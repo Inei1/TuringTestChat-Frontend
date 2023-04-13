@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Chat } from './a/a';
+import { SelectRoom } from './chat/SelectRoom';
+import { ChatRoom } from './chat/ChatRoom';
 import { io } from 'socket.io-client';
 
-const socket = io("http://localhost:4000");
+const socket = io("http://localhost:8080");
 
 function App() {
   const [username, setUsername] = useState('');
@@ -14,12 +15,13 @@ function App() {
     {
       path: "/",
       element:
-        <Chat
-        username={username}
-        setUsername={setUsername}
-        room={room}
-        setRoom={setRoom}
-        socket={socket} />
+        <SelectRoom socket={socket} />
+    },
+    {
+      path: "/chat",
+      element:
+        <ChatRoom
+          socket={socket}/>
     }
   ]);
   return (
