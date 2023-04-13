@@ -11,7 +11,7 @@ export const ChatBar = (props: ChatFooterProps) => {
   const [users, setUsers] = useState<any>([]);
 
   useEffect(() => {
-    props.socket.on('newUserResponse', (data: any) => setUsers(data));
+    props.socket.on('newUserResponse', (data: any) => { setUsers(data) });
   }, [props.socket, users]);
 
   return (
@@ -21,7 +21,7 @@ export const ChatBar = (props: ChatFooterProps) => {
         <h4 className="chat__header">ACTIVE USERS</h4>
         <div className="chat__users">
           {users.map((user: any) => {
-            <p key={user.socketID}>{user.userName}</p>
+            return <p key={user.socketId}>{user.userName}</p>
           })}
         </div>
       </div>

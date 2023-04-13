@@ -2,6 +2,7 @@ import { DefaultEventsMap } from '@socket.io/component-emitter';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
+import "./SelectRoom.css";
 
 export interface SelectRoomProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -14,7 +15,7 @@ export const SelectRoom = (props: SelectRoomProps) => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     localStorage.setItem('userName', userName);
-    props.socket.emit('newUser', { userName, socketID: props.socket.id });
+    props.socket.emit('newUser', { userName, socketId: props.socket.id });
     navigate('/chat');
   };
 

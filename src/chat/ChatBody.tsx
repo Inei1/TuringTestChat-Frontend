@@ -1,7 +1,10 @@
 import { useNavigate } from 'react-router-dom';
+import "./ChatRoom.css";
 
 export interface ChatBodyProps {
   messages: any[];
+  lastMessageRef: React.RefObject<HTMLDivElement>;
+  typingUser: string;
 }
 
 export const ChatBody = (props: ChatBodyProps) => {
@@ -21,14 +24,16 @@ export const ChatBody = (props: ChatBodyProps) => {
         </button>
       </header>
 
-      {/*This shows messages sent from you*/}
+      <div className="message__status">
+        {props.typingUser.length > 0 && <p>{props.typingUser + "is typing"}</p>}
+      </div>
+
       <div className="message__container">
 
         {props.messages.map((message) => {
           if (!message) {
             return <p>Error</p>
           }
-          console.log(message);
           return message.name === localStorage.getItem('userName') ? (
             <div className="message__chats" key={message.id}>
               <p className="sender__name">You</p>
@@ -45,6 +50,7 @@ export const ChatBody = (props: ChatBodyProps) => {
             </div>
           )
         })}
+        <div ref={props.lastMessageRef} />
       </div>
     </>
   );
