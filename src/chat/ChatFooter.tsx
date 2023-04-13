@@ -9,14 +9,14 @@ export interface ChatFooterProps {
 
 export const ChatFooter = (props: ChatFooterProps) => {
   const [message, setMessage] = useState('');
-  const [activeTimeout, setActiveTimeout] = useState();
+  const [activeTimeout, setActiveTimeout] = useState<NodeJS.Timeout>();
 
-  const handleTyping = () => {
+  const handleTyping = (e: any) => {
     props.socket.emit("typing", localStorage.getItem("userName"));
     if (activeTimeout) {
       clearTimeout(activeTimeout);
     }
-    //activeTimeout = setTimeout(5000);
+    setActiveTimeout(setTimeout(() => props.socket.emit("typing", ""), 5000));
   }
 
   const handleSendMessage = (e: any) => {

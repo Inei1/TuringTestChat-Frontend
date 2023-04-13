@@ -24,10 +24,6 @@ export const ChatBody = (props: ChatBodyProps) => {
         </button>
       </header>
 
-      <div className="message__status">
-        {props.typingUser.length > 0 && <p>{props.typingUser + "is typing"}</p>}
-      </div>
-
       <div className="message__container">
 
         {props.messages.map((message) => {
@@ -50,6 +46,9 @@ export const ChatBody = (props: ChatBodyProps) => {
             </div>
           )
         })}
+        <div className="message__status">
+          {props.typingUser.length > 0 && <p>{props.typingUser + " is typing"}</p>}
+        </div>
         <div ref={props.lastMessageRef} />
       </div>
     </>

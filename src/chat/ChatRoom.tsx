@@ -17,7 +17,10 @@ export const ChatRoom = (props: ChatRoomProps) => {
   const lastMessageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    props.socket.on('messageResponse', (data: any) => { setMessages([...messages, data]) });
+    props.socket.on('messageResponse', (data: any) => {
+      setMessages([...messages, data]);
+      setTypingUser("");
+    });
   }, [props.socket, messages]);
 
   useEffect(() => {
