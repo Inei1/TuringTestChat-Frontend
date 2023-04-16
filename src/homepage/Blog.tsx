@@ -1,7 +1,7 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 // import NewspaperIcon from '@mui/icons-material/Newspaper';
 
-export const News = () => {
+export const Blog = () => {
   return (
     <Box
       component="section"

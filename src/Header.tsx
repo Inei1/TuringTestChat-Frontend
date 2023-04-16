@@ -55,7 +55,7 @@ export const Header = () => {
                 '&:hover': {
                   cursor: 'pointer'
                 }
-              }}>Idle Game Engine BETA</Typography>
+              }}>Turing Test Chat Closed Beta</Typography>
             <Box sx={{ flexGrow: 0.1 }} />
             <Button onClick={() => navigate("/editor/")} color="inherit" variant="text">Editor</Button>
             {/* <Button onClick={() => navigate("/documentation/")} color="inherit" variant="text">Documentation</Button> */}

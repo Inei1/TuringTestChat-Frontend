@@ -4,18 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { LoginStateContext } from "../App";
 import { LoginDialog } from "./LoginDialog";
 
-const LandingLayoutRoot = styled('section')(({ theme }) => ({
-  color: theme.palette.common.black,
-  position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
-  [theme.breakpoints.up("sm")]: {
-    height: '60vh',
-    minHeight: 500,
-    maxHeight: 1600,
-  }
-}));
-
 export const Landing = () => {
 
   const { loginState, setLoginState } = useContext(LoginStateContext);
@@ -23,26 +11,20 @@ export const Landing = () => {
   const navigate = useNavigate();
 
   return (
-    <LandingLayoutRoot>
+    <>
       <LoginDialog
         open={loginState.open}
         tabIndex={loginState.tabIndex}
         onClose={() => setLoginState({ open: false, tabIndex: 0, loggedIn: loginState.loggedIn })}
-        onChange={(index: number) => setLoginState({ open: loginState.open, tabIndex: index, loggedIn: loginState.loggedIn })} />
-      <Container
-        sx={{
-          mt: 3,
-          mb: -10,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}>
-        <Box
-          component="img"
-          src="IGE-logo2.png"
-          alt="IGE logo"
-          sx={{ width: 275, height: 260, mb: 5 }}
-        />
+        onChange={(index: number) => setLoginState({ open: loginState.open, tabIndex: index, loggedIn: loginState.loggedIn })} /><Container
+          sx={{
+            mt: 3,
+            mb: -10,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+        <Typography>Explain the turing test, challenge users to take it.</Typography>
         {localStorage.getItem("user") === null &&
           <React.Fragment>
             <Button
@@ -82,6 +64,6 @@ export const Landing = () => {
           }}>
         </Box>
       </Container>
-    </LandingLayoutRoot>
+    </>
   );
 }

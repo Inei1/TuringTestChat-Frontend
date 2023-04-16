@@ -5,6 +5,8 @@ import { ChatRoom } from './chat/ChatRoom';
 import { io } from 'socket.io-client';
 import { LoginState } from './types';
 import { Homepage } from './Homepage';
+import { createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@emotion/react';
 
 interface LoginStateContextType {
   loginState: LoginState;
@@ -17,6 +19,19 @@ export const LoginStateContext = createContext<LoginStateContextType>({
 });
 
 const socket = io("http://localhost:8080");
+
+const theme = createTheme({
+  palette: {
+    contrastThreshold: 4.5,
+    primary: {
+      main: "#1F51FF",
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: "#1D1D1D",
+    },
+  },
+});
 
 function App() {
 
@@ -35,12 +50,14 @@ function App() {
       path: "/chat",
       element:
         <ChatRoom
-          socket={socket}/>
+          socket={socket} />
     }
   ]);
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </div>
   );
 }

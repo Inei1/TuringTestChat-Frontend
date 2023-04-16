@@ -13,22 +13,22 @@ export const Features = () => {
         <Grid item xs={12} md={4}>
           <Box sx={{}}>
             
-            <Typography variant="h6" sx={{ my: 5 }}>Create An Idle Game Without Code</Typography>
-            <Typography variant="h5">No coding is needed to make a game.</Typography>
+            <Typography variant="h6" sx={{ my: 5 }}>Give others the turing test</Typography>
+            <Typography variant="h5">Blog.</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} md={4}>
           <Box sx={{}}>
             
-            <Typography variant="h6" sx={{ my: 5 }}>Create Idle Games Quickly</Typography>
-            <Typography variant="h5">Development with Idle Game Engine is far quicker than coding a game.</Typography>
+            <Typography variant="h6" sx={{ my: 5 }}>Can you pass the turing test?</Typography>
+            <Typography variant="h5">Try to convince others that you are a person. Alternatively, fool others into thinking you are a bot.</Typography>
           </Box>
         </Grid>
         <Grid item xs={12} md={4}>
           <Box sx={{}}>
           
-            <Typography variant="h6" sx={{ my: 5 }}>No Code With All The Features</Typography>
-            <Typography variant="h5">Create a game as complex as you want.</Typography>
+            <Typography variant="h6" sx={{ my: 5 }}>Blog</Typography>
+            <Typography variant="h5">Blog.</Typography>
           </Box>
         </Grid>
       </Grid>

@@ -1,22 +1,22 @@
-import React from "react";
 import { Features } from "./homepage/Features";
 import { Header } from "./Header";
 import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
+import { Box } from "@mui/material";
 
 export const Homepage = () => {
 
   return (
-    <React.Fragment>
+    <Box sx={{backgroundColor: "secondary.main"}}>
         <Header />
         <Landing />
         <Features />
         {/* <Demo /> */}
         {/* <DragAndDrop /> */}
         {/* <Documentation /> */}
-        {/* <News /> */}
+        {/* <Blog /> */}
         {/* <Subscribe /> */}
         <Footer />
-    </React.Fragment>
+    </Box>
   )
 }
