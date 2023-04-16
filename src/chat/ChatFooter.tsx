@@ -1,7 +1,6 @@
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { useState } from 'react';
 import { Socket } from 'socket.io-client';
-import "./ChatRoom.css";
 
 export interface ChatFooterProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;

@@ -2,7 +2,6 @@ import { DefaultEventsMap } from '@socket.io/component-emitter';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
-import "./SelectRoom.css";
 
 export interface SelectRoomProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;

@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import "./ChatRoom.css";
 
 export interface ChatBodyProps {
   messages: any[];
