@@ -23,6 +23,8 @@ export const ChatRoom = (props: ChatRoomProps) => {
     });
   }, [props.socket, messages]);
 
+  console.log(messages);
+
   useEffect(() => {
     lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);

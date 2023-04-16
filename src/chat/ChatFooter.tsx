@@ -23,9 +23,8 @@ export const ChatFooter = (props: ChatFooterProps) => {
     e.preventDefault();
     if (message.trim() && localStorage.getItem('userName')) {
       props.socket.emit('message', {
+        name: "user",
         text: message,
-        name: localStorage.getItem("userName"),
-        socketId: props.socket.id,
       });
     }
     setMessage('');
