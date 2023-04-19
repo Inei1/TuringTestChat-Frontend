@@ -50,7 +50,7 @@ export const Login = () => {
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
-    if (name.length < 7) {
+    if (name.length < 6) {
       setAccountFailedMessage("Username must be at least 6 characters long");
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
@@ -60,7 +60,7 @@ export const Login = () => {
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
-    if (password.length < 7) {
+    if (password.length < 6) {
       setAccountFailedMessage("Password must be at least 6 characters long");
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
