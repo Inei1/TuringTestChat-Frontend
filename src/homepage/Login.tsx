@@ -34,20 +34,57 @@ export const Login = () => {
     }
   };
 
+  const validateSignup = () => {
+    if (email.length === 0) {
+      setAccountFailedMessage("Email must not be empty");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
+      return false;
+    }
+    if (!email.match("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$")) {
+      setAccountFailedMessage("Invalid email");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
+      return false;
+    }
+    if (name.length === 0) {
+      setAccountFailedMessage("Username must not be empty");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
+      return false;
+    }
+    if (name.length < 7) {
+      setAccountFailedMessage("Username must be at least 6 characters long");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
+      return false;
+    }
+    if (password.length === 0) {
+      setAccountFailedMessage("Password must not be empty");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
+      return false;
+    }
+    if (password.length < 7) {
+      setAccountFailedMessage("Password must be at least 6 characters long");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
+      return false;
+    }
+    return true;
+  }
+
   const handleSignUp = async () => {
-    try {
-      const result = await fetch(Constants.BASE_URL + "account/register", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: name, email: email, password: password }),
-      }).then(res => res.json());
-      if (result.succeeded) {
-        setAccountCreated(true);
-      } else {
-        setAccountFailedMessage(result.message);
+    const validate = validateSignup()
+    if (validate) {
+      try {
+        const result = await fetch(Constants.BASE_URL + "account/register", {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: name, email: email, password: password }),
+        }).then(res => res.json());
+        if (result.succeeded) {
+          setAccountCreated(true);
+        } else {
+          setAccountFailedMessage(result.message);
+        }
+      } catch (err) {
+        throw err;
       }
-    } catch (err) {
-      throw err;
     }
   };
 
@@ -56,7 +93,7 @@ export const Login = () => {
   };
 
   return (
-    <Box sx={{height: "100vh"}}>
+    <Box sx={{ height: "100vh" }}>
       <Typography>Logo</Typography>
       <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
         <Box sx={{ minWidth: 350, minHeight: 400 }}>
