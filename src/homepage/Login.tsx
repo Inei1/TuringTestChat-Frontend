@@ -40,8 +40,16 @@ export const Login = () => {
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
+    // validate email regex
     if (!email.match("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$")) {
       setAccountFailedMessage("Invalid email");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
+      return false;
+    }
+    // don't allow < > & ' " or /
+    // backend escapes these so they will not work properly when trying to log in
+    if (email.match("[<>&\'\"/]+")) {
+      setAccountFailedMessage("Email cannot contain < > & \' \" or /");
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
@@ -55,6 +63,11 @@ export const Login = () => {
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
+    if (name.match("[<>&\'\"/]+")) {
+      setAccountFailedMessage("Name cannot contain < > & \' \" or /");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
+      return false;
+    }
     if (password.length === 0) {
       setAccountFailedMessage("Password must not be empty");
       setTimeout(() => setAccountFailedMessage(""), 5000);
@@ -62,6 +75,11 @@ export const Login = () => {
     }
     if (password.length < 6) {
       setAccountFailedMessage("Password must be at least 6 characters long");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
+      return false;
+    }
+    if (password.match("[<>&\'\"/]+")) {
+      setAccountFailedMessage("Password cannot contain < > & \' \" or /");
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
