@@ -7,6 +7,7 @@ import { LoginState } from './types';
 import { Homepage } from './Homepage';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
+import { Login } from './homepage/Login';
 
 interface LoginStateContextType {
   loginState: LoginState;
@@ -14,7 +15,7 @@ interface LoginStateContextType {
 }
 
 export const LoginStateContext = createContext<LoginStateContextType>({
-  loginState: { open: false, tabIndex: 0, loggedIn: false },
+  loginState: { tabIndex: 0, loggedIn: false },
   setLoginState: () => null,
 });
 
@@ -27,10 +28,12 @@ const theme = createTheme({
       main: "#1F51FF",
     },
     secondary: {
-      // This is green.A700 as hex.
       main: "#1D1D1D",
     },
   },
+  typography: {
+    fontFamily: "monospace",
+  }
 });
 
 function App() {
@@ -40,6 +43,11 @@ function App() {
       path: "/",
       element:
         <Homepage />
+    },
+    {
+      path: "/login",
+      element:
+        <Login />
     },
     {
       path: "/joinchat",
@@ -54,7 +62,7 @@ function App() {
     }
   ]);
   return (
-    <div className="App">
+    <div style={{backgroundColor: "#1D1D1D"}} className="App">
       <ThemeProvider theme={theme}>
         <RouterProvider router={router} />
       </ThemeProvider>

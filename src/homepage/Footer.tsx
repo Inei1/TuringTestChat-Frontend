@@ -1,19 +1,17 @@
-import { Container, Grid, Link } from "@mui/material";
-import React from "react";
+import { Container, Grid } from "@mui/material";
 
 export const Footer = () => {
   return (
-    <Container sx={{mb: 50}}>
-      <hr />
+    <Container>
       <Grid sx={{mt: 1}} container spacing={5}>
         <Grid item xs={12} md={4}>
-          <Link target="_blank" href="https://discord.com/invite/kpjFFnb9Mn">Discord</Link>
+          <p>1</p>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Link target="_blank" href="https://old.reddit.com/r/IdleGameEngine/">Reddit</Link>
+          <p>2</p>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Link target="_blank" href="https://neilmoon.me/">I'm looking for a job!</Link>
+          <p>3</p>
         </Grid>
       </Grid>
     </Container>

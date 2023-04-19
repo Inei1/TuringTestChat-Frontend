@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginStateContext } from "./App";
 import { Constants } from "./Constants";
-import { LoginDialog } from "./homepage/LoginDialog";
 import { setAccesstoken } from "./setAccesstoken";
 
 export const Header = () => {
@@ -15,7 +14,7 @@ export const Header = () => {
   const logout = () => {
     localStorage.clear();
     setAccesstoken("");
-    setLoginState({ open: false, tabIndex: 0, loggedIn: false });
+    setLoginState({ tabIndex: 0, loggedIn: false });
   }
 
   const checkLogin = async () => {
@@ -28,7 +27,7 @@ export const Header = () => {
         credentials: "include",
       }).then(res => res.json());
       if (!authStatus.succeeded) {
-        setLoginState({ open: loginState.open, tabIndex: loginState.tabIndex, loggedIn: false });
+        setLoginState({ tabIndex: loginState.tabIndex, loggedIn: false });
         localStorage.removeItem("user");
       }
       if (authStatus.accessToken) {
@@ -39,11 +38,6 @@ export const Header = () => {
 
   return (
     <React.Fragment>
-      <LoginDialog
-        open={loginState.open}
-        tabIndex={loginState.tabIndex}
-        onClose={() => setLoginState({ open: false, tabIndex: 0, loggedIn: loginState.loggedIn })}
-        onChange={(index: number) => setLoginState({ open: loginState.open, tabIndex: index, loggedIn: loginState.loggedIn })} />
       <AppBar position="sticky" component="nav">
         <Container maxWidth="xl">
           <Toolbar>
@@ -57,20 +51,16 @@ export const Header = () => {
                 }
               }}>Turing Test Chat Closed Beta</Typography>
             <Box sx={{ flexGrow: 0.1 }} />
-            <Button onClick={() => navigate("/editor/")} color="inherit" variant="text">Editor</Button>
+            <Button onClick={() => navigate("/editor")} color="inherit" variant="text">Editor</Button>
             {/* <Button onClick={() => navigate("/documentation/")} color="inherit" variant="text">Documentation</Button> */}
             {/* <Button onClick={() => navigate("/browsegames/")} color="inherit" variant="text">Browse Games</Button> */}
             {/* <Button onClick={() => navigate("/news/")} color="inherit" variant="text">News</Button> */}
             <Box sx={{ flexGrow: 1 }} />
             {localStorage.getItem("user") === null && <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Button
-                onClick={() => setLoginState({ open: true, tabIndex: 0, loggedIn: loginState.loggedIn })}
+                onClick={() => navigate("/login")}
                 color="inherit"
-                variant="text">Log in</Button>
-              <Button
-                onClick={() => setLoginState({ open: true, tabIndex: 1, loggedIn: loginState.loggedIn })}
-                color="success"
-                variant="contained">Sign up</Button>
+                variant="text">Log in/Sign up</Button>
             </Box>}
             {localStorage.getItem("user") !== null &&
               <Button onClick={logout} color="success" variant="contained">Log out</Button>}

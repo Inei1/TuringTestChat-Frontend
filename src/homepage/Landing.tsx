@@ -2,7 +2,7 @@ import { Box, Button, Container, styled, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginStateContext } from "../App";
-import { LoginDialog } from "./LoginDialog";
+import { Login } from "./Login";
 
 export const Landing = () => {
 
@@ -12,28 +12,24 @@ export const Landing = () => {
 
   return (
     <>
-      <LoginDialog
-        open={loginState.open}
-        tabIndex={loginState.tabIndex}
-        onClose={() => setLoginState({ open: false, tabIndex: 0, loggedIn: loginState.loggedIn })}
-        onChange={(index: number) => setLoginState({ open: loginState.open, tabIndex: index, loggedIn: loginState.loggedIn })} /><Container
-          sx={{
-            mt: 3,
-            mb: -10,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}>
+      <Container
+        sx={{
+          mt: 3,
+          mb: -10,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}>
         <Typography>Explain the turing test, challenge users to take it.</Typography>
         {localStorage.getItem("user") === null &&
           <React.Fragment>
             <Button
-              onClick={() => setLoginState({ open: true, tabIndex: 0, loggedIn: loginState.loggedIn })}
+              onClick={() => setLoginState({ tabIndex: 0, loggedIn: loginState.loggedIn })}
               sx={{ mt: 1 }}
               color="primary"
               variant="contained">Log in</Button>
             <Button
-              onClick={() => setLoginState({ open: true, tabIndex: 1, loggedIn: loginState.loggedIn })}
+              onClick={() => setLoginState({ tabIndex: 1, loggedIn: loginState.loggedIn })}
               sx={{ mt: 1 }}
               color="success"
               variant="contained">Sign up</Button>
