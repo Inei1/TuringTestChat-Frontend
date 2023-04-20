@@ -30,6 +30,7 @@ const theme = createTheme({
     secondary: {
       main: "#1D1D1D",
     },
+    // #e9e9e9
   },
   typography: {
     fontFamily: "monospace",
