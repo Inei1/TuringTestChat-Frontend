@@ -1,4 +1,4 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginStateContext } from "../App";
@@ -16,9 +16,18 @@ export const Landing = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          mt: "60vh",
+          mt: "55vh",
+          maxWidth: 800,
         }}>
-        <Typography>Explain the turing test, challenge users to take it.</Typography>
+        <Grid sx={{ mt: 1, ml: 50 }} container spacing={1}>
+          <Grid item xs={12} md={5}>
+            <Typography>"The Turing test... is a test of a machine's ability to exhibit intelligent behaviour equivalent to, or indistinguishable from, that of a human."</Typography>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Typography variant="h4"> - Wikipedia</Typography>
+          </Grid>
+        </Grid>
+
         <Box
           sx={{
             position: 'absolute',

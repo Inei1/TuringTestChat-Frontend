@@ -1,47 +1,73 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import React, { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
+import { Constants } from "../Constants";
 
 export const Subscribe = () => {
 
-  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [waitlistMessage, setWaitlistMessage] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setOpen(true);
+  const validateEmail = (email: string) => {
+    if (email.length === 0) {
+      setWaitlistMessage("Email must not be empty");
+      return false;
+    }
+    // validate email regex
+    if (!email.match("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$")) {
+      setWaitlistMessage("Invalid email");
+      return false;
+    }
+    // don't allow < > & ' " or /
+    // backend escapes these so they will not work properly when trying to log in
+    if (email.match("[<>&\'\"/]+")) {
+      setWaitlistMessage("Email cannot contain < > & \' \" or /");
+      return false;
+    }
+    return true;
+  }
+
+  const emailSubscribe = async () => {
+    if (validateEmail(email)) {
+      setWaitlistMessage((await fetch(Constants.BASE_URL + "account/waitlist", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        credentials: "include",
+        body: JSON.stringify({ email: email })
+      }).then(res => res.json())).message);
+    }
   };
 
   return (
     <Box>
-      <Container component="section" sx={{ mt: 50 }}>
+      <Container component="section">
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
             bgcolor: 'inherit',
-            py: 8,
-            px: 12,
+            mt: 5
           }}
         >
-          <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400 }}>
-            <Typography variant="h2" component="h2" gutterBottom>
-              Subscribe
-            </Typography>
+          <Box sx={{ maxWidth: 800 }}>
             <Typography variant="h5">
-              Subscribe to emails related to Idle Game Engine that may or may not ever exist
+              Join the waitlist to get in when the closed beta releases
             </Typography>
             <TextField
               placeholder="Your email"
               variant="standard"
-              sx={{ width: '100%', mt: 3, mb: 2 }}
+              color="info"
+              sx={{ width: '100%', mt: 3, mb: 2, input: { color: "#e9e9e9" } }}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
             />
             <Button
-              type="submit"
               color="error"
               variant="contained"
               sx={{ width: '100%' }}
-            >
-              Keep me updated
+              onClick={emailSubscribe}>
+              Join waitlist
             </Button>
+            {waitlistMessage.length > 0 && <Typography>{waitlistMessage}</Typography>}
           </Box>
         </Box>
       </Container>

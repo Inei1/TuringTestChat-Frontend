@@ -4,29 +4,34 @@ import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
 import logo from "./img/TTCLogov8.png";
+import { Subscribe } from "./homepage/Subscribe";
 
 export const Homepage = () => {
 
   return (
-    <Box sx={{
-      backgroundColor: "secondary.main",
-      background: `url(${logo})`,
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",
-      backgroundPositionY: 60,
-      maxWidth: "100vw",
-      maxHeight: "100vh",
-    }}>
-      <Header />
-      <Landing />
-      <Features />
-      {/* <Demo /> */}
-      {/* <DragAndDrop /> */}
-      {/* <Documentation /> */}
-      {/* <Blog /> */}
-      {/* <Subscribe /> */}
-      <Footer />
-    </Box>
+    <>
+      <Box sx={{
+        backgroundColor: "secondary.main",
+        background: `url(${logo})`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPositionY: 60,
+        maxWidth: "100vw",
+        height: "100vh",
+      }}>
+        <Header />
+        <Landing />
+
+        {/* <Demo /> */}
+        {/* <DragAndDrop /> */}
+        {/* <Documentation /> */}
+        {/* <Blog /> */}
+        <Subscribe />
+      </Box>
+      <Box>
+        <Features />
+      </Box>
+    </>
   )
 }

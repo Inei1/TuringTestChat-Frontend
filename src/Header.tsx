@@ -49,21 +49,20 @@ export const Header = () => {
                 '&:hover': {
                   cursor: 'pointer'
                 }
-              }}>Turing Test Chat Closed Beta</Typography>
+              }}>Turing Test Chat</Typography>
             <Box sx={{ flexGrow: 0.1 }} />
-            <Button onClick={() => navigate("/editor")} color="inherit" variant="text">Editor</Button>
             {/* <Button onClick={() => navigate("/documentation/")} color="inherit" variant="text">Documentation</Button> */}
             {/* <Button onClick={() => navigate("/browsegames/")} color="inherit" variant="text">Browse Games</Button> */}
             {/* <Button onClick={() => navigate("/news/")} color="inherit" variant="text">News</Button> */}
             <Box sx={{ flexGrow: 1 }} />
             {localStorage.getItem("user") === null && <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Button
-                onClick={() => navigate("/login")}
-                color="inherit"
-                variant="text">Log in/Sign up</Button>
+                onClick={() => navigate("/waitlist")}
+                color="error"
+                variant="contained">Sign up for waitlist</Button>
             </Box>}
             {localStorage.getItem("user") !== null &&
-              <Button onClick={logout} color="success" variant="contained">Log out</Button>}
+              <Button onClick={(logout)} color="success" variant="contained">Log out</Button>}
           </Toolbar>
         </Container>
       </AppBar>
