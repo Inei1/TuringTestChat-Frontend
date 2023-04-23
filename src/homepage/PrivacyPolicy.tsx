@@ -1,9 +1,10 @@
 import { Box, Container, Typography } from "@mui/material"
 import { Header } from "../Header"
+import { Footer } from "./Footer"
 
 export const PrivacyPolicy = () => {
   return (
-    <Box sx={{ maxWidth: "100vw", maxHeight: "100vh" }}>
+    <Box sx={{ maxWidth: "100vw" }}>
       <Header />
       <Container sx={{
         display: 'flex',
@@ -29,6 +30,7 @@ export const PrivacyPolicy = () => {
         <Typography sx={{ my: 1 }}>This privacy policy is effective as of 4/22/2023 and may be updated from time to time.
           you can review this policy regularly to stay informed of any changes.</Typography>
       </Container>
+      <Footer />
     </Box>
   )
 }

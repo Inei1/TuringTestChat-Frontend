@@ -3,7 +3,7 @@ import { Header } from "./Header";
 import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
-import logo from "./img/TTCLogov13.png";
+import logo from "./img/TTCbgplainv1.png";
 import { Subscribe } from "./homepage/Subscribe";
 
 export const Homepage = () => {
@@ -14,11 +14,9 @@ export const Homepage = () => {
         backgroundColor: "secondary.main",
         background: `url(${logo})`,
         backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
         backgroundSize: "100vw",
         backgroundPositionY: 60,
         maxWidth: "100vw",
-        maxHeight: "100vh",
       }}>
         <Header />
         <Landing />
@@ -28,10 +26,11 @@ export const Homepage = () => {
         {/* <Documentation /> */}
         {/* <Blog /> */}
         <Subscribe />
-      </Box>
-      <Box>
         <Features />
         <Footer />
+      </Box>
+      <Box>
+        
       </Box>
     </>
   )

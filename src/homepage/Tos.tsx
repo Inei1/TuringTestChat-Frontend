@@ -1,5 +1,6 @@
 import { Box, Container, Typography } from "@mui/material"
 import { Header } from "../Header"
+import { Footer } from "./Footer"
 
 export const Tos = () => {
   return (
@@ -59,6 +60,7 @@ export const Tos = () => {
 
         <Typography sx={{ my: 1 }}>If you have any questions or concerns about these Terms, please send an email to support@turingtestchat.com.</Typography>
       </Container>
+      <Footer />
     </Box>
   )
 }
