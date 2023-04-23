@@ -24,7 +24,7 @@ export const LoginStateContext = createContext<LoginStateContextType>({
   setLoginState: () => null,
 });
 
-const socket = io("https://api.turingtestchat.com");
+//const socket = io("https://api.turingtestchat.com");
 
 const theme = createTheme({
   palette: {
@@ -60,17 +60,17 @@ function App() {
       element:
         <Login />
     },
-    {
-      path: "/joinchat",
-      element:
-        <SelectRoom socket={socket} />
-    },
-    {
-      path: "/chat",
-      element:
-        <ChatRoom
-          socket={socket} />
-    },
+    // {
+    //   path: "/joinchat",
+    //   element:
+    //     <SelectRoom socket={socket} />
+    // },
+    // {
+    //   path: "/chat",
+    //   element:
+    //     <ChatRoom
+    //       socket={socket} />
+    // },
     {
       path: "/waitlist",
       element:
