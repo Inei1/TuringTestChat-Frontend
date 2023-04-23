@@ -24,7 +24,7 @@ export const LoginStateContext = createContext<LoginStateContextType>({
   setLoginState: () => null,
 });
 
-const socket = io("http://localhost:8080");
+const socket = io("https://api.turingtestchat.com");
 
 const theme = createTheme({
   palette: {
