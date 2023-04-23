@@ -3,7 +3,7 @@ import { Header } from "./Header";
 import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
-import logo from "./img/TTCLogov8.png";
+import logo from "./img/TTCLogov13.png";
 import { Subscribe } from "./homepage/Subscribe";
 
 export const Homepage = () => {
@@ -31,6 +31,7 @@ export const Homepage = () => {
       </Box>
       <Box>
         <Features />
+        <Footer />
       </Box>
     </>
   )

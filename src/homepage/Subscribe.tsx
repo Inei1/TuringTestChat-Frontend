@@ -5,6 +5,7 @@ import { Constants } from "../Constants";
 export const Subscribe = () => {
 
   const [email, setEmail] = useState("");
+  const [comment, setComment] = useState("");
   const [waitlistMessage, setWaitlistMessage] = useState("");
 
   const validateEmail = (email: string) => {
@@ -32,7 +33,7 @@ export const Subscribe = () => {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         credentials: "include",
-        body: JSON.stringify({ email: email })
+        body: JSON.stringify({ email: email, comment: comment })
       }).then(res => res.json())).message);
     }
   };
@@ -56,8 +57,16 @@ export const Subscribe = () => {
               placeholder="Your email"
               variant="standard"
               color="info"
-              sx={{ width: '100%', mt: 3, mb: 2, input: { color: "#e9e9e9" } }}
+              sx={{ width: '100%', mt: 3, input: { color: "#e9e9e9" } }}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
+            />
+            <TextField
+              placeholder="Comment (optional)"
+              variant="standard"
+              color="info"
+              sx={{ width: '100%', mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
+              onChange={(e) => setComment(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
             />
             <Button

@@ -11,6 +11,8 @@ import { Login } from './homepage/Login';
 import { Subscribe } from './homepage/Subscribe';
 import { Box } from '@mui/material';
 import { Header } from './Header';
+import { PrivacyPolicy } from './homepage/PrivacyPolicy';
+import { Tos } from './homepage/Tos';
 
 interface LoginStateContextType {
   loginState: LoginState;
@@ -72,10 +74,20 @@ function App() {
     {
       path: "/waitlist",
       element:
-        <Box sx={{width: "100vw", height: "100vh"}}>
+        <Box sx={{ width: "100vw", height: "100vh" }}>
           <Header />
           <Subscribe />
         </Box>
+    },
+    {
+      path: "/privacypolicy",
+      element:
+        <PrivacyPolicy />
+    },
+    {
+      path: "/tos",
+      element:
+        <Tos />
     }
   ]);
   return (
