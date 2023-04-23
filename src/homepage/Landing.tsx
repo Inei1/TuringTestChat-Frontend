@@ -1,13 +1,6 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { LoginStateContext } from "../App";
+import { Box, Container, Grid, Typography } from "@mui/material";
 
 export const Landing = () => {
-
-  const { loginState, setLoginState } = useContext(LoginStateContext);
-
-  const navigate = useNavigate();
 
   return (
     <>
@@ -16,10 +9,10 @@ export const Landing = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          mt: "55vh",
-          maxWidth: 800,
+          mt: window.innerWidth > window.innerHeight ? "55vh" : "30vh",
+          maxWidth: "50vw",
         }}>
-        <Grid sx={{ mt: 1, ml: 50 }} container spacing={1}>
+        <Grid sx={{ mt: 1, ml: "40%" }} container spacing={1}>
           <Grid item xs={12} md={5}>
             <Typography>"The Turing test... is a test of a machine's ability to exhibit intelligent behaviour equivalent to, or indistinguishable from, that of a human."</Typography>
           </Grid>

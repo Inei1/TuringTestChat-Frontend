@@ -15,7 +15,7 @@ export const Homepage = () => {
         background: `url(${logo})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
+        backgroundSize: "100vw",
         backgroundPositionY: 60,
         maxWidth: "100vw",
         maxHeight: "100vh",
