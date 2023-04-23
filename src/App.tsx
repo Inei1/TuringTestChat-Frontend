@@ -13,6 +13,9 @@ import { Box } from '@mui/material';
 import { Header } from './Header';
 import { PrivacyPolicy } from './homepage/PrivacyPolicy';
 import { Tos } from './homepage/Tos';
+import ReactGA from "react-ga4";
+
+ReactGA.initialize("G-J8W08XRDN6");
 
 interface LoginStateContextType {
   loginState: LoginState;
