@@ -3,7 +3,7 @@ import { Header } from "../Header"
 
 export const Tos = () => {
   return (
-    <Box sx={{ width: "100vw" }}>
+    <Box sx={{ maxWidth: "100vw" }}>
       <Header />
       <Container sx={{
         display: 'flex',

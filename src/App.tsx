@@ -74,7 +74,7 @@ function App() {
     {
       path: "/waitlist",
       element:
-        <Box sx={{ width: "100vw", height: "100vh" }}>
+        <Box sx={{ maxWidth: "100vw", maxHeight: "100vh" }}>
           <Header />
           <Subscribe />
         </Box>

@@ -3,7 +3,7 @@ import { Header } from "../Header"
 
 export const PrivacyPolicy = () => {
   return (
-    <Box sx={{ width: "100vw", height: "100vh" }}>
+    <Box sx={{ maxWidth: "100vw", maxHeight: "100vh" }}>
       <Header />
       <Container sx={{
         display: 'flex',

@@ -18,7 +18,7 @@ export const Homepage = () => {
         backgroundSize: "cover",
         backgroundPositionY: 60,
         maxWidth: "100vw",
-        height: "100vh",
+        maxHeight: "100vh",
       }}>
         <Header />
         <Landing />
