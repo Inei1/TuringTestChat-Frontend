@@ -41,18 +41,13 @@ export const Header = () => {
       <AppBar position="sticky" component="nav">
         <Container maxWidth="xl">
           <Toolbar>
-            <Typography
+            <Link
               color="inherit"
-              onClick={() => navigate("/")}
-              variant="h5"
-              sx={{
-                '&:hover': {
-                  cursor: 'pointer'
-                }
-              }}>Turing Test Chat</Typography>
+              to="/"
+              style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 30, textDecoration: "none" }}>Turing Test Chat
+            </Link>
             <Box sx={{ flexGrow: 0.1 }} />
             {/* <Button onClick={() => navigate("/documentation/")} color="inherit" variant="text">Documentation</Button> */}
-            {/* <Button onClick={() => navigate("/browsegames/")} color="inherit" variant="text">Browse Games</Button> */}
             {/* <Button onClick={() => navigate("/news/")} color="inherit" variant="text">News</Button> */}
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
