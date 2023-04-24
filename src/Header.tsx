@@ -1,6 +1,6 @@
 import { AppBar, Box, Button, Container, Toolbar, Typography } from "@mui/material";
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginStateContext } from "./App";
 import { Constants } from "./Constants";
 import { setAccesstoken } from "./setAccesstoken";
@@ -55,14 +55,15 @@ export const Header = () => {
             {/* <Button onClick={() => navigate("/browsegames/")} color="inherit" variant="text">Browse Games</Button> */}
             {/* <Button onClick={() => navigate("/news/")} color="inherit" variant="text">News</Button> */}
             <Box sx={{ flexGrow: 1 }} />
-            {localStorage.getItem("user") === null && <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <Button
-                onClick={() => navigate("/waitlist")}
-                color="error"
-                variant="contained">Sign up for waitlist</Button>
-            </Box>}
-            {localStorage.getItem("user") !== null &&
-              <Button onClick={(logout)} color="success" variant="contained">Log out</Button>}
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              <Link to="/waitlist">
+                <Button
+                  color="error"
+                  variant="contained">Sign up for waitlist</Button>
+              </Link>
+            </Box>
+            {/* {localStorage.getItem("user") !== null &&
+              <Button onClick={(logout)} color="success" variant="contained">Log out</Button>} */}
           </Toolbar>
         </Container>
       </AppBar>

@@ -4,7 +4,7 @@ import { Footer } from "./Footer"
 
 export const PrivacyPolicy = () => {
   return (
-    <Box sx={{ maxWidth: "100vw" }}>
+    <Box sx={{ maxWidth: "100vw", minHeight: "100vh", }}>
       <Header />
       <Container sx={{
         display: 'flex',

@@ -1,5 +1,5 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Constants } from "../Constants";
 
 export const Subscribe = () => {
