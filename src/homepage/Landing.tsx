@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Link, Typography } from "@mui/material";
 
 export const Landing = () => {
 
@@ -19,7 +19,7 @@ export const Landing = () => {
             <Typography>"The Turing test... is a test of a machine's ability to exhibit intelligent behaviour equivalent to, or indistinguishable from, that of a human."</Typography>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Typography variant="h4"> - Wikipedia</Typography>
+            <Link variant="h4" target="_blank" rel="noreferrer" color="#e9e9e9" href="https://en.wikipedia.org/wiki/Turing_test"> - Wikipedia</Link>
           </Grid>
         </Grid>
       </Container>
