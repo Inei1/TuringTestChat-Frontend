@@ -3,7 +3,8 @@ import { Header } from "./Header";
 import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
-import logo from "./img/TTCbgplainv1.png";
+import logopng from "./img/TTCbgplainv1.png";
+import logowebp from "./img/TTCbgplainv1.webp";
 import { Subscribe } from "./homepage/Subscribe";
 
 export const Homepage = () => {
@@ -12,7 +13,7 @@ export const Homepage = () => {
     <>
       <Box sx={{
         backgroundColor: "secondary.main",
-        background: `url(${logo})`,
+        background: `url(${logowebp}), url(${logopng})`,
         backgroundPosition: "center",
         backgroundSize: "100vw",
         backgroundPositionY: 60,
