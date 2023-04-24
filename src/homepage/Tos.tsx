@@ -14,7 +14,7 @@ export const Tos = () => {
         bgcolor: 'inherit',
         mt: 1,
       }}>
-        <Typography variant="h4" sx={{ my: 2 }}>Terms of Service</Typography>
+        <Typography variant="h1" sx={{ my: 2, fontSize: 50 }}>Terms of Service</Typography>
         <Typography sx={{ my: 1 }}>Welcome to TuringTestChat! These terms of service ("Terms") govern your use of
           turingtestchat.com. By accessing or using turingtestchat.com, you agree to be bound by these Terms.</Typography>
 

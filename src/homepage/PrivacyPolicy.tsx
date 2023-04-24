@@ -14,7 +14,7 @@ export const PrivacyPolicy = () => {
         bgcolor: 'inherit',
         mt: 1,
       }}>
-        <Typography variant="h4" sx={{ my: 2 }}>Privacy Policy</Typography>
+        <Typography variant="h1" sx={{ my: 2, fontSize: 50 }}>Privacy Policy</Typography>
         <Typography sx={{ my: 1 }}>TuringTestChat takes your privacy seriously and is committed to protecting your personal information.
           Your personal data will not be sold, rented, or otherwise disclosed to any third party without your explicit consent.</Typography>
         <Typography sx={{ my: 1 }}>The personal data collected from you may include your email address.

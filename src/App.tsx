@@ -9,7 +9,7 @@ import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
 import { Login } from './homepage/Login';
 import { Subscribe } from './homepage/Subscribe';
-import { Box } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { Header } from './Header';
 import { PrivacyPolicy } from './homepage/PrivacyPolicy';
 import { Tos } from './homepage/Tos';
@@ -79,7 +79,17 @@ function App() {
       element:
         <Box sx={{ maxWidth: "100vw", minHeight: "100vh" }}>
           <Header />
-          <Subscribe />
+          <Container sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            bgcolor: 'inherit',
+            mt: 5,
+          }}>
+            <Typography variant="h1" sx={{ fontSize: 50 }}>Waitlist</Typography>
+            <Subscribe />
+          </Container>
         </Box>
     },
     {
