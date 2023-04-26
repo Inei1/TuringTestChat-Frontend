@@ -26,8 +26,8 @@ export const Homepage = () => {
         {/* <DragAndDrop /> */}
         {/* <Documentation /> */}
         {/* <Blog /> */}
-        <Subscribe />
         <Features />
+        <Subscribe />
         <Footer />
       </Box>
       <Box>
