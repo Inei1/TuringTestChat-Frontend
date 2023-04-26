@@ -51,7 +51,7 @@ export const Subscribe = () => {
         >
           <Box sx={{ maxWidth: 800 }}>
             <Typography variant="h5">
-              Join the waitlist to get in when the closed beta releases for free
+              Subscribe to the email list
             </Typography>
             <TextField
               placeholder="Your email"
@@ -74,7 +74,7 @@ export const Subscribe = () => {
               variant="contained"
               sx={{ width: '100%' }}
               onClick={emailSubscribe}>
-              Join waitlist
+              Subscribe
             </Button>
             {waitlistMessage.length > 0 && <Typography>{waitlistMessage}</Typography>}
           </Box>

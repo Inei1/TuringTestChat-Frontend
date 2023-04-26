@@ -47,14 +47,12 @@ export const Header = () => {
               style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 30, textDecoration: "none" }}>Turing Test Chat
             </Link>
             <Box sx={{ flexGrow: 0.1 }} />
-            {/* <Button onClick={() => navigate("/documentation/")} color="inherit" variant="text">Documentation</Button> */}
-            {/* <Button onClick={() => navigate("/news/")} color="inherit" variant="text">News</Button> */}
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <Link to="/waitlist">
+              <Link to="/login">
                 <Button
-                  color="error"
-                  variant="contained">Sign up for waitlist</Button>
+                  color="info"
+                  variant="contained">Log in/Sign up</Button>
               </Link>
             </Box>
             {/* {localStorage.getItem("user") !== null &&

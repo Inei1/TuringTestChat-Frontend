@@ -8,9 +8,6 @@ import { Homepage } from './Homepage';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
 import { Login } from './homepage/Login';
-import { Subscribe } from './homepage/Subscribe';
-import { Box, Container, Typography } from '@mui/material';
-import { Header } from './Header';
 import { PrivacyPolicy } from './homepage/PrivacyPolicy';
 import { Tos } from './homepage/Tos';
 import ReactGA from "react-ga4";
@@ -27,7 +24,7 @@ export const LoginStateContext = createContext<LoginStateContextType>({
   setLoginState: () => null,
 });
 
-//const socket = io("https://api.turingtestchat.com");
+const socket = io("https://api.turingtestchat.com");
 
 const theme = createTheme({
   palette: {
@@ -63,34 +60,16 @@ function App() {
       element:
         <Login />
     },
-    // {
-    //   path: "/joinchat",
-    //   element:
-    //     <SelectRoom socket={socket} />
-    // },
-    // {
-    //   path: "/chat",
-    //   element:
-    //     <ChatRoom
-    //       socket={socket} />
-    // },
     {
-      path: "/waitlist",
+      path: "/joinchat",
       element:
-        <Box sx={{ maxWidth: "100vw", minHeight: "100vh" }}>
-          <Header />
-          <Container sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            bgcolor: 'inherit',
-            mt: 5,
-          }}>
-            <Typography variant="h1" sx={{ fontSize: 50 }}>Waitlist</Typography>
-            <Subscribe />
-          </Container>
-        </Box>
+        <SelectRoom socket={socket} />
+    },
+    {
+      path: "/chat",
+      element:
+        <ChatRoom
+          socket={socket} />
     },
     {
       path: "/privacypolicy",
