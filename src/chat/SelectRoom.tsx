@@ -2,6 +2,8 @@ import { DefaultEventsMap } from '@socket.io/component-emitter';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
+import { Header } from '../Header';
+import { Button, Typography } from '@mui/material';
 
 export interface SelectRoomProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -18,9 +20,15 @@ export const SelectRoom = (props: SelectRoomProps) => {
   };
 
   return (
-    <form className="home__container" onSubmit={handleSubmit}>
-      <h2 className="home__header">Sign in to Open Chat</h2>
-      <button className="home__cta">SIGN IN</button>
-    </form>
+    <>
+      <Header />
+      {/* <Typography>Select some interests</Typography>
+      <Typography>Games, Sports, News, Technology, Memes, Jokes, TV shows, Movies, History, Politics, Art, Books, Space, Music</Typography> */}
+      <Typography>I want to be...</Typography>
+      <Typography>Human</Typography>
+      <Typography>Bot</Typography>
+      <Typography>Both</Typography>
+      <Button>Enter Chat Room</Button>
+    </>
   );
 };

@@ -14,6 +14,7 @@ export const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [accountCreated, setAccountCreated] = useState(false);
+  const [loginFailedMessage, setLoginFailedMessage] = useState("");
   const [accountFailedMessage, setAccountFailedMessage] = useState("");
   const [password, setPassword] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
@@ -24,10 +25,18 @@ export const Login = () => {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: name, password: password }),
-      }).then(res => res.json());
-      if (result.succeeded) {
-        localStorage.setItem("user", result.user);
-        navigate("/joinchat");
+      });
+      if (result.ok) {
+        const resultJson = await result.json();
+        console.log(resultJson);
+        localStorage.setItem("user", resultJson.user.username);
+        navigate("/home");
+      } else if (result.statusText === "Unauthorized") {
+        setLoginFailedMessage("Username or password not found");
+        setTimeout(() => setLoginFailedMessage(""), 5000);
+      } else {
+        setLoginFailedMessage("An unknown error occurred");
+        setTimeout(() => setLoginFailedMessage(""), 5000);
       }
     } catch (err) {
       console.error(err);
@@ -146,7 +155,8 @@ export const Login = () => {
                       variant="filled"
                       value={password}
                       type="password"
-                      onChange={(e) => setPassword(e.target.value)} />
+                      onChange={(e) => setPassword(e.target.value)}
+                      onKeyDown={(e) => { if (e.key === "Enter") { handleSignIn() } }} />
                     <Button
                       size="large"
                       variant="contained"
@@ -181,7 +191,8 @@ export const Login = () => {
                       variant="filled"
                       value={password}
                       type="password"
-                      onChange={(e) => setPassword(e.target.value)} />
+                      onChange={(e) => setPassword(e.target.value)}
+                      onKeyDown={(e) => { if (e.key === "Enter") { handleSignUp() } }} />
                     <Button
                       size="large"
                       variant="contained"
@@ -196,6 +207,7 @@ export const Login = () => {
           })()}
           {accountCreated && tabIndex === 1 && <Typography>Account successfully created! Please log in.</Typography>}
           {accountFailedMessage.length > 0 && tabIndex === 1 && <Typography>{accountFailedMessage}</Typography>}
+          {loginFailedMessage.length > 0 && tabIndex === 0 && <Typography>{loginFailedMessage}</Typography>}
         </Box>
       </Box>
       <Box sx={{ marginTop: "auto" }}>
