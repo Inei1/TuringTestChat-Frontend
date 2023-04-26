@@ -57,16 +57,8 @@ export const Subscribe = () => {
               placeholder="Your email"
               variant="standard"
               color="info"
-              sx={{ width: '100%', mt: 3, input: { color: "#e9e9e9" } }}
+              sx={{ width: '100%', my: 3, input: { color: "#e9e9e9" } }}
               onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
-            />
-            <TextField
-              placeholder="Comment (optional)"
-              variant="standard"
-              color="info"
-              sx={{ width: '100%', mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
-              onChange={(e) => setComment(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
             />
             <Button
