@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, Tab, Tabs, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, Grid, Tab, Tabs, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 // import CloseIcon from '@mui/icons-material/Close';
 import { setAccesstoken } from "../setAccesstoken";
@@ -112,18 +112,20 @@ export const Login = () => {
 
   return (
     <Box sx={{ height: "100vh" }}>
-      <Typography>Logo</Typography>
       <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Box sx={{ minWidth: 350, minHeight: 400 }}>
-          <Typography sx={{ mb: 2 }} align="center" variant="h5" color="inherit">Turing Test Chat</Typography>
+        <Box sx={{ minWidth: 350, minHeight: 400, my: 5 }}>
+          <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center">
+            <Box component="img" alt="TuringTestChat logo" src="TTCLogov2.png" sx={{ maxWidth: "10vh", }} />
+          </Grid>
+          <Typography sx={{ mb: 2 }} align="center" variant="h5">Turing Test Chat</Typography>
           <Tabs
             variant="fullWidth"
             value={tabIndex}
             centered
             aria-label="login tabs"
             onChange={(_, number) => setTabIndex(number)}>
-            <Tab label="Log in" tabIndex={0} />
-            <Tab label="Register" tabIndex={1} />
+            <Tab label="Log in" tabIndex={0} sx={{ color: "#e9e9e9" }} />
+            <Tab label="Register" tabIndex={1} sx={{ color: "#e9e9e9" }} />
           </Tabs>
           {(() => {
             switch (tabIndex) {
@@ -131,14 +133,14 @@ export const Login = () => {
                 return (
                   <FormControl margin="none" fullWidth>
                     <TextField
-                      sx={{ mt: 2 }}
+                      sx={{ mt: 2, input: { color: "#e9e9e9" } }}
                       placeholder="Name or email"
                       label="Name or email"
                       variant="filled"
                       value={name}
                       onChange={(e) => setName(e.target.value)} />
                     <TextField
-                      sx={{ mt: 2, mb: 2 }}
+                      sx={{ mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
                       placeholder="Password"
                       label="Password"
                       variant="filled"
@@ -159,21 +161,21 @@ export const Login = () => {
                 return (
                   <FormControl margin="none" fullWidth>
                     <TextField
-                      sx={{ mt: 2 }}
+                      sx={{ mt: 2, input: { color: "#e9e9e9" } }}
                       placeholder="Email"
                       label="Email"
                       variant="filled"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)} />
                     <TextField
-                      sx={{ mt: 2 }}
+                      sx={{ mt: 2, input: { color: "#e9e9e9" } }}
                       placeholder="Name"
                       label="Name"
                       variant="filled"
                       value={name}
                       onChange={(e) => setName(e.target.value)} />
                     <TextField
-                      sx={{ mt: 2, mb: 2 }}
+                      sx={{ mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
                       placeholder="Password"
                       label="Password"
                       variant="filled"
