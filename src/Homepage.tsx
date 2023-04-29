@@ -28,11 +28,8 @@ export const Homepage = () => {
         {/* <Blog /> */}
         <Features />
         <Subscribe />
-        <Footer />
       </Box>
-      <Box>
-        
-      </Box>
+      <Footer />
     </>
   )
 }
