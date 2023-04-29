@@ -1,10 +1,10 @@
 import { Box, Button, FormControl, Grid, Tab, Tabs, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-// import CloseIcon from '@mui/icons-material/Close';
-import { setAccesstoken } from "../setAccesstoken";
 import { Constants } from "../Constants";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "./Footer";
+import bgpng from "../img/TTCbgplainv1.png";
+import bgwebp from "../img/TTCbgplainv1.webp";
 
 export const Login = () => {
 
@@ -28,8 +28,7 @@ export const Login = () => {
       });
       if (result.ok) {
         const resultJson = await result.json();
-        console.log(resultJson);
-        localStorage.setItem("user", resultJson.user.username);
+        localStorage.setItem("user", resultJson.username.username);
         navigate("/home");
       } else if (result.statusText === "Unauthorized") {
         setLoginFailedMessage("Username or password not found");
@@ -57,8 +56,8 @@ export const Login = () => {
     }
     // don't allow < > & ' " or /
     // backend escapes these so they will not work properly when trying to log in
-    if (email.match("[<>&\'\"/]+")) {
-      setAccountFailedMessage("Email cannot contain < > & \' \" or /");
+    if (email.match("[<>&'\"/]+")) {
+      setAccountFailedMessage("Email cannot contain < > & ' \" or /");
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
@@ -72,8 +71,8 @@ export const Login = () => {
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
-    if (name.match("[<>&\'\"/]+")) {
-      setAccountFailedMessage("Name cannot contain < > & \' \" or /");
+    if (name.match("[<>&'\"/]+")) {
+      setAccountFailedMessage("Name cannot contain < > & ' \" or /");
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
@@ -87,8 +86,8 @@ export const Login = () => {
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
-    if (password.match("[<>&\'\"/]+")) {
-      setAccountFailedMessage("Password cannot contain < > & \' \" or /");
+    if (password.match("[<>&'\"/]+")) {
+      setAccountFailedMessage("Password cannot contain < > & ' \" or /");
       setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
@@ -115,12 +114,17 @@ export const Login = () => {
     }
   };
 
-  const handleForget = (email: string) => {
-    console.log({ email });
-  };
+  // const handleForget = (email: string) => {
+  //   console.log({ email });
+  // };
 
   return (
-    <Box sx={{ height: "100vh" }}>
+    <Box sx={{ minHeight: "100vh", backgroundColor: "secondary.main",
+    background: `url(${bgwebp}), url(${bgpng})`,
+    backgroundPosition: "center",
+    backgroundSize: "100vw",
+    backgroundPositionY: 60,
+    maxWidth: "100vw", }}>
       <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
         <Box sx={{ minWidth: 350, minHeight: 400, my: 5 }}>
           <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center">

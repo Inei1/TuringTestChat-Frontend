@@ -1,6 +1,6 @@
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { SelectRoom } from './chat/SelectRoom';
+import { ChatHome } from './chat/ChatHome';
 import { ChatRoom } from './chat/ChatRoom';
 import { io } from 'socket.io-client';
 import { LoginState } from './types';
@@ -11,6 +11,7 @@ import { Login } from './homepage/Login';
 import { PrivacyPolicy } from './homepage/PrivacyPolicy';
 import { Tos } from './homepage/Tos';
 import ReactGA from "react-ga4";
+import { Settings } from './Settings';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -45,6 +46,17 @@ const theme = createTheme({
       color: "#e9e9e9",
     }
   },
+  components: {
+    MuiMenu: {
+      styleOverrides: {
+        list: {
+          "&[role='menu']": {
+            backgroundColor: "#e9e9e9"
+          }
+        }
+      }
+    }
+  }
 });
 
 function App() {
@@ -63,7 +75,7 @@ function App() {
     {
       path: "/home",
       element:
-        <SelectRoom socket={socket} />
+        <ChatHome socket={socket} />
     },
     {
       path: "/chat",
@@ -80,7 +92,12 @@ function App() {
       path: "/tos",
       element:
         <Tos />
-    }
+    },
+    // {
+    //   path: "/home/settings",
+    //   element:
+    //     <Settings />
+    // }
   ]);
   return (
     <div style={{ backgroundColor: "#1D1D1D" }} className="App">

@@ -1,31 +1,9 @@
-import { AppBar, Box, Button, Container, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { LoginStateContext } from "./App";
-import { Constants } from "./Constants";
-import { setAccesstoken } from "./setAccesstoken";
+import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
+import React from "react";
+import { Link } from "react-router-dom";
 import { User } from "./User";
 
 export const Header = () => {
-
-  // const checkLogin = async () => {
-  //   const user = localStorage.getItem("user");
-  //   if (user !== null) {
-  //     const accessToken = sessionStorage.getItem("accessToken");
-  //     const authStatus = await fetch(Constants.BASE_URL + "api/auth/" + user, {
-  //       method: "POST",
-  //       headers: { 'Content-Type': 'application/json', "Authorization": "bearer " + accessToken },
-  //       credentials: "include",
-  //     }).then(res => res.json());
-  //     if (!authStatus.succeeded) {
-  //       setLoginState({ tabIndex: loginState.tabIndex, loggedIn: false });
-  //       localStorage.removeItem("user");
-  //     }
-  //     if (authStatus.accessToken) {
-  //       setAccesstoken(authStatus.accessToken);
-  //     }
-  //   }
-  // }
 
   return (
     <React.Fragment>
@@ -38,6 +16,10 @@ export const Header = () => {
               style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 30, textDecoration: "none" }}>Turing Test Chat
             </Link>
             <Box sx={{ flexGrow: 0.1 }} />
+            <Link
+              to="/home"
+              color="info"
+              style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 20, textDecoration: "none", fontWeight: "normal" }}>Chat</Link>
             <Box sx={{ flexGrow: 1 }} />
             {localStorage.getItem("user") === null && <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Link to="/login">
