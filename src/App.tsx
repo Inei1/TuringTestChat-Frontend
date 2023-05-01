@@ -14,6 +14,9 @@ import { Header } from './Header';
 import { PrivacyPolicy } from './homepage/PrivacyPolicy';
 import { Tos } from './homepage/Tos';
 import ReactGA from "react-ga4";
+import { Blog } from './homepage/Blog';
+import { Blog2 } from './blog/Blog2';
+import { Blog1 } from './blog/Blog1';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -101,6 +104,21 @@ function App() {
       path: "/tos",
       element:
         <Tos />
+    },
+    {
+      path: "/blog",
+      element:
+        <Blog />
+    },
+    {
+      path: "/blog/1",
+      element:
+        <Blog1 />
+    },
+    {
+      path: "/blog/2",
+      element:
+        <Blog2 />
     }
   ]);
   return (

@@ -1,40 +1,8 @@
-import { AppBar, Box, Button, Container, Toolbar, Typography } from "@mui/material";
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { LoginStateContext } from "./App";
-import { Constants } from "./Constants";
-import { setAccesstoken } from "./setAccesstoken";
+import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
+import React from "react";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
-
-  const { loginState, setLoginState } = useContext(LoginStateContext);
-
-  const navigate = useNavigate();
-
-  const logout = () => {
-    localStorage.clear();
-    setAccesstoken("");
-    setLoginState({ tabIndex: 0, loggedIn: false });
-  }
-
-  const checkLogin = async () => {
-    const user = localStorage.getItem("user");
-    if (user !== null) {
-      const accessToken = sessionStorage.getItem("accessToken");
-      const authStatus = await fetch(Constants.BASE_URL + "api/auth/" + user, {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json', "Authorization": "bearer " + accessToken },
-        credentials: "include",
-      }).then(res => res.json());
-      if (!authStatus.succeeded) {
-        setLoginState({ tabIndex: loginState.tabIndex, loggedIn: false });
-        localStorage.removeItem("user");
-      }
-      if (authStatus.accessToken) {
-        setAccesstoken(authStatus.accessToken);
-      }
-    }
-  }
 
   return (
     <React.Fragment>
@@ -47,8 +15,16 @@ export const Header = () => {
               style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 30, textDecoration: "none" }}>Turing Test Chat
             </Link>
             <Box sx={{ flexGrow: 0.1 }} />
-            {/* <Button onClick={() => navigate("/documentation/")} color="inherit" variant="text">Documentation</Button> */}
-            {/* <Button onClick={() => navigate("/news/")} color="inherit" variant="text">News</Button> */}
+            <Link
+              to="/blog"
+              color="info"
+              style={{
+                color: "#e9e9e9",
+                fontFamily: "monospace",
+                fontSize: 20,
+                textDecoration: "none",
+                fontWeight: "normal"
+              }}>Blog</Link>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Link to="/waitlist">
