@@ -40,7 +40,7 @@ export const ChatHome = (props: SelectRoomProps) => {
           <Typography>Both</Typography> */}
               {/* <Typography>Spectator</Typography> */}
               {/* <Typography>Select language: English, Spanish, etc</Typography> */}
-              {/* <Typography>Select duration: 2.5, 5 min</Typography> */}
+              {/* <Typography>Select duration: 2.5, 5 min, unlimited</Typography>*/}
 
               <Typography sx={{ fontSize: 18, mb: 5 }}>You will be paired anonymously with a human or with ChatGPT on entering the chat room.
                 Your task is to perform the Turing Test by identifying which of the two you think you were talking to.</Typography>

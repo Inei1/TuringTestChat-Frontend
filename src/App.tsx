@@ -12,6 +12,7 @@ import { PrivacyPolicy } from './homepage/PrivacyPolicy';
 import { Tos } from './homepage/Tos';
 import ReactGA from "react-ga4";
 import { Settings } from './Settings';
+import { ChatEnd } from './chat/ChatEnd';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
