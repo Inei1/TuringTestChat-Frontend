@@ -15,9 +15,6 @@ export const ChatHome = (props: SelectRoomProps) => {
   const navigate = useNavigate();
 
   const enterChat = (e: any) => {
-    e.preventDefault();
-    localStorage.setItem('userName', "user");
-    props.socket.emit('newUser', { username: "user", socketId: props.socket.id });
     navigate('/chat');
   };
 

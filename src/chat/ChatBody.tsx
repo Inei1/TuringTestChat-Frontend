@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import { Box, Typography } from '@mui/material';
+import { ChatMessage } from './ChatMessage';
 
 export interface ChatBodyProps {
   messages: any[];
@@ -7,49 +8,18 @@ export interface ChatBodyProps {
 }
 
 export const ChatBody = (props: ChatBodyProps) => {
-  const navigate = useNavigate();
-
-  const handleLeaveChat = () => {
-    localStorage.removeItem('userName');
-    navigate('/');
-    window.location.reload();
-  };
 
   return (
     <>
-      <header className="chat__mainHeader">
-        <button className="leaveChat__btn" onClick={handleLeaveChat}>
-          LEAVE CHAT
-        </button>
-      </header>
-
-      <div className="message__container">
-
+      <Box>
         {props.messages.map((message) => {
-          if (!message) {
-            return <p>Error</p>
-          }
-          return message.name === localStorage.getItem('userName') ? (
-            <div className="message__chats" key={message.id}>
-              <p className="sender__name">You</p>
-              <div className="message__sender">
-                <p>{message.text}</p>
-              </div>
-            </div>
-          ) : (
-            <div className="message__chats" key={message.id}>
-              <p>{message.name}</p>
-              <div className="message__recipient">
-                <p>{message.text}</p>
-              </div>
-            </div>
-          )
+          return <ChatMessage message={message} />
         })}
-        <div className="message__status">
-          {props.typingUser.length > 0 && <p>{props.typingUser + " is typing"}</p>}
-        </div>
-        <div ref={props.lastMessageRef} />
-      </div>
+        <Box>
+          {props.typingUser.length > 0 && <Typography>{props.typingUser + " is typing"}</Typography>}
+        </Box>
+        <Box ref={props.lastMessageRef} />
+      </Box>
     </>
   );
 };
