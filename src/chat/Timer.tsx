@@ -14,7 +14,7 @@ export const Timer = (props: TimerProps) => {
 
   useInterval(() => {
     setSeconds(seconds - 1);
-    if (seconds === 0) {
+    if (seconds <= 0) {
       props.setChatActive(false);
     }
   }, 1000)

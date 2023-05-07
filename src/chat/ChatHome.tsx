@@ -7,15 +7,11 @@ import logopng from "../img/TTCbgplainv1.png";
 import logowebp from "../img/TTCbgplainv1.webp";
 import { Footer } from '../homepage/Footer';
 
-export interface SelectRoomProps {
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-}
-
-export const ChatHome = (props: SelectRoomProps) => {
+export const ChatHome = () => {
   const navigate = useNavigate();
 
   const enterChat = (e: any) => {
-    navigate('/chat');
+    navigate('/chatwaiting');
   };
 
   return (

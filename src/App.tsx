@@ -11,8 +11,7 @@ import { Login } from './homepage/Login';
 import { PrivacyPolicy } from './homepage/PrivacyPolicy';
 import { Tos } from './homepage/Tos';
 import ReactGA from "react-ga4";
-import { Settings } from './Settings';
-import { ChatEnd } from './chat/ChatEnd';
+import { ChatWaiting } from './chat/ChatWaiting';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -26,7 +25,7 @@ export const LoginStateContext = createContext<LoginStateContextType>({
   setLoginState: () => null,
 });
 
-const socket = io("localhost:8080");
+const socket = io("localhost:8080", { autoConnect: false });
 
 const theme = createTheme({
   palette: {
@@ -76,7 +75,12 @@ function App() {
     {
       path: "/home",
       element:
-        <ChatHome socket={socket} />
+        <ChatHome />
+    },
+    {
+      path: "/chatwaiting",
+      element:
+        <ChatWaiting socket={socket} />
     },
     {
       path: "/chat",

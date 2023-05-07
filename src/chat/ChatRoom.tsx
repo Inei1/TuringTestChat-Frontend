@@ -1,14 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
-import { ChatBody } from './ChatBody';
-import { ChatFooter } from './ChatFooter';
+import { useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import bgpng from "../img/TTCbgplainv1.png";
 import bgwebp from "../img/TTCbgplainv1.webp";
-import { Box, Button, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import { Header } from '../Header';
 import { Timer } from './Timer';
-import { useNavigate } from 'react-router-dom';
+import { ChatActive } from './ChatActive';
+import { ChatEnd } from './ChatEnd';
 
 export interface ChatRoomProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -16,30 +15,19 @@ export interface ChatRoomProps {
 
 export const ChatRoom = (props: ChatRoomProps) => {
 
-  const [messages, setMessages] = useState<any>([]);
-  const [typingUser, setTypingUser] = useState('');
-  const [endSeconds, setEndSeconds] = useState(30);
   const [chatActive, setChatActive] = useState(true);
-  const lastMessageRef = useRef<HTMLDivElement>(null);
-
-  const navigate = useNavigate();
-
-  console.log(chatActive);
+  const [chatSeconds, setChatSeconds] = useState(-1);
+  const [endSeconds, setEndSeconds] = useState(-1);
 
   useEffect(() => {
-    props.socket.on('messageResponse', (data: any) => {
-      setMessages([...messages, data]);
-      setTypingUser("");
-    });
-  }, [props.socket, messages]);
-
-  useEffect(() => {
-    lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
-  useEffect(() => {
-    props.socket.on('typingResponse', (data) => setTypingUser(data));
+    props.socket.on("newUserResponse", (data) => setChatSeconds(data));
+    props.socket.on("timeOver", (data) => setChatActive(data));
+    props.socket.on("beginPost", (data) => setEndSeconds(data));
   }, [props.socket]);
+
+  useEffect(() => {
+    props.socket.emit("newUser", localStorage.getItem("user"));
+  });
 
   return (
     <>
@@ -54,25 +42,11 @@ export const ChatRoom = (props: ChatRoomProps) => {
       }}>
         <Header />
         {chatActive && <Timer
-          seconds={5}
+          seconds={chatSeconds}
           sx={{ position: "fixed", top: "10%", left: 0, ml: 5 }}
           setChatActive={setChatActive} />}
-        <Box
-          sx={{
-            maxWidth: 800,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            mx: "auto",
-          }}>
-          <Container sx={{ backgroundColor: "#1D1D1D", width: "100%", my: 3 }}>
-            <ChatBody messages={messages} lastMessageRef={lastMessageRef} typingUser={typingUser} />
-            {chatActive && <ChatFooter socket={props.socket} />}
-          </Container>
-        </Box>
-        <Timer seconds={5}
-            sx={{  }}
-            setChatActive={setChatActive} />
+        <ChatActive socket={props.socket} chatActive={chatActive} />
+        <ChatEnd socket={props.socket} chatActive={chatActive} setChatActive={setChatActive} />
       </Box>
     </>
   );
