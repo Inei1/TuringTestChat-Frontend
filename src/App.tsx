@@ -75,7 +75,7 @@ function App() {
     {
       path: "/home",
       element:
-        <ChatHome />
+        <ChatHome socket={socket} />
     },
     {
       path: "/chatwaiting",

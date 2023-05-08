@@ -17,20 +17,22 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   const navigate = useNavigate();
 
   const [chatFound, setChatFound] = useState(false);
+  const [chatAccepted, setChatAccepted] = useState(false);
+  const [roomId, setRoomId] = useState("");
 
   useEffect(() => {
     props.socket.on("foundChat", () => { setChatFound(true) });
-    props.socket.on("startChat", () => navigate("/chat"))
+    let newRoomId = "";
+    props.socket.on("roomFound", (data) => {
+      newRoomId = data.roomId;
+      setRoomId(data.roomId);
+    })
+    props.socket.on("startChat", () => navigate("/chat", { state: { roomId: newRoomId } }));
   }, [props.socket]);
 
-  useEffect(() => {
-    props.socket.connect();
-    props.socket.emit("startRoom", localStorage.getItem("user"));
-    //socket.emit("userWaiting", localStorage.getItem("user"));
-  }, []);
-
   const ready = () => {
-    props.socket.emit("readyChat");
+    setChatAccepted(true);
+    props.socket.emit("readyChat", { user: localStorage.getItem("user"), roomId: roomId });
   }
 
   return (
@@ -56,9 +58,10 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
             <Grid item>
               {chatFound && <Timer setChatActive={() => null} sx={{}} seconds={30} />}
             </Grid>
-            {chatFound && <Button
+            {chatFound && !chatAccepted && <Button
               variant="contained"
               sx={{ width: "100%", height: 75, fontSize: 30 }} onClick={ready}>Go To Chat</Button>}
+            {chatAccepted && <Typography variant="h3">Waiting for other player</Typography>}
           </Grid>
         </Container>
       </Box>

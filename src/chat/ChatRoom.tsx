@@ -8,12 +8,15 @@ import { Header } from '../Header';
 import { Timer } from './Timer';
 import { ChatActive } from './ChatActive';
 import { ChatEnd } from './ChatEnd';
+import { useLocation } from 'react-router-dom';
 
 export interface ChatRoomProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
 export const ChatRoom = (props: ChatRoomProps) => {
+
+  const { roomId } = useLocation().state;
 
   const [chatActive, setChatActive] = useState(true);
   const [chatSeconds, setChatSeconds] = useState(-1);
@@ -45,8 +48,8 @@ export const ChatRoom = (props: ChatRoomProps) => {
           seconds={chatSeconds}
           sx={{ position: "fixed", top: "10%", left: 0, ml: 5 }}
           setChatActive={setChatActive} />}
-        <ChatActive socket={props.socket} chatActive={chatActive} />
-        <ChatEnd socket={props.socket} chatActive={chatActive} setChatActive={setChatActive} />
+        <ChatActive socket={props.socket} chatActive={chatActive} roomId={roomId} />
+        <ChatEnd socket={props.socket} chatActive={chatActive} setChatActive={setChatActive} roomId={roomId} />
       </Box>
     </>
   );

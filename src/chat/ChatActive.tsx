@@ -8,6 +8,7 @@ import { DefaultEventsMap } from '@socket.io/component-emitter';
 export interface ChatActiveProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   chatActive: boolean;
+  roomId: string;
 }
 
 export const ChatActive = (props: ChatActiveProps) => {

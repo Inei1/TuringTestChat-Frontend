@@ -7,10 +7,16 @@ import logopng from "../img/TTCbgplainv1.png";
 import logowebp from "../img/TTCbgplainv1.webp";
 import { Footer } from '../homepage/Footer';
 
-export const ChatHome = () => {
+export interface ChatHomeProps {
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+}
+
+export const ChatHome = (props: ChatHomeProps) => {
   const navigate = useNavigate();
 
   const enterChat = (e: any) => {
+    props.socket.connect();
+    props.socket.emit("startRoom", localStorage.getItem("user"));
     navigate('/chatwaiting');
   };
 
