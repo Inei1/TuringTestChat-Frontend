@@ -16,21 +16,13 @@ export interface ChatRoomProps {
 
 export const ChatRoom = (props: ChatRoomProps) => {
 
-  const { roomId } = useLocation().state;
+  const { roomId, endTime } = useLocation().state;
+
+  useEffect(() => {
+    props.socket.on("chatEnd", () => setChatActive(false));
+  }, [props.socket])
 
   const [chatActive, setChatActive] = useState(true);
-  const [chatSeconds, setChatSeconds] = useState(-1);
-  const [endSeconds, setEndSeconds] = useState(-1);
-
-  useEffect(() => {
-    props.socket.on("newUserResponse", (data) => setChatSeconds(data));
-    props.socket.on("timeOver", (data) => setChatActive(data));
-    props.socket.on("beginPost", (data) => setEndSeconds(data));
-  }, [props.socket]);
-
-  useEffect(() => {
-    props.socket.emit("newUser", localStorage.getItem("user"));
-  });
 
   return (
     <>
@@ -45,11 +37,10 @@ export const ChatRoom = (props: ChatRoomProps) => {
       }}>
         <Header />
         {chatActive && <Timer
-          seconds={chatSeconds}
-          sx={{ position: "fixed", top: "10%", left: 0, ml: 5 }}
-          setChatActive={setChatActive} />}
+          millis={endTime - Date.now()}
+          sx={{ position: "fixed", top: "10%", left: 0, ml: 5 }} />}
         <ChatActive socket={props.socket} chatActive={chatActive} roomId={roomId} />
-        <ChatEnd socket={props.socket} chatActive={chatActive} setChatActive={setChatActive} roomId={roomId} />
+        {!chatActive && <ChatEnd socket={props.socket} chatActive={chatActive} setChatActive={setChatActive} roomId={roomId} />}
       </Box>
     </>
   );

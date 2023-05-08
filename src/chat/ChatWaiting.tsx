@@ -17,17 +17,18 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   const navigate = useNavigate();
 
   const [chatFound, setChatFound] = useState(false);
+  const [chatWaitingEnd, setChatWaitingEnd] = useState(-1);
   const [chatAccepted, setChatAccepted] = useState(false);
   const [roomId, setRoomId] = useState("");
 
   useEffect(() => {
-    props.socket.on("foundChat", () => { setChatFound(true) });
+    props.socket.on("foundChat", (data) => { setChatFound(true); setChatWaitingEnd(data.endTime) });
     let newRoomId = "";
     props.socket.on("roomFound", (data) => {
       newRoomId = data.roomId;
       setRoomId(data.roomId);
     })
-    props.socket.on("startChat", () => navigate("/chat", { state: { roomId: newRoomId } }));
+    props.socket.on("startChat", (data) => navigate("/chat", { state: { roomId: newRoomId, endTime: data.endTime } }));
   }, [props.socket]);
 
   const ready = () => {
@@ -56,7 +57,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
             {!chatFound && <Typography variant="h1">Waiting for chat</Typography>}
             {chatFound && <Typography variant="h1">Chat found</Typography>}
             <Grid item>
-              {chatFound && <Timer setChatActive={() => null} sx={{}} seconds={30} />}
+              {chatFound && <Timer sx={{}} millis={chatWaitingEnd - Date.now()} />}
             </Grid>
             {chatFound && !chatAccepted && <Button
               variant="contained"

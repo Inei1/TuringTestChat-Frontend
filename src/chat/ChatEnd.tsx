@@ -56,9 +56,8 @@ export const ChatEnd = (props: ChatEndProps) => {
         alignItems="center"
         justifyContent="center">
         <Grid item>
-          <Timer seconds={5}
-            sx={{}}
-            setChatActive={props.setChatActive} />
+          <Timer millis={5}
+            sx={{}} />
         </Grid>
         <Grid item>
           <Typography variant="h1" sx={{ fontSize: 50, my: 3 }}>Who do you think you just talked to?</Typography>
