@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, Grid, IconButton, TextField, Typography } from '@mui/material';
+import { Box, Grid, IconButton, TextField } from '@mui/material';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { useState } from 'react';
 import { Socket } from 'socket.io-client';
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 export interface ChatFooterProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  roomId: string;
 }
 
 export const ChatFooter = (props: ChatFooterProps) => {
@@ -28,6 +29,7 @@ export const ChatFooter = (props: ChatFooterProps) => {
     if (message.trim() && localStorage.getItem('user')) {
       props.socket.emit('message', {
         name: localStorage.getItem("user"),
+        roomId: props.roomId,
         text: message,
       });
     }

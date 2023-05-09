@@ -37,6 +37,7 @@ export const ChatActive = (props: ChatActiveProps) => {
     <Box
       sx={{
         maxWidth: 800,
+        maxHeight: "80vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -44,7 +45,7 @@ export const ChatActive = (props: ChatActiveProps) => {
       }}>
       <Container sx={{ backgroundColor: "#1D1D1D", width: "100%", my: 3 }}>
         <ChatBody messages={messages} lastMessageRef={lastMessageRef} typingUser={typingUser} />
-        {props.chatActive && <ChatFooter socket={props.socket} />}
+        {props.chatActive && <ChatFooter roomId={props.roomId} socket={props.socket} />}
       </Container>
     </Box>
   );

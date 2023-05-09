@@ -4,26 +4,27 @@ import useInterval from "use-interval";
 import { Timer } from "./Timer";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from '@socket.io/component-emitter';
+import { useNavigate } from "react-router-dom";
 
 export interface ChatEndProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   chatActive: boolean;
   setChatActive: (over: boolean) => void;
   roomId: string;
+  endResultMillis: number;
 }
 
 export const ChatEnd = (props: ChatEndProps) => {
 
-  const [seconds, setSeconds] = useState(30);
+  const navigate = useNavigate();
+
   const [result, setResult] = useState("");
+  const [other, setOther] = useState("");
   const [selfPoints, setSelfPoints] = useState(0);
   const [confirm, setConfirm] = useState(false);
   const [otherResult, setOtherResult] = useState("");
   const [otherPoints, setOtherPoints] = useState(0);
-
-  useInterval(() => {
-    setSeconds(seconds - 1);
-  }, 1000)
+  const [resultOver, setResultOver] = useState(false);
 
   useEffect(() => {
     props.socket.on("otherResult", (data) => {
@@ -32,6 +33,19 @@ export const ChatEnd = (props: ChatEndProps) => {
     });
     props.socket.on("selfResult", (data) => {
       setSelfPoints(data.points);
+    });
+    props.socket.on("endResult", () => {
+      if (result === "") {
+        props.socket.emit("result", {
+          name: localStorage.getItem("user"),
+          roomId: props.roomId,
+          result: "Did not pick"
+        });
+      } else {
+        sendResult();
+      }
+      setConfirm(true);
+      setResultOver(true);
     });
   }, [props.socket]);
 
@@ -46,6 +60,7 @@ export const ChatEnd = (props: ChatEndProps) => {
       result: result
     });
     setConfirm(true);
+    setResultOver(true);
   }
 
   return (
@@ -56,16 +71,15 @@ export const ChatEnd = (props: ChatEndProps) => {
         alignItems="center"
         justifyContent="center">
         <Grid item>
-          <Timer millis={5}
-            sx={{}} />
+          {!resultOver && <Timer millis={props.endResultMillis} sx={{}} />}
         </Grid>
         <Grid item>
           <Typography variant="h1" sx={{ fontSize: 50, my: 3 }}>Who do you think you just talked to?</Typography>
         </Grid>
         <Grid item>
           <ButtonGroup variant="contained">
-            <Button onClick={() => selectResult("DefinitelyHuman")}
-              sx={{ backgroundColor: result === "DefinitelyHuman" ? "#1538B2" : "#1F51FF" }}>
+            <Button onClick={() => selectResult("Definitely a human")}
+              sx={{ backgroundColor: result === "Definitely a human" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
                   <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />
@@ -75,8 +89,8 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => selectResult("ProbablyHuman")}
-              sx={{ backgroundColor: result === "ProbablyHuman" ? "#1538B2" : "#1F51FF" }}>
+            <Button onClick={() => selectResult("Probably a human")}
+              sx={{ backgroundColor: result === "Probably a human" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
                   <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />
@@ -97,8 +111,8 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => selectResult("ProbablyBot")}
-              sx={{ backgroundColor: result === "ProbablyBot" ? "#1538B2" : "#1F51FF" }}>
+            <Button onClick={() => selectResult("Probably a bot")}
+              sx={{ backgroundColor: result === "Probably a bot" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
                   <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />
@@ -108,8 +122,8 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => selectResult("DefinitelyBot")}
-              sx={{ backgroundColor: result === "DefinitelyBot" ? "#1538B2" : "#1F51FF" }}>
+            <Button onClick={() => selectResult("Definitely a bot")}
+              sx={{ backgroundColor: result === "Definitely a bot" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
                   <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />
@@ -131,17 +145,18 @@ export const ChatEnd = (props: ChatEndProps) => {
           spacing={5}>
           <Grid item sx={{ mt: 2 }}>
             {confirm && <Typography>You chose:</Typography>}
-            {result === "DefinitelyHuman" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
-            {result === "ProbablyHuman" && <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />}
+            {result === "Definitely a human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
+            {result === "Probably a human" && <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />}
             {result === "Unknown" && <Box component="img" alt="Unknown" src="TTCUnknown.png" maxWidth={"8vw"} />}
-            {result === "ProbablyBot" && <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />}
-            {result === "DefinitelyBot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
-            <Typography>{result}</Typography>
+            {result === "Probably a bot" && <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />}
+            {result === "Definitely a bot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
+            <Typography>{result === "" ? "Did not pick" : result}</Typography>
           </Grid>
           <Grid item sx={{ mt: 2 }}>
             {confirm && <Typography>They were:</Typography>}
-            <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />
-            <Typography>Human</Typography>
+            {other === "Human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
+            {other === "Bot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
+            <Typography>{other}</Typography>
           </Grid>
           <Grid item>
           </Grid>
@@ -155,17 +170,20 @@ export const ChatEnd = (props: ChatEndProps) => {
           {otherResult && otherResult.length > 0 && <Typography>They chose:</Typography>}
         </Grid>
         <Grid item>
-          {otherResult === "DefinitelyHuman" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
-          {otherResult === "ProbablyHuman" && <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />}
+          {otherResult === "Definitely a human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
+          {otherResult === "Probably a human" && <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />}
           {otherResult === "Unknown" && <Box component="img" alt="Unknown" src="TTCUnknown.png" maxWidth={"8vw"} />}
-          {otherResult === "ProbablyBot" && <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />}
-          {otherResult === "DefinitelyBot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
+          {otherResult === "Probably a bot" && <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />}
+          {otherResult === "Definitely a bot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
         </Grid>
         <Grid item>
           <Typography>{otherResult}</Typography>
         </Grid>
         <Grid item>
           {otherPoints !== 0 && <Typography>You received {otherPoints} points from the other person's selection</Typography>}
+        </Grid>
+        <Grid item>
+          {resultOver && <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>}
         </Grid>
       </Grid>
     </Container>
