@@ -1,6 +1,5 @@
 import { Box, Button, ButtonGroup, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import useInterval from "use-interval";
 import { Timer } from "./Timer";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from '@socket.io/component-emitter';
@@ -21,7 +20,6 @@ export const ChatEnd = (props: ChatEndProps) => {
   const [result, setResult] = useState("");
   const [other, setOther] = useState("");
   const [selfPoints, setSelfPoints] = useState(0);
-  const [confirm, setConfirm] = useState(false);
   const [otherResult, setOtherResult] = useState("");
   const [otherPoints, setOtherPoints] = useState(0);
   const [resultOver, setResultOver] = useState(false);
@@ -33,34 +31,24 @@ export const ChatEnd = (props: ChatEndProps) => {
     });
     props.socket.on("selfResult", (data) => {
       setSelfPoints(data.points);
-    });
-    props.socket.on("endResult", () => {
-      if (result === "") {
-        props.socket.emit("result", {
-          name: localStorage.getItem("user"),
-          roomId: props.roomId,
-          result: "Did not pick"
-        });
-      } else {
-        sendResult();
-      }
-      setConfirm(true);
+      setOther(data.other);
+      setResult(data.result);
       setResultOver(true);
     });
+    props.socket.on("noResult", () => {
+      setOtherResult("Did not pick");
+      setOtherPoints(10);
+      setOther("Human");
+    });
+    props.socket.on("completeChat", () => setResultOver(true));
   }, [props.socket]);
 
-  const selectResult = (result: string) => {
-    setResult(result);
-  };
-
-  const sendResult = () => {
+  const sendResult = (result: string) => {
     props.socket.emit("result", {
       name: localStorage.getItem("user"),
       roomId: props.roomId,
       result: result
     });
-    setConfirm(true);
-    setResultOver(true);
   }
 
   return (
@@ -78,7 +66,7 @@ export const ChatEnd = (props: ChatEndProps) => {
         </Grid>
         <Grid item>
           <ButtonGroup variant="contained">
-            <Button onClick={() => selectResult("Definitely a human")}
+            <Button onClick={() => sendResult("Definitely a human")}
               sx={{ backgroundColor: result === "Definitely a human" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -89,8 +77,8 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => selectResult("Probably a human")}
-              sx={{ backgroundColor: result === "Probably a human" ? "#1538B2" : "#1F51FF" }}>
+            <Button onClick={() => sendResult("Possibly a human")}
+              sx={{ backgroundColor: result === "Possibly a human" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
                   <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />
@@ -100,7 +88,7 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => selectResult("Unknown")}
+            <Button onClick={() => sendResult("Unknown")}
               sx={{ backgroundColor: result === "Unknown" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -111,8 +99,8 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => selectResult("Probably a bot")}
-              sx={{ backgroundColor: result === "Probably a bot" ? "#1538B2" : "#1F51FF" }}>
+            <Button onClick={() => sendResult("Possibly a bot")}
+              sx={{ backgroundColor: result === "Possibly a bot" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
                   <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />
@@ -122,7 +110,7 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => selectResult("Definitely a bot")}
+            <Button onClick={() => sendResult("Definitely a bot")}
               sx={{ backgroundColor: result === "Definitely a bot" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -135,25 +123,22 @@ export const ChatEnd = (props: ChatEndProps) => {
             </Button>
           </ButtonGroup>
         </Grid>
-        <Grid item sx={{ mt: 2 }}>
-          {!confirm && <Button variant="contained" onClick={sendResult}>Confirm</Button>}
-        </Grid>
         <Grid
           container
           alignItems="center"
           justifyContent="center"
           spacing={5}>
           <Grid item sx={{ mt: 2 }}>
-            {confirm && <Typography>You chose:</Typography>}
+            {(result.length > 0 || resultOver) && <Typography>You chose:</Typography>}
             {result === "Definitely a human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
-            {result === "Probably a human" && <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />}
+            {result === "Possibly a human" && <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />}
             {result === "Unknown" && <Box component="img" alt="Unknown" src="TTCUnknown.png" maxWidth={"8vw"} />}
-            {result === "Probably a bot" && <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />}
+            {result === "Possibly a bot" && <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />}
             {result === "Definitely a bot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
-            <Typography>{result === "" ? "Did not pick" : result}</Typography>
+            {resultOver && <Typography>{result === "" ? "Did not pick" : result}</Typography>}
           </Grid>
           <Grid item sx={{ mt: 2 }}>
-            {confirm && <Typography>They were:</Typography>}
+            {other.length > 0 && <Typography>They were:</Typography>}
             {other === "Human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
             {other === "Bot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
             <Typography>{other}</Typography>
@@ -165,15 +150,15 @@ export const ChatEnd = (props: ChatEndProps) => {
           <Typography>You received {selfPoints} points from your selection</Typography>
         </Grid>
         <Grid item sx={{ my: 2 }}>
-          {result && result.length > 0 && confirm && otherResult.length === 0 &&
+          {result && result.length > 0 && otherResult.length === 0 &&
             <Typography>Waiting for other person...</Typography>}
           {otherResult && otherResult.length > 0 && <Typography>They chose:</Typography>}
         </Grid>
         <Grid item>
           {otherResult === "Definitely a human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
-          {otherResult === "Probably a human" && <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />}
+          {otherResult === "Possibly a human" && <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />}
           {otherResult === "Unknown" && <Box component="img" alt="Unknown" src="TTCUnknown.png" maxWidth={"8vw"} />}
-          {otherResult === "Probably a bot" && <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />}
+          {otherResult === "Possibly a bot" && <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />}
           {otherResult === "Definitely a bot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
         </Grid>
         <Grid item>
