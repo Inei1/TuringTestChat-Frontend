@@ -17,6 +17,8 @@ import ReactGA from "react-ga4";
 import { Blog } from './homepage/Blog';
 import { Blog2 } from './blog/Blog2';
 import { Blog1 } from './blog/Blog1';
+import { Blog3 } from './blog/Blog3';
+import { Blog4 } from './blog/Blog4';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -119,6 +121,16 @@ function App() {
       path: "/blog/2",
       element:
         <Blog2 />
+    },
+    {
+      path: "/blog/3",
+      element:
+        <Blog3 />
+    },
+    {
+      path: "/blog/4",
+      element:
+        <Blog4 />
     }
   ]);
   return (

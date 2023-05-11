@@ -23,6 +23,20 @@ export const Blog = () => {
           <BlogEntry
             imageAlt="TuringTestChat logo"
             imageSrc="TTCLogov2.png"
+            blogNumber={4}
+            blogTitle="TuringTestChat Developer Update #2"
+            blogDate="May 11, 2023"
+            blogSubtitle="Building the chat application for TuringTestChat." />
+          <BlogEntry
+            imageAlt="TuringTestChat logo"
+            imageSrc="TTCLogov2.png"
+            blogNumber={3}
+            blogTitle="TuringTestChat Engineering Blog #2"
+            blogDate="May 11, 2023"
+            blogSubtitle="Using WebSockets to create a chat application." />
+          <BlogEntry
+            imageAlt="TuringTestChat logo"
+            imageSrc="TTCLogov2.png"
             blogNumber={2}
             blogTitle="TuringTestChat Developer Update #1"
             blogDate="May 1, 2023"
