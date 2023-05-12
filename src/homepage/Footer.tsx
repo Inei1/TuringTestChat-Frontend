@@ -19,9 +19,6 @@ export const Footer = () => {
           <Link to="/tos" style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 18 }}>Terms of Service</Link>
         </Grid>
         <Grid item xs={5} md={0}>
-          <MuiLink target="_blank" rel="noreferrer" href="https://www.facebook.com/people/Turingtestchat/100092302895572/" color="#e9e9e9" fontFamily="monospace" fontSize={18}>Facebook</MuiLink>
-        </Grid>
-        <Grid item xs={5} md={0}>
           <Link to="/privacypolicy" style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 18 }}>Privacy Policy</Link>
         </Grid>
         <Grid item xs={5} md={0}>
