@@ -6,11 +6,15 @@ import { Box } from "@mui/material";
 import logopng from "./img/TTCbgplainv1.png";
 import logowebp from "./img/TTCbgplainv1.webp";
 import { Subscribe } from "./homepage/Subscribe";
+import { Helmet } from "react-helmet-async";
 
 export const Homepage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Turing Test Chat | give ChatGPT the Turing Test</title>
+      </Helmet>
       <Box sx={{
         backgroundColor: "secondary.main",
         background: `url(${logowebp}), url(${logopng})`,

@@ -51,7 +51,7 @@ export const Subscribe = () => {
         >
           <Box sx={{ maxWidth: 800 }}>
             <Typography variant="h5">
-              Join the waitlist to get in when the closed beta releases for free
+              Join the waitlist to be notified when Turing Test Chat releases for free.
             </Typography>
             <TextField
               placeholder="Your email"

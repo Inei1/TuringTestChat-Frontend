@@ -5,10 +5,14 @@ import logowebp from "../img/TTCbgplainv1.webp";
 import { Footer } from "../homepage/Footer";
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import SyntaxHighlighter from "react-syntax-highlighter";
+import { Helmet } from "react-helmet-async";
 
 export const Blog1 = () => {
   return (
     <>
+      <Helmet>
+        <title>Engineering Blog 1: UI and Authentication | Turing Test Chat</title>
+      </Helmet>
       <Box sx={{
         backgroundColor: "secondary.main",
         background: `url(${logowebp}), url(${logopng})`,
@@ -20,12 +24,13 @@ export const Blog1 = () => {
       }}>
         <Header />
         <Container component="section">
-          <Typography variant="h1" sx={{ fontSize: 40, my: 5 }}>TuringTestChat Engineering Blog #1</Typography>
-          <Typography sx={{ fontStyle: "italic", fontWeight: "bold", fontSize: 20 }}>This blog entry focuses on writing the code for TuringTestChat.
+          <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Engineering Blog #1</Typography>
+          <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Diving into the code behind the early UI and authentication.</Typography>
+          <Typography sx={{ fontStyle: "italic", fontWeight: "bold", fontSize: 20 }}>This blog entry focuses on writing the code for Turing Test Chat.
             If you aren't familiar with coding, it may be difficult to understand.
             Also, this blog covers the topics mentioned in the developer update, so it's recommended to read that first.</Typography>
           <Typography sx={{ fontSize: 18, mt: 5 }}>As the first entry, there is a lot to cover, so I'll briefly go over what's already in place.
-            TuringTestChat is built by one person using a MERN (MongoDB, Express, React, Node) stack and runs on AWS.
+            Turing Test Chat is built by one person using a MERN (MongoDB, Express, React, Node) stack and runs on AWS.
             Some AWS services used are EC2 (backend hosting), S3 (frontend static site hosting), SES (waitlist emails), and CodeDeploy (CI/CD).
             The waitlist uses an email validator service to avoid SES sending hard bounced emails.
             On the frontend, MUI is used with React and TypeScript.
@@ -109,13 +114,13 @@ private async loginPassword(req: Request, res: Response) {
   </Link>
 </Box>}
 {localStorage.getItem("user") && <User />}`}</SyntaxHighlighter>
-          The user component is a custom component which contains the (unimplemented as of now) credit, points, and user settings.
-          Lastly, this blog was coded up and the components for it were created.
-          It's a simple custom made system coded up in an hour, but it's functional.<p />
-          Does the coding of the blog sound interesting?
-          Have you ever wanted to play a social deduction game centered around the difference between humans and AI?
-          You should sign up for the TuringTestChat waitlist.
-          Progress and engineering updates similar to this one will happen somewhat frequently until TuringTestChat is released.
+            The user component is a custom component which contains the (unimplemented as of now) credit, points, and user settings.
+            Lastly, this blog was coded up and the components for it were created.
+            It's a simple custom made system coded up in an hour, but it's functional.<p />
+            Does the coding of the blog sound interesting?
+            Have you ever wanted to play a social deduction game centered around the difference between humans and AI?
+            You should sign up for the Turing Test Chat waitlist.
+            Progress and engineering updates similar to this one will happen somewhat frequently until Turing Test Chat is released.
           </Typography>
         </Container>
       </Box>

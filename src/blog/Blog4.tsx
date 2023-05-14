@@ -4,10 +4,14 @@ import logopng from "../img/TTCbgplainv1.png";
 import logowebp from "../img/TTCbgplainv1.webp";
 import { Footer } from "../homepage/Footer";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 export const Blog4 = () => {
   return (
     <>
+      <Helmet>
+        <title>Developer Update 2: Websocket Chat Application | Turing Test Chat</title>
+      </Helmet>
       <Box sx={{
         backgroundColor: "secondary.main",
         background: `url(${logowebp}), url(${logopng})`,
@@ -19,7 +23,8 @@ export const Blog4 = () => {
       }}>
         <Header />
         <Container component="section">
-          <Typography variant="h1" sx={{ fontSize: 40, my: 5 }}>TuringTestChat Developer Update #2</Typography>
+          <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Developer Update #2</Typography>
+          <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Building the chat application for Turing Test Chat.</Typography>
           <Typography sx={{ fontSize: 18, mt: 5 }}>
             In this developer update, the early working prototype of chat room functionality will be covered.
             If you would prefer to view this blog post in video form, here is a short two-minute video:
@@ -50,7 +55,7 @@ export const Blog4 = () => {
             <Box component="img" alt="End of results" src="../b2result.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} />
             After these events, you are returned to the chat home screen and can play again.
             <p />
-            This concludes the second developer update for TuringTestChat.
+            This concludes the second developer update for Turing Test Chat.
             If this sounds interesting, you should sign up for the {}
             <Link to="/waitlist" color="info"
               style={{

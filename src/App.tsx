@@ -19,6 +19,7 @@ import { Blog2 } from './blog/Blog2';
 import { Blog1 } from './blog/Blog1';
 import { Blog3 } from './blog/Blog3';
 import { Blog4 } from './blog/Blog4';
+import { Helmet } from 'react-helmet-async';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -83,6 +84,9 @@ function App() {
       path: "/waitlist",
       element:
         <Box sx={{ maxWidth: "100vw", minHeight: "100vh" }}>
+          <Helmet>
+            <title>Subscribe to Waitlist | Turing Test Chat</title>
+          </Helmet>
           <Header />
           <Container sx={{
             display: 'flex',
