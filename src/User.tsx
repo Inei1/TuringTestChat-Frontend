@@ -2,7 +2,7 @@
 import { Circle } from '@mui/icons-material';
 import { Box, Button, Menu, MenuItem, Typography } from '@mui/material';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const User = () => {
 
@@ -14,6 +14,7 @@ export const User = () => {
   const userDropDownOpen = Boolean(userAnchorEl);
 
   const logout = () => {
+    setProfileImage(profileImage);
     localStorage.clear();
     navigate("/");
   }

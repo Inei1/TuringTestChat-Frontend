@@ -16,7 +16,7 @@ export interface ChatRoomProps {
 
 export const ChatRoom = (props: ChatRoomProps) => {
 
-  const { roomId, endChatTime, endResultTime } = useLocation().state;
+  const { roomId, endChatTime, endResultTime, canSend, goal } = useLocation().state;
 
   useEffect(() => {
     props.socket.on("endChat", () => setChatActive(false));
@@ -39,8 +39,8 @@ export const ChatRoom = (props: ChatRoomProps) => {
         {chatActive && <Timer
           millis={endChatTime - Date.now()}
           sx={{ position: "fixed", bottom: 0, left: 0, ml: 5 }} />}
-        <ChatActive socket={props.socket} chatActive={chatActive} roomId={roomId} />
-        {!chatActive && <ChatEnd socket={props.socket} endResultMillis={endResultTime - Date.now()} chatActive={chatActive} setChatActive={setChatActive} roomId={roomId} />}
+        <ChatActive socket={props.socket} chatActive={chatActive} roomId={roomId} canSend={canSend} goal={goal} />
+        {!chatActive && <ChatEnd socket={props.socket} endResultMillis={endResultTime - Date.now()} chatActive={chatActive} setChatActive={setChatActive} roomId={roomId} goal={goal} />}
       </Box>
     </>
   );

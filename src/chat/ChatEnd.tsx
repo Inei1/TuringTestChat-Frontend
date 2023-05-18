@@ -11,6 +11,7 @@ export interface ChatEndProps {
   setChatActive: (over: boolean) => void;
   roomId: string;
   endResultMillis: number;
+  goal: string;
 }
 
 export const ChatEnd = (props: ChatEndProps) => {

@@ -20,8 +20,8 @@ export const Subscribe = () => {
     }
     // don't allow < > & ' " or /
     // backend escapes these so they will not work properly when trying to log in
-    if (email.match("[<>&\'\"/]+")) {
-      setWaitlistMessage("Email cannot contain < > & \' \" or /");
+    if (email.match("[<>&'\"/]+")) {
+      setWaitlistMessage("Email cannot contain < > & ' \" or /");
       return false;
     }
     return true;
@@ -29,6 +29,7 @@ export const Subscribe = () => {
 
   const emailSubscribe = async () => {
     if (validateEmail(email)) {
+      setComment(comment);
       setWaitlistMessage((await fetch(Constants.BASE_URL + "account/waitlist", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },

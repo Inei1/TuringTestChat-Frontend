@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Link, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { ChatBody } from "./ChatBody";
 import { ChatFooter } from "./ChatFooter";
 import { useEffect, useRef, useState } from "react";
@@ -9,6 +9,8 @@ export interface ChatActiveProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   chatActive: boolean;
   roomId: string;
+  canSend: boolean;
+  goal: string;
 }
 
 export const ChatActive = (props: ChatActiveProps) => {
@@ -45,7 +47,7 @@ export const ChatActive = (props: ChatActiveProps) => {
       }}>
       <Container sx={{ backgroundColor: "#1D1D1D", width: "100%", my: 3 }}>
         <ChatBody messages={messages} lastMessageRef={lastMessageRef} typingUser={typingUser} />
-        {props.chatActive && <ChatFooter roomId={props.roomId} socket={props.socket} />}
+        {props.chatActive && <ChatFooter roomId={props.roomId} socket={props.socket} canSend={props.canSend} />}
       </Container>
     </Box>
   );
