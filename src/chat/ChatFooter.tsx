@@ -15,16 +15,12 @@ export const ChatFooter = (props: ChatFooterProps) => {
 
   const [message, setMessage] = useState('');
   const [typingTimeout, setActiveTimeout] = useState<NodeJS.Timeout>();
-  const [canSend, setCanSend] = useState(false);
+  const [canSend, setCanSend] = useState(props.canSend);
 
   useEffect(() => {
     props.socket.on("messageWaitingOther", () => setCanSend(false));
     props.socket.on("messageWaitingSelf", () => setCanSend(true));
   }, [props.socket]);
-
-  useEffect(() => {
-    setCanSend(props.canSend);
-  }, [props.canSend]);
 
   const handleTyping = (e: any) => {
     if (e.key === "Enter") {

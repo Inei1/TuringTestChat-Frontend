@@ -4,7 +4,6 @@ import useInterval from "use-interval";
 
 export interface TimerProps {
   millis: number;
-  sx: any;
 }
 
 export const Timer = (props: TimerProps) => {
@@ -16,8 +15,8 @@ export const Timer = (props: TimerProps) => {
   }, 1000)
 
   return (
-    <Grid container sx={props.sx}>
-        <Typography variant="h1">{new Date(millis).toISOString().substring(14, 19)}</Typography>
+    <Grid container>
+      <Typography variant="h1">{new Date(millis).toISOString().substring(14, 19)}</Typography>
     </Grid>
   );
 };

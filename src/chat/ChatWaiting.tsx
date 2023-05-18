@@ -33,7 +33,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
         setChatExpired(true);
       }
     });
-  }, [props.socket, chatAccepted, navigate]);
+  }, [props.socket, chatAccepted, navigate, roomId]);
 
   const ready = () => {
     setChatAccepted(true);
@@ -61,7 +61,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
             {!chatFound && <Typography variant="h1">Waiting for chat</Typography>}
             {chatFound && <Typography variant="h1">Chat found</Typography>}
             <Grid item>
-              {chatFound && !chatExpired && <Timer sx={{}} millis={chatWaitingEnd - Date.now()} />}
+              {chatFound && !chatExpired && <Timer millis={chatWaitingEnd - Date.now()} />}
             </Grid>
             {chatFound && !chatAccepted && !chatExpired && <Button
               variant="contained"

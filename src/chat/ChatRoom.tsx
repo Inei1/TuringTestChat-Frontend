@@ -3,7 +3,7 @@ import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import bgpng from "../img/TTCbgplainv1.png";
 import bgwebp from "../img/TTCbgplainv1.webp";
-import { Box } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { Header } from '../Header';
 import { Timer } from './Timer';
 import { ChatActive } from './ChatActive';
@@ -36,11 +36,20 @@ export const ChatRoom = (props: ChatRoomProps) => {
         maxWidth: "100vw",
       }}>
         <Header />
-        {chatActive && <Timer
-          millis={endChatTime - Date.now()}
-          sx={{ position: "fixed", bottom: 0, left: 0, ml: 5 }} />}
-        <ChatActive socket={props.socket} chatActive={chatActive} roomId={roomId} canSend={canSend} goal={goal} />
-        {!chatActive && <ChatEnd socket={props.socket} endResultMillis={endResultTime - Date.now()} chatActive={chatActive} setChatActive={setChatActive} roomId={roomId} goal={goal} />}
+        <ChatActive
+          socket={props.socket}
+          chatActive={chatActive}
+          roomId={roomId}
+          canSend={canSend}
+          goal={goal}
+          endChatTime={endChatTime} />
+        {!chatActive && <ChatEnd
+          socket={props.socket}
+          endResultMillis={endResultTime - Date.now()}
+          chatActive={chatActive}
+          setChatActive={setChatActive}
+          roomId={roomId}
+          goal={goal} />}
       </Box>
     </>
   );
