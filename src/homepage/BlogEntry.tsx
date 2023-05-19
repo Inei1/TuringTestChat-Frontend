@@ -17,7 +17,7 @@ export const BlogEntry = (props: BlogEntryProps) => {
       <Box sx={{ my: 5 }} />
       <Grid container>
         <Grid item xs={2}>
-          <Box component="img" alt={props.imageAlt} src={props.imageSrc} sx={{ maxWidth: 128 }} />
+          {window.innerWidth > window.innerHeight && <Box component="img" alt={props.imageAlt} src={props.imageSrc} sx={{ maxWidth: 128 }} />}
         </Grid>
         <Grid item xs={10}>
           <Link to={"/blog/" + props.blogNumber}>

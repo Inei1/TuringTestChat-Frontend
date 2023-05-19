@@ -1,7 +1,5 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { Header } from "../Header";
-import logopng from "../img/TTCbgplainv1.png";
-import logowebp from "../img/TTCbgplainv1.webp";
 import { Footer } from "../homepage/Footer";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -14,7 +12,7 @@ export const Blog4 = () => {
       </Helmet>
       <Box sx={{
         backgroundColor: "secondary.main",
-        background: `url(${logowebp}), url(${logopng})`,
+        background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
         backgroundPosition: "center",
         backgroundSize: "100vw",
         backgroundPositionY: 60,

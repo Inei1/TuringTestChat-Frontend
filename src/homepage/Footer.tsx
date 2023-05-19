@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const Footer = () => {
 
   return (
-    <Container>
+    <Container sx={{background: "#1D1D1D"}}>
       <Grid sx={{ mt: 10 }} container spacing={1}>
         <Grid item xs={5} md={0}>
           <MuiLink target="_blank" rel="noreferrer" href="https://old.reddit.com/r/TuringTestChat/" color="#e9e9e9" fontFamily="monospace" fontSize={18}>Reddit</MuiLink>

@@ -20,6 +20,7 @@ import { Blog1 } from './blog/Blog1';
 import { Blog3 } from './blog/Blog3';
 import { Blog4 } from './blog/Blog4';
 import { Helmet } from 'react-helmet-async';
+import { Footer } from './homepage/Footer';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -83,23 +84,26 @@ function App() {
     {
       path: "/waitlist",
       element:
-        <Box sx={{ maxWidth: "100vw", minHeight: "100vh" }}>
-          <Helmet>
-            <title>Subscribe to Waitlist | Turing Test Chat</title>
-          </Helmet>
-          <Header />
-          <Container sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            bgcolor: 'inherit',
-            mt: 5,
-          }}>
-            <Typography variant="h1" sx={{ fontSize: 50 }}>Waitlist</Typography>
-            <Subscribe />
-          </Container>
-        </Box>
+        <>
+          <Box sx={{ maxWidth: "100vw", minHeight: "100vh", background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)", }}>
+            <Helmet>
+              <title>Subscribe to Waitlist | Turing Test Chat</title>
+            </Helmet>
+            <Header />
+            <Container sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              bgcolor: 'inherit',
+              mt: 5,
+            }}>
+              <Typography variant="h1" sx={{ fontSize: 50 }}>Waitlist</Typography>
+              <Subscribe />
+            </Container>
+          </Box>
+          <Footer />
+        </>
     },
     {
       path: "/privacypolicy",
