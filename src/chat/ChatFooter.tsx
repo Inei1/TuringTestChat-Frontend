@@ -7,6 +7,7 @@ import SendIcon from '@mui/icons-material/Send';
 
 export interface ChatFooterProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  footerRef: React.RefObject<HTMLDivElement>;
   roomId: string;
   canSend: boolean;
 }
@@ -74,7 +75,8 @@ export const ChatFooter = (props: ChatFooterProps) => {
           </IconButton>
         </Grid>
       </Grid>
-      <Box sx={{ my: 1 }}></Box>
+      <Box sx={{ my: 2 }} />
+      <Box ref={props.footerRef} />
     </Box>
   );
 };

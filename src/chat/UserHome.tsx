@@ -11,7 +11,7 @@ export interface ChatHomeProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-export const ChatHome = (props: ChatHomeProps) => {
+export const UserHome = (props: ChatHomeProps) => {
   const navigate = useNavigate();
 
   const enterChat = (e: any) => {

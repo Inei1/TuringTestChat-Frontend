@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ChatHome } from './chat/ChatHome';
+import { UserHome } from './chat/UserHome';
 import { ChatRoom } from './chat/ChatRoom';
 import { io } from 'socket.io-client';
 import { LoginState } from './types';
@@ -37,13 +37,13 @@ const theme = createTheme({
       main: "#1D1D1D",
     },
     info: {
-      main: "#e9e9e9",
+      main: "#E9E9E9",
     },
   },
   typography: {
     fontFamily: "monospace",
     allVariants: {
-      color: "#e9e9e9",
+      color: "#E9E9E9",
     }
   },
   components: {
@@ -51,7 +51,7 @@ const theme = createTheme({
       styleOverrides: {
         list: {
           "&[role='menu']": {
-            backgroundColor: "#e9e9e9"
+            backgroundColor: "#E9E9E9"
           }
         }
       }
@@ -75,7 +75,7 @@ function App() {
     {
       path: "/home",
       element:
-        <ChatHome socket={socket} />
+        <UserHome socket={socket} />
     },
     {
       path: "/chatwaiting",
