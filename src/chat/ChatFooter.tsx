@@ -31,7 +31,7 @@ export const ChatFooter = (props: ChatFooterProps) => {
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
-    setActiveTimeout(setTimeout(() => props.socket.emit("typing", ""), 5000));
+    setActiveTimeout(setTimeout(() => props.socket.emit("typingStop"), 5000));
   }
 
   const sendMessage = () => {
