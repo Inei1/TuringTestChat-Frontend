@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
-import bgpng from "../img/TTCbgplainv1.png";
-import bgwebp from "../img/TTCbgplainv1.webp";
 import { Box, Button } from '@mui/material';
 import { ChatActive } from './ChatActive';
 import { ChatEnd } from './ChatEnd';
@@ -27,7 +25,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
     <Box sx={{
       minHeight: "100vh",
       backgroundColor: "secondary.main",
-      background: `url(${bgwebp}), url(${bgpng})`,
+      background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
       backgroundPosition: "center",
       backgroundSize: "100vw",
       backgroundPositionY: 60,

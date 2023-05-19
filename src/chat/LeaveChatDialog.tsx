@@ -12,7 +12,6 @@ export const LeaveChatDialog = (props: LeaveChatDialogProps) => {
 
   const navigate = useNavigate();
 
-  //"#1D1D1D"
   return (
     <Dialog onClose={props.onClose} open={props.open} PaperProps={{ style: { backgroundColor: "#1D1D1D" } }}>
       <DialogTitle textAlign="center" variant="h2">Are you sure you want to leave?</DialogTitle>

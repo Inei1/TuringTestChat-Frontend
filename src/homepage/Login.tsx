@@ -121,8 +121,9 @@ export const Login = () => {
   return (
     <>
       <Box sx={{
-        minHeight: "100vh", backgroundColor: "secondary.main",
-        background: `url(${bgwebp}), url(${bgpng})`,
+        minHeight: "100vh",
+        backgroundColor: "secondary.main",
+        background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
         backgroundPosition: "center",
         backgroundSize: "100vw",
         backgroundPositionY: 60,

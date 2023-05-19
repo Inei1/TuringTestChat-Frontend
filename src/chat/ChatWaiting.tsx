@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import { Header } from '../Header';
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
-import logopng from "../img/TTCbgplainv1.png";
-import logowebp from "../img/TTCbgplainv1.webp";
 import { Footer } from '../homepage/Footer';
 import { useEffect, useState } from 'react';
 import { Timer } from './Timer';
@@ -45,7 +43,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
       <Box sx={{
         minHeight: "100vh",
         backgroundColor: "secondary.main",
-        background: `url(${logowebp}), url(${logopng})`,
+        background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
         backgroundPosition: "center",
         backgroundSize: "100vw",
         backgroundPositionY: 60,
