@@ -4,6 +4,7 @@ import { Socket } from 'socket.io-client';
 import { Header } from '../Header';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { Footer } from '../homepage/Footer';
+import { Helmet } from 'react-helmet-async';
 
 export interface ChatHomeProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -29,6 +30,9 @@ export const UserHome = (props: ChatHomeProps) => {
         backgroundPositionY: 60,
         maxWidth: "100vw",
       }}>
+        <Helmet>
+          <title>Home | Turing Test Chat</title>
+        </Helmet>
         <Header />
         <Container component="section">
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>

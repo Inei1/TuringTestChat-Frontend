@@ -3,8 +3,6 @@ import { useState } from "react";
 import { Constants } from "../Constants";
 import { Link, useNavigate } from "react-router-dom";
 import { Footer } from "./Footer";
-import bgpng from "../img/TTCbgplainv1.png";
-import bgwebp from "../img/TTCbgplainv1.webp";
 
 export const Login = () => {
 

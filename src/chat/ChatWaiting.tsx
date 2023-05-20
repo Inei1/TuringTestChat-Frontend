@@ -6,6 +6,7 @@ import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import { Footer } from '../homepage/Footer';
 import { useEffect, useState } from 'react';
 import { Timer } from './Timer';
+import { Helmet } from 'react-helmet-async';
 
 export interface ChatWaitingProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -49,6 +50,9 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
         backgroundPositionY: 60,
         maxWidth: "100vw",
       }}>
+        <Helmet>
+          <title>Waiting for Chat | Turing Test Chat</title>
+        </Helmet>
         <Header />
         <Container component="section">
           <Grid
