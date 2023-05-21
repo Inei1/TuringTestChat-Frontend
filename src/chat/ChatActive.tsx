@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { ChatBody } from "./ChatBody";
 import { ChatFooter } from "./ChatFooter";
 import { useEffect, useRef, useState } from "react";
@@ -8,10 +8,12 @@ import { DefaultEventsMap } from '@socket.io/component-emitter';
 export interface ChatActiveProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   chatActive: boolean;
-  roomId: string;
+  setChatActive: (active: boolean) => void;
   canSend: boolean;
   goal: string;
   endChatTime: number;
+  otherLeft: boolean;
+  setOtherLeft: (left: boolean) => void;
 }
 
 export const ChatActive = (props: ChatActiveProps) => {
@@ -20,6 +22,15 @@ export const ChatActive = (props: ChatActiveProps) => {
 
   const [messages, setMessages] = useState<any>([]);
   const [typingUser, setTypingUser] = useState('');
+
+  useEffect(() => {
+    props.socket.on("otherLeft", () => {
+      if (props.chatActive) {
+        props.setOtherLeft(true);
+        props.setChatActive(false);
+      }
+    });
+  }, [props.socket]);
 
   useEffect(() => {
     props.socket.on('messageResponse', (data: any) => {
@@ -54,8 +65,11 @@ export const ChatActive = (props: ChatActiveProps) => {
       <Grid container direction="column">
         <Container sx={{ backgroundColor: "#1D1D1D", width: "100%", mb: 2 }}>
           <ChatBody messages={messages} typingUser={typingUser} />
-          {props.chatActive && <ChatFooter roomId={props.roomId} socket={props.socket} canSend={props.canSend} footerRef={footerRef} />}
+          {props.chatActive && <ChatFooter socket={props.socket} canSend={props.canSend} footerRef={footerRef} />}
         </Container>
+        <Grid container justifyContent={"center"}>
+          {props.otherLeft && <Typography variant="h3">Other chatter has left</Typography>}
+        </Grid>
       </Grid>
     </Box>
   );

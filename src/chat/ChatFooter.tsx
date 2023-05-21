@@ -3,12 +3,10 @@ import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import SendIcon from '@mui/icons-material/Send';
-// import { useNavigate } from 'react-router-dom';
 
 export interface ChatFooterProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   footerRef: React.RefObject<HTMLDivElement>;
-  roomId: string;
   canSend: boolean;
 }
 
@@ -38,7 +36,6 @@ export const ChatFooter = (props: ChatFooterProps) => {
     if (message.trim() && localStorage.getItem('user')) {
       props.socket.emit('message', {
         name: localStorage.getItem("user"),
-        roomId: props.roomId,
         text: message,
       });
     }

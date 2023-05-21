@@ -11,9 +11,9 @@ export interface ChatEndProps {
   setChatActive: (over: boolean) => void;
   resultOver: boolean;
   setResultOver: (over: boolean) => void;
-  roomId: string;
   endResultMillis: number;
   goal: string;
+  otherLeft: boolean;
 }
 
 export const ChatEnd = (props: ChatEndProps) => {
@@ -48,7 +48,6 @@ export const ChatEnd = (props: ChatEndProps) => {
   const sendResult = (result: string) => {
     props.socket.emit("result", {
       name: localStorage.getItem("user"),
-      roomId: props.roomId,
       result: result
     });
   }
@@ -152,7 +151,8 @@ export const ChatEnd = (props: ChatEndProps) => {
           <Typography>You received {selfPoints} points from your selection</Typography>
         </Grid>
         <Grid item sx={{ my: 2 }}>
-          {result && result.length > 0 && otherResult.length === 0 &&
+          {props.otherLeft && <Typography>Other person left<p/>You gained 5 deception exp</Typography>}
+          {result && result.length > 0 && otherResult.length === 0 && !props.otherLeft &&
             <Typography>Waiting for other person...</Typography>}
           {otherResult && otherResult.length > 0 && <Typography>They chose:</Typography>}
         </Grid>

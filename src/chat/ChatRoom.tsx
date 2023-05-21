@@ -17,10 +17,11 @@ export const ChatRoom = (props: ChatRoomProps) => {
 
   const navigate = useNavigate();
 
-  const { roomId, endChatTime, endResultTime, canSend, goal } = useLocation().state;
+  const { endChatTime, endResultTime, canSend, goal } = useLocation().state;
   const [chatActive, setChatActive] = useState(true);
   const [resultOver, setResultOver] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [otherLeft, setOtherLeft] = useState(false);
 
   const onLeave = useCallback((e: BeforeUnloadEvent) => {
     e.preventDefault();
@@ -92,10 +93,12 @@ export const ChatRoom = (props: ChatRoomProps) => {
       <ChatActive
         socket={props.socket}
         chatActive={chatActive}
-        roomId={roomId}
+        setChatActive={setChatActive}
         canSend={canSend}
         goal={goal}
-        endChatTime={endChatTime} />
+        endChatTime={endChatTime}
+        otherLeft={otherLeft}
+        setOtherLeft={setOtherLeft} />
       {!chatActive && <ChatEnd
         resultOver={resultOver}
         setResultOver={setResultOver}
@@ -103,8 +106,8 @@ export const ChatRoom = (props: ChatRoomProps) => {
         endResultMillis={endResultTime - Date.now()}
         chatActive={chatActive}
         setChatActive={setChatActive}
-        roomId={roomId}
-        goal={goal} />}
+        goal={goal}
+        otherLeft={otherLeft} />}
     </Box>
   );
 };
