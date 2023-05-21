@@ -33,7 +33,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
     window.removeEventListener("visibilitychange", onVisibilityChange);
     window.removeEventListener("popstate", onPopState);
     props.socket.disconnect();
-  }, []);
+  }, [onLeave, props.socket]);
 
   const onPopState = useCallback((e: PopStateEvent) => {
     if (window.confirm("Leaving will cause you to lose 5 detection exp and 5 deception exp. Are you sure you want to leave?")) {
@@ -45,7 +45,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
     } else {
       window.history.pushState(null, "", null);
     }
-  }, []);
+  }, [navigate, onLeave, onVisibilityChange, props.socket]);
 
   useEffect(() => {
     if (!resultOver) {
@@ -57,7 +57,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
       window.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("popstate", onPopState);
     }
-  }, [resultOver]);
+  }, [resultOver, onLeave, onPopState, onVisibilityChange]);
 
 
   useEffect(() => {

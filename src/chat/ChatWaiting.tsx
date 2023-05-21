@@ -22,21 +22,50 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   const [roomId, setRoomId] = useState("");
 
   useEffect(() => {
-    props.socket.on("foundChat", (data) => { setChatFound(true); setChatWaitingEnd(data.endTime) });
+    props.socket.on("foundChat", (data) => {
+      setChatFound(true);
+      setChatWaitingEnd(data.endTime)
+    });
+    
+  }, [props.socket]);
+
+  useEffect(() => {
     props.socket.on("roomFound", (data) => {
       setRoomId(data.roomId);
     });
-    props.socket.on("startChat", (data) => navigate("/chat", { state: { roomId: roomId, endChatTime: data.endChatTime, endResultTime: data.endResultTime, canSend: data.canSend, goal: data.goal } }));
+  }, [props.socket]);
+
+  useEffect(() => {
     props.socket.on("readyExpired", () => {
       if (!chatAccepted) {
         setChatExpired(true);
       }
     });
-  }, [props.socket, chatAccepted, navigate, roomId]);
+  }, [props.socket, chatAccepted]);
+
+  useEffect(() => {
+    props.socket.once("startChat", (data) => {
+      navigate("/chat", {
+        state: {
+          roomId: roomId,
+          endChatTime:
+            data.endChatTime,
+          endResultTime: data.endResultTime,
+          canSend: data.canSend,
+          goal: data.goal
+        }
+      });
+    });
+  }, []);
 
   const ready = () => {
     setChatAccepted(true);
     props.socket.emit("readyChat", { user: localStorage.getItem("user"), roomId: roomId });
+  }
+
+  const cancelChat = () => {
+    navigate("/home");
+    props.socket.disconnect();
   }
 
   return (
@@ -73,10 +102,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
             {chatExpired && chatAccepted && <Typography variant="h3" sx={{ my: 5 }}>The other player has not accepted, please return to home.</Typography>}
             {chatExpired && <Button variant="contained" onClick={() => navigate("/home")}
               sx={{ width: "100%", height: 75, fontSize: 30 }}>Return to home.</Button>}
-            {!chatFound && <Button variant="contained" onClick={() => {
-              navigate("/home");
-              props.socket.disconnect();
-            }}
+            {!chatFound && <Button variant="contained" onClick={cancelChat}
               sx={{ width: "100%", height: 75, fontSize: 30 }}>Cancel</Button>}
           </Grid>
         </Container>
