@@ -9,6 +9,8 @@ export interface ChatEndProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   chatActive: boolean;
   setChatActive: (over: boolean) => void;
+  resultOver: boolean;
+  setResultOver: (over: boolean) => void;
   roomId: string;
   endResultMillis: number;
   goal: string;
@@ -23,7 +25,6 @@ export const ChatEnd = (props: ChatEndProps) => {
   const [selfPoints, setSelfPoints] = useState(0);
   const [otherResult, setOtherResult] = useState("");
   const [otherPoints, setOtherPoints] = useState(0);
-  const [resultOver, setResultOver] = useState(false);
 
   useEffect(() => {
     props.socket.on("otherResult", (data) => {
@@ -34,14 +35,14 @@ export const ChatEnd = (props: ChatEndProps) => {
       setSelfPoints(data.points);
       setOther(data.other);
       setResult(data.result);
-      setResultOver(true);
+      props.setResultOver(true);
     });
     props.socket.on("noResult", () => {
       setOtherResult("Did not pick");
       setOtherPoints(10);
       setOther("Human");
     });
-    props.socket.on("completeChat", () => setResultOver(true));
+    props.socket.on("completeChat", () => props.setResultOver(true));
   }, [props.socket]);
 
   const sendResult = (result: string) => {
@@ -60,7 +61,7 @@ export const ChatEnd = (props: ChatEndProps) => {
         alignItems="center"
         justifyContent="center">
         <Grid item>
-          {!resultOver && <Timer millis={props.endResultMillis} />}
+          {!props.resultOver && <Timer millis={props.endResultMillis} />}
         </Grid>
         <Grid item>
           <Typography variant="h1" sx={{ fontSize: 50, my: 3 }}>Who do you think you just talked to?</Typography>
@@ -130,13 +131,13 @@ export const ChatEnd = (props: ChatEndProps) => {
           justifyContent="center"
           spacing={5}>
           <Grid item sx={{ mt: 2 }}>
-            {(result.length > 0 || resultOver) && <Typography>You chose:</Typography>}
+            {(result.length > 0 || props.resultOver) && <Typography>You chose:</Typography>}
             {result === "Definitely a human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
             {result === "Possibly a human" && <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />}
             {result === "Unknown" && <Box component="img" alt="Unknown" src="TTCUnknown.png" maxWidth={"8vw"} />}
             {result === "Possibly a bot" && <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />}
             {result === "Definitely a bot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
-            {resultOver && <Typography>{result === "" ? "Did not pick" : result}</Typography>}
+            {props.resultOver && <Typography>{result === "" ? "Did not pick" : result}</Typography>}
           </Grid>
           <Grid item sx={{ mt: 2 }}>
             {other.length > 0 && <Typography>They were:</Typography>}
@@ -169,7 +170,7 @@ export const ChatEnd = (props: ChatEndProps) => {
           {otherPoints !== 0 && <Typography>You received {otherPoints} points from the other person's selection</Typography>}
         </Grid>
         <Grid item>
-          {resultOver && <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>}
+          {props.resultOver && <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>}
         </Grid>
       </Grid>
     </Container>

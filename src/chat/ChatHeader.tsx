@@ -2,18 +2,17 @@ import { AppBar, Box, Container, Grid, IconButton, Menu, MenuItem, Typography } 
 import { Timer } from "./Timer";
 import { MoreVert } from "@mui/icons-material";
 import { useState } from "react";
-import { LeaveChatDialog } from "./LeaveChatDialog";
 
 export interface ChatHeaderProps {
   chatActive: boolean;
   goal: string;
   endChatTime: number;
+  setDialogOpen: (open: boolean) => void;
 }
 
 export const ChatHeader = (props: ChatHeaderProps) => {
 
   const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
   const menuOpen = Boolean(menuAnchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -25,13 +24,12 @@ export const ChatHeader = (props: ChatHeaderProps) => {
   }
 
   const leaveChat = () => {
-    setDialogOpen(true);
+    props.setDialogOpen(true);
     setMenuAnchorEl(null);
   }
 
   return (
     <AppBar position="sticky" component="nav">
-      <LeaveChatDialog onClose={() => setDialogOpen(false)} open={dialogOpen} />
       <Container maxWidth={"md"}>
         <Grid container>
           <Grid item>
