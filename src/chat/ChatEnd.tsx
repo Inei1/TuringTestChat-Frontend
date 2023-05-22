@@ -22,24 +22,24 @@ export const ChatEnd = (props: ChatEndProps) => {
 
   const [result, setResult] = useState("");
   const [other, setOther] = useState("");
-  const [selfPoints, setSelfPoints] = useState(0);
+  const [detectionExp, setDetectionExp] = useState(0);
   const [otherResult, setOtherResult] = useState("");
-  const [otherPoints, setOtherPoints] = useState(0);
+  const [deceptionExp, setDeceptionExp] = useState(0);
 
   useEffect(() => {
     props.socket.on("otherResult", (data) => {
       setOtherResult(data.result);
-      setOtherPoints(data.points);
+      setDeceptionExp(data.points);
     });
     props.socket.on("selfResult", (data) => {
-      setSelfPoints(data.points);
+      setDetectionExp(data.points);
       setOther(data.other);
       setResult(data.result);
       props.setResultOver(true);
     });
     props.socket.on("noResult", () => {
       setOtherResult("Did not pick");
-      setOtherPoints(10);
+      setDeceptionExp(10);
       setOther("Human");
     });
     props.socket.on("completeChat", () => props.setResultOver(true));
@@ -148,7 +148,7 @@ export const ChatEnd = (props: ChatEndProps) => {
           </Grid>
         </Grid>
         <Grid item>
-          <Typography>You received {selfPoints} points from your selection</Typography>
+          <Typography>You received {detectionExp} detection exp from your selection</Typography>
         </Grid>
         <Grid item sx={{ my: 2 }}>
           {props.otherLeft && <Typography>Other person left<p/>You gained 5 deception exp</Typography>}
@@ -167,7 +167,7 @@ export const ChatEnd = (props: ChatEndProps) => {
           <Typography>{otherResult}</Typography>
         </Grid>
         <Grid item>
-          {otherPoints !== 0 && <Typography>You received {otherPoints} points from the other person's selection</Typography>}
+          {deceptionExp !== 0 && <Typography>You received {deceptionExp} deception exp from the other person's selection</Typography>}
         </Grid>
         <Grid item>
           {props.resultOver && <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>}

@@ -50,7 +50,7 @@ export const UserHome = (props: ChatHomeProps) => {
                 Your task is to perform the Turing Test by identifying which of the two you think you were talking to.</Typography>
               <Typography sx={{ fontSize: 18, my: 5 }}>Your chat partner will also be trying to do the same for you.
                 You must simultaneously attempt to convince your partner while also determining what they are.</Typography>
-              <Typography sx={{ fontSize: 18, my: 5 }}>You will gain or lose points based on performance. Successfully guessing your partner's identity and convincing your partner of your own identity will give you up to 10 points each. Failing to do so for either will cost you up to 3 points each.</Typography>
+              <Typography sx={{ fontSize: 18, my: 5 }}>You will gain or lose exp based on performance. Successfully guessing your partner's identity and convincing your partner of your own identity will give you up to 10 exp each. Failing to do so for either will cost you up to 3 exp each.</Typography>
               <Typography sx={{ my: 5 }} variant="h4">Do not share any personal information.</Typography>
               <Button sx={{ width: "100%", height: 75, fontSize: 30 }} variant="contained" onClick={(e) => enterChat(e)}>Enter Chat Room</Button>
               {/* <Button>Enter Group Chat Room</Button> */}
