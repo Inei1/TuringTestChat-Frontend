@@ -1,8 +1,5 @@
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { SelectRoom } from './chat/SelectRoom';
-import { ChatRoom } from './chat/ChatRoom';
-import { io } from 'socket.io-client';
 import { LoginState } from './types';
 import { Homepage } from './Homepage';
 import { createTheme } from '@mui/material/styles';
@@ -21,6 +18,8 @@ import { Blog3 } from './blog/Blog3';
 import { Blog4 } from './blog/Blog4';
 import { Helmet } from 'react-helmet-async';
 import { Footer } from './homepage/Footer';
+import { Blog5 } from './blog/Blog5';
+import { Blog6 } from './blog/Blog6';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -34,7 +33,7 @@ export const LoginStateContext = createContext<LoginStateContextType>({
   setLoginState: () => null,
 });
 
-//const socket = io("https://api.turingtestchat.com");
+//const socket = io("https://www.turingtestchat.com");
 
 const theme = createTheme({
   palette: {
@@ -70,17 +69,6 @@ function App() {
       element:
         <Login />
     },
-    // {
-    //   path: "/joinchat",
-    //   element:
-    //     <SelectRoom socket={socket} />
-    // },
-    // {
-    //   path: "/chat",
-    //   element:
-    //     <ChatRoom
-    //       socket={socket} />
-    // },
     {
       path: "/waitlist",
       element:
@@ -139,6 +127,16 @@ function App() {
       path: "/blog/4",
       element:
         <Blog4 />
+    },
+    {
+      path: "/blog/5",
+      element:
+        <Blog5 />
+    },
+    {
+      path: "/blog/6",
+      element:
+        <Blog6 />
     }
   ]);
   return (
