@@ -1,6 +1,6 @@
 import { Box, Grid, IconButton, TextField, Typography } from '@mui/material';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import SendIcon from '@mui/icons-material/Send';
 
@@ -12,9 +12,12 @@ export interface ChatFooterProps {
 
 export const ChatFooter = (props: ChatFooterProps) => {
 
+  const MAX_LENGTH = 200;
+
   const [message, setMessage] = useState('');
   const [typingTimeout, setActiveTimeout] = useState<NodeJS.Timeout>();
   const [canSend, setCanSend] = useState(props.canSend);
+  const [messageLength, setMessageLength] = useState(0);
 
   useEffect(() => {
     props.socket.on("messageWaitingOther", () => setCanSend(false));
@@ -33,22 +36,28 @@ export const ChatFooter = (props: ChatFooterProps) => {
   }
 
   const sendMessage = () => {
+    let messageToSend = message
+    if (message.length > MAX_LENGTH) {
+      messageToSend = message.substring(0, MAX_LENGTH);
+    }
     if (message.trim() && localStorage.getItem('user')) {
       props.socket.emit('message', {
         name: localStorage.getItem("user"),
-        text: message,
+        text: messageToSend,
       });
     }
     setMessage('');
+    setMessageLength(0);
   };
 
-  // const navigate = useNavigate();
-
-  // const handleLeaveChat = () => {
-  //   localStorage.removeItem('user');
-  //   navigate('/userhome');
-  //   window.location.reload();
-  // };
+  const updateMessage = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setMessage(e.target.value);
+    setMessageLength(e.target.value.length);
+    if (e.target.value.length > MAX_LENGTH) {
+      setMessage(message.substring(0, MAX_LENGTH));
+      setMessageLength(MAX_LENGTH);
+    }
+  }
 
   return (
     <Box>
@@ -62,7 +71,7 @@ export const ChatFooter = (props: ChatFooterProps) => {
             placeholder="Write message"
             className="message"
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => updateMessage(e)}
             onKeyDown={handleTyping}
           />
         </Grid>
@@ -72,6 +81,7 @@ export const ChatFooter = (props: ChatFooterProps) => {
           </IconButton>
         </Grid>
       </Grid>
+      <Typography>{messageLength + ` / ${MAX_LENGTH}`}</Typography>
       <Box sx={{ my: 2 }} />
       <Box ref={props.footerRef} />
     </Box>
