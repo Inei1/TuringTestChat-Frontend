@@ -36,7 +36,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
     });
   }, [props.socket, chatAccepted]);
 
-  /* eslint-disable react-hooks/exhaustive-deps*/
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     props.socket.once("startChat", (data) => {
       navigate("/chat", {
@@ -49,7 +49,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
       });
     });
   }, []);
-  /* eslint-enable react-hooks/exhaustive-deps*/
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   const ready = () => {
     setChatAccepted(true);

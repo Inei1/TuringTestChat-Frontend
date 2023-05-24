@@ -10,7 +10,6 @@ export interface LeaveChatDialogProps {
   open: boolean;
   onClose: () => void;
   onLeave: (e: BeforeUnloadEvent) => void;
-  onVisibilityChange: (e: any) => void;
   onPopState: (e: PopStateEvent) => void;
 }
 
@@ -20,7 +19,6 @@ export const LeaveChatDialog = (props: LeaveChatDialogProps) => {
 
   const leaveChat = () => {
     window.removeEventListener("beforeunload", props.onLeave);
-    window.removeEventListener("visibilitychange", props.onVisibilityChange);
     window.removeEventListener("popstate", props.onPopState);
     props.socket.disconnect();
     navigate("/home");

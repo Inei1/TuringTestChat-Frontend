@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
-import { Box } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { ChatActive } from './ChatActive';
 import { ChatEnd } from './ChatEnd';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -22,6 +22,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
   const [resultOver, setResultOver] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [otherLeft, setOtherLeft] = useState(false);
+  const [selfDisconnect, setSelfDisconnect] = useState(true);
 
   const onLeave = useCallback((e: BeforeUnloadEvent) => {
     e.preventDefault();
@@ -29,41 +30,34 @@ export const ChatRoom = (props: ChatRoomProps) => {
     e.returnValue = "";
   }, []);
 
-  const onVisibilityChange = useCallback((e: any) => {
-    window.removeEventListener("beforeunload", onLeave);
-    window.removeEventListener("visibilitychange", onVisibilityChange);
-    window.removeEventListener("popstate", onPopState);
-    props.socket.disconnect();
-  }, [onLeave, props.socket]);
-
   const onPopState = useCallback((e: PopStateEvent) => {
     if (window.confirm("Leaving will cause you to lose 5 detection exp and 5 deception exp. Are you sure you want to leave?")) {
       window.removeEventListener("beforeunload", onLeave);
-      window.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("popstate", onPopState);
       props.socket.disconnect();
       navigate("/home");
     } else {
       window.history.pushState(null, "", null);
     }
-  }, [navigate, onLeave, onVisibilityChange, props.socket]);
+  }, [navigate, onLeave, props.socket]);
 
   useEffect(() => {
     if (!resultOver) {
       window.addEventListener("beforeunload", onLeave);
-      window.addEventListener("visibilitychange", onVisibilityChange)
       window.addEventListener("popstate", onPopState);
     } else {
       window.removeEventListener("beforeunload", onLeave);
-      window.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("popstate", onPopState);
     }
-  }, [resultOver, onLeave, onPopState, onVisibilityChange]);
-
+  }, [resultOver, onLeave, onPopState]);
 
   useEffect(() => {
     props.socket.on("endChat", () => setChatActive(false));
   }, [props.socket]);
+
+  useEffect(() => {
+    props.socket.on("disconnected", () => { setSelfDisconnect(true); console.log("DISCOONECTED") });
+  });
 
   return (
     <Box sx={{
@@ -80,7 +74,6 @@ export const ChatRoom = (props: ChatRoomProps) => {
       </Helmet>
       <LeaveChatDialog
         onLeave={onLeave}
-        onVisibilityChange={onVisibilityChange}
         onPopState={onPopState}
         onClose={() => setDialogOpen(false)}
         open={dialogOpen}
@@ -108,6 +101,11 @@ export const ChatRoom = (props: ChatRoomProps) => {
         setChatActive={setChatActive}
         goal={goal}
         otherLeft={otherLeft} />}
+      {selfDisconnect &&
+        <Grid container justifyContent={"center"}>
+            <Typography variant="h4">Lost connection to chat</Typography>
+            <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>
+        </Grid>}
     </Box>
   );
 };

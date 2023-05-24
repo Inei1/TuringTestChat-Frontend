@@ -25,7 +25,8 @@ export const LoginStateContext = createContext<LoginStateContextType>({
   setLoginState: () => null,
 });
 
-const socket = io(process.env.NODE_ENV === "production" ? "https://www.turingtestchat.com" : "localhost:8080", { autoConnect: false });
+const socket = io(process.env.NODE_ENV === "production" ? "https://www.turingtestchat.com" : "localhost:8080",
+  { autoConnect: false, transports: ["websocket"], upgrade: false, closeOnBeforeunload: false });
 
 const theme = createTheme({
   palette: {

@@ -4,6 +4,7 @@ import { ChatFooter } from "./ChatFooter";
 import { useEffect, useRef, useState } from "react";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from '@socket.io/component-emitter';
+import { Message } from "../types";
 
 export interface ChatActiveProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -20,7 +21,7 @@ export const ChatActive = (props: ChatActiveProps) => {
 
   const footerRef = useRef<HTMLDivElement>(null);
 
-  const [messages, setMessages] = useState<any>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [typingUser, setTypingUser] = useState('');
 
   useEffect(() => {
