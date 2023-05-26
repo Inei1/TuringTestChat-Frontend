@@ -151,7 +151,7 @@ export const ChatEnd = (props: ChatEndProps) => {
           <Typography>You received {detectionExp} detection exp from your selection</Typography>
         </Grid>
         <Grid item sx={{ my: 2 }}>
-          {props.otherLeft && <Typography>Other person left<p/>You gained 5 deception exp</Typography>}
+          {props.otherLeft && other === "Human" && <Typography>Other person left<p/>You gained 5 deception exp</Typography>}
           {result && result.length > 0 && otherResult.length === 0 && !props.otherLeft &&
             <Typography>Waiting for other person...</Typography>}
           {otherResult && otherResult.length > 0 && <Typography>They chose:</Typography>}

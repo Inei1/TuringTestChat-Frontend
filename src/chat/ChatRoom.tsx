@@ -22,7 +22,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
   const [resultOver, setResultOver] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [otherLeft, setOtherLeft] = useState(false);
-  const [selfDisconnect, setSelfDisconnect] = useState(true);
+  const [selfDisconnect, setSelfDisconnect] = useState(false);
 
   const onLeave = useCallback((e: BeforeUnloadEvent) => {
     e.preventDefault();
@@ -56,8 +56,8 @@ export const ChatRoom = (props: ChatRoomProps) => {
   }, [props.socket]);
 
   useEffect(() => {
-    props.socket.on("disconnected", () => { setSelfDisconnect(true); console.log("DISCOONECTED") });
-  });
+    props.socket.on("disconnect", () => { setSelfDisconnect(true); console.log("DISCOONECTED") });
+  }, [props.socket]);
 
   return (
     <Box sx={{
