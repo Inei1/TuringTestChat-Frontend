@@ -23,6 +23,7 @@ import { Blog3 } from './blog/Blog3';
 import { Blog4 } from './blog/Blog4';
 import { Blog5 } from './blog/Blog5';
 import { Blog6 } from './blog/Blog6';
+import { BetaFaq } from './homepage/BetaFaq';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -128,6 +129,11 @@ function App() {
           </Box>
           <Footer />
         </>
+    },
+    {
+      path: "/betafaq",
+      element:
+        <BetaFaq />
     },
     {
       path: "/blog",

@@ -1,11 +1,13 @@
-import { Box, Container, Grid, Link, Typography } from "@mui/material";
-import { Timer } from "../chat/Timer";
+import { Box, Button, Container, Grid, Link, Typography } from "@mui/material";
 import { useState } from "react";
 import useInterval from "use-interval";
+import { useNavigate } from "react-router";
 
 export const Landing = () => {
 
   const [timeUntilBeta, setTimeUntilBeta] = useState(1685750400000 - Date.now());
+
+  const navigate = useNavigate();
 
   useInterval(() => {
     setTimeUntilBeta(timeUntilBeta - 1000);
@@ -34,6 +36,7 @@ export const Landing = () => {
             </Grid>
           </Grid>
         </Grid>
+        <Button variant="contained" onClick={() => navigate("/betafaq")}>beta FAQ</Button>
       </Container>
     </>
   );
