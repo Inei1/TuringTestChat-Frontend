@@ -7,11 +7,15 @@ import { LoginState } from './types';
 import { Homepage } from './Homepage';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
-import { Login } from './homepage/Login';
 import { PrivacyPolicy } from './homepage/PrivacyPolicy';
 import { Tos } from './homepage/Tos';
 import ReactGA from "react-ga4";
 import { ChatWaiting } from './chat/ChatWaiting';
+import { Box, Container, Typography } from '@mui/material';
+import { Helmet } from 'react-helmet-async';
+import { Header } from './Header';
+import { Subscribe } from './homepage/Subscribe';
+import { Footer } from './homepage/Footer';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -69,11 +73,6 @@ function App() {
         <Homepage />
     },
     {
-      path: "/login",
-      element:
-        <Login />
-    },
-    {
       path: "/home",
       element:
         <UserHome socket={socket} />
@@ -99,11 +98,30 @@ function App() {
       element:
         <Tos />
     },
-    // {
-    //   path: "/home/settings",
-    //   element:
-    //     <Settings />
-    // }
+    {
+      path: "/waitlist",
+      element:
+        <>
+          <Box sx={{ maxWidth: "100vw", minHeight: "100vh", background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)", }}>
+            <Helmet>
+              <title>Subscribe to Waitlist | Turing Test Chat</title>
+            </Helmet>
+            <Header />
+            <Container sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              bgcolor: 'inherit',
+              mt: 5,
+            }}>
+              <Typography variant="h1" sx={{ fontSize: 50 }}>Waitlist</Typography>
+              <Subscribe />
+            </Container>
+          </Box>
+          <Footer />
+        </>
+    },
   ]);
   return (
     <div style={{ backgroundColor: "#1D1D1D" }} className="App">
