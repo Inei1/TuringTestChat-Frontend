@@ -30,9 +30,39 @@ export const ChatEnd = (props: ChatEndProps) => {
     props.socket.on("otherResult", (data) => {
       setOtherResult(data.result);
       setDeceptionExp(data.points);
+      if (!localStorage.getItem("deception")) {
+        localStorage.setItem("deception", "0");
+      }
+      localStorage.setItem("deception", Number(localStorage.getItem("deception")) + data.points);
+      if (data.points > 0) {
+        if (!localStorage.getItem("deceptionWins")) {
+          localStorage.setItem("deceptionWins", "0");
+        }
+        localStorage.setItem("deceptionWins", Number(localStorage.getItem("deceptionWins")) + data.points);
+      } else if (data.points < 0) {
+        if (!localStorage.getItem("deceptionLosses")) {
+          localStorage.setItem("deceptionLosses", "0");
+        }
+        localStorage.setItem("deceptionLosses", Number(localStorage.getItem("deceptionLosses")) + data.points);
+      }
     });
     props.socket.on("selfResult", (data) => {
       setDetectionExp(data.points);
+      if (!localStorage.getItem("detection")) {
+        localStorage.setItem("detection", "0");
+      }
+      localStorage.setItem("detection", Number(localStorage.getItem("detection")) + data.points);
+      if (data.points > 0) {
+        if (!localStorage.getItem("detectionWins")) {
+          localStorage.setItem("detectionWins", "0");
+        }
+        localStorage.setItem("detectionWins", Number(localStorage.getItem("detectionWins")) + data.points);
+      } else if (data.points < 0) {
+        if (!localStorage.getItem("detectionLosses")) {
+          localStorage.setItem("detectionLosses", "0");
+        }
+        localStorage.setItem("detectionLosses", Number(localStorage.getItem("detectionLosses")) + data.points);
+      }
       setOther(data.other);
       setResult(data.result);
       props.setResultOver(true);
@@ -151,7 +181,7 @@ export const ChatEnd = (props: ChatEndProps) => {
           <Typography>You received {detectionExp} detection exp from your selection</Typography>
         </Grid>
         <Grid item sx={{ my: 2 }}>
-          {props.otherLeft && other === "Human" && <Typography>Other person left<p/>You gained 5 deception exp</Typography>}
+          {props.otherLeft && other === "Human" && <Typography>Other person left<p />You gained 5 deception exp</Typography>}
           {result && result.length > 0 && otherResult.length === 0 && !props.otherLeft &&
             <Typography>Waiting for other person...</Typography>}
           {otherResult && otherResult.length > 0 && <Typography>They chose:</Typography>}
