@@ -76,6 +76,11 @@ export const Subscribe = () => {
               onClick={emailSubscribe}>
               Join waitlist
             </Button>
+            <Typography>
+              Join now to receive bonus rewards on Turing Test Chat's full release.
+              You will receive weekly updates until release, unless you opt out.
+              You can unsubscribe at any time.
+            </Typography>
             {waitlistMessage.length > 0 && <Typography>{waitlistMessage}</Typography>}
           </Box>
         </Box>

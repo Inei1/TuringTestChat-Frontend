@@ -20,6 +20,16 @@ export const Header = () => {
               to="/home"
               color="info"
               style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 20, textDecoration: "none", fontWeight: "normal" }}>Chat</Link>
+            <Link
+              to="/blog"
+              color="info"
+              style={{
+                color: "#e9e9e9",
+                fontFamily: "monospace",
+                fontSize: 20,
+                textDecoration: "none",
+                fontWeight: "normal"
+              }}>Blog</Link>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Link to="/waitlist">

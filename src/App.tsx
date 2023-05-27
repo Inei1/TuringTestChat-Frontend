@@ -16,6 +16,13 @@ import { Helmet } from 'react-helmet-async';
 import { Header } from './Header';
 import { Subscribe } from './homepage/Subscribe';
 import { Footer } from './homepage/Footer';
+import { Blog } from './homepage/Blog';
+import { Blog2 } from './blog/Blog2';
+import { Blog1 } from './blog/Blog1';
+import { Blog3 } from './blog/Blog3';
+import { Blog4 } from './blog/Blog4';
+import { Blog5 } from './blog/Blog5';
+import { Blog6 } from './blog/Blog6';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -122,6 +129,40 @@ function App() {
           <Footer />
         </>
     },
+      path: "/blog",
+      element:
+        <Blog />
+    },
+    {
+      path: "/blog/1",
+      element:
+        <Blog1 />
+    },
+    {
+      path: "/blog/2",
+      element:
+        <Blog2 />
+    },
+    {
+      path: "/blog/3",
+      element:
+        <Blog3 />
+    },
+    {
+      path: "/blog/4",
+      element:
+        <Blog4 />
+    },
+    {
+      path: "/blog/5",
+      element:
+        <Blog5 />
+    },
+    {
+      path: "/blog/6",
+      element:
+        <Blog6 />
+    }
   ]);
   return (
     <div style={{ backgroundColor: "#1D1D1D" }} className="App">
