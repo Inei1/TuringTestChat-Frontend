@@ -30,6 +30,17 @@ export const BetaFaq = () => {
             Once the beta starts, you will be able to enter your email to receive rewards including free bonus credits on full release.
             Also, you can join the whitelist right now to receive even more free credits on release.</Typography>
 
+          <Typography variant="h5" sx={{ my: 1 }}>How can I give feedback/report an issue?</Typography>
+          <Typography sx={{ my: 1 }}>Since this is a beta, issues are expected to occur.
+            To give feedback or report an issue, you can contact support@turingtestchat.com or post to social media.
+            
+          </Typography>
+
+          <Typography variant="h5" sx={{ my: 1 }}>How can I support Turing Test Chat?</Typography>
+          <Typography sx={{ my: 1 }}>Share the game on social media!
+            You can find social media links in the footer below.
+            Once the the full release is here, you will be able to refer friends to give both of you bonus rewards.
+          </Typography>
           <Typography sx={{ my: 1 }}>If you have any questions, send an email to support@turingtestchat.com.</Typography>
         </Container>
       </Box>
