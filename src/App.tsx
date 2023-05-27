@@ -1,23 +1,26 @@
 import { createContext } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { UserHome } from './chat/UserHome';
+import { ChatRoom } from './chat/ChatRoom';
+import { io } from 'socket.io-client';
 import { LoginState } from './types';
 import { Homepage } from './Homepage';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
-import { Login } from './homepage/Login';
-import { Subscribe } from './homepage/Subscribe';
-import { Box, Container, Typography } from '@mui/material';
-import { Header } from './Header';
 import { PrivacyPolicy } from './homepage/PrivacyPolicy';
 import { Tos } from './homepage/Tos';
 import ReactGA from "react-ga4";
+import { ChatWaiting } from './chat/ChatWaiting';
+import { Box, Container, Typography } from '@mui/material';
+import { Helmet } from 'react-helmet-async';
+import { Header } from './Header';
+import { Subscribe } from './homepage/Subscribe';
+import { Footer } from './homepage/Footer';
 import { Blog } from './homepage/Blog';
 import { Blog2 } from './blog/Blog2';
 import { Blog1 } from './blog/Blog1';
 import { Blog3 } from './blog/Blog3';
 import { Blog4 } from './blog/Blog4';
-import { Helmet } from 'react-helmet-async';
-import { Footer } from './homepage/Footer';
 import { Blog5 } from './blog/Blog5';
 import { Blog6 } from './blog/Blog6';
 
@@ -33,7 +36,8 @@ export const LoginStateContext = createContext<LoginStateContextType>({
   setLoginState: () => null,
 });
 
-//const socket = io("https://www.turingtestchat.com");
+const socket = io(process.env.NODE_ENV === "production" ? "https://www.turingtestchat.com" : "localhost:8080",
+  { autoConnect: false, transports: ["websocket"], upgrade: false, closeOnBeforeunload: false });
 
 const theme = createTheme({
   palette: {
@@ -45,15 +49,26 @@ const theme = createTheme({
       main: "#1D1D1D",
     },
     info: {
-      main: "#e9e9e9",
+      main: "#E9E9E9",
     },
   },
   typography: {
     fontFamily: "monospace",
     allVariants: {
-      color: "#e9e9e9",
+      color: "#E9E9E9",
     }
   },
+  components: {
+    MuiMenu: {
+      styleOverrides: {
+        list: {
+          "&[role='menu']": {
+            backgroundColor: "#E9E9E9"
+          }
+        }
+      }
+    }
+  }
 });
 
 function App() {
@@ -65,9 +80,30 @@ function App() {
         <Homepage />
     },
     {
-      path: "/login",
+      path: "/home",
       element:
-        <Login />
+        <UserHome socket={socket} />
+    },
+    {
+      path: "/chatwaiting",
+      element:
+        <ChatWaiting socket={socket} />
+    },
+    {
+      path: "/chat",
+      element:
+        <ChatRoom
+          socket={socket} />
+    },
+    {
+      path: "/privacypolicy",
+      element:
+        <PrivacyPolicy />
+    },
+    {
+      path: "/tos",
+      element:
+        <Tos />
     },
     {
       path: "/waitlist",
@@ -93,17 +129,6 @@ function App() {
           <Footer />
         </>
     },
-    {
-      path: "/privacypolicy",
-      element:
-        <PrivacyPolicy />
-    },
-    {
-      path: "/tos",
-      element:
-        <Tos />
-    },
-    {
       path: "/blog",
       element:
         <Blog />

@@ -28,13 +28,13 @@ export const Homepage = () => {
         {/* <DragAndDrop /> */}
         {/* <Documentation /> */}
         {/* <Blog /> */}
-        <Subscribe />
         <Features />
+        <Subscribe />
       </Box>
       <Footer />
       <Box>
-
       </Box>
+      <Footer />
     </>
   )
 }

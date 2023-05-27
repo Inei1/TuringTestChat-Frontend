@@ -1,6 +1,7 @@
 import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import { User } from "./User";
 
 export const Header = () => {
 
@@ -15,6 +16,10 @@ export const Header = () => {
               style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 30, textDecoration: "none" }}>Turing Test Chat
             </Link>
             <Box sx={{ flexGrow: 0.1 }} />
+            <Link
+              to="/home"
+              color="info"
+              style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 20, textDecoration: "none", fontWeight: "normal" }}>Chat</Link>
             <Link
               to="/blog"
               color="info"
@@ -33,8 +38,7 @@ export const Header = () => {
                   variant="contained">Sign up for waitlist</Button>
               </Link>
             </Box>
-            {/* {localStorage.getItem("user") !== null &&
-              <Button onClick={(logout)} color="success" variant="contained">Log out</Button>} */}
+            {localStorage.getItem("user") && <User />}
           </Toolbar>
         </Container>
       </AppBar>
