@@ -1,6 +1,15 @@
 import { Box, Container, Grid, Link, Typography } from "@mui/material";
+import { Timer } from "../chat/Timer";
+import { useState } from "react";
+import useInterval from "use-interval";
 
 export const Landing = () => {
+
+  const [timeUntilBeta, setTimeUntilBeta] = useState(1685750400000 - Date.now());
+
+  useInterval(() => {
+    setTimeUntilBeta(timeUntilBeta - 1000);
+  }, 1000)
 
   return (
     <>
@@ -14,12 +23,15 @@ export const Landing = () => {
         }}>
         <Box component="img" alt="Turing Test Chat logo" src="TTCLogov2.png" sx={{ maxWidth: "25vh", }} />
         <Typography variant="h1" style={{ fontFamily: "monospace", fontSize: 100, fontWeight: "normal", color: "#e9e9e9" }}>Turing Test Chat</Typography>
-        <Grid sx={{ mt: 1, ml: "40%" }} container spacing={1}>
-          <Grid item xs={12} md={5}>
-            <Typography>"The Turing test... is a test of a machine's ability to exhibit intelligent behaviour equivalent to, or indistinguishable from, that of a human."</Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Link variant="h4" target="_blank" rel="noreferrer" color="#e9e9e9" href="https://en.wikipedia.org/wiki/Turing_test"> - Wikipedia</Link>
+        <Grid sx={{ mt: 1, ml: "25%", my: 3 }} container spacing={1}>
+          <Grid container spacing={5}>
+            <Grid item>
+              <Typography variant="h3">Open beta starts in</Typography>
+            </Grid>
+            <Grid item>
+              {/* time of midnight Jun 3 2023 UTC*/}
+              <Typography variant="h3" color="primary">{Math.floor(timeUntilBeta / 8.64e+7) + " days " + new Date(timeUntilBeta).toISOString().substring(11, 19)}</Typography>
+            </Grid>
           </Grid>
         </Grid>
       </Container>

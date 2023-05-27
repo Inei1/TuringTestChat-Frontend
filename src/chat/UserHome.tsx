@@ -87,7 +87,21 @@ export const UserHome = (props: ChatHomeProps) => {
         <Container component="section">
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Box sx={{ maxWidth: 800, mt: 15 }}>
-              <Typography sx={{ fontSize: 18, }}>(Optional) enter email here to receive bonus beta tester credits on the full release.
+              <Typography sx={{ fontSize: 18, mb: 5 }}>You will be paired anonymously with a human or with ChatGPT on entering the chat room.
+                Your task is to perform the Turing Test by identifying which of the two you think you were talking to.</Typography>
+              <Typography sx={{ fontSize: 18, my: 5 }}>Your chat partner will also be trying to do the same for you.
+                You must simultaneously attempt to convince your partner while also determining what they are.</Typography>
+              <Typography sx={{ fontSize: 18, my: 5 }}>You will gain or lose exp based on performance. Successfully guessing your partner's identity and convincing your partner of your own identity will give you up to 10 exp each. Failing to do so for either will cost you up to 3 exp each.</Typography>
+              <Grid container>
+                <Grid item>
+                  <Checkbox checked={checked} onChange={onCheckBox} sx={{ color: "#e9e9e9" }} />
+                </Grid>
+                <Grid item sx={{mt: 1}}>
+                  <Typography>By checking this box you acknowledge you are 13 years of age or older</Typography>
+                </Grid>
+              </Grid>
+              <Button disabled={!checked} sx={{ width: "100%", height: 75, fontSize: 30 }} variant="contained" onClick={(e) => enterChat(e)}>Enter Chat Room</Button>
+              <Typography sx={{ fontSize: 18, mt: 5 }}>(Optional) enter email here to receive bonus beta tester credits on the full release.
                 You will not receive any emails by joining this list, unless you also join the waitlist.
                 If you join both the waitlist and this list, you will receive rewards for both!</Typography>
               <TextField
@@ -106,21 +120,6 @@ export const UserHome = (props: ChatHomeProps) => {
                 Receive bonus rewards
               </Button>
               {betaMessage.length > 0 && <Typography>{betaMessage}</Typography>}
-              <Typography sx={{ fontSize: 18, mb: 5 }}>You will be paired anonymously with a human or with ChatGPT on entering the chat room.
-                Your task is to perform the Turing Test by identifying which of the two you think you were talking to.</Typography>
-              <Typography sx={{ fontSize: 18, my: 5 }}>Your chat partner will also be trying to do the same for you.
-                You must simultaneously attempt to convince your partner while also determining what they are.</Typography>
-              <Typography sx={{ fontSize: 18, my: 5 }}>You will gain or lose exp based on performance. Successfully guessing your partner's identity and convincing your partner of your own identity will give you up to 10 exp each. Failing to do so for either will cost you up to 3 exp each.</Typography>
-              <Grid container>
-                <Grid item>
-                  <Checkbox checked={checked} onChange={onCheckBox} sx={{ color: "#e9e9e9" }} />
-                </Grid>
-                <Grid item sx={{mt: 1}}>
-                  <Typography>By checking this box you acknowledge you are 13 years of age or older</Typography>
-                </Grid>
-              </Grid>
-              <Button disabled={!checked} sx={{ width: "100%", height: 75, fontSize: 30 }} variant="contained" onClick={(e) => enterChat(e)}>Enter Chat Room</Button>
-
             </Box>
           </Box>
         </Container>

@@ -23,16 +23,12 @@ export const Homepage = () => {
       }}>
         <Header />
         <Landing />
-
+        <Subscribe />
         {/* <Demo /> */}
         {/* <DragAndDrop /> */}
         {/* <Documentation /> */}
         {/* <Blog /> */}
         <Features />
-        <Subscribe />
-      </Box>
-      <Footer />
-      <Box>
       </Box>
       <Footer />
     </>
