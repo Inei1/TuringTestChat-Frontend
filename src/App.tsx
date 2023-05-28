@@ -20,6 +20,7 @@ import { Helmet } from 'react-helmet-async';
 import { Footer } from './homepage/Footer';
 import { Blog5 } from './blog/Blog5';
 import { Blog6 } from './blog/Blog6';
+import { BetaFaq } from './homepage/BetaFaq';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -104,6 +105,11 @@ function App() {
         <Tos />
     },
     {
+      path: "/betafaq",
+      element:
+        <BetaFaq />
+    },
+    {
       path: "/blog",
       element:
         <Blog />
@@ -137,6 +143,10 @@ function App() {
       path: "/blog/6",
       element:
         <Blog6 />
+    },
+    {
+      path: "/VGhpcyBpcyB0aGUgYmVnaW5uaW5nIG9mIHRoZSByb2JvdCByZXZvbHV0aW9u",
+      element: null
     }
   ]);
   return (
