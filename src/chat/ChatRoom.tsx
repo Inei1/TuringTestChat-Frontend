@@ -22,7 +22,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
   const [resultOver, setResultOver] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [otherLeft, setOtherLeft] = useState(false);
-  const [selfDisconnect, setSelfDisconnect] = useState(false);
+  const [selfDisconnect, setSelfDisconnect] = useState(true);
 
   const onLeave = useCallback((e: BeforeUnloadEvent) => {
     e.preventDefault();
@@ -50,6 +50,21 @@ export const ChatRoom = (props: ChatRoomProps) => {
       window.removeEventListener("popstate", onPopState);
     }
   }, [resultOver, onLeave, onPopState]);
+
+  useEffect(() => {
+    if (selfDisconnect === true) {
+      window.removeEventListener("beforeunload", onLeave);
+      window.removeEventListener("popstate", onPopState);
+    }
+  }, [selfDisconnect]);
+
+  useEffect(() => {
+    if (props.socket.connected) {
+      setSelfDisconnect(false);
+    } else {
+      setSelfDisconnect(true);
+    }
+  }, []);
 
   useEffect(() => {
     props.socket.on("endChat", () => setChatActive(false));
@@ -105,8 +120,8 @@ export const ChatRoom = (props: ChatRoomProps) => {
         user={user} />}
       {selfDisconnect &&
         <Grid container justifyContent={"center"}>
-            <Typography variant="h4">Lost connection to chat</Typography>
-            <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>
+          <Typography variant="h4">Lost connection to chat</Typography>
+          <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>
         </Grid>}
     </Box>
   );

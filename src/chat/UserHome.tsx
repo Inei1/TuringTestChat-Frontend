@@ -100,17 +100,17 @@ export const UserHome = (props: ChatHomeProps) => {
                 {localStorage.getItem("detectionWins") ?
                 localStorage.getItem("detectionWins") : 0}/
                 {localStorage.getItem("detectionLosses") ?
-                localStorage.getItem("detectionLosses") : 0} win/loss ({localStorage.getItem("detectionWins") ?
-                localStorage.getItem("detectionWins") : 0 / (localStorage.getItem("detectionLosses") ?
-                Number(localStorage.getItem("detectionLosses")) : 1)}%) and {}
+                localStorage.getItem("detectionLosses") : 0} win/loss ({(100 * Number(localStorage.getItem("detectionWins") ?
+                localStorage.getItem("detectionWins") : 0) / Number(localStorage.getItem("detectionLosses") ?
+                Number(localStorage.getItem("detectionLosses")) : 1)).toFixed(0)}%) and {}
                 {localStorage.getItem("deception") ?
-                localStorage.getItem("deception") : 0} detection exp with {}
+                localStorage.getItem("deception") : 0} deception exp with {}
                 {localStorage.getItem("deceptionWins") ?
                 localStorage.getItem("deceptionWins") : 0}/
                 {localStorage.getItem("deceptionLosses") ?
-                localStorage.getItem("deceptionLosses") : 0} win/loss ({localStorage.getItem("deceptionWins") ?
-                localStorage.getItem("deceptionWins") : 0 / (localStorage.getItem("deceptionLosses") ?
-                Number(localStorage.getItem("deceptionLosses")) : 1)}%).
+                localStorage.getItem("deceptionLosses") : 0} win/loss ({(100 * Number(localStorage.getItem("deceptionWins") ?
+                localStorage.getItem("deceptionWins") : 0) / Number(localStorage.getItem("deceptionLosses") ?
+                Number(localStorage.getItem("deceptionLosses")) : 1)).toFixed(0)}%).
                 </Typography>
               <Grid container>
                 <Grid item>

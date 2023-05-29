@@ -23,6 +23,7 @@ export const ChatEnd = (props: ChatEndProps) => {
 
   const [result, setResult] = useState("");
   const [other, setOther] = useState("");
+  const [otherGoal, setOtherGoal] = useState("");
   const [detectionExp, setDetectionExp] = useState(0);
   const [otherResult, setOtherResult] = useState("");
   const [deceptionExp, setDeceptionExp] = useState(0);
@@ -65,13 +66,15 @@ export const ChatEnd = (props: ChatEndProps) => {
         localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
       }
       setOther(data.other);
+      setOtherGoal(data.otherGoal);
       setResult(data.result);
       props.setResultOver(true);
     });
-    props.socket.on("noResult", () => {
+    props.socket.on("noResult", (data) => {
       setOtherResult("Did not pick");
       setDeceptionExp(10);
       setOther("Human");
+      setOtherGoal(data.otherGoal);
     });
     props.socket.on("completeChat", () => props.setResultOver(true));
   }, [props.socket]);
@@ -176,14 +179,22 @@ export const ChatEnd = (props: ChatEndProps) => {
             <Typography>{other}</Typography>
           </Grid>
           <Grid item>
+            <Typography>Their goal was: </Typography>
+            {otherGoal === "Human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
+            {otherGoal === "Bot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
+            <Typography>{otherGoal}</Typography>
           </Grid>
         </Grid>
         <Grid item>
           <Typography>You received {detectionExp} detection exp from your selection</Typography>
         </Grid>
         <Grid item sx={{ my: 2 }}>
-          {props.otherLeft && other === "Human" && <Typography>Other person left<p />You gained 5 deception exp</Typography>}
-          {result && result.length > 0 && otherResult.length === 0 && !props.otherLeft &&
+          {props.otherLeft && other === "Human" &&
+            <>
+              <Typography>Other person left</Typography>
+              <Typography>You gained 2 deception exp</Typography>
+            </>}
+          {result && result.length > 0 && otherResult.length === 0 && !props.otherLeft && other !== "Bot" &&
             <Typography>Waiting for other person...</Typography>}
           {otherResult && otherResult.length > 0 && <Typography>They chose:</Typography>}
         </Grid>
