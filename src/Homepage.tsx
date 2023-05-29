@@ -11,7 +11,7 @@ export const Homepage = () => {
   return (
     <>
       <Helmet>
-        <title>Turing Test Chat | give ChatGPT the Turing Test</title>
+        <title>Turing Test Chat | free online Turing Test with ChatGPT</title>
       </Helmet>
       <Box sx={{
         backgroundColor: "secondary.main",
