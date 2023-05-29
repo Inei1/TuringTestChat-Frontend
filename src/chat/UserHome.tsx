@@ -65,7 +65,7 @@ export const UserHome = (props: ChatHomeProps) => {
 
   const enterChat = (e: any) => {
     props.socket.connect();
-    props.socket.emit("startRoom", localStorage.getItem("user"));
+    props.socket.emit("startRoom");
     navigate('/chatwaiting');
   };
 

@@ -1,10 +1,14 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { Header } from "../Header";
 import { Footer } from "./Footer";
 import { BlogEntry } from "./BlogEntry";
 import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 
 export const Blog = () => {
+
+  const navigate = useNavigate();
+
   return (
     <>
     <Helmet>
@@ -20,6 +24,7 @@ export const Blog = () => {
         minHeight: "100vh",
       }}>
         <Header />
+        <Button onClick={() => navigate("/unknown")}></Button>
         <Container component="section">
           <Typography variant="h1" sx={{ fontSize: 40, my: 5 }}>Turing Test Chat Blog</Typography>
           <BlogEntry

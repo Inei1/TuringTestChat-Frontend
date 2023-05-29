@@ -8,6 +8,7 @@ export interface ChatFooterProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   footerRef: React.RefObject<HTMLDivElement>;
   canSend: boolean;
+  user: string;
 }
 
 export const ChatFooter = (props: ChatFooterProps) => {
@@ -28,7 +29,7 @@ export const ChatFooter = (props: ChatFooterProps) => {
     if (e.key === "Enter") {
       sendMessage();
     }
-    props.socket.emit("typing", localStorage.getItem("user"));
+    props.socket.emit("typing", "Chatter");
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
@@ -36,13 +37,13 @@ export const ChatFooter = (props: ChatFooterProps) => {
   }
 
   const sendMessage = () => {
-    let messageToSend = message
+    let messageToSend = message;
     if (message.length > MAX_LENGTH) {
       messageToSend = message.substring(0, MAX_LENGTH);
     }
-    if (message.trim() && localStorage.getItem('user')) {
+    if (message.trim() && props.user) {
       props.socket.emit('message', {
-        name: localStorage.getItem("user"),
+        name: props.user,
         text: messageToSend,
       });
     }

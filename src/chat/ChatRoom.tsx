@@ -17,7 +17,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
 
   const navigate = useNavigate();
 
-  const { endChatTime, endResultTime, canSend, goal } = useLocation().state;
+  const { endChatTime, endResultTime, canSend, goal, user } = useLocation().state;
   const [chatActive, setChatActive] = useState(true);
   const [resultOver, setResultOver] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -56,7 +56,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
   }, [props.socket]);
 
   useEffect(() => {
-    props.socket.on("disconnect", () => { setSelfDisconnect(true); console.log("DISCOONECTED") });
+    props.socket.on("disconnect", () => { setSelfDisconnect(true); });
   }, [props.socket]);
 
   return (
@@ -91,7 +91,8 @@ export const ChatRoom = (props: ChatRoomProps) => {
         goal={goal}
         endChatTime={endChatTime}
         otherLeft={otherLeft}
-        setOtherLeft={setOtherLeft} />
+        setOtherLeft={setOtherLeft}
+        user={user} />
       {!chatActive && <ChatEnd
         resultOver={resultOver}
         setResultOver={setResultOver}
@@ -100,7 +101,8 @@ export const ChatRoom = (props: ChatRoomProps) => {
         chatActive={chatActive}
         setChatActive={setChatActive}
         goal={goal}
-        otherLeft={otherLeft} />}
+        otherLeft={otherLeft}
+        user={user} />}
       {selfDisconnect &&
         <Grid container justifyContent={"center"}>
             <Typography variant="h4">Lost connection to chat</Typography>

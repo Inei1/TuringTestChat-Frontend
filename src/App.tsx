@@ -24,6 +24,7 @@ import { Blog4 } from './blog/Blog4';
 import { Blog5 } from './blog/Blog5';
 import { Blog6 } from './blog/Blog6';
 import { BetaFaq } from './homepage/BetaFaq';
+import { Unknown } from './unknown';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -169,6 +170,11 @@ function App() {
       path: "/blog/6",
       element:
         <Blog6 />
+    },
+    {
+      path: "/unknown",
+      element:
+        <Unknown />
     }
   ]);
   return (

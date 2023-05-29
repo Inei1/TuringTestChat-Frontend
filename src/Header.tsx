@@ -1,7 +1,6 @@
 import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import { User } from "./User";
 
 export const Header = () => {
 
@@ -39,7 +38,6 @@ export const Header = () => {
                   variant="contained">Sign up for waitlist</Button>
               </Link>
             </Box>
-            {localStorage.getItem("user") && <User />}
           </Toolbar>
         </Container>
       </AppBar>

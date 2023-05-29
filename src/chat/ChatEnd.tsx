@@ -14,6 +14,7 @@ export interface ChatEndProps {
   endResultMillis: number;
   goal: string;
   otherLeft: boolean;
+  user: string;
 }
 
 export const ChatEnd = (props: ChatEndProps) => {
@@ -38,12 +39,12 @@ export const ChatEnd = (props: ChatEndProps) => {
         if (!localStorage.getItem("deceptionWins")) {
           localStorage.setItem("deceptionWins", "0");
         }
-        localStorage.setItem("deceptionWins", Number(localStorage.getItem("deceptionWins")) + data.points);
+        localStorage.setItem("deceptionWins", String(Number(localStorage.getItem("deceptionWins")) + 1));
       } else if (data.points < 0) {
         if (!localStorage.getItem("deceptionLosses")) {
           localStorage.setItem("deceptionLosses", "0");
         }
-        localStorage.setItem("deceptionLosses", Number(localStorage.getItem("deceptionLosses")) + data.points);
+        localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
       }
     });
     props.socket.on("selfResult", (data) => {
@@ -56,12 +57,12 @@ export const ChatEnd = (props: ChatEndProps) => {
         if (!localStorage.getItem("detectionWins")) {
           localStorage.setItem("detectionWins", "0");
         }
-        localStorage.setItem("detectionWins", Number(localStorage.getItem("detectionWins")) + data.points);
+        localStorage.setItem("detectionWins", String(Number(localStorage.getItem("detectionWins")) + 1));
       } else if (data.points < 0) {
         if (!localStorage.getItem("detectionLosses")) {
           localStorage.setItem("detectionLosses", "0");
         }
-        localStorage.setItem("detectionLosses", Number(localStorage.getItem("detectionLosses")) + data.points);
+        localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
       }
       setOther(data.other);
       setResult(data.result);
@@ -77,7 +78,7 @@ export const ChatEnd = (props: ChatEndProps) => {
 
   const sendResult = (result: string) => {
     props.socket.emit("result", {
-      name: localStorage.getItem("user"),
+      name: props.user,
       result: result
     });
   }

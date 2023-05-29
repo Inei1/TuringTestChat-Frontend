@@ -34,6 +34,8 @@ export const Tos = () => {
             is the property of turingtestchat.com or its licensors and is protected by copyright, trademark, and other laws.
             You may not copy, modify, distribute, or otherwise use Turing Test Chat's content without Turing Test Chat's prior written consent.</Typography>
 
+          {/* the is the third */}
+
           <Typography variant="h6" sx={{ my: 1 }}>User content</Typography>
           <Typography sx={{ my: 1 }}>You may submit content to turingtestchat.com, such as chat messages. By submitting content,
             you grant Turing Test Chat a non-exclusive, royalty-free, perpetual, irrevocable, and fully sub-licensable right to use,

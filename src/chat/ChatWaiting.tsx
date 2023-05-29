@@ -19,13 +19,14 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   const [chatWaitingEnd, setChatWaitingEnd] = useState(-1);
   const [chatAccepted, setChatAccepted] = useState(false);
   const [chatExpired, setChatExpired] = useState(false);
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     props.socket.on("foundChat", (data) => {
       setChatFound(true);
-      setChatWaitingEnd(data.endTime)
+      setChatWaitingEnd(data.endTime);
+      setUser(data.name);
     });
-
   }, [props.socket]);
 
   useEffect(() => {
@@ -44,7 +45,8 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
           endChatTime: data.endChatTime,
           endResultTime: data.endResultTime,
           canSend: data.canSend,
-          goal: data.goal
+          goal: data.goal,
+          user: data.name,
         }
       });
     });
@@ -53,7 +55,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
 
   const ready = () => {
     setChatAccepted(true);
-    props.socket.emit("readyChat", { user: localStorage.getItem("user") });
+    props.socket.emit("readyChat", { user: user });
   }
 
   const cancelChat = () => {
