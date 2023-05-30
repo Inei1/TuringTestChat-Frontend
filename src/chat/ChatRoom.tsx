@@ -26,20 +26,27 @@ export const ChatRoom = (props: ChatRoomProps) => {
 
   const onLeave = useCallback((e: BeforeUnloadEvent) => {
     e.preventDefault();
+    if (!resultOver) {
+      console.log("lost points");
+      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 4));
+      localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 2));
+    }
     // You cannot specify a message in modern browsers, so return an empty string.
     e.returnValue = "";
-  }, []);
+  }, [resultOver]);
 
   const onPopState = useCallback((e: PopStateEvent) => {
-    if (window.confirm("Leaving will cause you to lose 5 detection exp and 5 deception exp. Are you sure you want to leave?")) {
+    if (!resultOver) {
+      console.log("lost points");
+      alert("Lost 4 detection exp and 2 deception exp for leaving.");
       window.removeEventListener("beforeunload", onLeave);
       window.removeEventListener("popstate", onPopState);
-      props.socket.disconnect();
-      navigate("/home");
-    } else {
-      window.history.pushState(null, "", null);
+      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 4));
+      localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 2));
     }
-  }, [navigate, onLeave, props.socket]);
+    props.socket.disconnect();
+    navigate("/home");
+  }, [navigate, onLeave, props.socket, resultOver]);
 
   useEffect(() => {
     if (!resultOver) {
@@ -53,8 +60,8 @@ export const ChatRoom = (props: ChatRoomProps) => {
 
   useEffect(() => {
     if (selfDisconnect === true) {
-      window.removeEventListener("beforeunload", onLeave);
-      window.removeEventListener("popstate", onPopState);
+      // window.removeEventListener("beforeunload", onLeave);
+      // window.removeEventListener("popstate", onPopState);
     }
   }, [selfDisconnect]);
 

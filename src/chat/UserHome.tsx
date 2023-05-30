@@ -21,6 +21,7 @@ export const UserHome = (props: ChatHomeProps) => {
 
   useEffect(() => {
     setChecked(localStorage.getItem("checked") === "true");
+    //props.socket.disconnect();
   }, []);
 
   const onCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +92,7 @@ export const UserHome = (props: ChatHomeProps) => {
                 Your task is to perform the Turing Test by identifying which of the two you think you were talking to.</Typography>
               <Typography sx={{ fontSize: 18, my: 5 }}>Your chat partner will also be trying to do the same for you.
                 You must simultaneously attempt to convince your partner while also determining what they are.</Typography>
-              <Typography sx={{ fontSize: 18, my: 5 }}>You will gain or lose exp based on performance. Successfully guessing your partner's identity and convincing your partner of your own identity will give you up to 10 exp each. Failing to do so for either will cost you up to 3 exp each.</Typography>
+              <Typography sx={{ fontSize: 18, my: 5 }}>You will gain or lose exp based on performance. Successfully guessing your partner's identity and convincing your partner of your own identity will give you up to 10 exp each. Failing to do so for either will cost you up to 3 exp each. If you use the back button or otherwise leave the page, you will lose exp.</Typography>
               <Typography sx={{ fontSize: 18, my: 5 }}>Have any questions? Check out the {}
                 <Link to="/betafaq" style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 18 }}>Beta FAQ</Link></Typography>
               <Typography sx={{ fontSize: 20, my: 5 }}>
