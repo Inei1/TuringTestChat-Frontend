@@ -25,6 +25,7 @@ import { Blog5 } from './blog/Blog5';
 import { Blog6 } from './blog/Blog6';
 import { BetaFaq } from './homepage/BetaFaq';
 import { Unknown } from './unknown';
+import { ErrorPage } from './homepage/ErrorPage';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -175,6 +176,11 @@ function App() {
       path: "/unknown",
       element:
         <Unknown />
+    },
+    {
+      path: "*",
+      element:
+        <ErrorPage />
     }
   ]);
   return (
