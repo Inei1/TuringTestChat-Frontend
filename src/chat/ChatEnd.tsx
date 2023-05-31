@@ -92,7 +92,7 @@ export const ChatEnd = (props: ChatEndProps) => {
         </Grid>
         <Grid item>
           <ButtonGroup variant="contained">
-            <Button onClick={() => sendResult("Definitely a human")}
+            <Button disabled={result.length > 0} onClick={() => sendResult("Definitely a human")}
               sx={{ backgroundColor: result === "Definitely a human" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -103,7 +103,7 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => sendResult("Possibly a human")}
+            <Button disabled={result.length > 0} onClick={() => sendResult("Possibly a human")}
               sx={{ backgroundColor: result === "Possibly a human" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -114,7 +114,7 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => sendResult("Unknown")}
+            <Button disabled={result.length > 0} onClick={() => sendResult("Unknown")}
               sx={{ backgroundColor: result === "Unknown" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -125,7 +125,7 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => sendResult("Possibly a bot")}
+            <Button disabled={result.length > 0} onClick={() => sendResult("Possibly a bot")}
               sx={{ backgroundColor: result === "Possibly a bot" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -136,7 +136,7 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => sendResult("Definitely a bot")}
+            <Button disabled={result.length > 0} onClick={() => sendResult("Definitely a bot")}
               sx={{ backgroundColor: result === "Definitely a bot" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>

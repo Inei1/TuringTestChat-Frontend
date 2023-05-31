@@ -25,21 +25,16 @@ export const ChatRoom = (props: ChatRoomProps) => {
   const [selfDisconnect, setSelfDisconnect] = useState(true);
 
   const onLeave = useCallback((e: BeforeUnloadEvent) => {
-    e.preventDefault();
     if (!resultOver) {
-      console.log("lost points");
       localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 4));
       localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
       localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 2));
       localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
     }
-    // You cannot specify a message in modern browsers, so return an empty string.
-    e.returnValue = "";
   }, [resultOver]);
 
   const onPopState = useCallback((e: PopStateEvent) => {
     if (!resultOver) {
-      console.log("lost points");
       alert("Lost 4 detection exp and 2 deception exp for leaving.");
       window.removeEventListener("beforeunload", onLeave);
       window.removeEventListener("popstate", onPopState);
@@ -136,9 +131,9 @@ export const ChatRoom = (props: ChatRoomProps) => {
         otherLeft={otherLeft}
         user={user} />}
       {selfDisconnect &&
-        <Grid container justifyContent={"center"}>
+        <Grid container justifyContent={"center"} direction="column">
           <Typography variant="h4">Lost connection to chat</Typography>
-          <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>
+          <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3, height: 75, fontSize: 30 }}>Return to home</Button>
         </Grid>}
     </Box>
   );
