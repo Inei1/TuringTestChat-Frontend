@@ -19,7 +19,9 @@ export const LeaveChatDialog = (props: LeaveChatDialogProps) => {
 
   const leaveChat = () => {
     localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 4));
+    localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
     localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 2));
+    localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
     window.removeEventListener("beforeunload", props.onLeave);
     window.removeEventListener("popstate", props.onPopState);
     props.socket.disconnect();

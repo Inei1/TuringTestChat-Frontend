@@ -50,19 +50,10 @@ export const ChatEnd = (props: ChatEndProps) => {
     });
     props.socket.on("selfResult", (data) => {
       setDetectionExp(data.points);
-      if (!localStorage.getItem("detection")) {
-        localStorage.setItem("detection", "0");
-      }
-      localStorage.setItem("detection", Number(localStorage.getItem("detection")) + data.points);
+      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) + data.points));
       if (data.points > 0) {
-        if (!localStorage.getItem("detectionWins")) {
-          localStorage.setItem("detectionWins", "0");
-        }
         localStorage.setItem("detectionWins", String(Number(localStorage.getItem("detectionWins")) + 1));
       } else if (data.points < 0) {
-        if (!localStorage.getItem("detectionLosses")) {
-          localStorage.setItem("detectionLosses", "0");
-        }
         localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
       }
       setOther(data.other);

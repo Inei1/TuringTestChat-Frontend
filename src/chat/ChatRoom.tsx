@@ -29,7 +29,9 @@ export const ChatRoom = (props: ChatRoomProps) => {
     if (!resultOver) {
       console.log("lost points");
       localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 4));
+      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
       localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 2));
+      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
     }
     // You cannot specify a message in modern browsers, so return an empty string.
     e.returnValue = "";
@@ -42,7 +44,9 @@ export const ChatRoom = (props: ChatRoomProps) => {
       window.removeEventListener("beforeunload", onLeave);
       window.removeEventListener("popstate", onPopState);
       localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 4));
+      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
       localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 2));
+      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
     }
     props.socket.disconnect();
     navigate("/home");

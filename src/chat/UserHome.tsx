@@ -21,6 +21,24 @@ export const UserHome = (props: ChatHomeProps) => {
 
   useEffect(() => {
     setChecked(localStorage.getItem("checked") === "true");
+    if (!localStorage.getItem("detection")) {
+      localStorage.setItem("detection", "0");
+    }
+    if (!localStorage.getItem("deception")) {
+      localStorage.setItem("deception", "0");
+    }
+    if (!localStorage.getItem("detectionWins")) {
+      localStorage.setItem("detectionWins", "0");
+    }
+    if (!localStorage.getItem("deceptionWins")) {
+      localStorage.setItem("deceptionWins", "0");
+    }
+    if (!localStorage.getItem("detectionLosses")) {
+      localStorage.setItem("detectionLosses", "0");
+    }
+    if (!localStorage.getItem("deceptionLosses")) {
+      localStorage.setItem("deceptionLosses", "0");
+    }
     //props.socket.disconnect();
   }, []);
 
@@ -96,22 +114,21 @@ export const UserHome = (props: ChatHomeProps) => {
               <Typography sx={{ fontSize: 18, my: 5 }}>Have any questions? Check out the {}
                 <Link to="/betafaq" style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 18 }}>Beta FAQ</Link></Typography>
               <Typography sx={{ fontSize: 20, my: 5 }}>
-                You have {localStorage.getItem("detection") ?
-                localStorage.getItem("detection") : 0} detection exp with {}
-                {localStorage.getItem("detectionWins") ?
-                localStorage.getItem("detectionWins") : 0}/
-                {localStorage.getItem("detectionLosses") ?
-                localStorage.getItem("detectionLosses") : 0} win/loss ({(100 * Number(localStorage.getItem("detectionWins") ?
-                localStorage.getItem("detectionWins") : 0) / Number(localStorage.getItem("detectionLosses") ?
-                Number(localStorage.getItem("detectionLosses")) : 1)).toFixed(0)}%) and {}
+                You have {localStorage.getItem("detection")} detection exp with {}
+                {localStorage.getItem("detectionWins")}/
+                {localStorage.getItem("detectionLosses")} win/loss (
+                {(100 * (Number(localStorage.getItem("detectionWins")) /
+                Math.max(Number(localStorage.getItem("detectionLosses")) +
+                Number(localStorage.getItem("detectionWins")), 1))).toFixed(0)}%) and {}
                 {localStorage.getItem("deception") ?
                 localStorage.getItem("deception") : 0} deception exp with {}
                 {localStorage.getItem("deceptionWins") ?
                 localStorage.getItem("deceptionWins") : 0}/
                 {localStorage.getItem("deceptionLosses") ?
-                localStorage.getItem("deceptionLosses") : 0} win/loss ({(100 * Number(localStorage.getItem("deceptionWins") ?
-                localStorage.getItem("deceptionWins") : 0) / Number(localStorage.getItem("deceptionLosses") ?
-                Number(localStorage.getItem("deceptionLosses")) : 1)).toFixed(0)}%).
+                localStorage.getItem("deceptionLosses") : 0} win/loss (
+                  {(100 * (Number(localStorage.getItem("deceptionWins")) /
+                  Math.max(Number(localStorage.getItem("deceptionLosses")) +
+                  Number(localStorage.getItem("deceptionWins")), 1))).toFixed(0)}%)
                 </Typography>
               <Grid container>
                 <Grid item>

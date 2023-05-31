@@ -25,14 +25,18 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
     if (chatFound && !chatExpired) {
       localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 2));
       localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 1));
+      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
     }
   }, [chatFound, chatExpired]);
 
   const onPopState = useCallback((e: PopStateEvent) => {
-    console.log(chatFound + " "  + chatExpired);
+    console.log(chatFound + " " + chatExpired);
     if (chatFound && !chatExpired) {
       localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 2));
       localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 1));
+      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
     }
     window.removeEventListener("beforeunload", onLeave);
     window.removeEventListener("popstate", onPopState);
@@ -73,6 +77,8 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
       if (!chatAccepted) {
         localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 2));
         localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 1));
+        localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+        localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
       }
       setChatExpired(true);
     });
