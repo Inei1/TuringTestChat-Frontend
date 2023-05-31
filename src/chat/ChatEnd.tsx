@@ -179,7 +179,7 @@ export const ChatEnd = (props: ChatEndProps) => {
             <Typography>{other}</Typography>
           </Grid>
           <Grid item>
-            <Typography>Their goal was: </Typography>
+            {otherGoal.length > 0 && <Typography>Their goal was: </Typography>}
             {otherGoal === "Human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
             {otherGoal === "Bot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
             <Typography>{otherGoal}</Typography>

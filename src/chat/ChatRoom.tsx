@@ -56,6 +56,12 @@ export const ChatRoom = (props: ChatRoomProps) => {
       window.removeEventListener("beforeunload", onLeave);
       window.removeEventListener("popstate", onPopState);
     }
+    return () => {
+      setTimeout(() => {
+        window.removeEventListener("beforeunload", onLeave);
+        window.removeEventListener("popstate", onPopState);
+      }, 100);
+    }
   }, [resultOver, onLeave, onPopState]);
 
   useEffect(() => {
