@@ -2,11 +2,9 @@ import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { Link, useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import { Header } from '../Header';
-import { Box, Button, Checkbox, Container, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import { Footer } from '../homepage/Footer';
 import { Helmet } from 'react-helmet-async';
-import { useEffect, useState } from 'react';
-import { Constants } from '../Constants';
 
 export interface ChatHomeProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -14,73 +12,6 @@ export interface ChatHomeProps {
 
 export const UserHome = (props: ChatHomeProps) => {
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState("");
-  const [betaMessage, setBetaMessage] = useState("");
-  const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
-    setChecked(localStorage.getItem("checked") === "true");
-    if (!localStorage.getItem("detection")) {
-      localStorage.setItem("detection", "0");
-    }
-    if (!localStorage.getItem("deception")) {
-      localStorage.setItem("deception", "0");
-    }
-    if (!localStorage.getItem("detectionWins")) {
-      localStorage.setItem("detectionWins", "0");
-    }
-    if (!localStorage.getItem("deceptionWins")) {
-      localStorage.setItem("deceptionWins", "0");
-    }
-    if (!localStorage.getItem("detectionLosses")) {
-      localStorage.setItem("detectionLosses", "0");
-    }
-    if (!localStorage.getItem("deceptionLosses")) {
-      localStorage.setItem("deceptionLosses", "0");
-    }
-    //props.socket.disconnect();
-  }, []);
-
-  const onCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      setChecked(true);
-      localStorage.setItem("checked", "true");
-    } else {
-      setChecked(false);
-      localStorage.setItem("checked", "false");
-    }
-  }
-
-  const validateEmail = (email: string) => {
-    if (email.length === 0) {
-      setBetaMessage("Email must not be empty");
-      return false;
-    }
-    // validate email regex
-    if (!email.match("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$")) {
-      setBetaMessage("Invalid email");
-      return false;
-    }
-    // don't allow < > & ' " or /
-    // backend escapes these so they will not work properly when trying to log in
-    if (email.match("[<>&\'\"/]+")) {
-      setBetaMessage("Email cannot contain < > & \' \" or /");
-      return false;
-    }
-    return true;
-  }
-
-  const emailSubscribe = async () => {
-    if (validateEmail(email)) {
-      setBetaMessage((await fetch(Constants.BASE_URL + "account/waitlist", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        credentials: "include",
-        body: JSON.stringify({ email: email })
-      }).then(res => res.json())).message);
-    }
-  };
 
   const enterChat = (e: any) => {
     props.socket.connect();
@@ -130,34 +61,7 @@ export const UserHome = (props: ChatHomeProps) => {
                   Math.max(Number(localStorage.getItem("deceptionLosses")) +
                   Number(localStorage.getItem("deceptionWins")), 1))).toFixed(0)}%)
                 </Typography>
-              <Grid container>
-                <Grid item>
-                  <Checkbox checked={checked} onChange={onCheckBox} sx={{ color: "#e9e9e9" }} />
-                </Grid>
-                <Grid item sx={{mt: 1}}>
-                  <Typography>By checking this box you acknowledge you are 13 years of age or older</Typography>
-                </Grid>
-              </Grid>
-              <Button disabled={!checked} sx={{ width: "100%", height: 75, fontSize: 30 }} variant="contained" onClick={(e) => enterChat(e)}>Enter Chat Room</Button>
-              <Typography sx={{ fontSize: 18, mt: 5 }}>(Optional) enter email here to receive bonus beta tester credits on the full release.
-                You will not receive any emails by joining this list, unless you also join the waitlist.
-                If you join both the waitlist and this list, you will receive rewards for both!</Typography>
-              <TextField
-                placeholder="Your email (optional)"
-                variant="standard"
-                color="info"
-                sx={{ width: '100%', input: { color: "#e9e9e9" } }}
-                onChange={(e) => setEmail(e.target.value)}
-                onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
-              />
-              <Button
-                color="error"
-                variant="contained"
-                sx={{ width: '100%', mb: 2 }}
-                onClick={emailSubscribe}>
-                Receive bonus rewards
-              </Button>
-              {betaMessage.length > 0 && <Typography>{betaMessage}</Typography>}
+              <Button sx={{ width: "100%", height: 75, fontSize: 30 }} variant="contained" onClick={(e) => enterChat(e)}>Enter Chat Room</Button>
             </Box>
           </Box>
         </Container>
