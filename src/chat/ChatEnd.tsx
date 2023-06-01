@@ -182,11 +182,11 @@ export const ChatEnd = (props: ChatEndProps) => {
         <Grid item sx={{ my: 2 }}>
           {props.otherLeft && other === "Human" &&
             <>
-              <Typography>Other person left</Typography>
+              <Typography>Other chatter left</Typography>
               <Typography>You gained 2 deception exp</Typography>
             </>}
           {result && result.length > 0 && otherResult.length === 0 && !props.otherLeft && other !== "Bot" &&
-            <Typography>Waiting for other person...</Typography>}
+            <Typography>Waiting for other chatter...</Typography>}
           {otherResult && otherResult.length > 0 && <Typography>They chose:</Typography>}
         </Grid>
         <Grid item>
@@ -200,7 +200,7 @@ export const ChatEnd = (props: ChatEndProps) => {
           <Typography>{otherResult}</Typography>
         </Grid>
         <Grid item>
-          {deceptionExp !== 0 && <Typography>You received {deceptionExp} deception exp from the other person's selection</Typography>}
+          {deceptionExp !== 0 && <Typography>You received {deceptionExp} deception exp from the other chatter's selection</Typography>}
         </Grid>
         <Grid item>
           {props.resultOver && <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>}

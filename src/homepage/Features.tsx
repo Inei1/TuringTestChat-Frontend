@@ -20,7 +20,7 @@ export const Features = () => {
           <Grid item xs={12} md={4}>
             <Box sx={{}}>
               <Typography variant="h2" sx={{ my: 2, fontSize: 25 }}>A <Link color="#e9e9e9" href="https://en.wikipedia.org/wiki/Social_deduction_game" target="_blank" rel="noreferrer">game of deception</Link></Typography>
-              <Typography sx={{ fontSize: 18 }}>Put your deception and detective skills to the test by outsmarting the other person.
+              <Typography sx={{ fontSize: 18 }}>Put your deception and detective skills to the test by outsmarting the other chatter.
                 You will be randomly assigned one of two tasks - to convince them that you are a bot or a human.
                 But don't forget, they are trying to do the same!</Typography>
             </Box>

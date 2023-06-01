@@ -63,7 +63,7 @@ export const ChatFooter = (props: ChatFooterProps) => {
   return (
     <Box>
       <Grid container width={"100%"}>
-        <Typography>{canSend ? "Your turn to chat" : "Waiting for other person..."}</Typography>
+        <Typography>{canSend ? "Your turn to chat" : "Waiting for other chatter..."}</Typography>
         <Grid item xs={11.5}>
           <TextField
             disabled={!canSend}
