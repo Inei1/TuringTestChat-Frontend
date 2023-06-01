@@ -3,13 +3,14 @@ import { Message } from '../types';
 
 export interface ChatMessageProps {
   message: Message;
+  user: string;
 }
 
 export const ChatMessage = (props: ChatMessageProps) => {
 
   return (
     <Box sx={{my: 2}}>
-      {props.message.name === localStorage.getItem('user') ? (
+      {props.message.name === props.user ? (
         <Grid container justifyContent="flex-end">
           <Box sx={{ borderRadius: 3, border: 1, borderWidth: 8, borderColor: "#1F51FF", backgroundColor: "#1F51FF" }}>
             <Typography>{props.message.text}</Typography>

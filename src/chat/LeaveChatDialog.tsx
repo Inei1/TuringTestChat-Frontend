@@ -18,6 +18,10 @@ export const LeaveChatDialog = (props: LeaveChatDialogProps) => {
   const navigate = useNavigate();
 
   const leaveChat = () => {
+    localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 4));
+    localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+    localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 2));
+    localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
     window.removeEventListener("beforeunload", props.onLeave);
     window.removeEventListener("popstate", props.onPopState);
     props.socket.disconnect();
@@ -29,7 +33,7 @@ export const LeaveChatDialog = (props: LeaveChatDialogProps) => {
       <DialogTitle textAlign="center" variant="h2">Are you sure you want to leave?</DialogTitle>
       <Typography
         sx={{ m: 3 }}
-        variant="h5">Leaving will cause you to lose 5 detection exp and 5 deception exp. Are you sure you want to leave?</Typography>
+        variant="h5">Leaving will cause you to lose 4 detection exp and 2 deception exp. Are you sure you want to leave?</Typography>
       <Button variant="contained" sx={{height: 75, m: 3}} onClick={leaveChat}>Leave chat</Button>
     </Dialog>
   )

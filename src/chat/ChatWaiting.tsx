@@ -1,10 +1,9 @@
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
-import { Header } from '../Header';
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import { Footer } from '../homepage/Footer';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Timer } from './Timer';
 import { Helmet } from 'react-helmet-async';
 
@@ -19,32 +18,91 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   const [chatWaitingEnd, setChatWaitingEnd] = useState(-1);
   const [chatAccepted, setChatAccepted] = useState(false);
   const [chatExpired, setChatExpired] = useState(false);
+  const [selfDisconnect, setSelfDisconnect] = useState(false);
+  const [user, setUser] = useState("");
+
+  const onLeave = useCallback((e: BeforeUnloadEvent) => {
+    if (chatFound && !chatExpired) {
+      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 2));
+      localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 1));
+      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
+    }
+  }, [chatFound, chatExpired]);
+
+  const onPopState = useCallback((e: PopStateEvent) => {
+    console.log(chatFound + " " + chatExpired);
+    if (chatFound && !chatExpired) {
+      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 2));
+      localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 1));
+      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
+    }
+    window.removeEventListener("beforeunload", onLeave);
+    window.removeEventListener("popstate", onPopState);
+    props.socket.disconnect();
+  }, [onLeave, props.socket, chatFound, chatExpired]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!props.socket.connected) {
+        setSelfDisconnect(true);
+      }
+    }, 1000);
+  }, [props.socket]);
 
   useEffect(() => {
     props.socket.on("foundChat", (data) => {
       setChatFound(true);
-      setChatWaitingEnd(data.endTime)
+      setChatWaitingEnd(data.endTime);
+      setUser(data.name);
     });
-
   }, [props.socket]);
 
   useEffect(() => {
+    window.addEventListener("beforeunload", onLeave);
+    window.addEventListener("popstate", onPopState);
+    return () => {
+      setTimeout(() => {
+        window.removeEventListener("beforeunload", onLeave);
+        window.removeEventListener("popstate", onPopState);
+      }, 100);
+    }
+  }, [onLeave, onPopState]);
+
+  useEffect(() => {
+    props.socket.off("readyExpired");
     props.socket.on("readyExpired", () => {
+      console.log(chatAccepted);
       if (!chatAccepted) {
-        setChatExpired(true);
+        localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 2));
+        localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 1));
+        localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+        localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
       }
+      setChatExpired(true);
     });
   }, [props.socket, chatAccepted]);
+
+  useEffect(() => {
+    props.socket.on("otherWaitingLeft", () => {
+      setChatExpired(true);
+      setChatAccepted(true);
+    });
+  });
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     props.socket.once("startChat", (data) => {
+      window.removeEventListener("beforeunload", onLeave);
+      window.removeEventListener("popstate", onPopState);
       navigate("/chat", {
         state: {
           endChatTime: data.endChatTime,
           endResultTime: data.endResultTime,
           canSend: data.canSend,
-          goal: data.goal
+          goal: data.goal,
+          user: data.name,
         }
       });
     });
@@ -53,12 +111,14 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
 
   const ready = () => {
     setChatAccepted(true);
-    props.socket.emit("readyChat", { user: localStorage.getItem("user") });
+    props.socket.emit("readyChat", { user: user });
   }
 
-  const cancelChat = () => {
-    navigate("/home");
+  const returnHome = () => {
     props.socket.disconnect();
+    window.removeEventListener("beforeunload", onLeave);
+    window.removeEventListener("popstate", onPopState);
+    navigate("/home");
   }
 
   return (
@@ -75,27 +135,27 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
         <Helmet>
           <title>Waiting for Chat | Turing Test Chat</title>
         </Helmet>
-        <Header />
         <Container component="section">
           <Grid
             container
             direction="column"
             alignItems="center"
             justifyContent="center">
-            {!chatFound && <Typography variant="h1">Waiting for chat</Typography>}
+            {!chatFound && !selfDisconnect && <Typography variant="h1">Waiting for chat</Typography>}
             {chatFound && <Typography variant="h1">Chat found</Typography>}
+            {selfDisconnect && <Typography variant="h2">Lost connection to the server.</Typography>}
             <Grid item>
               {chatFound && !chatExpired && <Timer millis={chatWaitingEnd - Date.now()} />}
             </Grid>
             {chatFound && !chatAccepted && !chatExpired && <Button
               variant="contained"
               sx={{ width: "100%", height: 75, fontSize: 30 }} onClick={ready}>Go To Chat</Button>}
-            {chatAccepted && !chatExpired && <Typography variant="h3" sx={{ my: 5 }}>Waiting for other player</Typography>}
-            {chatExpired && !chatAccepted && <Typography variant="h3" sx={{ my: 5 }}>Your chat has expired and you have lost one credit.</Typography>}
-            {chatExpired && chatAccepted && <Typography variant="h3" sx={{ my: 5 }}>The other player has not accepted, please return to home.</Typography>}
-            {chatExpired && <Button variant="contained" onClick={() => navigate("/home")}
-              sx={{ width: "100%", height: 75, fontSize: 30 }}>Return to home.</Button>}
-            {!chatFound && <Button variant="contained" onClick={cancelChat}
+            {chatAccepted && !chatExpired && <Typography variant="h3" sx={{ my: 5 }}>Waiting for other chatter</Typography>}
+            {chatExpired && !chatAccepted && <Typography variant="h3" sx={{ my: 5 }}>Your chat has expired and you have lost two detection exp and one deception exp.</Typography>}
+            {chatExpired && chatAccepted && <Typography variant="h3" sx={{ my: 5 }}>The other chatter has not accepted, please return to home.</Typography>}
+            {(chatExpired || selfDisconnect) && <Button variant="contained" onClick={returnHome}
+              sx={{ width: "100%", height: 75, fontSize: 30 }}>Return to home</Button>}
+            {!chatFound && !selfDisconnect && <Button variant="contained" onClick={returnHome}
               sx={{ width: "100%", height: 75, fontSize: 30 }}>Cancel</Button>}
           </Grid>
         </Container>

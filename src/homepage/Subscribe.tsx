@@ -20,8 +20,8 @@ export const Subscribe = () => {
     }
     // don't allow < > & ' " or /
     // backend escapes these so they will not work properly when trying to log in
-    if (email.match("[<>&'\"/]+")) {
-      setWaitlistMessage("Email cannot contain < > & ' \" or /");
+    if (email.match("[<>&\'\"/]+")) {
+      setWaitlistMessage("Email cannot contain < > & \' \" or /");
       return false;
     }
     return true;
@@ -29,7 +29,6 @@ export const Subscribe = () => {
 
   const emailSubscribe = async () => {
     if (validateEmail(email)) {
-      setComment(comment);
       setWaitlistMessage((await fetch(Constants.BASE_URL + "account/waitlist", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
@@ -52,14 +51,22 @@ export const Subscribe = () => {
         >
           <Box sx={{ maxWidth: 800 }}>
             <Typography variant="h5">
-              Subscribe to the email list
+              Join the waitlist to be notified when Turing Test Chat releases for free.
             </Typography>
             <TextField
               placeholder="Your email"
               variant="standard"
               color="info"
-              sx={{ width: '100%', my: 3, input: { color: "#e9e9e9" } }}
+              sx={{ width: '100%', mt: 3, input: { color: "#e9e9e9" } }}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
+            />
+            <TextField
+              placeholder="Comment (optional)"
+              variant="standard"
+              color="info"
+              sx={{ width: '100%', mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
+              onChange={(e) => setComment(e.target.value)}
               onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
             />
             <Button
@@ -67,8 +74,13 @@ export const Subscribe = () => {
               variant="contained"
               sx={{ width: '100%' }}
               onClick={emailSubscribe}>
-              Subscribe
+              Join waitlist
             </Button>
+            <Typography>
+              Join now to receive bonus rewards on Turing Test Chat's full release.
+              You will receive weekly updates until release, unless you opt out.
+              You can unsubscribe at any time.
+            </Typography>
             {waitlistMessage.length > 0 && <Typography>{waitlistMessage}</Typography>}
           </Box>
         </Box>

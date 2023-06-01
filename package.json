@@ -16,10 +16,12 @@
     "@types/react-dom": "^18.0.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-error-boundary": "^4.0.9",
     "react-ga4": "^2.1.0",
     "react-helmet-async": "^1.3.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
+    "react-syntax-highlighter": "^15.5.0",
     "socket.io-client": "^4.6.1",
     "typescript": "^4.9.5",
     "use-interval": "^1.4.0",
@@ -51,5 +53,8 @@
     ]
   },
   "proxy": "http://localhost:8080/",
-  "homepage": "https://www.turingtestchat.com"
+  "homepage": "https://www.turingtestchat.com",
+  "devDependencies": {
+    "@types/react-syntax-highlighter": "^15.5.6"
+  }
 }

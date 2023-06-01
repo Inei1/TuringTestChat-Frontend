@@ -14,6 +14,7 @@ export interface ChatEndProps {
   endResultMillis: number;
   goal: string;
   otherLeft: boolean;
+  user: string;
 }
 
 export const ChatEnd = (props: ChatEndProps) => {
@@ -22,6 +23,7 @@ export const ChatEnd = (props: ChatEndProps) => {
 
   const [result, setResult] = useState("");
   const [other, setOther] = useState("");
+  const [otherGoal, setOtherGoal] = useState("");
   const [detectionExp, setDetectionExp] = useState(0);
   const [otherResult, setOtherResult] = useState("");
   const [deceptionExp, setDeceptionExp] = useState(0);
@@ -30,24 +32,47 @@ export const ChatEnd = (props: ChatEndProps) => {
     props.socket.on("otherResult", (data) => {
       setOtherResult(data.result);
       setDeceptionExp(data.points);
+      if (!localStorage.getItem("deception")) {
+        localStorage.setItem("deception", "0");
+      }
+      localStorage.setItem("deception", Number(localStorage.getItem("deception")) + data.points);
+      if (data.points > 0) {
+        if (!localStorage.getItem("deceptionWins")) {
+          localStorage.setItem("deceptionWins", "0");
+        }
+        localStorage.setItem("deceptionWins", String(Number(localStorage.getItem("deceptionWins")) + 1));
+      } else if (data.points < 0) {
+        if (!localStorage.getItem("deceptionLosses")) {
+          localStorage.setItem("deceptionLosses", "0");
+        }
+        localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
+      }
     });
     props.socket.on("selfResult", (data) => {
       setDetectionExp(data.points);
+      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) + data.points));
+      if (data.points > 0) {
+        localStorage.setItem("detectionWins", String(Number(localStorage.getItem("detectionWins")) + 1));
+      } else if (data.points < 0) {
+        localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+      }
       setOther(data.other);
+      setOtherGoal(data.otherGoal);
       setResult(data.result);
       props.setResultOver(true);
     });
-    props.socket.on("noResult", () => {
+    props.socket.on("noResult", (data) => {
       setOtherResult("Did not pick");
       setDeceptionExp(10);
       setOther("Human");
+      setOtherGoal(data.otherGoal);
     });
     props.socket.on("completeChat", () => props.setResultOver(true));
   }, [props.socket]);
 
   const sendResult = (result: string) => {
     props.socket.emit("result", {
-      name: localStorage.getItem("user"),
+      name: props.user,
       result: result
     });
   }
@@ -67,7 +92,7 @@ export const ChatEnd = (props: ChatEndProps) => {
         </Grid>
         <Grid item>
           <ButtonGroup variant="contained">
-            <Button onClick={() => sendResult("Definitely a human")}
+            <Button disabled={result.length > 0} onClick={() => sendResult("Definitely a human")}
               sx={{ backgroundColor: result === "Definitely a human" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -78,7 +103,7 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => sendResult("Possibly a human")}
+            <Button disabled={result.length > 0} onClick={() => sendResult("Possibly a human")}
               sx={{ backgroundColor: result === "Possibly a human" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -89,7 +114,7 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => sendResult("Unknown")}
+            <Button disabled={result.length > 0} onClick={() => sendResult("Unknown")}
               sx={{ backgroundColor: result === "Unknown" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -100,7 +125,7 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => sendResult("Possibly a bot")}
+            <Button disabled={result.length > 0} onClick={() => sendResult("Possibly a bot")}
               sx={{ backgroundColor: result === "Possibly a bot" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -111,7 +136,7 @@ export const ChatEnd = (props: ChatEndProps) => {
                 </Grid>
               </Grid>
             </Button>
-            <Button onClick={() => sendResult("Definitely a bot")}
+            <Button disabled={result.length > 0} onClick={() => sendResult("Definitely a bot")}
               sx={{ backgroundColor: result === "Definitely a bot" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
@@ -145,15 +170,23 @@ export const ChatEnd = (props: ChatEndProps) => {
             <Typography>{other}</Typography>
           </Grid>
           <Grid item>
+            {otherGoal && otherGoal.length > 0 && <Typography>Their goal was: </Typography>}
+            {otherGoal === "Human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
+            {otherGoal === "Bot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
+            <Typography>{otherGoal}</Typography>
           </Grid>
         </Grid>
         <Grid item>
           <Typography>You received {detectionExp} detection exp from your selection</Typography>
         </Grid>
         <Grid item sx={{ my: 2 }}>
-          {props.otherLeft && other === "Human" && <Typography>Other person left<p/>You gained 5 deception exp</Typography>}
-          {result && result.length > 0 && otherResult.length === 0 && !props.otherLeft &&
-            <Typography>Waiting for other person...</Typography>}
+          {props.otherLeft && other === "Human" &&
+            <>
+              <Typography>Other chatter left</Typography>
+              <Typography>You gained 2 deception exp</Typography>
+            </>}
+          {result && result.length > 0 && otherResult.length === 0 && !props.otherLeft && other !== "Bot" &&
+            <Typography>Waiting for other chatter...</Typography>}
           {otherResult && otherResult.length > 0 && <Typography>They chose:</Typography>}
         </Grid>
         <Grid item>
@@ -167,7 +200,7 @@ export const ChatEnd = (props: ChatEndProps) => {
           <Typography>{otherResult}</Typography>
         </Grid>
         <Grid item>
-          {deceptionExp !== 0 && <Typography>You received {deceptionExp} deception exp from the other person's selection</Typography>}
+          {deceptionExp !== 0 && <Typography>You received {deceptionExp} deception exp from the other chatter's selection</Typography>}
         </Grid>
         <Grid item>
           {props.resultOver && <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>}

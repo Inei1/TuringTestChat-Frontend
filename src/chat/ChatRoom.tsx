@@ -17,29 +17,35 @@ export const ChatRoom = (props: ChatRoomProps) => {
 
   const navigate = useNavigate();
 
-  const { endChatTime, endResultTime, canSend, goal } = useLocation().state;
+  const { endChatTime, endResultTime, canSend, goal, user } = useLocation().state;
   const [chatActive, setChatActive] = useState(true);
   const [resultOver, setResultOver] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [otherLeft, setOtherLeft] = useState(false);
-  const [selfDisconnect, setSelfDisconnect] = useState(false);
+  const [selfDisconnect, setSelfDisconnect] = useState(true);
 
   const onLeave = useCallback((e: BeforeUnloadEvent) => {
-    e.preventDefault();
-    // You cannot specify a message in modern browsers, so return an empty string.
-    e.returnValue = "";
-  }, []);
+    if (!resultOver) {
+      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 4));
+      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+      localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 2));
+      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
+    }
+  }, [resultOver]);
 
   const onPopState = useCallback((e: PopStateEvent) => {
-    if (window.confirm("Leaving will cause you to lose 5 detection exp and 5 deception exp. Are you sure you want to leave?")) {
+    if (!resultOver) {
+      alert("Lost 4 detection exp and 2 deception exp for leaving.");
       window.removeEventListener("beforeunload", onLeave);
       window.removeEventListener("popstate", onPopState);
-      props.socket.disconnect();
-      navigate("/home");
-    } else {
-      window.history.pushState(null, "", null);
+      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 4));
+      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+      localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 2));
+      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
     }
-  }, [navigate, onLeave, props.socket]);
+    props.socket.disconnect();
+    navigate("/home");
+  }, [navigate, onLeave, props.socket, resultOver]);
 
   useEffect(() => {
     if (!resultOver) {
@@ -49,14 +55,35 @@ export const ChatRoom = (props: ChatRoomProps) => {
       window.removeEventListener("beforeunload", onLeave);
       window.removeEventListener("popstate", onPopState);
     }
+    return () => {
+      setTimeout(() => {
+        window.removeEventListener("beforeunload", onLeave);
+        window.removeEventListener("popstate", onPopState);
+      }, 100);
+    }
   }, [resultOver, onLeave, onPopState]);
+
+  useEffect(() => {
+    if (selfDisconnect === true) {
+      // window.removeEventListener("beforeunload", onLeave);
+      // window.removeEventListener("popstate", onPopState);
+    }
+  }, [selfDisconnect]);
+
+  useEffect(() => {
+    if (props.socket.connected) {
+      setSelfDisconnect(false);
+    } else {
+      setSelfDisconnect(true);
+    }
+  }, []);
 
   useEffect(() => {
     props.socket.on("endChat", () => setChatActive(false));
   }, [props.socket]);
 
   useEffect(() => {
-    props.socket.on("disconnect", () => { setSelfDisconnect(true); console.log("DISCOONECTED") });
+    props.socket.on("disconnect", () => { setSelfDisconnect(true); });
   }, [props.socket]);
 
   return (
@@ -91,7 +118,8 @@ export const ChatRoom = (props: ChatRoomProps) => {
         goal={goal}
         endChatTime={endChatTime}
         otherLeft={otherLeft}
-        setOtherLeft={setOtherLeft} />
+        setOtherLeft={setOtherLeft}
+        user={user} />
       {!chatActive && <ChatEnd
         resultOver={resultOver}
         setResultOver={setResultOver}
@@ -100,11 +128,12 @@ export const ChatRoom = (props: ChatRoomProps) => {
         chatActive={chatActive}
         setChatActive={setChatActive}
         goal={goal}
-        otherLeft={otherLeft} />}
+        otherLeft={otherLeft}
+        user={user} />}
       {selfDisconnect &&
-        <Grid container justifyContent={"center"}>
-            <Typography variant="h4">Lost connection to chat</Typography>
-            <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>
+        <Grid container justifyContent={"center"} direction="column">
+          <Typography variant="h4">Lost connection to chat</Typography>
+          <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3, height: 75, fontSize: 30 }}>Return to home</Button>
         </Grid>}
     </Box>
   );

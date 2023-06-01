@@ -4,11 +4,15 @@ import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
 import { Subscribe } from "./homepage/Subscribe";
+import { Helmet } from "react-helmet-async";
 
 export const Homepage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Turing Test Chat | free online Turing Test with ChatGPT</title>
+      </Helmet>
       <Box sx={{
         backgroundColor: "secondary.main",
         background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
@@ -19,13 +23,12 @@ export const Homepage = () => {
       }}>
         <Header />
         <Landing />
-
+        <Subscribe />
         {/* <Demo /> */}
         {/* <DragAndDrop /> */}
         {/* <Documentation /> */}
         {/* <Blog /> */}
         <Features />
-        <Subscribe />
       </Box>
       <Footer />
     </>
