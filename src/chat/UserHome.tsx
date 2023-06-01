@@ -71,9 +71,9 @@ export const UserHome = (props: ChatHomeProps) => {
     return true;
   }
 
-  const emailSubscribe = async () => {
+  const betaSubscribe = async () => {
     if (validateEmail(email)) {
-      setBetaMessage((await fetch(Constants.BASE_URL + "account/waitlist", {
+      setBetaMessage((await fetch(Constants.BASE_URL + "account/beta", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         credentials: "include",
@@ -143,18 +143,18 @@ export const UserHome = (props: ChatHomeProps) => {
                 You will not receive any emails by joining this list, unless you also join the waitlist.
                 If you join both the waitlist and this list, you will receive rewards for both!</Typography>
               <TextField
-                placeholder="Your email (optional)"
+                placeholder="Your email"
                 variant="standard"
                 color="info"
                 sx={{ width: '100%', input: { color: "#e9e9e9" } }}
                 onChange={(e) => setEmail(e.target.value)}
-                onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
+                onKeyDown={(e) => { if (e.key === "Enter") { betaSubscribe() } }}
               />
               <Button
                 color="error"
                 variant="contained"
                 sx={{ width: '100%', mb: 2 }}
-                onClick={emailSubscribe}>
+                onClick={betaSubscribe}>
                 Receive bonus rewards
               </Button>
               {betaMessage.length > 0 && <Typography>{betaMessage}</Typography>}
