@@ -3,7 +3,6 @@ import { Header } from "./Header";
 import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
-import { Subscribe } from "./homepage/Subscribe";
 import { Helmet } from "react-helmet-async";
 
 export const Homepage = () => {
@@ -23,7 +22,6 @@ export const Homepage = () => {
       }}>
         <Header />
         <Landing />
-        <Subscribe />
         {/* <Demo /> */}
         {/* <DragAndDrop /> */}
         {/* <Documentation /> */}

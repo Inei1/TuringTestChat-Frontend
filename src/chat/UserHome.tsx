@@ -5,12 +5,18 @@ import { Header } from '../Header';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { Footer } from '../homepage/Footer';
 import { Helmet } from 'react-helmet-async';
+import { useEffect, useState } from 'react';
+import { User } from '../types';
+import { Constants } from '../Constants';
 
 export interface ChatHomeProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
 export const UserHome = (props: ChatHomeProps) => {
+
+  const [user, setUser] = useState<User>();
+
   const navigate = useNavigate();
 
   const enterChat = (e: any) => {
@@ -18,6 +24,35 @@ export const UserHome = (props: ChatHomeProps) => {
     props.socket.emit("startRoom");
     navigate('/chatwaiting');
   };
+
+  const getUser = async () => {
+    try {
+      const result = await fetch(Constants.BASE_URL + "login/password", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: localStorage.getItem("user") }),
+      });
+      return await result.json();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getExpMessage = () => {
+    if (!user) {
+      return "user not found"
+    }
+    return "You have " + user.detection + " detection exp with " + user.detectionWins + "/" +
+      user.detectionLosses + "win/loss (" +
+      (100 * (user.detectionWins / Math.max(user.detectionWins + user.detectionLosses, 1))).toFixed(0) + "%) and " +
+      user.deception + " deception exp with " + user.deceptionWins / user.deceptionLosses + " win/loss (" +
+      (100 * (user!.deceptionWins / Math.max(user!.deceptionWins +
+        user!.deceptionLosses, 1))).toFixed(0) + "%)."
+  }
+
+  useEffect(() => {
+    getUser().then((user) => setUser(user));
+  }, []);
 
   return (
     <>
@@ -42,25 +77,11 @@ export const UserHome = (props: ChatHomeProps) => {
               <Typography sx={{ fontSize: 18, my: 5 }}>Your chat partner will also be trying to do the same for you.
                 You must simultaneously attempt to convince your partner while also determining what they are.</Typography>
               <Typography sx={{ fontSize: 18, my: 5 }}>You will gain or lose exp based on performance. Successfully guessing your partner's identity and convincing your partner of your own identity will give you up to 10 exp each. Failing to do so for either will cost you up to 3 exp each. If you use the back button or otherwise leave the page, you will lose exp.</Typography>
-              <Typography sx={{ fontSize: 18, my: 5 }}>Have any questions? Check out the {}
+              <Typography sx={{ fontSize: 18, my: 5 }}>Have any questions? Check out the { }
                 <Link to="/betafaq" style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 18 }}>Beta FAQ</Link></Typography>
               <Typography sx={{ fontSize: 20, my: 5 }}>
-                You have {localStorage.getItem("detection")} detection exp with {}
-                {localStorage.getItem("detectionWins")}/
-                {localStorage.getItem("detectionLosses")} win/loss (
-                {(100 * (Number(localStorage.getItem("detectionWins")) /
-                Math.max(Number(localStorage.getItem("detectionLosses")) +
-                Number(localStorage.getItem("detectionWins")), 1))).toFixed(0)}%) and {}
-                {localStorage.getItem("deception") ?
-                localStorage.getItem("deception") : 0} deception exp with {}
-                {localStorage.getItem("deceptionWins") ?
-                localStorage.getItem("deceptionWins") : 0}/
-                {localStorage.getItem("deceptionLosses") ?
-                localStorage.getItem("deceptionLosses") : 0} win/loss (
-                  {(100 * (Number(localStorage.getItem("deceptionWins")) /
-                  Math.max(Number(localStorage.getItem("deceptionLosses")) +
-                  Number(localStorage.getItem("deceptionWins")), 1))).toFixed(0)}%)
-                </Typography>
+                {getExpMessage()}
+              </Typography>
               <Button sx={{ width: "100%", height: 75, fontSize: 30 }} variant="contained" onClick={(e) => enterChat(e)}>Enter Chat Room</Button>
             </Box>
           </Box>

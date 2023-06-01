@@ -32,30 +32,9 @@ export const ChatEnd = (props: ChatEndProps) => {
     props.socket.on("otherResult", (data) => {
       setOtherResult(data.result);
       setDeceptionExp(data.points);
-      if (!localStorage.getItem("deception")) {
-        localStorage.setItem("deception", "0");
-      }
-      localStorage.setItem("deception", Number(localStorage.getItem("deception")) + data.points);
-      if (data.points > 0) {
-        if (!localStorage.getItem("deceptionWins")) {
-          localStorage.setItem("deceptionWins", "0");
-        }
-        localStorage.setItem("deceptionWins", String(Number(localStorage.getItem("deceptionWins")) + 1));
-      } else if (data.points < 0) {
-        if (!localStorage.getItem("deceptionLosses")) {
-          localStorage.setItem("deceptionLosses", "0");
-        }
-        localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
-      }
     });
     props.socket.on("selfResult", (data) => {
       setDetectionExp(data.points);
-      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) + data.points));
-      if (data.points > 0) {
-        localStorage.setItem("detectionWins", String(Number(localStorage.getItem("detectionWins")) + 1));
-      } else if (data.points < 0) {
-        localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
-      }
       setOther(data.other);
       setOtherGoal(data.otherGoal);
       setResult(data.result);

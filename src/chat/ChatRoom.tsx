@@ -24,44 +24,23 @@ export const ChatRoom = (props: ChatRoomProps) => {
   const [otherLeft, setOtherLeft] = useState(false);
   const [selfDisconnect, setSelfDisconnect] = useState(true);
 
-  const onLeave = useCallback((e: BeforeUnloadEvent) => {
-    if (!resultOver) {
-      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 4));
-      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
-      localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 2));
-      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
-    }
-  }, [resultOver]);
-
   const onPopState = useCallback((e: PopStateEvent) => {
-    if (!resultOver) {
-      alert("Lost 4 detection exp and 2 deception exp for leaving.");
-      window.removeEventListener("beforeunload", onLeave);
-      window.removeEventListener("popstate", onPopState);
-      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 4));
-      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
-      localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 2));
-      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
-    }
     props.socket.disconnect();
     navigate("/home");
-  }, [navigate, onLeave, props.socket, resultOver]);
+  }, [navigate, props.socket]);
 
   useEffect(() => {
     if (!resultOver) {
-      window.addEventListener("beforeunload", onLeave);
       window.addEventListener("popstate", onPopState);
     } else {
-      window.removeEventListener("beforeunload", onLeave);
       window.removeEventListener("popstate", onPopState);
     }
     return () => {
       setTimeout(() => {
-        window.removeEventListener("beforeunload", onLeave);
         window.removeEventListener("popstate", onPopState);
       }, 100);
     }
-  }, [resultOver, onLeave, onPopState]);
+  }, [resultOver, onPopState]);
 
   useEffect(() => {
     if (selfDisconnect === true) {
@@ -100,7 +79,6 @@ export const ChatRoom = (props: ChatRoomProps) => {
         <title>Chatting | Turing Test Chat</title>
       </Helmet>
       <LeaveChatDialog
-        onLeave={onLeave}
         onPopState={onPopState}
         onClose={() => setDialogOpen(false)}
         open={dialogOpen}

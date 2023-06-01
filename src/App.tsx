@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { createBrowserRouter, Outlet, RouterProvider, useLocation } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
 import { UserHome } from './chat/UserHome';
 import { ChatRoom } from './chat/ChatRoom';
 import { io } from 'socket.io-client';
@@ -11,11 +11,6 @@ import { PrivacyPolicy } from './homepage/PrivacyPolicy';
 import { Tos } from './homepage/Tos';
 import ReactGA from "react-ga4";
 import { ChatWaiting } from './chat/ChatWaiting';
-import { Box, Container, Typography } from '@mui/material';
-import { Helmet } from 'react-helmet-async';
-import { Header } from './Header';
-import { Subscribe } from './homepage/Subscribe';
-import { Footer } from './homepage/Footer';
 import { Blog } from './homepage/Blog';
 import { Blog2 } from './blog/Blog2';
 import { Blog1 } from './blog/Blog1';
@@ -28,6 +23,7 @@ import { Unknown } from './unknown';
 import { ErrorPage } from './homepage/ErrorPage';
 import { NotFoundPage } from './homepage/NotFoundPage';
 import { ErrorBoundaryComponent } from './homepage/ErrorBoundaryComponent';
+import { Login } from './homepage/Login';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -114,28 +110,9 @@ function App() {
             <Tos />
         },
         {
-          path: "/waitlist",
+          path: "/login",
           element:
-            <>
-              <Box sx={{ maxWidth: "100vw", minHeight: "100vh", background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)", }}>
-                <Helmet>
-                  <title>Subscribe to Waitlist | Turing Test Chat</title>
-                </Helmet>
-                <Header />
-                <Container sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  bgcolor: 'inherit',
-                  mt: 5,
-                }}>
-                  <Typography variant="h1" sx={{ fontSize: 50 }}>Waitlist</Typography>
-                  <Subscribe />
-                </Container>
-              </Box>
-              <Footer />
-            </>
+            <Login />
         },
         {
           path: "/betafaq",
