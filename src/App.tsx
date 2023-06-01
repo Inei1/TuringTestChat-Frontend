@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Outlet, RouterProvider, useLocation } from 'react-router-dom';
 import { UserHome } from './chat/UserHome';
 import { ChatRoom } from './chat/ChatRoom';
 import { io } from 'socket.io-client';
@@ -26,6 +26,8 @@ import { Blog6 } from './blog/Blog6';
 import { BetaFaq } from './homepage/BetaFaq';
 import { Unknown } from './unknown';
 import { ErrorPage } from './homepage/ErrorPage';
+import { NotFoundPage } from './homepage/NotFoundPage';
+import { ErrorBoundaryComponent } from './homepage/ErrorBoundaryComponent';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -78,109 +80,116 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
-      element:
-        <Homepage />
-    },
-    {
-      path: "/home",
-      element:
-        <UserHome socket={socket} />
-    },
-    {
-      path: "/chatwaiting",
-      element:
-        <ChatWaiting socket={socket} />
-    },
-    {
-      path: "/chat",
-      element:
-        <ChatRoom
-          socket={socket} />
-    },
-    {
-      path: "/privacypolicy",
-      element:
-        <PrivacyPolicy />
-    },
-    {
-      path: "/tos",
-      element:
-        <Tos />
-    },
-    {
-      path: "/waitlist",
-      element:
-        <>
-          <Box sx={{ maxWidth: "100vw", minHeight: "100vh", background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)", }}>
-            <Helmet>
-              <title>Subscribe to Waitlist | Turing Test Chat</title>
-            </Helmet>
-            <Header />
-            <Container sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              bgcolor: 'inherit',
-              mt: 5,
-            }}>
-              <Typography variant="h1" sx={{ fontSize: 50 }}>Waitlist</Typography>
-              <Subscribe />
-            </Container>
-          </Box>
-          <Footer />
-        </>
-    },
-    {
-      path: "/betafaq",
-      element:
-        <BetaFaq />
-    },
-    {
-      path: "/blog",
-      element:
-        <Blog />
-    },
-    {
-      path: "/blog/1",
-      element:
-        <Blog1 />
-    },
-    {
-      path: "/blog/2",
-      element:
-        <Blog2 />
-    },
-    {
-      path: "/blog/3",
-      element:
-        <Blog3 />
-    },
-    {
-      path: "/blog/4",
-      element:
-        <Blog4 />
-    },
-    {
-      path: "/blog/5",
-      element:
-        <Blog5 />
-    },
-    {
-      path: "/blog/6",
-      element:
-        <Blog6 />
-    },
-    {
-      path: "/unknown",
-      element:
-        <Unknown />
-    },
-    {
-      path: "*",
-      element:
-        <ErrorPage />
+      element: <ErrorBoundaryComponent />,
+      children: [
+        {
+          path: "/",
+          element:
+            <Homepage />
+        },
+        {
+          path: "/home",
+          element:
+            <UserHome socket={socket} />
+        },
+        {
+          path: "/chatwaiting",
+          element:
+            <ChatWaiting socket={socket} />
+        },
+        {
+          path: "/chat",
+          element:
+            <ChatRoom
+              socket={socket} />
+        },
+        {
+          path: "/privacypolicy",
+          element:
+            <PrivacyPolicy />
+        },
+        {
+          path: "/tos",
+          element:
+            <Tos />
+        },
+        {
+          path: "/waitlist",
+          element:
+            <>
+              <Box sx={{ maxWidth: "100vw", minHeight: "100vh", background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)", }}>
+                <Helmet>
+                  <title>Subscribe to Waitlist | Turing Test Chat</title>
+                </Helmet>
+                <Header />
+                <Container sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  bgcolor: 'inherit',
+                  mt: 5,
+                }}>
+                  <Typography variant="h1" sx={{ fontSize: 50 }}>Waitlist</Typography>
+                  <Subscribe />
+                </Container>
+              </Box>
+              <Footer />
+            </>
+        },
+        {
+          path: "/betafaq",
+          element:
+            <BetaFaq />
+        },
+        {
+          path: "/blog",
+          element:
+            <Blog />
+        },
+        {
+          path: "/blog/1",
+          element:
+            <Blog1 />
+        },
+        {
+          path: "/blog/2",
+          element:
+            <Blog2 />
+        },
+        {
+          path: "/blog/3",
+          element:
+            <Blog3 />
+        },
+        {
+          path: "/blog/4",
+          element:
+            <Blog4 />
+        },
+        {
+          path: "/blog/5",
+          element:
+            <Blog5 />
+        },
+        {
+          path: "/blog/6",
+          element:
+            <Blog6 />
+        },
+        {
+          path: "/unknown",
+          element:
+            <Unknown />
+        },
+        {
+          path: "*",
+          errorElement:
+            <ErrorPage />,
+          element:
+            <NotFoundPage />
+        }
+      ]
     }
   ]);
   return (

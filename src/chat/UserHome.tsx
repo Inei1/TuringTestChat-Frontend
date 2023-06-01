@@ -18,8 +18,10 @@ export const UserHome = (props: ChatHomeProps) => {
   const [email, setEmail] = useState("");
   const [betaMessage, setBetaMessage] = useState("");
   const [checked, setChecked] = useState(false);
+  const [test] = useState<string>();
 
   useEffect(() => {
+    console.log(test!.length);
     setChecked(localStorage.getItem("checked") === "true");
     if (!localStorage.getItem("detection")) {
       localStorage.setItem("detection", "0");

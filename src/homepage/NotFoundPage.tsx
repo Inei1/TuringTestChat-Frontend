@@ -2,14 +2,9 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../Header";
 
-export const ErrorPage = ({ resetErrorBoundary }: any) => {
+export const NotFoundPage = () => {
 
   const navigate = useNavigate();
-
-  const leaveError = () => {
-    navigate("/");
-    resetErrorBoundary();
-  }
 
   return (
     <Box sx={{
@@ -21,12 +16,11 @@ export const ErrorPage = ({ resetErrorBoundary }: any) => {
       backgroundPositionY: 60,
       maxWidth: "100vw",
     }}>
-      <Header />
-      <Container>
-        <Typography variant="h1">An error has occurred</Typography>
-        <Button variant="contained" onClick={leaveError} sx={{ width: "100%", height: 75, fontSize: 30 }}>Return to home</Button>
+        <Header />
+        <Container>
+        <Typography variant="h1">Page not found</Typography>
+        <Button variant="contained" onClick={() => navigate("/")} sx={{ width: "100%", height: 75, fontSize: 30 }}>Return to home</Button>
       </Container>
     </Box>
   );
-
 }
