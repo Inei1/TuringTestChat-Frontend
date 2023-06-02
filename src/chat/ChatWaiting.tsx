@@ -21,10 +21,26 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   const [selfDisconnect, setSelfDisconnect] = useState(false);
   const [user, setUser] = useState("");
 
+  const onLeave = useCallback((e: BeforeUnloadEvent) => {
+    if (chatFound && !chatExpired) {
+      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 2));
+      localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 1));
+      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
+    }
+  }, [chatFound, chatExpired]);
+
   const onPopState = useCallback((e: PopStateEvent) => {
+    if (chatFound && !chatExpired) {
+      localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 2));
+      localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 1));
+      localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+      localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
+    }
+    window.removeEventListener("beforeunload", onLeave);
     window.removeEventListener("popstate", onPopState);
     props.socket.disconnect();
-  }, [props.socket, chatFound, chatExpired]);
+  }, [onLeave, props.socket, chatFound, chatExpired]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -43,20 +59,28 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   }, [props.socket]);
 
   useEffect(() => {
+    window.addEventListener("beforeunload", onLeave);
     window.addEventListener("popstate", onPopState);
     return () => {
       setTimeout(() => {
+        window.removeEventListener("beforeunload", onLeave);
         window.removeEventListener("popstate", onPopState);
       }, 100);
     }
-  }, [onPopState]);
+  }, [onLeave, onPopState]);
 
   useEffect(() => {
     props.socket.off("readyExpired");
     props.socket.on("readyExpired", () => {
+      if (!chatAccepted) {
+        localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 2));
+        localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 1));
+        localStorage.setItem("detectionLosses", String(Number(localStorage.getItem("detectionLosses")) + 1));
+        localStorage.setItem("deceptionLosses", String(Number(localStorage.getItem("deceptionLosses")) + 1));
+      }
       setChatExpired(true);
     });
-  }, [props.socket]);
+  }, [props.socket, chatAccepted]);
 
   useEffect(() => {
     props.socket.on("otherWaitingLeft", () => {
@@ -68,6 +92,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     props.socket.once("startChat", (data) => {
+      window.removeEventListener("beforeunload", onLeave);
       window.removeEventListener("popstate", onPopState);
       navigate("/chat", {
         state: {
@@ -89,6 +114,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
 
   const returnHome = () => {
     props.socket.disconnect();
+    window.removeEventListener("beforeunload", onLeave);
     window.removeEventListener("popstate", onPopState);
     navigate("/home");
   }
