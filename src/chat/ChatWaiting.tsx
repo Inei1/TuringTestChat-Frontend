@@ -109,7 +109,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
 
   const ready = () => {
     setChatAccepted(true);
-    props.socket.emit("readyChat", { user: user });
+    setTimeout(() => props.socket.emit("readyChat", { user: user }), 1000);
   }
 
   const returnHome = () => {
