@@ -71,7 +71,7 @@ export const UserHome = (props: ChatHomeProps) => {
         <Header />
         <Container component="section">
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Box sx={{ maxWidth: 800, mt: 15 }}>
+            <Box sx={{ maxWidth: 800, mt: 5 }}>
               <Typography sx={{ fontSize: 18, mb: 5 }}>You will be paired anonymously with a human or with ChatGPT on entering the chat room.
                 Your task is to perform the Turing Test by identifying which of the two you think you were talking to.</Typography>
               <Typography sx={{ fontSize: 18, my: 5 }}>Your chat partner will also be trying to do the same for you.
