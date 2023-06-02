@@ -31,7 +31,6 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   }, [chatFound, chatExpired]);
 
   const onPopState = useCallback((e: PopStateEvent) => {
-    console.log(chatFound + " " + chatExpired);
     if (chatFound && !chatExpired) {
       localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 2));
       localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 1));
@@ -73,7 +72,6 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   useEffect(() => {
     props.socket.off("readyExpired");
     props.socket.on("readyExpired", () => {
-      console.log(chatAccepted);
       if (!chatAccepted) {
         localStorage.setItem("detection", String(Number(localStorage.getItem("detection")) - 2));
         localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) - 1));
