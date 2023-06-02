@@ -2,10 +2,11 @@ import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { Link, useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import { Header } from '../Header';
-import { Box, Button, Checkbox, Container, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import { Footer } from '../homepage/Footer';
 import { Helmet } from 'react-helmet-async';
 import { useEffect, useState } from 'react';
+import { User } from '../types';
 import { Constants } from '../Constants';
 
 export interface ChatHomeProps {
@@ -13,80 +14,45 @@ export interface ChatHomeProps {
 }
 
 export const UserHome = (props: ChatHomeProps) => {
+
+  const [user, setUser] = useState<User>();
+
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState("");
-  const [betaMessage, setBetaMessage] = useState("");
-  const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
-    setChecked(localStorage.getItem("checked") === "true");
-    if (!localStorage.getItem("detection")) {
-      localStorage.setItem("detection", "0");
-    }
-    if (!localStorage.getItem("deception")) {
-      localStorage.setItem("deception", "0");
-    }
-    if (!localStorage.getItem("detectionWins")) {
-      localStorage.setItem("detectionWins", "0");
-    }
-    if (!localStorage.getItem("deceptionWins")) {
-      localStorage.setItem("deceptionWins", "0");
-    }
-    if (!localStorage.getItem("detectionLosses")) {
-      localStorage.setItem("detectionLosses", "0");
-    }
-    if (!localStorage.getItem("deceptionLosses")) {
-      localStorage.setItem("deceptionLosses", "0");
-    }
-    //props.socket.disconnect();
-  }, []);
-
-  const onCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      setChecked(true);
-      localStorage.setItem("checked", "true");
-    } else {
-      setChecked(false);
-      localStorage.setItem("checked", "false");
-    }
-  }
-
-  const validateEmail = (email: string) => {
-    if (email.length === 0) {
-      setBetaMessage("Email must not be empty");
-      return false;
-    }
-    // validate email regex
-    if (!email.match("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$")) {
-      setBetaMessage("Invalid email");
-      return false;
-    }
-    // don't allow < > & ' " or /
-    // backend escapes these so they will not work properly when trying to log in
-    if (email.match("[<>&\'\"/]+")) {
-      setBetaMessage("Email cannot contain < > & \' \" or /");
-      return false;
-    }
-    return true;
-  }
-
-  const betaSubscribe = async () => {
-    if (validateEmail(email)) {
-      setBetaMessage((await fetch(Constants.BASE_URL + "account/beta", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        credentials: "include",
-        body: JSON.stringify({ email: email })
-      }).then(res => res.json())).message);
-    }
-  };
 
   const enterChat = (e: any) => {
     props.socket.connect();
     props.socket.emit("startRoom");
     navigate('/chatwaiting');
   };
+
+  const getUser = async () => {
+    try {
+      const result = await fetch(Constants.BASE_URL + "login/password", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: localStorage.getItem("user") }),
+      });
+      return await result.json();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getExpMessage = () => {
+    if (!user) {
+      return "user not found"
+    }
+    return "You have " + user.detection + " detection exp with " + user.detectionWins + "/" +
+      user.detectionLosses + "win/loss (" +
+      (100 * (user.detectionWins / Math.max(user.detectionWins + user.detectionLosses, 1))).toFixed(0) + "%) and " +
+      user.deception + " deception exp with " + user.deceptionWins / user.deceptionLosses + " win/loss (" +
+      (100 * (user!.deceptionWins / Math.max(user!.deceptionWins +
+        user!.deceptionLosses, 1))).toFixed(0) + "%)."
+  }
+
+  useEffect(() => {
+    getUser().then((user) => setUser(user));
+  }, []);
 
   return (
     <>
@@ -111,56 +77,12 @@ export const UserHome = (props: ChatHomeProps) => {
               <Typography sx={{ fontSize: 18, my: 5 }}>Your chat partner will also be trying to do the same for you.
                 You must simultaneously attempt to convince your partner while also determining what they are.</Typography>
               <Typography sx={{ fontSize: 18, my: 5 }}>You will gain or lose exp based on performance. Successfully guessing your partner's identity and convincing your partner of your own identity will give you up to 10 exp each. Failing to do so for either will cost you up to 3 exp each. If you use the back button or otherwise leave the page, you will lose exp.</Typography>
-              <Typography sx={{ fontSize: 18, my: 5 }}>The chat may not function properly if you are using private/incognito browsing. Have any questions? Check out the {}
-                <Link to="/betafaq" style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 18 }}>Beta FAQ</Link>.</Typography>
+              <Typography sx={{ fontSize: 18, my: 5 }}>Have any questions? Check out the { }
+                <Link to="/betafaq" style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 18 }}>Beta FAQ</Link></Typography>
               <Typography sx={{ fontSize: 20, my: 5 }}>
-                You have {localStorage.getItem("detection") ?
-                localStorage.getItem("detection") : 0} detection exp with {}
-                {localStorage.getItem("detectionWins") ?
-                localStorage.getItem("detectionWins") : 0}/
-                {localStorage.getItem("detectionLosses") ?
-                localStorage.getItem("detectionLosses") : 0} win/loss (
-                {(100 * (Number(localStorage.getItem("detectionWins")) /
-                Math.max(Number(localStorage.getItem("detectionLosses")) +
-                Number(localStorage.getItem("detectionWins")), 1))).toFixed(0)}%) and {}
-                {localStorage.getItem("deception") ?
-                localStorage.getItem("deception") : 0} deception exp with {}
-                {localStorage.getItem("deceptionWins") ?
-                localStorage.getItem("deceptionWins") : 0}/
-                {localStorage.getItem("deceptionLosses") ?
-                localStorage.getItem("deceptionLosses") : 0} win/loss (
-                  {(100 * (Number(localStorage.getItem("deceptionWins")) /
-                  Math.max(Number(localStorage.getItem("deceptionLosses")) +
-                  Number(localStorage.getItem("deceptionWins")), 1))).toFixed(0)}%)
-                </Typography>
-              <Grid container>
-                <Grid item>
-                  <Checkbox checked={checked} onChange={onCheckBox} sx={{ color: "#e9e9e9" }} />
-                </Grid>
-                <Grid item sx={{mt: 1}}>
-                  <Typography>By checking this box you acknowledge you are 13 years of age or older</Typography>
-                </Grid>
-              </Grid>
-              <Button disabled={!checked} sx={{ width: "100%", height: 75, fontSize: 30 }} variant="contained" onClick={(e) => enterChat(e)}>Enter Chat Room</Button>
-              <Typography sx={{ fontSize: 18, mt: 5 }}>(Optional) enter email here to receive bonus beta tester credits on the full release.
-                You will not receive any emails by joining this list, unless you also join the waitlist.
-                If you join both the waitlist and this list, you will receive rewards for both!</Typography>
-              <TextField
-                placeholder="Your email"
-                variant="standard"
-                color="info"
-                sx={{ width: '100%', input: { color: "#e9e9e9" } }}
-                onChange={(e) => setEmail(e.target.value)}
-                onKeyDown={(e) => { if (e.key === "Enter") { betaSubscribe() } }}
-              />
-              <Button
-                color="error"
-                variant="contained"
-                sx={{ width: '100%', mb: 2 }}
-                onClick={betaSubscribe}>
-                Receive bonus rewards
-              </Button>
-              {betaMessage.length > 0 && <Typography>{betaMessage}</Typography>}
+                {getExpMessage()}
+              </Typography>
+              <Button sx={{ width: "100%", height: 75, fontSize: 30 }} variant="contained" onClick={(e) => enterChat(e)}>Enter Chat Room</Button>
             </Box>
           </Box>
         </Container>

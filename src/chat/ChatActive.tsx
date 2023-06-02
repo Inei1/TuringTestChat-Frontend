@@ -32,8 +32,6 @@ export const ChatActive = (props: ChatActiveProps) => {
     props.socket.on("otherLeft", () => {
       if (props.chatActive) {
         props.setOtherLeft(true);
-        localStorage.setItem("deception", String(Number(localStorage.getItem("deception")) + 2));
-        localStorage.setItem("deceptionWins", String(Number(localStorage.getItem("deceptionWins")) + 1))
         props.setChatActive(false);
       }
     });
