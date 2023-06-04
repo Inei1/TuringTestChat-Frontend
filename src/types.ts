@@ -1,6 +1,6 @@
-export interface LoginState {
-  tabIndex: number;
-  loggedIn: boolean;
+export interface LoginContextType {
+  user: User | null;
+  setUser: (user: User | null) => void;
 }
 
 export interface Message {
@@ -10,6 +10,7 @@ export interface Message {
 }
 
 export interface User {
+  name: string;
   detection: number;
   deception: number;
   detectionWins: number;

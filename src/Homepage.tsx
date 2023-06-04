@@ -4,6 +4,7 @@ import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
 import { Helmet } from "react-helmet-async";
+import { Blog } from "./homepage/Blog";
 
 export const Homepage = () => {
 
@@ -22,11 +23,8 @@ export const Homepage = () => {
       }}>
         <Header />
         <Landing />
-        {/* <Demo /> */}
-        {/* <DragAndDrop /> */}
-        {/* <Documentation /> */}
-        {/* <Blog /> */}
         <Features />
+        <Blog disableHeader disableFooter disableBackground disableTitle />
       </Box>
       <Footer />
     </>

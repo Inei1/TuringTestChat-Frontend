@@ -5,9 +5,10 @@ import { Header } from '../Header';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { Footer } from '../homepage/Footer';
 import { Helmet } from 'react-helmet-async';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { User } from '../types';
 import { Constants } from '../Constants';
+import { LoginContext } from '../App';
 
 export interface ChatHomeProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -15,7 +16,7 @@ export interface ChatHomeProps {
 
 export const UserHome = (props: ChatHomeProps) => {
 
-  const [user, setUser] = useState<User>();
+  const { user, setUser } = useContext(LoginContext);
 
   const navigate = useNavigate();
 
@@ -23,19 +24,6 @@ export const UserHome = (props: ChatHomeProps) => {
     props.socket.connect();
     props.socket.emit("startRoom");
     navigate('/chatwaiting');
-  };
-
-  const getUser = async () => {
-    try {
-      const result = await fetch(Constants.BASE_URL + "login/password", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: localStorage.getItem("user") }),
-      });
-      return await result.json();
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   const getExpMessage = () => {
@@ -49,10 +37,6 @@ export const UserHome = (props: ChatHomeProps) => {
       (100 * (user!.deceptionWins / Math.max(user!.deceptionWins +
         user!.deceptionLosses, 1))).toFixed(0) + "%)."
   }
-
-  useEffect(() => {
-    getUser().then((user) => setUser(user));
-  }, []);
 
   return (
     <>

@@ -1,9 +1,9 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 import { createBrowserRouter, RouterProvider, } from 'react-router-dom';
 import { UserHome } from './chat/UserHome';
 import { ChatRoom } from './chat/ChatRoom';
 import { io } from 'socket.io-client';
-import { LoginState } from './types';
+import { LoginContextType, User } from './types';
 import { Homepage } from './Homepage';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
@@ -18,7 +18,7 @@ import { Blog3 } from './blog/Blog3';
 import { Blog4 } from './blog/Blog4';
 import { Blog5 } from './blog/Blog5';
 import { Blog6 } from './blog/Blog6';
-import { BetaFaq } from './homepage/BetaFaq';
+import { Faq } from './homepage/Faq';
 import { Unknown } from './unknown';
 import { ErrorPage } from './homepage/ErrorPage';
 import { NotFoundPage } from './homepage/NotFoundPage';
@@ -27,14 +27,9 @@ import { Login } from './homepage/Login';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
-interface LoginStateContextType {
-  loginState: LoginState;
-  setLoginState: React.Dispatch<React.SetStateAction<LoginState>>;
-}
-
-export const LoginStateContext = createContext<LoginStateContextType>({
-  loginState: { tabIndex: 0, loggedIn: false },
-  setLoginState: () => null,
+export const LoginContext = createContext<LoginContextType>({
+  user: null,
+  setUser: () => { },
 });
 
 const socket = io(process.env.NODE_ENV === "production" ? "https://www.turingtestchat.com" : "localhost:8080",
@@ -73,6 +68,8 @@ const theme = createTheme({
 });
 
 function App() {
+
+  const [user, setUser] = useState<User | null>(null);
 
   const router = createBrowserRouter([
     {
@@ -115,9 +112,9 @@ function App() {
             <Login />
         },
         {
-          path: "/betafaq",
+          path: "/faq",
           element:
-            <BetaFaq />
+            <Faq />
         },
         {
           path: "/blog",
@@ -172,11 +169,12 @@ function App() {
   return (
     <div style={{ backgroundColor: "#1D1D1D" }} className="App">
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
+        <LoginContext.Provider value={{ user, setUser }}>
+          <RouterProvider router={router} />
+        </LoginContext.Provider>
       </ThemeProvider>
     </div>
   );
 }
 
 export default App;
-

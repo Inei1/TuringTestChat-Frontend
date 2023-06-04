@@ -3,7 +3,7 @@ import { Header } from "../Header"
 import { Footer } from "./Footer"
 import { Helmet } from "react-helmet-async"
 
-export const BetaFaq = () => {
+export const Faq = () => {
   return (
     <>
       <Box sx={{ maxWidth: "100vw", minHeight: "100vh", background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)", }}>

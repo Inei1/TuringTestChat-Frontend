@@ -1,8 +1,11 @@
 import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { LoginContext } from "./App";
 
 export const Header = () => {
+
+  const {user, setUser} = useContext(LoginContext);
 
   return (
     <React.Fragment>
@@ -31,13 +34,13 @@ export const Header = () => {
                 fontWeight: "normal"
               }}>Blog</Link>
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <Link to="/waitlist">
+            {user === null && <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              <Link to="/login">
                 <Button
-                  color="error"
-                  variant="contained">Sign up for waitlist</Button>
+                  color="info"
+                  variant="contained">Log in/Sign up</Button>
               </Link>
-            </Box>
+            </Box>}
           </Toolbar>
         </Container>
       </AppBar>

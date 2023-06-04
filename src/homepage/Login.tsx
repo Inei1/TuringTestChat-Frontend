@@ -1,13 +1,16 @@
 import { Box, Button, FormControl, Grid, Tab, Tabs, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Constants } from "../Constants";
 import { Link, useNavigate } from "react-router-dom";
 import { Footer } from "./Footer";
+import { Header } from "../Header";
+import { LoginContext } from "../App";
 
 export const Login = () => {
 
   const navigate = useNavigate();
 
+  const {user, setUser} = useContext(LoginContext);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,7 +29,7 @@ export const Login = () => {
       });
       if (result.ok) {
         const resultJson = await result.json();
-        localStorage.setItem("user", resultJson.username.username);
+        setUser(resultJson.username.username);
         navigate("/home");
       } else if (result.statusText === "Unauthorized") {
         setLoginFailedMessage("Username or password not found");
@@ -118,6 +121,7 @@ export const Login = () => {
 
   return (
     <>
+      <Header />
       <Box sx={{
         minHeight: "100vh",
         backgroundColor: "secondary.main",

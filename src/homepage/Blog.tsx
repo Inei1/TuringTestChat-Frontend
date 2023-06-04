@@ -5,25 +5,33 @@ import { BlogEntry } from "./BlogEntry";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
-export const Blog = () => {
+export interface BlogProps {
+  disableHeader?: boolean;
+  disableFooter?: boolean;
+  disableBackground?: boolean;
+  disableTitle?: boolean;
+}
+
+export const Blog = (props: BlogProps) => {
 
   const navigate = useNavigate();
 
   return (
     <>
-    <Helmet>
-      <title>Blog | Turing Test Chat</title>
-    </Helmet>
-      <Box sx={{
-        backgroundColor: "secondary.main",
-        background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
-        backgroundPosition: "center",
-        backgroundSize: "100vw",
-        backgroundPositionY: 60,
-        maxWidth: "100vw",
-        minHeight: "100vh",
-      }}>
-        <Header />
+      {!props.disableTitle && <Helmet>
+        <title>Blog | Turing Test Chat</title>
+      </Helmet>}
+      <Box
+        sx={!props.disableBackground ? {
+          backgroundColor: "secondary.main",
+          background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
+          backgroundPosition: "center",
+          backgroundSize: "100vw",
+          backgroundPositionY: 60,
+          maxWidth: "100vw",
+          minHeight: "100vh",
+        } : {}}>
+        {!props.disableHeader && <Header />}
         <Button onClick={() => navigate("/unknown")}></Button>
         <Container component="section">
           <Typography variant="h1" sx={{ fontSize: 40, my: 5 }}>Turing Test Chat Blog</Typography>
@@ -71,7 +79,7 @@ export const Blog = () => {
             blogSubtitle="Diving into the code behind the early UI and authentication." />
         </Container>
       </Box>
-      <Footer />
+      {!props.disableFooter && <Footer />}
     </>
   );
 }
