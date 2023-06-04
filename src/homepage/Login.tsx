@@ -14,9 +14,8 @@ export const Login = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [accountCreated, setAccountCreated] = useState(false);
   const [loginFailedMessage, setLoginFailedMessage] = useState("");
-  const [accountFailedMessage, setAccountFailedMessage] = useState("");
+  const [accountMessage, setAccountMessage] = useState("");
   const [password, setPassword] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -29,7 +28,7 @@ export const Login = () => {
       });
       if (result.ok) {
         const resultJson = await result.json();
-        setUser(resultJson.username.username);
+        setUser(resultJson.user);
         navigate("/home");
       } else if (result.statusText === "Unauthorized") {
         setLoginFailedMessage("Username or password not found");
@@ -45,51 +44,51 @@ export const Login = () => {
 
   const validateSignup = () => {
     if (email.length === 0) {
-      setAccountFailedMessage("Email must not be empty");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setAccountMessage("Email must not be empty");
+      setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
     // validate email regex
     if (!email.match("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$")) {
-      setAccountFailedMessage("Invalid email");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setAccountMessage("Invalid email");
+      setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
     // don't allow < > & ' " or /
     // backend escapes these so they will not work properly when trying to log in
     if (email.match("[<>&'\"/]+")) {
-      setAccountFailedMessage("Email cannot contain < > & ' \" or /");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setAccountMessage("Email cannot contain < > & ' \" or /");
+      setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
     if (name.length === 0) {
-      setAccountFailedMessage("Username must not be empty");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setAccountMessage("Username must not be empty");
+      setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
     if (name.length < 6) {
-      setAccountFailedMessage("Username must be at least 6 characters long");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setAccountMessage("Username must be at least 6 characters long");
+      setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
     if (name.match("[<>&'\"/]+")) {
-      setAccountFailedMessage("Name cannot contain < > & ' \" or /");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setAccountMessage("Name cannot contain < > & ' \" or /");
+      setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
     if (password.length === 0) {
-      setAccountFailedMessage("Password must not be empty");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setAccountMessage("Password must not be empty");
+      setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
     if (password.length < 6) {
-      setAccountFailedMessage("Password must be at least 6 characters long");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setAccountMessage("Password must be at least 6 characters long");
+      setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
     if (password.match("[<>&'\"/]+")) {
-      setAccountFailedMessage("Password cannot contain < > & ' \" or /");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setAccountMessage("Password cannot contain < > & ' \" or /");
+      setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
     return true;
@@ -104,11 +103,7 @@ export const Login = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: name, email: email, password: password }),
         }).then(res => res.json());
-        if (result.succeeded) {
-          setAccountCreated(true);
-        } else {
-          setAccountFailedMessage(result.message);
-        }
+        setAccountMessage(result.message);
       } catch (err) {
         throw err;
       }
@@ -217,8 +212,7 @@ export const Login = () => {
                   )
               };
             })()}
-            {accountCreated && tabIndex === 1 && <Typography>Account successfully created! Please log in.</Typography>}
-            {accountFailedMessage.length > 0 && tabIndex === 1 && <Typography>{accountFailedMessage}</Typography>}
+            {accountMessage.length > 0 && tabIndex === 1 && <Typography>{accountMessage}</Typography>}
             {loginFailedMessage.length > 0 && tabIndex === 0 && <Typography>{loginFailedMessage}</Typography>}
           </Box>
         </Box>

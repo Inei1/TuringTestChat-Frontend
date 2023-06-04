@@ -2,10 +2,11 @@ import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "./App";
+import { User } from "./User";
 
 export const Header = () => {
 
-  const {user, setUser} = useContext(LoginContext);
+  const { user, setUser } = useContext(LoginContext);
 
   return (
     <React.Fragment>
@@ -41,6 +42,7 @@ export const Header = () => {
                   variant="contained">Log in/Sign up</Button>
               </Link>
             </Box>}
+            {user && <User />}
           </Toolbar>
         </Container>
       </AppBar>

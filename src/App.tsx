@@ -24,6 +24,7 @@ import { ErrorPage } from './homepage/ErrorPage';
 import { NotFoundPage } from './homepage/NotFoundPage';
 import { ErrorBoundaryComponent } from './homepage/ErrorBoundaryComponent';
 import { Login } from './homepage/Login';
+import { EarnCredits } from './homepage/EarnCredits';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -115,6 +116,11 @@ function App() {
           path: "/faq",
           element:
             <Faq />
+        },
+        {
+          path: "/earncredits",
+          element:
+            <EarnCredits />
         },
         {
           path: "/blog",

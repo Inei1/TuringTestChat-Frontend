@@ -11,6 +11,8 @@ export interface Message {
 
 export interface User {
   name: string;
+  dailyCredits: number;
+  permanentCredits: number;
   detection: number;
   deception: number;
   detectionWins: number;

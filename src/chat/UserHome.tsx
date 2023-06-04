@@ -31,9 +31,9 @@ export const UserHome = (props: ChatHomeProps) => {
       return "user not found"
     }
     return "You have " + user.detection + " detection exp with " + user.detectionWins + "/" +
-      user.detectionLosses + "win/loss (" +
+      user.detectionLosses + " win/loss (" +
       (100 * (user.detectionWins / Math.max(user.detectionWins + user.detectionLosses, 1))).toFixed(0) + "%) and " +
-      user.deception + " deception exp with " + user.deceptionWins / user.deceptionLosses + " win/loss (" +
+      user.deception + " deception exp with " + user.deceptionWins + "/" + user.deceptionLosses + " win/loss (" +
       (100 * (user!.deceptionWins / Math.max(user!.deceptionWins +
         user!.deceptionLosses, 1))).toFixed(0) + "%)."
   }

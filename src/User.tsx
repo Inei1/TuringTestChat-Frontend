@@ -1,50 +1,49 @@
-
-import { Circle } from '@mui/icons-material';
-import { Box, Button, Menu, MenuItem, Typography } from '@mui/material';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Box, Button, Tooltip, Typography } from '@mui/material';
+import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { LoginContext } from './App';
 
 export const User = () => {
 
-  const navigate = useNavigate();
-
-  const [userAnchorEl, setUserAnchorEl] = useState<null | HTMLElement>(null);
-  const [profileImage, setProfileImage] = useState("TTCHumanv2.png");
-  const [credits] = useState(0);
-  const userDropDownOpen = Boolean(userAnchorEl);
+  const { user, setUser } = useContext(LoginContext);
 
   const logout = () => {
-    setProfileImage(profileImage);
-    navigate("/");
+    setUser(null);
   }
 
   return (
     <>
-      <Typography sx={{ fontSize: 20 }}>{credits} Credits Remaining</Typography>
-      <Button
-        sx={{ mx: 1 }}
-        variant="text"
-        color="primary"
-        onClick={(event: React.MouseEvent<HTMLButtonElement>) => setUserAnchorEl(event.currentTarget)}>
-        <Box component="img" alt="Profile Picture" src={profileImage} sx={{ maxWidth: 64 }} />
-      </Button>
-      <Menu
-        sx={{ list: { color: "secondary" } }}
-        MenuListProps={{ color: "secondary" }}
-        open={userDropDownOpen}
-        anchorEl={userAnchorEl}
-        onClose={() => setUserAnchorEl(null)}
-        color="primary">
-        {/* <MenuItem color="info">
-          <Link to="/home/settings" state={{ profileImage: profileImage }}
-            style={{ color: "#1D1D1D", fontFamily: "monospace", fontSize: 18, textDecoration: "none" }}>Settings</Link>
-        </MenuItem> */}
-        <MenuItem
-          style={{ color: "#1D1D1D", fontFamily: "monospace", fontSize: 18, textDecoration: "none" }}
-          onClick={() => logout()}>Logout</MenuItem>
-      </Menu>
-      <Typography sx={{ fontSize: 20 }}>0</Typography>
-      <Circle sx={{ color: "#000000", maxWidth: 16 }} />
+      {user && <>
+        <Tooltip title={`${user.dailyCredits} daily credits remaining`}>
+          <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", mr: 2 }}>
+            <Typography sx={{ fontSize: 20 }}>{user.dailyCredits}</Typography>
+            <Box component="img" alt="Turing Test Chat logo" src="TTCLogov2.png" height={16} />
+          </Box>
+        </Tooltip><Tooltip title={`${user.permanentCredits} permanent credits remaining`}>
+          <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", mr: 2 }}>
+            <Typography sx={{ fontSize: 20 }}>{user.permanentCredits}</Typography>
+            <Box component="img" alt="Turing Test Chat logo" src="TTCLogov2.png" height={16} />
+          </Box>
+        </Tooltip>
+      </>}
+      <Link style={{
+        color: "#1D1D1D",
+        fontFamily: "monospace",
+        fontSize: 18,
+        textDecoration: "none",
+        marginRight: "2em"
+      }}
+        to={"/earncredits"}><Button color="error" variant="contained">Earn more credits</Button>
+      </Link>
+      <Link style={{
+        color: "#1D1D1D",
+        fontFamily: "monospace",
+        fontSize: 18,
+        textDecoration: "none"
+      }}
+        to={"/"}
+        onClick={logout}><Button color="info" variant="contained">Logout</Button>
+      </Link>
     </>
   );
 };
