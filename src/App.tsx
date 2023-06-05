@@ -20,7 +20,7 @@ import { Helmet } from 'react-helmet-async';
 import { Footer } from './homepage/Footer';
 import { Blog5 } from './blog/Blog5';
 import { Blog6 } from './blog/Blog6';
-import { BetaFaq } from './homepage/BetaFaq';
+import { Faq } from './homepage/Faq';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -105,9 +105,9 @@ function App() {
         <Tos />
     },
     {
-      path: "/betafaq",
+      path: "/faq",
       element:
-        <BetaFaq />
+        <Faq />
     },
     {
       path: "/blog",
