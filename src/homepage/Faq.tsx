@@ -31,7 +31,7 @@ export const Faq = () => {
 
             <Typography variant="h5" sx={{ my: 1 }}>Who is developing Turing Test Chat?</Typography>
             <Typography sx={{ my: 1 }}>Hi there!
-              I'm a solo developer with a few years of experience at Google and Amazon.
+              I'm Neil, a solo developer with a few years of experience at Google and Amazon.
             </Typography>
 
             <Typography variant="h5" sx={{ my: 1 }}>How can I support Turing Test Chat?</Typography>

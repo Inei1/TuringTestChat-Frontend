@@ -25,6 +25,13 @@ export const Blog = () => {
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
+            blogNumber={7}
+            blogTitle="Turing Test Chat Developer Update #4"
+            blogDate="June 6, 2023"
+            blogSubtitle="Results from the beta test." />
+          <BlogEntry
+            imageAlt="Turing Test Chat logo"
+            imageSrc="TTCLogov2.png"
             blogNumber={6}
             blogTitle="Turing Test Chat Developer Update #3"
             blogDate="May 22, 2023"
