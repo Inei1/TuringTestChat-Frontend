@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, Grid, Tab, Tabs, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, Grid, Tab, Tabs, TextField, Typography, Link as MuiLink } from "@mui/material";
 import { useContext, useState } from "react";
 import { Constants } from "../Constants";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
-  const {user, setUser} = useContext(LoginContext);
+  const { user, setUser } = useContext(LoginContext);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -214,6 +214,14 @@ export const Login = () => {
             })()}
             {accountMessage.length > 0 && tabIndex === 1 && <Typography>{accountMessage}</Typography>}
             {loginFailedMessage.length > 0 && tabIndex === 0 && <Typography>{loginFailedMessage}</Typography>}
+            <Grid container sx={{ mt: -4 }} spacing={6}>
+              <Grid item>
+                <MuiLink target="_blank" rel="noreferrer" href="/tos" color="#e9e9e9" fontFamily="monospace" fontSize={18}>Terms of Service</MuiLink>
+              </Grid>
+              <Grid item>
+                <MuiLink target="_blank" rel="noreferrer" href="/privacypolicy" color="#e9e9e9" fontFamily="monospace" fontSize={18}>Privacy Policy</MuiLink>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
       </Box>
