@@ -43,7 +43,6 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
     props.socket.on("foundChat", (data) => {
       setChatFound(true);
       setChatWaitingEnd(data.endTime);
-      console.log(user?.playFoundSound)
       if (user?.playFoundSound) {
         const sound = new Audio("TTCNotification.mp3");
         sound.volume = 0.1;
@@ -104,7 +103,6 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   }
 
   const toggleNotificationSound = async () => {
-    console.log("toggle");
     const result = await fetch(Constants.BASE_URL + "settings/notifications/waiting", {
       method: "POST",
       credentials: "include",

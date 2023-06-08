@@ -22,7 +22,7 @@ export const UserHome = (props: ChatHomeProps) => {
 
   const enterChat = (e: any) => {
     props.socket.connect();
-    props.socket.emit("startRoom");
+    props.socket.emit("startRoom", { username: user?.username });
     navigate('/chatwaiting');
   };
 
