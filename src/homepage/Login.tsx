@@ -12,7 +12,7 @@ export const Login = () => {
 
   const { user, setUser } = useContext(LoginContext);
 
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [loginFailedMessage, setLoginFailedMessage] = useState("");
   const [accountMessage, setAccountMessage] = useState("");
@@ -24,7 +24,8 @@ export const Login = () => {
       const result = await fetch(Constants.BASE_URL + "login/password", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: name, password: password }),
+        credentials: "include",
+        body: JSON.stringify({ username: username, password: password }),
       });
       if (result.ok) {
         const resultJson = await result.json();
@@ -61,18 +62,18 @@ export const Login = () => {
       setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
-    if (name.length === 0) {
+    if (username.length === 0) {
       setAccountMessage("Username must not be empty");
       setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
-    if (name.length < 6) {
+    if (username.length < 6) {
       setAccountMessage("Username must be at least 6 characters long");
       setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
-    if (name.match("[<>&'\"/]+")) {
-      setAccountMessage("Name cannot contain < > & ' \" or /");
+    if (username.match("[<>&'\"/]+")) {
+      setAccountMessage("Username cannot contain < > & ' \" or /");
       setTimeout(() => setAccountMessage(""), 5000);
       return false;
     }
@@ -101,7 +102,7 @@ export const Login = () => {
         const result = await fetch(Constants.BASE_URL + "account/register", {
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: name, email: email, password: password }),
+          body: JSON.stringify({ username: username, email: email, password: password }),
         }).then(res => res.json());
         setAccountMessage(result.message);
       } catch (err) {
@@ -150,11 +151,11 @@ export const Login = () => {
                     <FormControl margin="none" fullWidth>
                       <TextField
                         sx={{ mt: 2, input: { color: "#e9e9e9" } }}
-                        placeholder="Name or email"
-                        label="Name or email"
+                        placeholder="Username or email"
+                        label="Username or email"
                         variant="filled"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)} />
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)} />
                       <TextField
                         sx={{ mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
                         placeholder="Password"
@@ -186,11 +187,11 @@ export const Login = () => {
                         onChange={(e) => setEmail(e.target.value)} />
                       <TextField
                         sx={{ mt: 2, input: { color: "#e9e9e9" } }}
-                        placeholder="Name"
-                        label="Name"
+                        placeholder="Username"
+                        label="Username"
                         variant="filled"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)} />
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)} />
                       <TextField
                         sx={{ mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
                         placeholder="Password"

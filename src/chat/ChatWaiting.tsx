@@ -1,17 +1,22 @@
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { useNavigate } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { Box, Button, Container, FormControlLabel, FormGroup, Grid, Switch, Typography } from '@mui/material';
 import { Footer } from '../homepage/Footer';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Timer } from './Timer';
 import { Helmet } from 'react-helmet-async';
+import { LoginContext } from '../App';
+import { Constants } from '../Constants';
+import { StatusCodes } from "http-status-codes";
 
 export interface ChatWaitingProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
 export const ChatWaiting = (props: ChatWaitingProps) => {
+
+  const { user, setUser } = useContext(LoginContext);
   const navigate = useNavigate();
 
   const [chatFound, setChatFound] = useState(false);
@@ -19,7 +24,7 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   const [chatAccepted, setChatAccepted] = useState(false);
   const [chatExpired, setChatExpired] = useState(false);
   const [selfDisconnect, setSelfDisconnect] = useState(false);
-  const [user, setUser] = useState("");
+  const [toggleError, setToggleError] = useState(false);
 
   const onPopState = useCallback((e: PopStateEvent) => {
     window.removeEventListener("popstate", onPopState);
@@ -38,7 +43,12 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
     props.socket.on("foundChat", (data) => {
       setChatFound(true);
       setChatWaitingEnd(data.endTime);
-      setUser(data.name);
+      console.log(user?.playFoundSound)
+      if (user?.playFoundSound) {
+        const sound = new Audio("TTCNotification.mp3");
+        sound.volume = 0.1;
+        sound.play();
+      }
     });
   }, [props.socket]);
 
@@ -84,13 +94,28 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
 
   const ready = () => {
     setChatAccepted(true);
-    props.socket.emit("readyChat", { user: user });
+    props.socket.emit("readyChat", { user: user?.username });
   }
 
   const returnHome = () => {
     props.socket.disconnect();
     window.removeEventListener("popstate", onPopState);
     navigate("/home");
+  }
+
+  const toggleNotificationSound = async () => {
+    console.log("toggle");
+    const result = await fetch(Constants.BASE_URL + "settings/notifications/waiting", {
+      method: "POST",
+      credentials: "include",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ playFoundSound: !user?.playFoundSound, username: user?.username }),
+    });
+    if (result.status === StatusCodes.OK) {
+      setUser({ ...user!, playFoundSound: !user?.playFoundSound });
+    } else {
+      setToggleError(true);
+    }
   }
 
   return (
@@ -129,6 +154,10 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
               sx={{ width: "100%", height: 75, fontSize: 30 }}>Return to home</Button>}
             {!chatFound && !selfDisconnect && <Button variant="contained" onClick={returnHome}
               sx={{ width: "100%", height: 75, fontSize: 30 }}>Cancel</Button>}
+            <FormGroup sx={{ mt: 2 }}>
+              <FormControlLabel control={<Switch color="primary" onClick={toggleNotificationSound} checked={user?.playFoundSound} />} label="Play notification sound when chat found"></FormControlLabel>
+            </FormGroup>
+            {toggleError && <Typography>An unknown error occurred when toggling notification sounds</Typography>}
           </Grid>
         </Container>
       </Box>

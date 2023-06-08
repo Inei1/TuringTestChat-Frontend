@@ -10,7 +10,7 @@ export interface Message {
 }
 
 export interface User {
-  name: string;
+  username: string;
   dailyCredits: number;
   permanentCredits: number;
   detection: number;
@@ -19,4 +19,5 @@ export interface User {
   detectionLosses: number;
   deceptionWins: number;
   deceptionLosses: number;
+  playFoundSound: boolean;
 }
