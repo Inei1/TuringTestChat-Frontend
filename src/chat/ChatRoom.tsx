@@ -108,7 +108,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
         goal={goal}
         otherLeft={otherLeft}
         user={user} />}
-      {selfDisconnect &&
+      {selfDisconnect && !resultOver &&
         <Grid container justifyContent={"center"} direction="column">
           <Typography variant="h4">Lost connection to chat</Typography>
           <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3, height: 75, fontSize: 30 }}>Return to home</Button>
