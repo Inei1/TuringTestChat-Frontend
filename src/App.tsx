@@ -25,6 +25,7 @@ import { NotFoundPage } from './homepage/NotFoundPage';
 import { ErrorBoundaryComponent } from './homepage/ErrorBoundaryComponent';
 import { Login } from './homepage/Login';
 import { EarnCredits } from './homepage/EarnCredits';
+import { LoginRequest } from './homepage/LoginRequest';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -84,18 +85,17 @@ function App() {
         {
           path: "/home",
           element:
-            <UserHome socket={socket} />
+            user ? <UserHome socket={socket} /> : <LoginRequest />
         },
         {
           path: "/chatwaiting",
           element:
-            <ChatWaiting socket={socket} />
+            user ? <ChatWaiting socket={socket} /> : <LoginRequest />
         },
         {
           path: "/chat",
           element:
-            <ChatRoom
-              socket={socket} />
+            user ? <ChatRoom socket={socket} /> : <LoginRequest />
         },
         {
           path: "/privacypolicy",

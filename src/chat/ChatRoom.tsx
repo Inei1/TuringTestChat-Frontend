@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ChatHeader } from './ChatHeader';
 import { Helmet } from 'react-helmet-async';
 import { LeaveChatDialog } from './LeaveChatDialog';
+import { LoginRequest } from '../homepage/LoginRequest';
 
 export interface ChatRoomProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -66,7 +67,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
   }, [props.socket]);
 
   return (
-    <Box sx={{
+    user ? <Box sx={{
       minHeight: "100vh",
       backgroundColor: "secondary.main",
       background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
@@ -113,6 +114,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
           <Typography variant="h4">Lost connection to chat</Typography>
           <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3, height: 75, fontSize: 30 }}>Return to home</Button>
         </Grid>}
-    </Box>
+    </Box> :
+      <LoginRequest />
   );
 };

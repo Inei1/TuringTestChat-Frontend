@@ -19,12 +19,13 @@ export const EarnCredits = () => {
           bgcolor: 'inherit',
           mt: 1,
         }}>
-          <Typography variant="h1" sx={{ my: 2, fontSize: 50 }}>Earn more credits</Typography>
+          <Typography variant="h1" sx={{ my: 2, fontSize: 50 }}>Get more credits</Typography>
           <Typography sx={{ my: 1 }}>To earn more credits, you can do the following:</Typography>
           <List>
             <ListItem><Typography>1. Turn off your adblock if it's on.
               This will give you permanent credits passively, just by using Turing Test Chat.</Typography></ListItem>
-              <ListItem><Typography>2. Pay for access. Cheaper options will give you a limited but greater quantity of credits.</Typography></ListItem>
+            <ListItem><Typography>2. Pay for access. Cheaper options will give you a limited but greater quantity of credits.</Typography></ListItem>
+            <ListItem><Typography>3. Wait for the next day. Your daily credits will automatically reset once per day at midnight UTC.</Typography></ListItem>
           </List>
         </Container>
       </Box>

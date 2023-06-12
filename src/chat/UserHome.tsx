@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from 'react';
 import { User } from '../types';
 import { Constants } from '../Constants';
 import { LoginContext } from '../App';
+import { LoginRequest } from '../homepage/LoginRequest';
 
 export interface ChatHomeProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -39,7 +40,7 @@ export const UserHome = (props: ChatHomeProps) => {
   }
 
   return (
-    <>
+    user ? <>
       <Box sx={{
         minHeight: "100vh",
         backgroundColor: "secondary.main",
@@ -72,6 +73,7 @@ export const UserHome = (props: ChatHomeProps) => {
         </Container>
       </Box>
       <Footer />
-    </>
+    </> :
+    <LoginRequest />
   );
 };
