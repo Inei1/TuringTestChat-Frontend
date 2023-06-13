@@ -14,9 +14,9 @@ export const User = () => {
   return (
     <>
       {user && <>
-        <Tooltip title={`${user.dailyCredits} daily credits remaining`}>
+        <Tooltip title={`${user.currentDailyCredits} daily credits remaining`}>
           <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", mr: 2 }}>
-            <Typography sx={{ fontSize: 20, mr: 0.5 }}>{user.dailyCredits}</Typography>
+            <Typography sx={{ fontSize: 20, mr: 0.5 }}>{user.currentDailyCredits}</Typography>
             <Box component="img" alt="Turing Test Chat logo" src="TTCDailyCredits.png" height={24} />
           </Box>
         </Tooltip><Tooltip title={`${user.permanentCredits} permanent credits remaining`}>

@@ -11,7 +11,7 @@ export interface Message {
 
 export interface User {
   username: string;
-  dailyCredits: number;
+  currentDailyCredits: number;
   permanentCredits: number;
   detection: number;
   deception: number;

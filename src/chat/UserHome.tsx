@@ -5,11 +5,10 @@ import { Header } from '../Header';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { Footer } from '../homepage/Footer';
 import { Helmet } from 'react-helmet-async';
-import { useContext, useEffect, useState } from 'react';
-import { User } from '../types';
-import { Constants } from '../Constants';
+import { useContext, useEffect } from 'react';
 import { LoginContext } from '../App';
 import { LoginRequest } from '../homepage/LoginRequest';
+import { Constants } from '../Constants';
 
 export interface ChatHomeProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -38,6 +37,18 @@ export const UserHome = (props: ChatHomeProps) => {
       (100 * (user!.deceptionWins / Math.max(user!.deceptionWins +
         user!.deceptionLosses, 1))).toFixed(0) + "%)."
   }
+
+  useEffect(() => {
+    const getUser = async (username: string) => {
+      const result = await fetch(Constants.BASE_URL + `account/${username}`, {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' },
+        credentials: "include",
+      });
+      setUser(await result.json());
+    }
+    getUser(user?.username!).catch(console.error);
+  }, []);
 
   return (
     user ? <>

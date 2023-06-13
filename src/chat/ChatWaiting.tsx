@@ -43,6 +43,12 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
     props.socket.on("foundChat", (data) => {
       setChatFound(true);
       setChatWaitingEnd(data.endTime);
+      if (user?.currentDailyCredits! > 0) {
+        setUser({...user!, currentDailyCredits: user?.currentDailyCredits! - 1});
+      } else if (user?.permanentCredits! > 0) {
+        setUser({...user!, permanentCredits: user?.permanentCredits! - 1});
+      }
+      
       if (user?.playFoundSound) {
         const sound = new Audio("TTCNotification.mp3");
         sound.volume = 0.1;
