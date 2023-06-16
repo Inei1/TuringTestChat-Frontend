@@ -8,7 +8,7 @@ export const Explanations = () => {
       sx={{ display: 'flex', overflow: 'hidden' }}
     >
       <Container sx={{ mt: 5, mb: 5, }}>
-        <Typography variant="h2" sx={{ my: 2, fontSize: 25 }}>How do I take the Turing test and what are my results?</Typography>
+        <Typography variant="h2" sx={{ my: 2, fontSize: 25 }}>Can I take the Turing Test online?</Typography>
         <Typography sx={{ fontSize: 18, my: 2 }}>To take an online Turing Test with ChatGPT, simply go to the website when it releases and interact with the AI.
           The results will be based on whether or not the AI can convince you it is human.
           <b>If it successfully convinces you, it has passed the Turing Test.</b></Typography>
