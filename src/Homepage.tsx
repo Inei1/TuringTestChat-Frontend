@@ -5,6 +5,7 @@ import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
 import { Subscribe } from "./homepage/Subscribe";
 import { Helmet } from "react-helmet-async";
+import { Explanations } from "./homepage/Explanations";
 
 export const Homepage = () => {
 
@@ -23,13 +24,10 @@ export const Homepage = () => {
       }}>
         <Header />
         <Landing />
-
-        {/* <Demo /> */}
-        {/* <DragAndDrop /> */}
-        {/* <Documentation /> */}
         {/* <Blog /> */}
         <Subscribe />
         <Features />
+        <Explanations />
       </Box>
       <Footer />
       <Box>

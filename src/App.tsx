@@ -22,6 +22,7 @@ import { Blog5 } from './blog/Blog5';
 import { Blog6 } from './blog/Blog6';
 import { Faq } from './homepage/Faq';
 import { Blog7 } from './blog/Blog7';
+import { Blog8 } from './blog/Blog8';
 
 ReactGA.initialize("G-J8W08XRDN6");
 
@@ -149,6 +150,11 @@ function App() {
       path: "/blog/7",
       element:
         <Blog7 />
+    },
+    {
+      path: "/blog/8",
+      element:
+        <Blog8 />
     },
     {
       path: "/VGhpcyBpcyB0aGUgYmVnaW5uaW5nIG9mIHRoZSByb2JvdCByZXZvbHV0aW9u",

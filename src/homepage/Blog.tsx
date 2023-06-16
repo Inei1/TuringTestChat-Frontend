@@ -22,6 +22,13 @@ export const Blog = () => {
         <Header />
         <Container component="section">
           <Typography variant="h1" sx={{ fontSize: 40, my: 5 }}>Turing Test Chat Blog</Typography>
+          {/* <BlogEntry
+            imageAlt="Turing Test Chat logo"
+            imageSrc="TTCLogov2.png"
+            blogNumber={8}
+            blogTitle="What is the Turing Test?"
+            blogDate="June 6, 2023"
+            blogSubtitle="Turing Test explained." /> */}
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
