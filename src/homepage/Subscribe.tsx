@@ -81,7 +81,7 @@ export const Subscribe = () => {
               By joining, you will receive updates until the release date.
               However, if you wish to opt-out at any time, you can do so with two clicks.
               This is a great opportunity to stay updated with the latest news and be rewarded for your interest in the upcoming launch.
-              <b>Don't miss out on this chance and sign up today!</b>
+              {} <b>Don't miss out on this chance and sign up today!</b>
             </Typography>
             {waitlistMessage.length > 0 && <Typography>{waitlistMessage}</Typography>}
           </Box>

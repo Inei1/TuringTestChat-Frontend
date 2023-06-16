@@ -152,7 +152,7 @@ function App() {
         <Blog7 />
     },
     {
-      path: "/blog/8",
+      path: "/blog/what-is-the-turing-test",
       element:
         <Blog8 />
     },

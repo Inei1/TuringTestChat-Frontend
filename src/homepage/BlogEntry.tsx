@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export interface BlogEntryProps {
   imageAlt: string;
   imageSrc: string;
-  blogNumber: number;
+  blogUrl: string;
   blogTitle: string;
   blogDate: string;
   blogSubtitle: string;
@@ -20,7 +20,7 @@ export const BlogEntry = (props: BlogEntryProps) => {
           {window.innerWidth > window.innerHeight && <Box component="img" alt={props.imageAlt} src={props.imageSrc} sx={{ maxWidth: 128 }} />}
         </Grid>
         <Grid item xs={10}>
-          <Link to={"/blog/" + props.blogNumber}>
+          <Link to={"/blog/" + props.blogUrl}>
             <MuiLink fontFamily="monospace" color="#e9e9e9" sx={{ fontSize: 30, }}>
               {props.blogTitle}
             </MuiLink>
