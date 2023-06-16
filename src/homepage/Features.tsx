@@ -11,10 +11,10 @@ export const Features = () => {
         <Grid container spacing={5}>
           <Grid item xs={12} md={4}>
             <Box sx={{}}>
-              <Typography variant="h2" sx={{ my: 2, fontSize: 25 }}>Online Turing Test</Typography>
+              <Typography variant="h2" sx={{ my: 2, fontSize: 25 }}>Online <Link target="_blank" rel="noreferrer" href="https://en.wikipedia.org/wiki/Social_deduction_game" color="#e9e9e9" fontFamily="monospace">Turing Test</Link></Typography>
               <Typography sx={{ fontSize: 18 }}>Upon entering the chatroom on the website,
-              you will be matched with either a human or ChatGPT.
-              Your objective is to perform the Turing Test by accurately discerning which of the two you are communicating with.
+              you will be matched with either a human or <Link target="_blank" rel="noreferrer" href="https://chat.openai.com/" color="#e9e9e9" fontFamily="monospace">ChatGPT</Link>.
+              Your objective is to perform the Turing Test by <b>accurately discerning which of the two you are communicating with.</b>
               The Turing Test is a widely recognized measure of a machine's ability to exhibit intelligent behavior that is equivalent to, or indistinguishable from, that of a human.
               This thought experiment evaluates an AI's capacity to perceive, reason, and respond like a human.
               Do you believe you possess the skills necessary to distinguish between human and AI in this chatroom?</Typography>
@@ -22,8 +22,8 @@ export const Features = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <Box sx={{}}>
-              <Typography variant="h2" sx={{ my: 2, fontSize: 25 }}>A ChatGPT Turing Test Game of Deception</Typography>
-              <Typography sx={{ fontSize: 18 }}>This exciting game allows you to use your abilities in deception and detection by attempting to outwit your adversary.
+              <Typography variant="h2" sx={{ my: 2, fontSize: 25 }}>A ChatGPT Turing Test <Link target="_blank" rel="noreferrer" href="https://en.wikipedia.org/wiki/Social_deduction_game" color="#e9e9e9" fontFamily="monospace">Game of Deception</Link></Typography>
+              <Typography sx={{ fontSize: 18 }}>This exciting game allows you to <b>use your abilities in deception and detection</b> by attempting to outwit your adversary.
               You will be randomly assigned one of two tasks - either to convince the other chatter that you are a bot or a human.
               However, keep in mind that your opponent is also trying to do the same thing!
               This game is not only entertaining but also helps hone your critical thinking and communication skills.

@@ -77,11 +77,11 @@ export const Subscribe = () => {
               Join waitlist
             </Button>
             <Typography>
-            Turing Test Chat is offering bonus rewards to those who sign up now for its full release.
-            By joining, you will receive updates until the release date.
-            However, if you wish to opt-out at any time, you can do so with two clicks.
-            This is a great opportunity to stay updated with the latest news and be rewarded for your interest in the upcoming launch.
-            Don't miss out on this chance and sign up today!
+              <b>Turing Test Chat</b> is offering bonus rewards to those who sign up now for its full release.
+              By joining, you will receive updates until the release date.
+              However, if you wish to opt-out at any time, you can do so with two clicks.
+              This is a great opportunity to stay updated with the latest news and be rewarded for your interest in the upcoming launch.
+              <b>Don't miss out on this chance and sign up today!</b>
             </Typography>
             {waitlistMessage.length > 0 && <Typography>{waitlistMessage}</Typography>}
           </Box>
