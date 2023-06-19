@@ -5,6 +5,7 @@ import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
 import { Subscribe } from "./homepage/Subscribe";
 import { Explanations } from "./homepage/Explanations";
+import Head from "next/head";
 
 export const Homepage = () => {
 
@@ -18,6 +19,9 @@ export const Homepage = () => {
         backgroundPositionY: 60,
         maxWidth: "100vw",
       }}>
+        <Head>
+          <title>Turing Test Chat | Online Turing Test with ChatGPT</title>
+        </Head>
         <Header />
         <Landing />
         <Subscribe />
