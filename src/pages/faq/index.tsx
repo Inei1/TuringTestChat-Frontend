@@ -1,9 +1,9 @@
-import { Box, Container, Typography } from "@mui/material"
-import { Header } from "../Header"
-import { Footer } from "./Footer"
-import Head from "next/head"
+import { Box, Container, Typography } from "@mui/material";
+import { Header } from "../../Header";
+import { Footer } from "../../homepage/Footer";
+import Head from "next/head";
 
-export const Faq = () => {
+const Faq = () => {
   return (
     <>
       <Box sx={{ maxWidth: "100vw", minHeight: "100vh", background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)", }}>
@@ -48,3 +48,5 @@ export const Faq = () => {
     </>
   )
 }
+
+export default Faq;

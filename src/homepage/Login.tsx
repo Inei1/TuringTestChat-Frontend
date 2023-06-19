@@ -1,15 +1,9 @@
 import { Box, Button, FormControl, Tab, Tabs, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-// import CloseIcon from '@mui/icons-material/Close';
-import { setAccesstoken } from "../setAccesstoken";
 import { Constants } from "../Constants";
-import { useNavigate } from "react-router-dom";
 import { Footer } from "./Footer";
 
 export const Login = () => {
-
-  const navigate = useNavigate();
-
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,12 +16,12 @@ export const Login = () => {
     try {
       const result = await fetch(Constants.BASE_URL + "login/password", {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: name, password: password }),
       }).then(res => res.json());
       if (result.succeeded) {
         localStorage.setItem("user", result.user);
-        navigate("/joinchat");
+        // navigate("/joinchat");
       }
     } catch (err) {
       console.error(err);
@@ -92,7 +86,7 @@ export const Login = () => {
       try {
         const result = await fetch(Constants.BASE_URL + "account/register", {
           method: "POST",
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username: name, email: email, password: password }),
         }).then(res => res.json());
         if (result.succeeded) {

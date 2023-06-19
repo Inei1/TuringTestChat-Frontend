@@ -2,9 +2,20 @@
   "name": "turing-test-chat",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next export",
+    "start": "next start",
+    "test": "next test",
+    "lint": "next lint",
+    "deploy": "npm run build && npm run export && aws s3 sync out/ s3://www.turingtestchat.com && aws cloudfront create-invalidation --distribution-id=E1GEF0PVHD90DD --paths /"
+  },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.0",
+    "@emotion/server": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -14,47 +25,20 @@
     "@types/node": "^16.18.23",
     "@types/react": "^18.0.34",
     "@types/react-dom": "^18.0.11",
+    "eslint-config-next": "^13.4.6",
     "next": "^13.4.6",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-ga4": "^2.1.0",
-    "react-helmet-async": "^1.3.0",
-    "react-router-dom": "^6.10.0",
-    "react-scripts": "5.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "socket.io-client": "^4.6.1",
     "typescript": "^4.9.5",
     "use-interval": "^1.4.0",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "npm run build && aws s3 sync build/ s3://www.turingtestchat.com && aws cloudfront create-invalidation --distribution-id=E1GEF0PVHD90DD --paths /"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "proxy": "http://localhost:8080/",
-  "homepage": "https://www.turingtestchat.com",
   "devDependencies": {
-    "@types/react-syntax-highlighter": "^15.5.6"
+    "@types/react-syntax-highlighter": "^15.5.7",
+    "eslint": "^8.43.0"
   }
 }

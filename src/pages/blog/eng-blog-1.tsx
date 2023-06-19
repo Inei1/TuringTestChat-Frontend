@@ -1,16 +1,17 @@
 import { Box, Container, Typography } from "@mui/material";
-import { Header } from "../Header";
-import { Footer } from "../homepage/Footer";
-import { dark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Header } from "../../Header";
+import { Footer } from "../../homepage/Footer";
+import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { Helmet } from "react-helmet-async";
+import Head from "next/head";
+import { Subscribe } from "@/homepage/Subscribe";
 
-export const Blog1 = () => {
+const EngBlog1 = () => {
   return (
     <>
-      <Helmet>
+      <Head>
         <title>Engineering Blog 1: UI and Authentication | Turing Test Chat</title>
-      </Helmet>
+      </Head>
       <Box sx={{
         backgroundColor: "secondary.main",
         background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
@@ -21,13 +22,13 @@ export const Blog1 = () => {
         minHeight: "100vh",
       }}>
         <Header />
-        <Container component="section">
+        <Container component="section" maxWidth="md">
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Engineering Blog #1</Typography>
           <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Diving into the code behind the early UI and authentication.</Typography>
           <Typography sx={{ fontStyle: "italic", fontWeight: "bold", fontSize: 20 }}>This blog entry focuses on writing the code for Turing Test Chat.
-            If you aren't familiar with coding, it may be difficult to understand.
-            Also, this blog covers the topics mentioned in the developer update, so it's recommended to read that first.</Typography>
-          <Typography sx={{ fontSize: 18, mt: 5 }}>As the first entry, there is a lot to cover, so I'll briefly go over what's already in place.
+            If you aren{"\'"}t familiar with coding, it may be difficult to understand.
+            Also, this blog covers the topics mentioned in the developer update, so it{"\'"}s recommended to read that first.</Typography>
+          <Typography sx={{ fontSize: 18, mt: 5 }}>As the first entry, there is a lot to cover, so I{"\'"}ll briefly go over what{"\'"}s already in place.
             Turing Test Chat is built by one person using a MERN (MongoDB, Express, React, Node) stack and runs on AWS.
             Some AWS services used are EC2 (backend hosting), S3 (frontend static site hosting), SES (waitlist emails), and CodeDeploy (CI/CD).
             The waitlist uses an email validator service to avoid SES sending hard bounced emails.
@@ -37,11 +38,11 @@ export const Blog1 = () => {
             <br />
             Starting with the login, on the backend, passport.js is used for authentication.
             Passport is an authentication framework that makes it easier and safer to code an authentication system.
-            You can use it to authenticate with many different "strategies," or ways to log in.
+            You can use it to authenticate with many different {"\""}strategies,{"\""} or ways to log in.
             For now, the password login strategy is the only one in use, AKA LocalStrategy.
-            The code looks like this:
-            <SyntaxHighlighter language="typescript" style={dark}>
-              {`passport.serializeUser((user, done) => {
+            The code looks like this:</Typography>
+          <SyntaxHighlighter language="typescript" style={dark}>
+            {`passport.serializeUser((user, done) => {
   done(undefined, user);
 });
 
@@ -76,10 +77,12 @@ passport.use(new LocalStrategy({ usernameField: "username", passwordField: "pass
 
 this.app.use(passport.initialize());
 this.app.use(passport.session());`}</SyntaxHighlighter>
-            You must put first three methods listed before the app.use() statements, or it won't work.
-            With these in place, it's very easy to authenticate:
-            <SyntaxHighlighter language="typescript" style={dark}>
-              {`@Post("password")
+          <Typography sx={{ fontSize: 18 }}>
+            You must put first three methods listed before the app.use() statements, or it won{"\'"}t work.
+            With these in place, it{"\'"}s very easy to authenticate:
+          </Typography>
+          <SyntaxHighlighter language="typescript" style={dark}>
+            {`@Post("password")
 @Middleware(passport.authenticate("local"))
 private async loginPassword(req: Request, res: Response) {
   if (req.user) {
@@ -88,23 +91,25 @@ private async loginPassword(req: Request, res: Response) {
     });
   }
 }`}
-            </SyntaxHighlighter>
-            It's simple to call the above code:
-            <SyntaxHighlighter language="typescript" style={dark}>
-              {`const result = await fetch("https://www.turingtestchat.com/login/password", {
+          </SyntaxHighlighter>
+          <Typography sx={{ fontSize: 18 }}>It{"\'"}s simple to call the above code:</Typography>
+          <SyntaxHighlighter language="typescript" style={dark}>
+            {`const result = await fetch("https://www.turingtestchat.com/login/password", {
   method: "POST",
-  headers: { 'Content-Type': 'application/json' },
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ username: name, password: password }),
 });`}
-            </SyntaxHighlighter>
+          </SyntaxHighlighter>
+          <Typography sx={{ fontSize: 18 }}>
             The login page is some standard React with MUI code.
             It uses MUI Tabs and FormControl with TextField inputs.
             These TextFields update email, username, and password inputs, which are then passed to the backend.
             The frontend does some simple validation for the inputs, while the backend does more advanced checks to avoid processing and receiving bad data.
-            It's always important to NEVER put critical validation in the frontend, since it's always possible to access the backend without the frontend.<p />
-            The enter chat room is currently just some simple text and a simple button. The header's changes are a bit more involved.
-            The username is stored in LocalStorage upon logging in and cleared upon logging out, and if it's present the header changes from a login button to a user home button:
-            <SyntaxHighlighter language="javascript" style={dark}>{`{localStorage.getItem("user") === null && <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            It{"\'"}s always important to NEVER put critical validation in the frontend, since it{"\'"}s always possible to access the backend without the frontend.</Typography>
+          <Typography>Enter chat room is currently just some simple text and a simple button. The header{"\'"}s changes are a bit more involved.
+            The username is stored in LocalStorage upon logging in and cleared upon logging out, and if it{"\'"}s present the header changes from a login button to a user home button:
+          </Typography>
+          <SyntaxHighlighter language="javascript" style={dark}>{`{localStorage.getItem("user") === null && <Box sx={{ display: { xs: "none", md: "flex" } }}>
   <Link to="/login">
     <Button
       color="info"
@@ -112,17 +117,20 @@ private async loginPassword(req: Request, res: Response) {
   </Link>
 </Box>}
 {localStorage.getItem("user") && <User />}`}</SyntaxHighlighter>
-            The user component is a custom component which contains the (unimplemented as of now) credit, points, and user settings.
+          <Typography sx={{ fontSize: 18 }}>The user component is a custom component which contains the (unimplemented as of now) credit, points, and user settings.
             Lastly, this blog was coded up and the components for it were created.
-            It's a simple custom made system coded up in an hour, but it's functional.<p />
-            Does the coding of the blog sound interesting?
+            It{"\'"}s a simple custom made system coded up in an hour, but it{"\'"}s functional.</Typography>
+          <Typography>Does the coding of the blog sound interesting?
             Have you ever wanted to play a social deduction game centered around the difference between humans and AI?
             You should sign up for the Turing Test Chat waitlist.
             Progress and engineering updates similar to this one will happen somewhat frequently until Turing Test Chat is released.
           </Typography>
+          <Subscribe />
         </Container>
       </Box>
       <Footer />
     </>
   );
 }
+
+export default EngBlog1;

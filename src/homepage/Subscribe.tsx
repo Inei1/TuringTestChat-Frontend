@@ -1,4 +1,4 @@
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { Button, Container, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { Constants } from "../Constants";
 
@@ -31,7 +31,7 @@ export const Subscribe = () => {
     if (validateEmail(email)) {
       setWaitlistMessage((await fetch(Constants.BASE_URL + "account/waitlist", {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({ email: email, comment: comment })
       }).then(res => res.json())).message);
@@ -39,54 +39,41 @@ export const Subscribe = () => {
   };
 
   return (
-    <Box>
-      <Container component="section">
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            bgcolor: 'inherit',
-            mt: 5
-          }}
-        >
-          <Box sx={{ maxWidth: 800 }}>
-            <Typography variant="h5">
-              Join the waitlist to be notified when Turing Test Chat releases for free.
-            </Typography>
-            <TextField
-              placeholder="Your email"
-              variant="standard"
-              color="info"
-              sx={{ width: '100%', mt: 3, input: { color: "#e9e9e9" } }}
-              onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
-            />
-            <TextField
-              placeholder="Comment (optional)"
-              variant="standard"
-              color="info"
-              sx={{ width: '100%', mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
-              onChange={(e) => setComment(e.target.value)}
-              onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
-            />
-            <Button
-              color="error"
-              variant="contained"
-              sx={{ width: '100%' }}
-              onClick={emailSubscribe}>
-              Join waitlist
-            </Button>
-            <Typography>
-              <b>Turing Test Chat</b> is offering bonus rewards to those who sign up now for its full release.
-              By joining, you will receive updates until the release date.
-              However, if you wish to opt-out at any time, you can do so with two clicks.
-              This is a great opportunity to stay updated with the latest news and be rewarded for your interest in the upcoming launch.
-              {} <b>Don't miss out on this chance and sign up today!</b>
-            </Typography>
-            {waitlistMessage.length > 0 && <Typography>{waitlistMessage}</Typography>}
-          </Box>
-        </Box>
-      </Container>
-    </Box>
+    <Container component="section" maxWidth="md" sx={{ mt: 5 }}>
+      <Typography variant="h5">
+        Join the waitlist to be notified when Turing Test Chat releases for free!
+      </Typography>
+      <TextField
+        placeholder="Your email"
+        variant="standard"
+        color="info"
+        sx={{ width: "100%", mt: 3, input: { color: "#e9e9e9" } }}
+        onChange={(e) => setEmail(e.target.value)}
+        onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
+      />
+      <TextField
+        placeholder="Comment (optional)"
+        variant="standard"
+        color="info"
+        sx={{ width: "100%", mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
+        onChange={(e) => setComment(e.target.value)}
+        onKeyDown={(e) => { if (e.key === "Enter") { emailSubscribe() } }}
+      />
+      <Button
+        color="error"
+        variant="contained"
+        sx={{ width: "100%" }}
+        onClick={emailSubscribe}>
+        Join waitlist
+      </Button>
+      {waitlistMessage.length > 0 && <Typography>{waitlistMessage}</Typography>}
+      <Typography sx={{mt: 5}}>
+        <b>Turing Test Chat</b> is offering bonus rewards to those who sign up now for its full release.
+        By joining, you will receive updates until the release date.
+        However, if you wish to opt-out at any time, you can do so with two clicks.
+        This is a great opportunity to stay updated with the latest news and be rewarded for your interest in the upcoming launch.
+        { } <b>Don{"\'"}t miss out on this chance and sign up today!</b>
+      </Typography>
+    </Container>
   );
 }

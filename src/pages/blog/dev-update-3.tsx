@@ -1,15 +1,15 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
-import { Header } from "../Header";
-import { Footer } from "../homepage/Footer";
-import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { Header } from "../../Header";
+import { Footer } from "../../homepage/Footer";
+import Head from "next/head";
+import Link from "next/link";
 
-export const Blog6 = () => {
+const DevUpdate3 = () => {
   return (
     <>
-      <Helmet>
+      <Head>
         <title>Developer Update 3: ChatGPT in chat | Turing Test Chat</title>
-      </Helmet>
+      </Head>
       <Box sx={{
         backgroundColor: "secondary.main",
         background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
@@ -48,7 +48,7 @@ export const Blog6 = () => {
             If you try to leave the chat by pressing the back button, it will show this message:<br />
             <Box component="img" alt="Leave back button" src="../b3Popstate.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
             When you try to refresh or go to another website in the address bar, a message shows up.
-            It's not possible to change the text on this message, but you will receive the same penalty.
+            It{"\'"}s not possible to change the text on this message, but you will receive the same penalty.
             It looks like this: <br />
             <Box component="img" alt="Leave address bar" src="../b3onBeforeUnload.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
             When one user leaves the chat, the other user will get a message that the other chatter has left.
@@ -59,17 +59,12 @@ export const Blog6 = () => {
             There is a chance upon joining a chat that the user will instead join into ChatGPT.
             While this implementation is still very much a work in progress, here is an image of a working prototype: <br />
             <Box component="img" alt="ChatGPT chat" src="../b3ChatGPT.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
-            As you can see, it's not particularly convincing.
+            As you can see, it{"\'"}s not particularly convincing.
             However, this bot will be drastically improved by the time the beta is released.<p/>
             This concludes the third developer update for Turing Test Chat.
-            If this sounds interesting, you should sign up for the { }
-            <Link to="/waitlist" color="info"
-              style={{
-                color: "#e9e9e9",
-                fontFamily: "monospace",
-              }}>waitlist</Link>.
-            If you're interested in the coding behind this developer update (which contains more details on the ChatGPT implementation), you can check out the { }
-            <Link to="/blog/5" color="info"
+            If this sounds interesting, you should sign up for the waitlist.
+            If you{"\'"}re interested in the coding behind this developer update (which contains more details on the ChatGPT implementation), you can check out the { }
+            <Link href="/blog/eng-blog-3"
               style={{
                 color: "#e9e9e9",
                 fontFamily: "monospace",
@@ -81,3 +76,5 @@ export const Blog6 = () => {
     </>
   );
 }
+
+export default DevUpdate3;
