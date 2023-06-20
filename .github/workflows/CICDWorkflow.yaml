@@ -37,6 +37,6 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             cd /home/ubuntu/ttc-frontend
-            git checkout .
+            git checkout main
             git pull
             npm run build
