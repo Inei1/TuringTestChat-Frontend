@@ -36,6 +36,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
+            sudo rm -rf /home/ubuntu/ttc-frontend
+            mkdir /home/ubuntu/ttc-frontend
             cd /home/ubuntu/ttc-frontend
             git checkout .
             git pull
