@@ -4,6 +4,7 @@ import { EmotionCache } from "@emotion/react";
 import { ThemeProvider, CssBaseline, createTheme, Box } from "@mui/material";
 import { darkTheme } from "@/util/darkTheme";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -13,6 +14,12 @@ const darkThemeProvider = createTheme(darkTheme);
 
 const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   const { Component, pageProps } = props;
+
+  const router = useRouter();
+  const path = (/#!(\/.*)$/.exec(router.asPath) || [])[1];
+  if (path) {
+    router.replace(path);
+  }
 
   return (
     <>
