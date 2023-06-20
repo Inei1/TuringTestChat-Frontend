@@ -15,12 +15,6 @@ const darkThemeProvider = createTheme(darkTheme);
 const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   const { Component, pageProps } = props;
 
-  const router = useRouter();
-  const path = (/#!(\/.*)$/.exec(router.asPath) || [])[1];
-  if (path) {
-    router.replace(path);
-  }
-
   return (
     <>
       <Head>

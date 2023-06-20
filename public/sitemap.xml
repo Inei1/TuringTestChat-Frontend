@@ -9,7 +9,73 @@
 
 <url>
   <loc>https://www.turingtestchat.com/</loc>
-  <lastmod>2023-04-23T23:51:46+00:00</lastmod>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/blog</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/subscribe</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/faq</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/tos</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/privacypolicy</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/blog/what-is-the-turing-test</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/blog/dev-update-4</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/blog/dev-update-3</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/blog/eng-blog-3</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/blog/dev-update-2</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/blog/eng-blog-2</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/blog/dev-update-1</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.turingtestchat.com/blog/eng-blog-1</loc>
+  <lastmod>2023-06-20T05:35:57+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 
 

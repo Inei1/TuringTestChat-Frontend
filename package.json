@@ -8,8 +8,7 @@
     "export": "next export",
     "start": "next start",
     "test": "next test",
-    "lint": "next lint",
-    "deploy": "npm run build && npm run export && aws s3 sync out/ s3://www.turingtestchat.com && aws cloudfront create-invalidation --distribution-id=E1GEF0PVHD90DD --paths /"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
