@@ -36,7 +36,7 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             cd /home/ubuntu/TuringTestChat-Frontend
-            git checkout .
-            git pull
+            sudo git checkout .
+            sudo git pull
             sudo npm run build
             pm2 restart ttc-frontend
