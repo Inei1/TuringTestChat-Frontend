@@ -9,6 +9,18 @@ const Blog8 = () => {
     <>
       <Head>
         <title>What is the Turing Test? | Turing Test Chat</title>
+        <meta name="description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+        <meta property="og:title" content="What is the Turing Test? | Turing Test Chat" />
+        <meta property="og:description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://www.turingtestchat.com/TTCLogov2.png" />
+        <meta property="og:url" content="https://www.turingtestchat.com" />
+
+        <meta name="twitter:title" content="What is the Turing Test? | Turing Test Chat" />
+        <meta name="twitter:description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+        <meta name="twitter:image" content="https://www.turingtestchat.com/TTCLogov2.png" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="https://www.turingtestchat.com/" />
       </Head>
       <Box sx={{
         backgroundColor: "secondary.main",

@@ -39,4 +39,3 @@ jobs:
             sudo git checkout .
             sudo git pull
             sudo npm run build
-            pm2 restart ttc-frontend
