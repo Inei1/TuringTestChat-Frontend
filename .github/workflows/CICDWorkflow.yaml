@@ -1,4 +1,3 @@
-# 4
 name: Deploy Next App
 on:
   push:
@@ -17,7 +16,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm i
+      - run: npm ci
       - run: npm run build
 
   deploy:
@@ -36,7 +35,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            cd /home/ubuntu/ttc-frontend
+            cd /home/ubuntu/TuringTestChat-Frontend
             git checkout .
             git pull
             npm run build
+            pm2 restart ttc-frontend
