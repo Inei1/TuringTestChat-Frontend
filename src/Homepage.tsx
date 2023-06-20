@@ -21,6 +21,20 @@ export const Homepage = () => {
       }}>
         <Head>
           <title>Turing Test Chat | Online Turing Test with ChatGPT</title>
+          <meta name="description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+          <meta property="og:title" content="Turing Test Chat | free online Turing Test with ChatGPT" />
+          <meta property="og:description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+          <meta property="og:type" content="website" />
+          <meta property="og:image" content="https://www.turingtestchat.com/TTCLogov2.png" />
+          <meta property="og:url" content="https://www.turingtestchat.com" />
+
+          <meta name="twitter:title" content="Turing Test Chat | free online Turing Test with ChatGPT" />
+          <meta name="twitter:description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+          <meta name="twitter:image" content="https://www.turingtestchat.com/TTCLogov2.png" />
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="https://www.turingtestchat.com/" />
+
+          <link rel="canonical" href="https://www.turingtestchat.com" />
         </Head>
         <Header />
         <Landing />
