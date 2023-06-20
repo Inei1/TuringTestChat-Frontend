@@ -4,6 +4,7 @@ const nextConfig = {
     emotion: true,
     styledComponents: true,
   },
+  reactStrictMode: false,
   async rewrites() {
     return [
       {
