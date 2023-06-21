@@ -38,4 +38,3 @@ jobs:
             cd /home/ubuntu/TuringTestChat-Frontend
             sudo git checkout .
             sudo git pull
-            sudo npm run build
