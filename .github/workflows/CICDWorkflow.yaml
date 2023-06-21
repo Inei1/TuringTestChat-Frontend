@@ -1,4 +1,3 @@
-# test avoid crashing vps
 name: Deploy Next App
 on:
   push:
