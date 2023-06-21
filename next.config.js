@@ -5,7 +5,6 @@ const nextConfig = {
     styledComponents: true,
   },
   reactStrictMode: false,
-  trailingSlash: true,
   // async rewrites() {
   //   return [
   //     {
