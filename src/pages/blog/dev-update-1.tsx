@@ -3,6 +3,7 @@ import { Header } from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
 import { Subscribe } from "@/homepage/Subscribe";
+import Image from "next/image";
 
 const DevUpdate1 = () => {
   return (
@@ -37,14 +38,14 @@ const DevUpdate1 = () => {
           <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Building the UI and authentication systems of Turing Test Chat.</Typography>
           <Typography sx={{ fontSize: 18 }}>In this developer update, I{"\'"}ll cover login/register, UI, and some design decisions.
             The first version of the homepage looks like this (open image in new tab to increase size):</Typography>
-          <Box component="img" alt="Blog 1 homepage" src="../b1homepage.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} />
+          <Image alt="Blog 1 homepage" src="/b1homepage.png" width={850} height={478} />
           <Typography sx={{ fontSize: 18 }}>The chat tab will bring you to a screen I{"\'"}ll show soon.
           The log in/sign up button will bring you to this screen:</Typography>
-          <Box component="img" alt="Blog 1 login" src="../b1login.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} />
+          <Image alt="Blog 1 login" src="/b1login.png" width={850} height={478} />
           <Typography sx={{ fontSize: 18 }}>Both the log in and register tabs are fully functional.
           It{"\'"}s possible to create an account and immediately log in.
           You{"\'"}ll need a valid email, username, and password to create an account. Upon logging in, you{"\'"}ll be taken to the main page:</Typography>
-          <Box component="img" alt="Blog 1 chat" src="../b1chat.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} />
+          <Image alt="Blog 1 chat" src="/b1chat.png" width={850} height={478} />
           <Typography sx={{ fontSize: 18, mt: 2 }}>The main page explains the rules and point system.
           Entering the chat room will put you into a queue where you will be matched with either a human or ChatGPT.
           The header displays account information once logged in.

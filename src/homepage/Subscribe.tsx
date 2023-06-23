@@ -40,7 +40,7 @@ export const Subscribe = () => {
 
   return (
     <Container component="section" maxWidth="md" sx={{ mt: 5 }}>
-      <Typography variant="h5">
+      <Typography variant="h2" fontSize={30}>
         Join the waitlist to be notified when Turing Test Chat releases for free!
       </Typography>
       <TextField

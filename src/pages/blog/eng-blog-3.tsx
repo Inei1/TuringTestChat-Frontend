@@ -4,6 +4,7 @@ import { Footer } from "../../homepage/Footer";
 import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import Head from "next/head";
+import Image from "next/image";
 
 const EngBlog3 = () => {
   return (
@@ -76,7 +77,7 @@ window.addEventListener("popstate", onPopState);`}
             This concept is explained in more detail in this { }
             <Link target="_blank" rel="noreferrer" href="https://dev.to/marcostreng/how-to-really-remove-eventlisteners-in-react-3och" color="#e9e9e9" fontFamily="monospace" fontSize={18}>blog post</Link>. { }
             Pressing the back button will then look like this (browser dependent): <br />
-            <Box component="img" alt="Leave back button" src="../b3Popstate.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
+            <Image alt="Leave back button" src="/b3Popstate.png" width={445} height={149} />
             To deal with #2 and #3, we can use the same listener for both:</Typography>
           <SyntaxHighlighter language="typescript" style={dark}>
             {`const onLeave = useCallback((e: BeforeUnloadEvent) => {
@@ -86,7 +87,7 @@ window.addEventListener("popstate", onPopState);`}
 }, []);`}
           </SyntaxHighlighter>
           <Typography>Which will look like this (also browser dependent):</Typography>
-          <Box component="img" alt="Leave address bar" src="../b3onBeforeUnload.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
+          <Image alt="Leave address bar" src="/b3onBeforeUnload.png" width={446} height={128} />
           <Typography>To implement ChatGPT in the chat room, there are a few steps required.
             First, you need to create an OpenAI account and generate some API keys for the OpenAI api.
             Then, you can use the OpenAI api by creating it:</Typography>
