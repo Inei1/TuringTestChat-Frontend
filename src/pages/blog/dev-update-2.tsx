@@ -35,7 +35,7 @@ const DevUpdate2 = () => {
         <Header />
         <Container component="section" maxWidth="md">
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Developer Update #2</Typography>
-          <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Building the chat application for Turing Test Chat.</Typography>
+          <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Building the chat application for Turing Test Chat.</Typography>
           <Typography sx={{ fontSize: 18, mt: 5 }}>
             In this developer update, the early working prototype of chat room functionality will be covered.
             If you would prefer to view this blog post in video form, here is a short two-minute video:</Typography>

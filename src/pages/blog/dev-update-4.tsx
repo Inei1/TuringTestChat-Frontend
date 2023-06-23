@@ -34,7 +34,7 @@ const DevUpdate4 = () => {
         <Header />
         <Container component="section">
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Developer Update #4</Typography>
-          <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Results from the beta test</Typography>
+          <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Results from the beta test</Typography>
           <Typography sx={{ fontSize: 18, mt: 5 }}>With the beta test started and finished, some useful information was gained from it.
             In this blog post, I{"\'"}ll share some of my findings from it.</Typography>
           <Typography sx={{ fontSize: 22, mt: 2 }}>Joining a chat and the chat room</Typography>

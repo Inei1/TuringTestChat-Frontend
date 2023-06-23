@@ -33,20 +33,20 @@ const Faq = () => {
         }}>
           <Typography variant="h1" sx={{ my: 2, fontSize: 50 }}>FAQ</Typography>
 
-          <Typography variant="h5" sx={{ my: 1 }}>When will the full release of the game come out?</Typography>
+          <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>When will the full release of the game come out?</Typography>
           <Typography sx={{ my: 1 }}>The full release date is unannounced, but you should expect it some time in June or July.</Typography>
 
-          <Typography variant="h5" sx={{ my: 1 }}>How can I give feedback/report an issue?</Typography>
+          <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>How can I give feedback/report an issue?</Typography>
           <Typography sx={{ my: 1 }}>Any and all feedback is greatly appreciated.
             To give feedback or report an issue, you can contact support@turingtestchat.com or post to social media.
           </Typography>
 
-          <Typography variant="h5" sx={{ my: 1 }}>Who is developing Turing Test Chat?</Typography>
+          <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>Who is developing Turing Test Chat?</Typography>
           <Typography sx={{ my: 1 }}>Hi there!
             I{"\'"}m Neil, a solo developer with a few years of experience at Google and Amazon.
           </Typography>
 
-          <Typography variant="h5" sx={{ my: 1 }}>How can I support Turing Test Chat?</Typography>
+          <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>How can I support Turing Test Chat?</Typography>
           <Typography sx={{ my: 1 }}>Share the game on social media!
             You can find social media links in the footer below.
           </Typography>

@@ -34,7 +34,7 @@ const Blog8 = () => {
         <Header />
         <Container component="section" maxWidth="md">
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>The Turing Test: A Test for AI Intelligence</Typography>
-          <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Artificial Intelligence Turing Test</Typography>
+          <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Artificial Intelligence Turing Test</Typography>
           <Typography sx={{ fontSize: 18, mt: 1 }}>
             The <Link target="_blank" rel="noreferrer" color="#e9e9e9" fontFamily="monospace" fontSize={18} href="https://en.wikipedia.org/wiki/Turing_test">Turing Test</Link>, also known as the test of Turing, the imitation game, the AI test, and the AI Turing Test, is a test for artificial intelligence (AI) that was proposed by the British mathematician and computer scientist <Link target="_blank" rel="noreferrer" color="#e9e9e9" fontFamily="monospace" fontSize={18} href="https://en.wikipedia.org/wiki/Alan_Turing">Alan Turing</Link> in the 1950s.
             The test involves a human evaluator conversing with a machine and/or a human participant without knowing which is which.

@@ -35,7 +35,7 @@ const DevUpdate1 = () => {
         <Header />
         <Container component="section" maxWidth="md">
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Developer Update #1</Typography>
-          <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Building the UI and authentication systems of Turing Test Chat.</Typography>
+          <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Building the UI and authentication systems of Turing Test Chat.</Typography>
           <Typography sx={{ fontSize: 18 }}>In this developer update, I{"\'"}ll cover login/register, UI, and some design decisions.
             The first version of the homepage looks like this (open image in new tab to increase size):</Typography>
           <Image alt="Blog 1 homepage" src="/b1homepage.png" width={850} height={478} />

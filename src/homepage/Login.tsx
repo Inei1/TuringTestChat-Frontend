@@ -109,7 +109,7 @@ export const Login = () => {
       <Typography>Logo</Typography>
       <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
         <Box sx={{ minWidth: 350, minHeight: 400 }}>
-          <Typography sx={{ mb: 2 }} align="center" variant="h5" color="inherit">Turing Test Chat</Typography>
+          <Typography sx={{ mb: 2, fontSize: 20 }} align="center" variant="h1" color="inherit">Turing Test Chat</Typography>
           <Tabs
             variant="fullWidth"
             value={tabIndex}

@@ -35,7 +35,7 @@ const DevUpdate3 = () => {
         <Header />
         <Container component="section" maxWidth="md">
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Developer Update #3</Typography>
-          <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Adding ChatGPT to the chat room (and other improvements)</Typography>
+          <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Adding ChatGPT to the chat room (and other improvements)</Typography>
           <Typography sx={{ fontSize: 18, mt: 5 }}>
             The beta release date for Turing Test Chat will be announced in the next developer update.
             Release date for the beta is expected to be some time in June.<p/>

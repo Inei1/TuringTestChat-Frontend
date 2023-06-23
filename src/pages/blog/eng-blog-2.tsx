@@ -35,7 +35,7 @@ const EngBlog2 = () => {
         <Header />
         <Container component="section">
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Engineering Blog #2</Typography>
-          <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Using WebSockets to create a chat application.</Typography>
+          <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Using WebSockets to create a chat application.</Typography>
           <Typography sx={{ fontStyle: "italic", fontWeight: "bold", fontSize: 20 }}>This blog entry focuses on writing the code for Turing Test Chat.
             If you aren{"\'"}t familiar with coding, it may be difficult to understand.
             Also, this blog covers the topics mentioned in the developer update, so it{"\'"}s recommended to read that first.</Typography>

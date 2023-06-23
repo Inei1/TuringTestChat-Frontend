@@ -36,7 +36,7 @@ const EngBlog1 = () => {
         <Header />
         <Container component="section" maxWidth="md">
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Engineering Blog #1</Typography>
-          <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Diving into the code behind the early UI and authentication.</Typography>
+          <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Diving into the code behind the early UI and authentication.</Typography>
           <Typography sx={{ fontStyle: "italic", fontWeight: "bold", fontSize: 20 }}>This blog entry focuses on writing the code for Turing Test Chat.
             If you aren{"\'"}t familiar with coding, it may be difficult to understand.
             Also, this blog covers the topics mentioned in the developer update, so it{"\'"}s recommended to read that first.</Typography>

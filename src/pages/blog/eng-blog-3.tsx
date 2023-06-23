@@ -36,7 +36,7 @@ const EngBlog3 = () => {
         <Header />
         <Container component="section">
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Engineering Blog #3</Typography>
-          <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Building the chat application for Turing Test Chat.</Typography>
+          <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Building the chat application for Turing Test Chat.</Typography>
           <Typography sx={{ fontSize: 18, mt: 5 }}>
             In this engineering blog post, the topics of how to build safeguards into chat and how to add ChatGPT to a chat is covered.
             In Turing Test Chat, users are not supposed to leave a chat in progress.

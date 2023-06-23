@@ -4,7 +4,6 @@ import { EmotionCache } from "@emotion/react";
 import { ThemeProvider, CssBaseline, createTheme, Box } from "@mui/material";
 import { darkTheme } from "@/util/darkTheme";
 import Head from "next/head";
-import { useRouter } from "next/router";
 
 export interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -19,6 +18,7 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
     <>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
       <ThemeProvider theme={darkThemeProvider}>
         <CssBaseline />
