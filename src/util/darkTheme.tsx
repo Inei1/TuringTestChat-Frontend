@@ -22,7 +22,7 @@ export const darkTheme = createTheme({
         fontFamily: "monospace",
         fontSize: 18
       }
-    }
+    },
   },
   typography: {
     fontFamily: "monospace",

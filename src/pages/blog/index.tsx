@@ -37,7 +37,14 @@ const Blog = () => {
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
-            blogUrl={"what-is-the-turing-test"}
+            blogUrl="turing-test-questions"
+            blogTitle="The Turing Test Questions To Ask List"
+            blogDate="June 22, 2023"
+            blogSubtitle="Examples of Turing Test Questions" />
+          <BlogEntry
+            imageAlt="Turing Test Chat logo"
+            imageSrc="TTCLogov2.png"
+            blogUrl="what-is-the-turing-test"
             blogTitle="The Turing Test: A Test for AI Intelligence"
             blogDate="June 16, 2023"
             blogSubtitle="Artificial Intelligence Turing Test" />
