@@ -37,6 +37,13 @@ const Blog = () => {
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
+            blogUrl="turing-test-chat-best-ai-chat"
+            blogTitle="Turing Test Chat: The Best Free AI Chat Game"
+            blogDate="June 22, 2023"
+            blogSubtitle="Free AI Chat App" />
+          <BlogEntry
+            imageAlt="Turing Test Chat logo"
+            imageSrc="TTCLogov2.png"
             blogUrl="turing-test-questions"
             blogTitle="The Turing Test Questions To Ask List"
             blogDate="June 22, 2023"
