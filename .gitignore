@@ -12,6 +12,7 @@
 /build
 out
 .next
+.next.zip
 
 # misc
 .DS_Store

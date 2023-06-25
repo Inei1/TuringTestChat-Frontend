@@ -77,8 +77,7 @@ const Blog10 = () => {
           <Typography>As it is currently in development, Turing Test Chat is not available to play.
             However, you can sign up for the waitlist to be one of the first to play the game.</Typography>
           <Typography variant="h3" sx={{ fontSize: 20, mt: 2 }}>Join the waitlist</Typography>
-          <Typography>To play the game as soon as possible, sign up here:</Typography>
-          <Subscribe />
+          <Typography>To play the game as soon as possible, <Link target="_blank" href="/subscribe" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 18 }}>sign up here</Link> or at the bottom of this page</Typography>
           <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>Advantages of Turing Test Chat</Typography>
           <Typography>There are some unique advantages of trying out this anonymous AI chatting website.</Typography>
           <Typography variant="h3" sx={{ fontSize: 20, mt: 2 }}>Check Out the Current State of Conversational AI and Chatbots</Typography>
