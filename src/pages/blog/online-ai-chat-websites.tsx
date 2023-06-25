@@ -43,18 +43,18 @@ const Blog11 = () => {
             Some of these are chatbot games online, while others are a website to talk to AI.
             All of the websites on this list are AI chat sites where you can talk to an AI robot online.
           </Typography>
-          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>1. <Link href="/">Turing Test Chat</Link></Typography>
+          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>1. <Link href="/" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 22 }}>Turing Test Chat</Link></Typography>
           <Container sx={{ display: "flex", justifyContent: "center" }}>
             <Image src="/TTCLogov2.png" alt="Turing Test Chat logo" width={506} height={512}></Image>
           </Container>
           <Typography>
             Unsurprisingly, I'm going to promote Turing Test Chat as #1 :).
-            Turing Test Chat is a unique upcoming chat website where you essentially perform the <Link href="/what-is-the-turing-test">Turing Test</Link> with ChatGPT.
+            Turing Test Chat is a unique upcoming chat website where you essentially perform the <Link href="/what-is-the-turing-test" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 18 }}>Turing Test</Link> with ChatGPT.
             You will be assigned to chat with another person or with a bot, and then you indicate if you think the other person was a human or a bot.
-            You can learn more about Turing Test Chat <Link href="/blog/turing-test-chat-best-ai-chat">Here</Link>.
-            To sign up for the waitlist, <Link href="/subscribe">click here</Link> or scroll to the bottom of this page.
+            You can learn more about Turing Test Chat <Link href="/blog/turing-test-chat-best-ai-chat" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 18 }}>Here</Link>.
+            To sign up for the waitlist, <Link href="/subscribe" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 18 }}>click here</Link> or scroll to the bottom of this page.
           </Typography>
-          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>2. <MuiLink href="https://chat.openai.com/">ChatGPT</MuiLink></Typography>
+          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>2. <MuiLink href="https://chat.openai.com/" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 22 }}>ChatGPT</MuiLink></Typography>
           <Container sx={{ display: "flex", justifyContent: "center" }}>
             <Image src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT logo" width={500} height={500}></Image>
           </Container>
@@ -65,7 +65,7 @@ const Blog11 = () => {
             You can ask ChatGPT almost anything, and it will usually give good responses.
             Best of all, ChatGPT is a completely free online AI you can talk to.
           </Typography>
-          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>3. <MuiLink href="https://beta.character.ai/">Character AI</MuiLink></Typography>
+          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>3. <MuiLink href="https://beta.character.ai/" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 22 }}>Character AI</MuiLink></Typography>
           <Container sx={{ display: "flex", justifyContent: "center" }}>
             <Image src="https://upload.wikimedia.org/wikipedia/commons/5/55/Character.ai_logo_new.png" alt="Character AI" width={640} height={134}></Image>
           </Container>
@@ -76,7 +76,7 @@ const Blog11 = () => {
             Be warned that Character AI has a moderately strict filter on not-safe-for-work (NSFW) content.
             Character AI is a AI chat free online for anyone who wants to speak to a character from their favorite media.
           </Typography>
-          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>4. <MuiLink href="https://aidungeon.io/">AI Dungeon</MuiLink></Typography>
+          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>4. <MuiLink href="https://aidungeon.io/" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 22 }}>AI Dungeon</MuiLink></Typography>
           <Container sx={{ display: "flex", justifyContent: "center" }}>
             <Image src="https://upload.wikimedia.org/wikipedia/commons/5/52/AI_Dungeon_Logo.png" alt="AI dungeon" width={512} height={512}></Image>
           </Container>
@@ -86,7 +86,7 @@ const Blog11 = () => {
             AI Dungeon can work as your own personal DnD dungeon master (minus the combat).
             The always free tier of AI dungeon offers plenty of entertainment, and the paid tiers will offer you a better experience.
           </Typography>
-          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>5. <MuiLink href="https://novelai.net/">Novel AI</MuiLink></Typography>
+          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>5. <MuiLink href="https://novelai.net/" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 22 }}>Novel AI</MuiLink></Typography>
           <Container sx={{ display: "flex", justifyContent: "center" }}>
             <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/NovelAI_Logo.svg/480px-NovelAI_Logo.svg.png" alt="AI dungeon" width={480} height={480}></Image>
           </Container>
@@ -97,7 +97,7 @@ const Blog11 = () => {
             The biggest downside to Novel AI is that it's not free.
             There is a free trial tier, and other tiers range from $10-$25 per month.
           </Typography>
-          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>6. <MuiLink href="https://chai.ml/dev/">Chai</MuiLink></Typography>
+          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>6. <MuiLink href="https://chai.ml/dev/" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 22 }}>Chai</MuiLink></Typography>
           <Container sx={{ display: "flex", justifyContent: "center" }}>
             <Image src="/ChaiLogo.webp" alt="AI dungeon" width={615} height={300}></Image>
           </Container>
@@ -107,7 +107,7 @@ const Blog11 = () => {
             This makes Chai the best web chat AI for NSFW chatbots.
             Chai is free to use, although there are limits to the number of messages you can send unless you pay.
           </Typography>
-          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>7. Replika</Typography>
+          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>7. <MuiLink href="https://replika.com/" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 22 }}>Replika</MuiLink></Typography>
           <Container sx={{ display: "flex", justifyContent: "center" }}>
             <Image src="/ReplikaLogo.png" alt="AI dungeon" width={600} height={314}></Image>
           </Container>
@@ -118,7 +118,7 @@ const Blog11 = () => {
             In 2023, Replika added a filter to prevent users from using it for romantic or NSFW features.
             Replika is free, with the option to pay for more features.
           </Typography>
-          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>8. Endless Visual Novel</Typography>
+          <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>8. <MuiLink href="https://endlessvn.io/" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 22 }}>Endless Visual Novel</MuiLink></Typography>
           <Typography>
             EndlessVN is another web chat AI which generates a story around you.
             What makes in unique is that it's focused on generating an AI <MuiLink>visual novel</MuiLink>.
