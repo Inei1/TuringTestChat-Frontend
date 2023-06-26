@@ -1,9 +1,10 @@
-import { Box, Container, Typography, Link, Grid } from "@mui/material";
+import { Box, Container, Typography, Link as MuiLink, Grid } from "@mui/material";
+import Link from "next/link";
 
 export interface BlogEntryProps {
   imageAlt: string;
   imageSrc: string;
-  blogNumber: number;
+  blogUrl: string;
   blogTitle: string;
   blogDate: string;
   blogSubtitle: string;
@@ -11,15 +12,12 @@ export interface BlogEntryProps {
 
 export const BlogEntry = (props: BlogEntryProps) => {
   return (
-    <Container component="section" sx={{ my: 5 }}>
+    <Container component="section" sx={{ py: 5 }}>
       <hr />
       <Box sx={{ my: 5 }} />
       <Grid container>
-        <Grid item xs={2}>
-          {window.innerWidth > window.innerHeight && <Box component="img" alt={props.imageAlt} src={props.imageSrc} sx={{ maxWidth: 128 }} />}
-        </Grid>
         <Grid item xs={10}>
-          <Link href={"/blog/" + props.blogNumber} style={{ fontFamily: "monospace", color: "#E9E9E9", fontSize: 30 }}>
+          <Link href={"/blog/" + props.blogUrl} style={{ fontSize: 30, color: "#E9E9E9", fontFamily: "monospace" }}>
             {props.blogTitle}
           </Link>
           <Typography sx={{ my: 2 }}>{props.blogDate}</Typography>

@@ -1,15 +1,28 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
-import { Header } from "../Header";
-import { Footer } from "../homepage/Footer";
-import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import { Header } from "../../Header";
+import { Footer } from "../../homepage/Footer";
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
 
-export const Blog6 = () => {
+const DevUpdate3 = () => {
   return (
     <>
-      <Helmet>
+      <Head>
         <title>Developer Update 3: ChatGPT in chat | Turing Test Chat</title>
-      </Helmet>
+        <meta name="description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+        <meta property="og:title" content="Developer Update 3: ChatGPT in chat | Turing Test Chat" />
+        <meta property="og:description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://www.turingtestchat.com/TTCLogov2.png" />
+        <meta property="og:url" content="https://www.turingtestchat.com" />
+
+        <meta name="twitter:title" content="Developer Update 3: ChatGPT in chat | Turing Test Chat" />
+        <meta name="twitter:description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+        <meta name="twitter:image" content="https://www.turingtestchat.com/TTCLogov2.png" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="https://www.turingtestchat.com/" />
+      </Head>
       <Box sx={{
         backgroundColor: "secondary.main",
         background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
@@ -20,9 +33,9 @@ export const Blog6 = () => {
         minHeight: "100vh",
       }}>
         <Header />
-        <Container component="section">
+        <Container component="section" maxWidth="md">
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Developer Update #3</Typography>
-          <Typography variant="h6" sx={{ mt: 1, mb: 3, fontStyle: "italic" }}>Adding ChatGPT to the chat room (and other improvements)</Typography>
+          <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Adding ChatGPT to the chat room (and other improvements)</Typography>
           <Typography sx={{ fontSize: 18, mt: 5 }}>
             The beta release date for Turing Test Chat will be announced in the next developer update.
             Release date for the beta is expected to be some time in June.<p/>
@@ -35,41 +48,36 @@ export const Blog6 = () => {
             </Grid>
             When entering a chat, the header is changed.
             Now it shows your goal, the timer, and a triple dot menu which allows you to leave the chat.<br />
-            <Box component="img" alt="Chat header" src="../b3Header.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
+            <Image alt="Chat header" src="/b3Header.png" width={806} height={94} />
             The chat itself had a few changes. It was fixed to scroll down and grow in size properly.
             It automatically scrolls down to the chat box at the bottom of the page when the other chatter types something.
             Importantly, it forces users to type one message back-and-forth each.
             This is done to make it possible for ChatGPT to receive messages without being overwhelmed.
-            <Box component="img" alt="Blog 3 chat changes" src="../b3Chat.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
+            <Image alt="Blog 3 chat changes" src="/b3Chat.png" width={852} height={404} />
             To leave the chat, you can click the three vertical dots menu on the right of the header.
             Doing this will open a dialog confirming if you want to leave.
-            <Box component="img" alt="Leave chat dialog" src="../b3LeaveChatDialog.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
+            <Image alt="Leave chat dialog" src="/b3LeaveChatDialog.png" width={790} height={803} />
             You will lose points (renamed to exp) on leaving the chat.
             If you try to leave the chat by pressing the back button, it will show this message:<br />
-            <Box component="img" alt="Leave back button" src="../b3Popstate.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
+            <Image alt="Leave back button" src="/b3Popstate.png" width={445} height={149} />
             When you try to refresh or go to another website in the address bar, a message shows up.
-            It's not possible to change the text on this message, but you will receive the same penalty.
+            It{"\'"}s not possible to change the text on this message, but you will receive the same penalty.
             It looks like this: <br />
-            <Box component="img" alt="Leave address bar" src="../b3onBeforeUnload.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
+            <Image alt="Leave address bar" src="/b3onBeforeUnload.png" width={446} height={128} />
             When one user leaves the chat, the other user will get a message that the other chatter has left.
             When one user leaves, the other user will receive 5 detection exp unless the leaver was a bot.
             You will not know if you actually received the 5 exp until you make your choice.<br />
-            <Box component="img" alt="Other user left" src="../b3OtherLeft.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
+            <Image alt="Other user left" src="/b3OtherLeft.png" width={761} height={802} />
             For one of the more interesting changes, ChatGPT has been implemented in the chat.
             There is a chance upon joining a chat that the user will instead join into ChatGPT.
             While this implementation is still very much a work in progress, here is an image of a working prototype: <br />
-            <Box component="img" alt="ChatGPT chat" src="../b3ChatGPT.png" sx={{ maxWidth: "100%", color: "#e9e9e9", my: 2 }} /><br />
-            As you can see, it's not particularly convincing.
+            <Image alt="ChatGPT chat" src="/b3ChatGPT.png" width={807} height={802} />
+            As you can see, it{"\'"}s not particularly convincing.
             However, this bot will be drastically improved by the time the beta is released.<p/>
             This concludes the third developer update for Turing Test Chat.
-            If this sounds interesting, you should sign up for the { }
-            <Link to="/waitlist" color="info"
-              style={{
-                color: "#e9e9e9",
-                fontFamily: "monospace",
-              }}>waitlist</Link>.
-            If you're interested in the coding behind this developer update (which contains more details on the ChatGPT implementation), you can check out the { }
-            <Link to="/blog/5" color="info"
+            If this sounds interesting, you should sign up for the waitlist.
+            If you{"\'"}re interested in the coding behind this developer update (which contains more details on the ChatGPT implementation), you can check out the { }
+            <Link href="/blog/eng-blog-3"
               style={{
                 color: "#e9e9e9",
                 fontFamily: "monospace",
@@ -81,3 +89,5 @@ export const Blog6 = () => {
     </>
   );
 }
+
+export default DevUpdate3;

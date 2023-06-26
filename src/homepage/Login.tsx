@@ -1,21 +1,14 @@
-import { Box, Button, FormControl, Grid, Tab, Tabs, TextField, Typography, Link as MuiLink } from "@mui/material";
-import { useContext, useState } from "react";
+import { Box, Button, FormControl, Tab, Tabs, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 import { Constants } from "../Constants";
-import { Link, useNavigate } from "react-router-dom";
 import { Footer } from "./Footer";
-import { Header } from "../Header";
-import { LoginContext } from "../App";
 
 export const Login = () => {
 
-  const navigate = useNavigate();
-
-  const { user, setUser } = useContext(LoginContext);
-
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [loginFailedMessage, setLoginFailedMessage] = useState("");
-  const [accountMessage, setAccountMessage] = useState("");
+  const [accountCreated, setAccountCreated] = useState(false);
+  const [accountFailedMessage, setAccountFailedMessage] = useState("");
   const [password, setPassword] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -23,20 +16,12 @@ export const Login = () => {
     try {
       const result = await fetch(Constants.BASE_URL + "login/password", {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        credentials: "include",
-        body: JSON.stringify({ username: username, password: password }),
-      });
-      if (result.ok) {
-        const resultJson = await result.json();
-        setUser(resultJson.user);
-        navigate("/home");
-      } else if (result.statusText === "Unauthorized") {
-        setLoginFailedMessage("Username or password not found");
-        setTimeout(() => setLoginFailedMessage(""), 5000);
-      } else {
-        setLoginFailedMessage("An unknown error occurred");
-        setTimeout(() => setLoginFailedMessage(""), 5000);
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: name, password: password }),
+      }).then(res => res.json());
+      if (result.succeeded) {
+        localStorage.setItem("user", result.user);
+        // navigate("/joinchat");
       }
     } catch (err) {
       console.error(err);
@@ -45,51 +30,51 @@ export const Login = () => {
 
   const validateSignup = () => {
     if (email.length === 0) {
-      setAccountMessage("Email must not be empty");
-      setTimeout(() => setAccountMessage(""), 5000);
+      setAccountFailedMessage("Email must not be empty");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
     // validate email regex
     if (!email.match("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$")) {
-      setAccountMessage("Invalid email");
-      setTimeout(() => setAccountMessage(""), 5000);
+      setAccountFailedMessage("Invalid email");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
     // don't allow < > & ' " or /
     // backend escapes these so they will not work properly when trying to log in
-    if (email.match("[<>&'\"/]+")) {
-      setAccountMessage("Email cannot contain < > & ' \" or /");
-      setTimeout(() => setAccountMessage(""), 5000);
+    if (email.match("[<>&\'\"/]+")) {
+      setAccountFailedMessage("Email cannot contain < > & \' \" or /");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
-    if (username.length === 0) {
-      setAccountMessage("Username must not be empty");
-      setTimeout(() => setAccountMessage(""), 5000);
+    if (name.length === 0) {
+      setAccountFailedMessage("Username must not be empty");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
-    if (username.length < 6) {
-      setAccountMessage("Username must be at least 6 characters long");
-      setTimeout(() => setAccountMessage(""), 5000);
+    if (name.length < 6) {
+      setAccountFailedMessage("Username must be at least 6 characters long");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
-    if (username.match("[<>&'\"/]+")) {
-      setAccountMessage("Username cannot contain < > & ' \" or /");
-      setTimeout(() => setAccountMessage(""), 5000);
+    if (name.match("[<>&\'\"/]+")) {
+      setAccountFailedMessage("Name cannot contain < > & \' \" or /");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
     if (password.length === 0) {
-      setAccountMessage("Password must not be empty");
-      setTimeout(() => setAccountMessage(""), 5000);
+      setAccountFailedMessage("Password must not be empty");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
     if (password.length < 6) {
-      setAccountMessage("Password must be at least 6 characters long");
-      setTimeout(() => setAccountMessage(""), 5000);
+      setAccountFailedMessage("Password must be at least 6 characters long");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
-    if (password.match("[<>&'\"/]+")) {
-      setAccountMessage("Password cannot contain < > & ' \" or /");
-      setTimeout(() => setAccountMessage(""), 5000);
+    if (password.match("[<>&\'\"/]+")) {
+      setAccountFailedMessage("Password cannot contain < > & \' \" or /");
+      setTimeout(() => setAccountFailedMessage(""), 5000);
       return false;
     }
     return true;
@@ -101,19 +86,23 @@ export const Login = () => {
       try {
         const result = await fetch(Constants.BASE_URL + "account/register", {
           method: "POST",
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: username, email: email, password: password }),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: name, email: email, password: password }),
         }).then(res => res.json());
-        setAccountMessage(result.message);
+        if (result.succeeded) {
+          setAccountCreated(true);
+        } else {
+          setAccountFailedMessage(result.message);
+        }
       } catch (err) {
         throw err;
       }
     }
   };
 
-  // const handleForget = (email: string) => {
-  //   console.log({ email });
-  // };
+  const handleForget = (email: string) => {
+    console.log({ email });
+  };
 
   return (
     <>

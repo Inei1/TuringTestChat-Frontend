@@ -1,8 +1,7 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
 import { useContext, useState } from "react";
-import useInterval from "use-interval";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 import { LoginContext } from "../App";
 
 export const Landing = () => {
@@ -10,8 +9,6 @@ export const Landing = () => {
   const { user, setUser } = useContext(LoginContext);
 
   const [timeUntilBeta, setTimeUntilBeta] = useState(1685750400000 - Date.now());
-
-  const navigate = useNavigate();
 
   useInterval(() => {
     setTimeUntilBeta(timeUntilBeta - 1000);
@@ -21,9 +18,9 @@ export const Landing = () => {
     <>
       <Container
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
           maxWidth: "50vw",
           mt: 5
         }}>
