@@ -23,6 +23,14 @@ export const Explanations = () => {
           Another flaw with the Turing Test includes the fact that it only tests whether a machine can behave like a human.
           As we all know, <b>not all human behavior is intelligent</b>, so the Turing Test could be a machine{"\'"}s success in <b>acting unintelligent</b>.
           However, the concept of artificial general intelligence is gaining traction and could potentially address these flaws in the future.</Typography>
+        <Typography variant="h2" sx={{ my: 2, fontSize: 25 }}>Human or Not Successor</Typography>
+        <Typography sx={{ fontSize: 18, my: 2 }}>
+          With the popular website <Link href="https://www.humanornot.ai/">Human or Not</Link> shutting down on June 28, it will no longer be possible to play an online social turing game.
+          That's why Turing Test Chat is under development and very close to being finished.
+          You will be able to play a game similar to the Human or Not game, but with some minor improvements.
+          Turing Test Chat will release at some point in July for everyone.
+          This human or not Turing Test is free for everyone, and if you want to start playing as soon as possible you should sign up for the waitlist!
+        </Typography>
       </Container>
     </Box>
   );
