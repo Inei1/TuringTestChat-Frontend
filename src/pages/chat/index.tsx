@@ -1,25 +1,23 @@
-import { useCallback, useEffect, useState } from 'react';
-import { Socket } from 'socket.io-client';
-import { DefaultEventsMap } from '@socket.io/component-emitter';
+"use client";
+
+import { useCallback, useEffect, useState, useContext } from 'react';
 import { Box, Button, Grid, Typography } from '@mui/material';
-import { ChatActive } from './ChatActive';
-import { ChatEnd } from './ChatEnd';
-import { ChatHeader } from './ChatHeader';
-import { LeaveChatDialog } from './LeaveChatDialog';
-import { LoginRequest } from '../homepage/LoginRequest';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { LoginRequest } from '@/homepage/LoginRequest';
+import { ChatEnd } from '@/chat/ChatEnd';
+import { ChatHeader } from '@/chat/ChatHeader';
+import { LeaveChatDialog } from '@/chat/LeaveChatDialog';
+import { useRouter } from 'next/router';
+import { ChatActive } from '@/chat/ChatActive';
 import Link from 'next/link';
+import { SocketContext } from '../_app';
 
-export interface ChatRoomProps {
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-}
-
-export const ChatRoom = (props: ChatRoomProps) => {
+export const ChatRoom = () => {
 
   const router = useRouter();
 
-  //const { endChatTime, endResultTime, canSend, goal, user } = useLocation().state;
+  const socket = useContext(SocketContext);
+
   const [chatActive, setChatActive] = useState(true);
   const [resultOver, setResultOver] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -27,9 +25,9 @@ export const ChatRoom = (props: ChatRoomProps) => {
   const [selfDisconnect, setSelfDisconnect] = useState(true);
 
   const onPopState = useCallback((e: PopStateEvent) => {
-    props.socket.disconnect();
+    socket.disconnect();
     router.push("/home");
-  }, [router, props.socket]);
+  }, [router, socket]);
 
   useEffect(() => {
     if (!resultOver) {
@@ -52,7 +50,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
   }, [selfDisconnect]);
 
   useEffect(() => {
-    if (props.socket.connected) {
+    if (socket.connected) {
       setSelfDisconnect(false);
     } else {
       setSelfDisconnect(true);
@@ -60,12 +58,12 @@ export const ChatRoom = (props: ChatRoomProps) => {
   }, []);
 
   useEffect(() => {
-    props.socket.on("endChat", () => setChatActive(false));
-  }, [props.socket]);
+    socket.on("endChat", () => setChatActive(false));
+  }, [socket]);
 
   useEffect(() => {
-    props.socket.on("disconnect", () => { setSelfDisconnect(true); });
-  }, [props.socket]);
+    socket.on("disconnect", () => { setSelfDisconnect(true); });
+  }, [socket]);
 
   return (
     router.query.user ? <Box sx={{
@@ -84,17 +82,17 @@ export const ChatRoom = (props: ChatRoomProps) => {
         onPopState={onPopState}
         onClose={() => setDialogOpen(false)}
         open={dialogOpen}
-        socket={props.socket} />
+        socket={socket} />
       <ChatHeader
         chatActive={chatActive}
-        goal={router.query.goal! as string}
+        goal={router.query.goal as string}
         endChatTime={Number(router.query.endChatTime as string)}
         setDialogOpen={setDialogOpen} />
       <ChatActive
-        socket={props.socket}
+        socket={socket}
         chatActive={chatActive}
         setChatActive={setChatActive}
-        canSend={Boolean(router.query.canSend as string)}
+        canSend={Boolean(router.query.canSend)}
         goal={router.query.goal as string}
         endChatTime={Number(router.query.endChatTime as string)}
         otherLeft={otherLeft}
@@ -103,7 +101,7 @@ export const ChatRoom = (props: ChatRoomProps) => {
       {!chatActive && <ChatEnd
         resultOver={resultOver}
         setResultOver={setResultOver}
-        socket={props.socket}
+        socket={socket}
         endResultMillis={Number(router.query.endResultTime as string) - Date.now()}
         chatActive={chatActive}
         setChatActive={setChatActive}
@@ -121,3 +119,5 @@ export const ChatRoom = (props: ChatRoomProps) => {
       <LoginRequest />
   );
 };
+
+export default ChatRoom;

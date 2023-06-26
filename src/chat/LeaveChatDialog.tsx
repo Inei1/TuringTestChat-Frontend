@@ -2,7 +2,7 @@ import { Button, Typography } from "@mui/material";
 import Dialog from "@mui/material/Dialog"
 import DialogTitle from "@mui/material/DialogTitle";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 import { Socket } from "socket.io-client";
 
 export interface LeaveChatDialogProps {
@@ -14,12 +14,12 @@ export interface LeaveChatDialogProps {
 
 export const LeaveChatDialog = (props: LeaveChatDialogProps) => {
 
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const leaveChat = () => {
     window.removeEventListener("popstate", props.onPopState);
     props.socket.disconnect();
-    navigate("/home");
+    router.push("/home");
   }
 
   return (

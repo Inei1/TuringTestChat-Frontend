@@ -1,23 +1,22 @@
-import { DefaultEventsMap } from '@socket.io/component-emitter';
-import { useNavigate } from 'react-router-dom';
-import { Socket } from 'socket.io-client';
+"use client";
+
 import { Box, Button, Container, FormControlLabel, FormGroup, Grid, Switch, Typography } from '@mui/material';
-import { Footer } from '../homepage/Footer';
+import { Footer } from '../../homepage/Footer';
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { Timer } from './Timer';
-import { Helmet } from 'react-helmet-async';
-import { LoginContext } from '../App';
-import { Constants } from '../Constants';
+import { Timer } from '../../chat/Timer';
+import { LoginContext, SocketContext } from '../_app';
+import { Constants } from '../../Constants';
 import { StatusCodes } from "http-status-codes";
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 
-export interface ChatWaitingProps {
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-}
-
-export const ChatWaiting = (props: ChatWaitingProps) => {
+export const ChatWaiting = () => {
 
   const { user, setUser } = useContext(LoginContext);
-  const navigate = useNavigate();
+
+  const router = useRouter();
+
+  const socket = useContext(SocketContext);
 
   const [chatFound, setChatFound] = useState(false);
   const [chatWaitingEnd, setChatWaitingEnd] = useState(-1);
@@ -28,34 +27,34 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
 
   const onPopState = useCallback((e: PopStateEvent) => {
     window.removeEventListener("popstate", onPopState);
-    props.socket.disconnect();
-  }, [props.socket, chatFound, chatExpired]);
+    socket.disconnect();
+  }, [socket, chatFound, chatExpired]);
 
   useEffect(() => {
     setTimeout(() => {
-      if (!props.socket.connected) {
+      if (!socket.connected) {
         setSelfDisconnect(true);
       }
     }, 1000);
-  }, [props.socket]);
+  }, [socket]);
 
   useEffect(() => {
-    props.socket.on("foundChat", (data) => {
+    socket.on("foundChat", (data) => {
       setChatFound(true);
       setChatWaitingEnd(data.endTime);
       if (user?.currentDailyCredits! > 0) {
-        setUser({...user!, currentDailyCredits: user?.currentDailyCredits! - 1});
+        setUser({ ...user!, currentDailyCredits: user?.currentDailyCredits! - 1 });
       } else if (user?.permanentCredits! > 0) {
-        setUser({...user!, permanentCredits: user?.permanentCredits! - 1});
+        setUser({ ...user!, permanentCredits: user?.permanentCredits! - 1 });
       }
-      
+
       if (user?.playFoundSound) {
         const sound = new Audio("TTCNotification.mp3");
         sound.volume = 0.1;
         sound.play();
       }
     });
-  }, [props.socket]);
+  }, [socket]);
 
   useEffect(() => {
     window.addEventListener("popstate", onPopState);
@@ -67,14 +66,14 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   }, [onPopState]);
 
   useEffect(() => {
-    props.socket.off("readyExpired");
-    props.socket.on("readyExpired", () => {
+    socket.off("readyExpired");
+    socket.on("readyExpired", () => {
       setChatExpired(true);
     });
-  }, [props.socket]);
+  }, [socket]);
 
   useEffect(() => {
-    props.socket.on("otherWaitingLeft", () => {
+    socket.on("otherWaitingLeft", () => {
       setChatExpired(true);
       setChatAccepted(true);
     });
@@ -82,10 +81,10 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    props.socket.once("startChat", (data) => {
+    socket.once("startChat", (data) => {
       window.removeEventListener("popstate", onPopState);
-      navigate("/chat", {
-        state: {
+      router.push({
+        pathname: "/chat", query: {
           endChatTime: data.endChatTime,
           endResultTime: data.endResultTime,
           canSend: data.canSend,
@@ -100,13 +99,13 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
   const ready = () => {
     setChatAccepted(true);
     // TODO: implement something better
-    setTimeout(() => props.socket.emit("readyChat", { username: user?.username }), 1000);
+    setTimeout(() => socket.emit("readyChat", { username: user?.username }), 1000);
   }
 
   const returnHome = () => {
-    props.socket.disconnect();
+    socket.disconnect();
     window.removeEventListener("popstate", onPopState);
-    navigate("/home");
+    router.push("/home");
   }
 
   const toggleNotificationSound = async () => {
@@ -134,9 +133,9 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
         backgroundPositionY: 60,
         maxWidth: "100vw",
       }}>
-        <Helmet>
+        <Head>
           <title>Waiting for Chat | Turing Test Chat</title>
-        </Helmet>
+        </Head>
         <Container component="section">
           <Grid
             container
@@ -170,3 +169,5 @@ export const ChatWaiting = (props: ChatWaitingProps) => {
     </>
   );
 };
+
+export default ChatWaiting;

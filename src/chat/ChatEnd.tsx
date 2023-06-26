@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { Timer } from "./Timer";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from '@socket.io/component-emitter';
-import { useNavigate } from "react-router-dom";
+import Link from "next/link";
+import Image from "next/image";
 
 export interface ChatEndProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -18,8 +19,6 @@ export interface ChatEndProps {
 }
 
 export const ChatEnd = (props: ChatEndProps) => {
-
-  const navigate = useNavigate();
 
   const [result, setResult] = useState("");
   const [other, setOther] = useState("");
@@ -75,7 +74,7 @@ export const ChatEnd = (props: ChatEndProps) => {
               sx={{ backgroundColor: result === "Definitely a human" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
-                  <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />
+                <Image alt="Definitely a human" src="/TTCHumanv2.png" width={100} height={100} />
                 </Grid>
                 <Grid item>
                   Definitely a Human
@@ -86,7 +85,7 @@ export const ChatEnd = (props: ChatEndProps) => {
               sx={{ backgroundColor: result === "Possibly a human" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
-                  <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />
+                  <Image alt="Possibly a human" src="/TTCUnknownHuman.png" width={100} height={100} />
                 </Grid>
                 <Grid item>
                   Possibly a Human
@@ -97,7 +96,7 @@ export const ChatEnd = (props: ChatEndProps) => {
               sx={{ backgroundColor: result === "Unknown" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
-                  <Box component="img" alt="Unknown" src="TTCUnknown.png" maxWidth={"8vw"} />
+                  <Image alt="Unknown" src="/TTCUnknown.png" width={100} height={100} />
                 </Grid>
                 <Grid item>
                   I don't know
@@ -108,7 +107,7 @@ export const ChatEnd = (props: ChatEndProps) => {
               sx={{ backgroundColor: result === "Possibly a bot" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
-                  <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />
+                  <Image alt="Possibly a bot" src="/TTCUnknownBot.png" width={100} height={100} />
                 </Grid>
                 <Grid item>
                   Possibly a bot
@@ -119,7 +118,7 @@ export const ChatEnd = (props: ChatEndProps) => {
               sx={{ backgroundColor: result === "Definitely a bot" ? "#1538B2" : "#1F51FF" }}>
               <Grid container direction="column">
                 <Grid item>
-                  <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />
+                  <Image alt="Definitely a bot" src="/TTCLogov2.png" width={100} height={100} />
                 </Grid>
                 <Grid item>
                   Definitely a Bot
@@ -182,7 +181,7 @@ export const ChatEnd = (props: ChatEndProps) => {
           {deceptionExp !== 0 && <Typography>You received {deceptionExp} deception exp from the other chatter's selection</Typography>}
         </Grid>
         <Grid item>
-          {props.resultOver && <Button variant="contained" onClick={() => navigate("/home")} sx={{ my: 3 }}>Return to home</Button>}
+          {props.resultOver && <Link href="/home"><Button variant="contained" sx={{ my: 3 }}>Return to home</Button></Link>}
         </Grid>
       </Grid>
     </Container>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
 import React, { useContext } from "react";
-import { LoginContext } from "./App";
+import { LoginContext } from "./pages/_app";
 import { User } from "./User";
 
 export const Header = () => {

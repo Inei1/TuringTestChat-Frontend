@@ -1,29 +1,28 @@
-import { DefaultEventsMap } from '@socket.io/component-emitter';
-import { Link, useNavigate } from 'react-router-dom';
-import { Socket } from 'socket.io-client';
-import { Header } from '../Header';
+"use client";
+
+import { Header } from '../../Header';
 import { Box, Button, Container, Typography } from '@mui/material';
-import { Footer } from '../homepage/Footer';
-import { Helmet } from 'react-helmet-async';
+import { Footer } from '../../homepage/Footer';
 import { useContext, useEffect } from 'react';
-import { LoginContext } from '../App';
-import { LoginRequest } from '../homepage/LoginRequest';
-import { Constants } from '../Constants';
+import { LoginRequest } from '../../homepage/LoginRequest';
+import { Constants } from '../../Constants';
+import { LoginContext, SocketContext } from '../_app';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-export interface ChatHomeProps {
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-}
-
-export const UserHome = (props: ChatHomeProps) => {
+export const UserHome = () => {
 
   const { user, setUser } = useContext(LoginContext);
 
-  const navigate = useNavigate();
+  const socket = useContext(SocketContext);
+
+  const router = useRouter();
 
   const enterChat = (e: any) => {
-    props.socket.connect();
-    props.socket.emit("startRoom", { username: user?.username });
-    navigate('/chatwaiting');
+    socket.connect();
+    socket.emit("startRoom", { username: user?.username });
+    router.push({pathname: "/chatwaiting" });
   };
 
   const getExpMessage = () => {
@@ -40,7 +39,7 @@ export const UserHome = (props: ChatHomeProps) => {
 
   useEffect(() => {
     const getUser = async (username: string) => {
-      const result = await fetch(Constants.BASE_URL + `account/${username}`, {
+      const result = await fetch(Constants.BASE_URL + `account/user/${username}`, {
         method: "GET",
         headers: { 'Content-Type': 'application/json' },
         credentials: "include",
@@ -61,9 +60,9 @@ export const UserHome = (props: ChatHomeProps) => {
         backgroundPositionY: 60,
         maxWidth: "100vw",
       }}>
-        <Helmet>
+        <Head>
           <title>Home | Turing Test Chat</title>
-        </Helmet>
+        </Head>
         <Header />
         <Container component="section">
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -74,7 +73,7 @@ export const UserHome = (props: ChatHomeProps) => {
                 You must simultaneously attempt to convince your partner while also determining what they are.</Typography>
               <Typography sx={{ fontSize: 18, my: 5 }}>You will gain or lose exp based on performance. Successfully guessing your partner's identity and convincing your partner of your own identity will give you up to 10 exp each. Failing to do so for either will cost you up to 3 exp each. If you use the back button or otherwise leave the page, you will lose exp.</Typography>
               <Typography sx={{ fontSize: 18, my: 5 }}>Have any questions? Check out the { }
-                <Link to="/betafaq" style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 18 }}>Beta FAQ</Link></Typography>
+                <Link href="/betafaq" style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 18 }}>Beta FAQ</Link></Typography>
               <Typography sx={{ fontSize: 20, my: 5 }}>
                 {getExpMessage()}
               </Typography>
@@ -85,6 +84,8 @@ export const UserHome = (props: ChatHomeProps) => {
       </Box>
       <Footer />
     </> :
-    <LoginRequest />
+      <LoginRequest />
   );
 };
+
+export default UserHome;

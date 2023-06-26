@@ -1,10 +1,10 @@
+"use client";
+
 import { Box, Button, Container, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
 import { Header } from "../Header";
+import Link from "next/link";
 
 export const LoginRequest = () => {
-
-  const navigate = useNavigate();
 
   return (
     <Box sx={{
@@ -20,13 +20,15 @@ export const LoginRequest = () => {
       <Container>
         <Typography variant="h1">Log in to view this page</Typography>
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <Link to="/login">
+          <Link href="/login">
             <Button
               color="info"
               variant="contained">Log in/Sign up</Button>
           </Link>
         </Box>
-        <Button variant="contained" onClick={() => navigate("/")} sx={{ width: "100%", height: 75, fontSize: 30 }}>Return to home</Button>
+        <Link href="/">
+          <Button variant="contained" sx={{ width: "100%", height: 75, fontSize: 30 }}>Return to home</Button>
+        </Link>
       </Container>
     </Box>
   );
