@@ -105,94 +105,117 @@ export const Login = () => {
   };
 
   return (
-    <Box sx={{ height: "100vh" }}>
-      <Typography>Logo</Typography>
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Box sx={{ minWidth: 350, minHeight: 400 }}>
-          <Typography sx={{ mb: 2, fontSize: 20 }} align="center" variant="h1" color="inherit">Turing Test Chat</Typography>
-          <Tabs
-            variant="fullWidth"
-            value={tabIndex}
-            centered
-            aria-label="login tabs"
-            onChange={(_, number) => setTabIndex(number)}>
-            <Tab label="Log in" tabIndex={0} />
-            <Tab label="Register" tabIndex={1} />
-          </Tabs>
-          {(() => {
-            switch (tabIndex) {
-              case 0:
-                return (
-                  <FormControl margin="none" fullWidth>
-                    <TextField
-                      sx={{ mt: 2 }}
-                      placeholder="Name or email"
-                      label="Name or email"
-                      variant="filled"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)} />
-                    <TextField
-                      sx={{ mt: 2, mb: 2 }}
-                      placeholder="Password"
-                      label="Password"
-                      variant="filled"
-                      value={password}
-                      type="password"
-                      onChange={(e) => setPassword(e.target.value)} />
-                    <Button
-                      size="large"
-                      variant="contained"
-                      color="primary"
-                      fullWidth
-                      onClick={() => handleSignIn()}>
-                      Log in
-                    </Button>
-                  </FormControl>
-                );
-              case 1:
-                return (
-                  <FormControl margin="none" fullWidth>
-                    <TextField
-                      sx={{ mt: 2 }}
-                      placeholder="Email"
-                      label="Email"
-                      variant="filled"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)} />
-                    <TextField
-                      sx={{ mt: 2 }}
-                      placeholder="Name"
-                      label="Name"
-                      variant="filled"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)} />
-                    <TextField
-                      sx={{ mt: 2, mb: 2 }}
-                      placeholder="Password"
-                      label="Password"
-                      variant="filled"
-                      value={password}
-                      type="password"
-                      onChange={(e) => setPassword(e.target.value)} />
-                    <Button
-                      size="large"
-                      variant="contained"
-                      color="primary"
-                      fullWidth
-                      onClick={() => handleSignUp()}>
-                      Create Account
-                    </Button>
-                  </FormControl>
-                )
-            };
-          })()}
-          {accountCreated && tabIndex === 1 && <Typography>Account successfully created! Please log in.</Typography>}
-          {accountFailedMessage.length > 0 && tabIndex === 1 && <Typography>{accountFailedMessage}</Typography>}
+    <>
+      <Header />
+      <Box sx={{
+        minHeight: "100vh",
+        backgroundColor: "secondary.main",
+        background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
+        backgroundPosition: "center",
+        backgroundSize: "100vw",
+        backgroundPositionY: 60,
+        maxWidth: "100vw",
+      }}>
+        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <Box sx={{ minWidth: 350, minHeight: 400, my: 5 }}>
+            <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center">
+              <Link to="/">
+                <Box component="img" alt="TuringTestChat logo" src="TTCLogov2.png" sx={{ maxWidth: "10vh", }} />
+              </Link>
+            </Grid>
+            <Typography sx={{ mb: 2 }} align="center" variant="h5">Turing Test Chat</Typography>
+            <Tabs
+              variant="fullWidth"
+              value={tabIndex}
+              centered
+              aria-label="login tabs"
+              onChange={(_, number) => setTabIndex(number)}>
+              <Tab label="Log in" tabIndex={0} sx={{ color: "#e9e9e9" }} />
+              <Tab label="Register" tabIndex={1} sx={{ color: "#e9e9e9" }} />
+            </Tabs>
+            {(() => {
+              switch (tabIndex) {
+                case 0:
+                  return (
+                    <FormControl margin="none" fullWidth>
+                      <TextField
+                        sx={{ mt: 2, input: { color: "#e9e9e9" } }}
+                        placeholder="Username or email"
+                        label="Username or email"
+                        variant="filled"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)} />
+                      <TextField
+                        sx={{ mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
+                        placeholder="Password"
+                        label="Password"
+                        variant="filled"
+                        value={password}
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === "Enter") { handleSignIn() } }} />
+                      <Button
+                        size="large"
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={() => handleSignIn()}>
+                        Log in
+                      </Button>
+                    </FormControl>
+                  );
+                case 1:
+                  return (
+                    <FormControl margin="none" fullWidth>
+                      <TextField
+                        sx={{ mt: 2, input: { color: "#e9e9e9" } }}
+                        placeholder="Email"
+                        label="Email"
+                        variant="filled"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} />
+                      <TextField
+                        sx={{ mt: 2, input: { color: "#e9e9e9" } }}
+                        placeholder="Username"
+                        label="Username"
+                        variant="filled"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)} />
+                      <TextField
+                        sx={{ mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
+                        placeholder="Password"
+                        label="Password"
+                        variant="filled"
+                        value={password}
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === "Enter") { handleSignUp() } }} />
+                      <Button
+                        size="large"
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={() => handleSignUp()}>
+                        Create Account
+                      </Button>
+                    </FormControl>
+                  )
+              };
+            })()}
+            {accountMessage.length > 0 && tabIndex === 1 && <Typography>{accountMessage}</Typography>}
+            {loginFailedMessage.length > 0 && tabIndex === 0 && <Typography>{loginFailedMessage}</Typography>}
+            <Grid container sx={{ mt: -4 }} spacing={6}>
+              <Grid item>
+                <MuiLink target="_blank" rel="noreferrer" href="/tos" color="#e9e9e9" fontFamily="monospace" fontSize={18}>Terms of Service</MuiLink>
+              </Grid>
+              <Grid item>
+                <MuiLink target="_blank" rel="noreferrer" href="/privacypolicy" color="#e9e9e9" fontFamily="monospace" fontSize={18}>Privacy Policy</MuiLink>
+              </Grid>
+            </Grid>
+          </Box>
         </Box>
       </Box>
-      <Box sx={{ marginTop: "auto" }}>
-        <Footer />
-      </Box>
-    </Box>
+      <Footer />
+    </>
   )
 }
