@@ -20,7 +20,8 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
 
-  const handleSignIn = async () => {
+  const handleSignIn = async (e: any) => {
+    e.preventDefault();
     try {
       const result = await fetch(Constants.BASE_URL + "login/password", {
         method: "POST",
@@ -88,7 +89,8 @@ export const Login = () => {
     return true;
   }
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (e: any) => {
+    e.preventDefault();
     const validate = validateSignup()
     if (validate) {
       try {
@@ -108,10 +110,6 @@ export const Login = () => {
     }
   };
 
-  const handleForget = (email: string) => {
-    console.log({ email });
-  };
-
   return (
     <>
       <Box sx={{
@@ -123,7 +121,7 @@ export const Login = () => {
         maxWidth: "100vw",
       }}>
         <Link href="/">
-          <Image src="/TTCLogov2.png" alt="Turing Test Chat logo" width={256} height={256} />
+          <Image src="/TTCLogov2.png" alt="Turing Test Chat logo" width={256} height={256} style={{ marginTop: "1em", marginLeft: "1em" }} />
         </Link>
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <Box sx={{ minWidth: 350, minHeight: 400 }}>
@@ -141,71 +139,78 @@ export const Login = () => {
               switch (tabIndex) {
                 case 0:
                   return (
-                    <FormControl margin="none" fullWidth>
-                      <TextField
-                        sx={{ mt: 2 }}
-                        placeholder="Name or email"
-                        label="Name or email"
-                        variant="filled"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)} />
-                      <TextField
-                        sx={{ mt: 2, mb: 2 }}
-                        placeholder="Password"
-                        label="Password"
-                        variant="filled"
-                        value={password}
-                        type="password"
-                        onChange={(e) => setPassword(e.target.value)} />
-                      <Button
-                        size="large"
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        onClick={() => handleSignIn()}>
-                        Log in
-                      </Button>
-                    </FormControl>
+                    <form onSubmit={(e) => handleSignIn(e)}>
+                      <FormControl margin="none" fullWidth>
+                        <TextField
+                          sx={{ mt: 2 }}
+                          placeholder="Name or email"
+                          label="Name or email"
+                          variant="filled"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)} />
+                        <TextField
+                          sx={{ mt: 2, mb: 2 }}
+                          placeholder="Password"
+                          label="Password"
+                          variant="filled"
+                          value={password}
+                          type="password"
+                          onChange={(e) => setPassword(e.target.value)} />
+                        <Button
+                          type="submit"
+                          size="large"
+                          variant="contained"
+                          color="primary"
+                          fullWidth
+                          onClick={(e) => handleSignIn(e)}>
+                          Log in
+                        </Button>
+                      </FormControl>
+                    </form>
                   );
                 case 1:
                   return (
-                    <FormControl margin="none" fullWidth>
-                      <TextField
-                        sx={{ mt: 2 }}
-                        placeholder="Email"
-                        label="Email"
-                        variant="filled"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)} />
-                      <TextField
-                        sx={{ mt: 2 }}
-                        placeholder="Name"
-                        label="Name"
-                        variant="filled"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)} />
-                      <TextField
-                        sx={{ mt: 2, mb: 2 }}
-                        placeholder="Password"
-                        label="Password"
-                        variant="filled"
-                        value={password}
-                        type="password"
-                        onChange={(e) => setPassword(e.target.value)} />
-                      <Button
-                        size="large"
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        onClick={() => handleSignUp()}>
-                        Create Account
-                      </Button>
-                    </FormControl>
+                    <form onSubmit={(e) => handleSignUp(e)}>
+                      <FormControl margin="none" fullWidth>
+                        <TextField
+                          sx={{ mt: 2 }}
+                          placeholder="Email"
+                          label="Email"
+                          variant="filled"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)} />
+                        <TextField
+                          sx={{ mt: 2 }}
+                          placeholder="Name"
+                          label="Name"
+                          variant="filled"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)} />
+                        <TextField
+                          sx={{ mt: 2, mb: 2 }}
+                          placeholder="Password"
+                          label="Password"
+                          variant="filled"
+                          value={password}
+                          type="password"
+                          onChange={(e) => setPassword(e.target.value)} />
+                        <Button
+                          type="submit"
+                          size="large"
+                          variant="contained"
+                          color="primary"
+                          fullWidth
+                          onClick={(e) => handleSignUp(e)}>
+                          Create Account
+                        </Button>
+                      </FormControl>
+                    </form>
                   )
               };
             })()}
             {accountCreated && tabIndex === 1 && <Typography>Account successfully created! Please log in.</Typography>}
             {accountFailedMessage.length > 0 && tabIndex === 1 && <Typography>{accountFailedMessage}</Typography>}
+            {/* <Link style={{ color: "#E9E9E9", fontFamily: "monospace" }} href={"/forgotpassword"}>Forgot Password?</Link> */}
           </Box>
         </Box>
       </Box>

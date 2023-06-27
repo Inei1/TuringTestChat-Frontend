@@ -11,7 +11,7 @@ export const Header = () => {
   return (
     <>
       <AppBar position="sticky" component="nav">
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
           <Toolbar>
             <Link
               href="/"
@@ -35,11 +35,12 @@ export const Header = () => {
               }}>Blog</Link>
             <Box sx={{ flexGrow: 1 }} />
             {user === null && <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <Link href="/login">
-                <Button
-                  color="info"
-                  variant="contained">Log in/Sign up</Button>
-              </Link>
+              <Button
+                color="info"
+                variant="contained"
+                sx={{mt: 0}}>
+                <Link href="/login" style={{ textDecoration: "none", color: "#000000" }}>Log in/Sign up</Link>
+              </Button>
             </Box>}
             {user && <User />}
           </Toolbar>

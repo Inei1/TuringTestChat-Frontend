@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Typography } from '@mui/material';
 import { ChatMessage } from './ChatMessage';
 import { Message } from '../types';

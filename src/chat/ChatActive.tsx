@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Container, Grid, Typography } from "@mui/material";	
 import { ChatBody } from "./ChatBody";	
 import { ChatFooter } from "./ChatFooter";	
@@ -76,7 +78,7 @@ export const ChatActive = (props: ChatActiveProps) => {
       }}>	
       <ChatDialog text={chatDialogText} open={chatDialogOpen} onClose={() => setChatDialogOpen(false)} />	
       <Grid container direction="column">	
-        <Container sx={{ backgroundColor: "#1D1D1D", width: "100%", mb: 2 }}>	
+        <Container sx={{ backgroundColor: "#1D1D1D", width: "100%", mb: 2, }}>	
           <ChatBody messages={messages} typingUser={typingUser} user={props.user} />	
           {props.chatActive &&	
             <ChatFooter socket={props.socket} canSend={props.canSend} footerRef={footerRef} user={props.user} />}	

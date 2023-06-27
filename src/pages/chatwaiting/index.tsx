@@ -9,6 +9,7 @@ import { Constants } from '../../Constants';
 import { StatusCodes } from "http-status-codes";
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import NoSSRWrapper from '@/NoSSRWrapper';
 
 export const ChatWaiting = () => {
 
@@ -87,7 +88,7 @@ export const ChatWaiting = () => {
         pathname: "/chat", query: {
           endChatTime: data.endChatTime,
           endResultTime: data.endResultTime,
-          canSend: data.canSend,
+          canSend: String(data.canSend),
           goal: data.goal,
           user: data.name,
         }
@@ -170,4 +171,4 @@ export const ChatWaiting = () => {
   );
 };
 
-export default ChatWaiting;
+export default NoSSRWrapper(ChatWaiting);

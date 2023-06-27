@@ -28,8 +28,6 @@ export const darkTheme = createTheme({
     fontFamily: "monospace",
     allVariants: {
       color: "#e9e9e9",
-      marginTop: "1em",
-      lineHeight: 1.6
     },
     fontSize: 16,
   },

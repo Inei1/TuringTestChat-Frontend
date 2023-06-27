@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { ChatActive } from '@/chat/ChatActive';
 import Link from 'next/link';
 import { SocketContext } from '../_app';
+import NoSSRWrapper from '@/NoSSRWrapper';
 
 export const ChatRoom = () => {
 
@@ -92,7 +93,7 @@ export const ChatRoom = () => {
         socket={socket}
         chatActive={chatActive}
         setChatActive={setChatActive}
-        canSend={Boolean(router.query.canSend)}
+        canSend={router.query.canSend === "true"}
         goal={router.query.goal as string}
         endChatTime={Number(router.query.endChatTime as string)}
         otherLeft={otherLeft}
@@ -120,4 +121,4 @@ export const ChatRoom = () => {
   );
 };
 
-export default ChatRoom;
+export default NoSSRWrapper(ChatRoom);

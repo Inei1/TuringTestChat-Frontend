@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Grid, IconButton, TextField, Typography } from '@mui/material';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { ChangeEvent, useEffect, useState } from 'react';

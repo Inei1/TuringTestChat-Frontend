@@ -15,35 +15,23 @@ export const User = () => {
     <>
       {user && <>
         <Tooltip title={`${user.currentDailyCredits} daily credits remaining`}>
-          <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", mr: 2 }}>
-            <Typography sx={{ fontSize: 20, mr: 0.5 }}>{user.currentDailyCredits}</Typography>
+          <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", mr: 2, }}>
+            <Typography sx={{ fontSize: 20, mr: 0.5, mt: 0 }}>{user.currentDailyCredits}</Typography>
             <Box component="img" alt="Daily Credits" src="/TTCDailyCredits.png" height={24} />
           </Box>
         </Tooltip><Tooltip title={`${user.permanentCredits} permanent credits remaining`}>
           <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", mr: 2 }}>
-            <Typography sx={{ fontSize: 20, mr: 0.5 }}>{user.permanentCredits}</Typography>
+            <Typography sx={{ fontSize: 20, mr: 0.5, mt: 0 }}>{user.permanentCredits}</Typography>
             <Box component="img" alt="Permanent Credits" src="/TTCPermCredits.png" height={24} />
           </Box>
         </Tooltip>
       </>}
-      <Link style={{
-        color: "#1D1D1D",
-        fontFamily: "monospace",
-        fontSize: 18,
-        textDecoration: "none",
-        marginRight: "2em"
-      }}
-        href="/earncredits"><Button color="error" variant="contained">Earn more credits</Button>
-      </Link>
-      <Link style={{
-        color: "#1D1D1D",
-        fontFamily: "monospace",
-        fontSize: 18,
-        textDecoration: "none"
-      }}
-        href="/"
-        onClick={logout}><Button color="info" variant="contained">Logout</Button>
-      </Link>
+      <Button color="error" variant="contained" sx={{ mr: 2, mt: 0 }}>
+        <Link href="/earncredits" style={{ textDecoration: "none", color: "#FFFFFF" }}>Earn more credits</Link>
+      </Button>
+      <Button color="info" variant="contained" sx={{ mt: 0 }}>
+        <Link href="/" onClick={logout} style={{ textDecoration: "none", color: "#000000" }}>Logout</Link>
+      </Button>
     </>
   );
 };

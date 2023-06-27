@@ -1,22 +1,24 @@
-import { Grid, Typography } from "@mui/material";	
-import { useState } from "react";	
-import useInterval from "use-interval";	
+"use client";
 
-export interface TimerProps {	
-  millis: number;	
-}	
+import { Grid, Typography } from "@mui/material";
+import { useState } from "react";
+import useInterval from "use-interval";
 
-export const Timer = (props: TimerProps) => {	
+export interface TimerProps {
+  millis: number;
+}
 
-  const [millis, setMillis] = useState(props.millis);	
+export const Timer = (props: TimerProps) => {
 
-  useInterval(() => {	
-    setMillis(millis - 1000);	
-  }, 1000)	
+  const [millis, setMillis] = useState(props.millis);
 
-  return (	
-    <Grid container>	
-      <Typography variant="h1">{new Date(millis).toISOString().substring(14, 19)}</Typography>	
-    </Grid>	
-  );	
+  useInterval(() => {
+    setMillis(millis - 1000);
+  }, 1000)
+
+  return (
+    <Grid container>
+      <Typography variant="h1" sx={{ mt: 0 }}>{new Date(millis).toISOString().substring(14, 19)}</Typography>
+    </Grid>
+  );
 };

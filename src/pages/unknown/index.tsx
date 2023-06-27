@@ -8,3 +8,5 @@ export const Unknown = () => {
     </>
   )
 }
+
+export default Unknown;

@@ -1,3 +1,5 @@
+"use client";
+
 import { AppBar, Box, Container, Grid, IconButton, Menu, MenuItem, Typography } from "@mui/material";	
 import { Timer } from "./Timer";	
 import { MoreVert } from "@mui/icons-material";	
@@ -31,7 +33,7 @@ export const ChatHeader = (props: ChatHeaderProps) => {
 
   return (	
     <AppBar position="sticky" component="nav">	
-      <Container maxWidth={"md"}>	
+      <Container maxWidth={"lg"}>	
         <Grid container>	
           <Grid item>	
             <Typography	
@@ -46,11 +48,11 @@ export const ChatHeader = (props: ChatHeaderProps) => {
                   <Image src="/TTCHumanv2.png" alt="Human" width={64} height={65} />}	
               </Grid>
               <Grid item>	
-                <Typography>{props.goal === "Bot" ? "Bot" : "Human"}</Typography>	
+                <Typography sx={{mt: 0}}>{props.goal === "Bot" ? "Bot" : "Human"}</Typography>	
               </Grid>	
             </Grid>	
           </Grid>	
-          <Grid item sx={{ ml: "auto", mr: 3 }}>	
+          <Grid item sx={{ ml: "auto", mr: 3, mt: 0 }}>	
             {props.chatActive && <Timer	
               millis={props.endChatTime - Date.now()} />}	
           </Grid>	

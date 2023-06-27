@@ -41,7 +41,6 @@ export const Homepage = () => {
         <Features />
         <Explanations />
       </Box>
-      <Subscribe />
       <Footer />
     </>
   )

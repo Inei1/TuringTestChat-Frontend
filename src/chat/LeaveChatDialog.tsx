@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Typography } from "@mui/material";
 import Dialog from "@mui/material/Dialog"
 import DialogTitle from "@mui/material/DialogTitle";
