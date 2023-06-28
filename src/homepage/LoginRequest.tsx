@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { Header } from "../Header";
 import Link from "next/link";
 
@@ -18,17 +18,19 @@ export const LoginRequest = () => {
     }}>
       <Header />
       <Container>
-        <Typography variant="h1">Log in to view this page</Typography>
-        <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <Link href="/login">
-            <Button
-              color="info"
-              variant="contained">Log in/Sign up</Button>
+        <Grid container direction="column" display="flex" alignItems="center">
+          <Typography variant="h1" sx={{ my: 10 }}>Log in to view this page</Typography>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <Link href="/login">
+              <Button
+                color="info"
+                variant="contained">Log in/Sign up</Button>
+            </Link>
+          </Box>
+          <Link href="/">
+            <Button variant="contained" sx={{ width: 900, height: 75, fontSize: 30, mt: 5 }}>Return to home</Button>
           </Link>
-        </Box>
-        <Link href="/">
-          <Button variant="contained" sx={{ width: "100%", height: 75, fontSize: 30 }}>Return to home</Button>
-        </Link>
+        </Grid>
       </Container>
     </Box>
   );

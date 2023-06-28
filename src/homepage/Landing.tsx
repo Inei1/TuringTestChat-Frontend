@@ -30,7 +30,7 @@ export const Landing = () => {
         {!user && <Link href="/login" style={{ marginTop: "2em", marginBottom: "2em" }}>
           <Button
             color="info"
-            variant="contained">Login or Register for free</Button>
+            variant="contained">Log in or Register for free</Button>
         </Link>}
         {user && <Link href={"/home"} style={{ marginTop: "2em", marginBottom: "2em" }}>
           <Button

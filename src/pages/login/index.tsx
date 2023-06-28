@@ -142,14 +142,16 @@ export const Login = () => {
                     <form onSubmit={(e) => handleSignIn(e)}>
                       <FormControl margin="none" fullWidth>
                         <TextField
-                          sx={{ mt: 2 }}
-                          placeholder="Name or email"
-                          label="Name or email"
+                          color="info"
+                          sx={{ mt: 2, input: { color: "#e9e9e9" } }}
+                          placeholder="Username"
+                          label="Username"
                           variant="filled"
                           value={name}
                           onChange={(e) => setName(e.target.value)} />
                         <TextField
-                          sx={{ mt: 2, mb: 2 }}
+                          color="info"
+                          sx={{ mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
                           placeholder="Password"
                           label="Password"
                           variant="filled"
@@ -173,21 +175,24 @@ export const Login = () => {
                     <form onSubmit={(e) => handleSignUp(e)}>
                       <FormControl margin="none" fullWidth>
                         <TextField
-                          sx={{ mt: 2 }}
+                          color="info"
+                          sx={{ mt: 2, input: { color: "#e9e9e9" } }}
                           placeholder="Email"
                           label="Email"
                           variant="filled"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)} />
                         <TextField
-                          sx={{ mt: 2 }}
+                          color="info"
+                          sx={{ mt: 2, input: { color: "#e9e9e9" } }}
                           placeholder="Name"
                           label="Name"
                           variant="filled"
                           value={name}
                           onChange={(e) => setName(e.target.value)} />
                         <TextField
-                          sx={{ mt: 2, mb: 2 }}
+                          color="info"
+                          sx={{ mt: 2, mb: 2, input: { color: "#e9e9e9" } }}
                           placeholder="Password"
                           label="Password"
                           variant="filled"

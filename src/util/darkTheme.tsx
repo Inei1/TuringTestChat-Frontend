@@ -23,6 +23,15 @@ export const darkTheme = createTheme({
         fontSize: 18
       }
     },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          "&.MuiTab-root": {
+            color: "#e9e9e9"
+          }
+        }
+      }
+    }
   },
   typography: {
     fontFamily: "monospace",
