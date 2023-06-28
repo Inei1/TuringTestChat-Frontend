@@ -32,14 +32,14 @@ const Tos = () => {
           mt: 1,
         }}>
           <Typography variant="h1" sx={{ my: 2, fontSize: 50 }}>Terms of Service</Typography>
-          <Typography sx={{ my: 1 }}>Welcome to Turing Test Chat! These terms of service ({"\""}Terms{"\""}) govern your use of
+          <Typography sx={{ my: 1 }}>Welcome to Turing Test Chat! These terms of service ("Terms") govern your use of
             turingtestchat.com. By accessing or using turingtestchat.com, you agree to be bound by these Terms.</Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 22 }}>Use of turingtestchat.com</Typography>
           <Typography sx={{ my: 1 }}>turingtestchat.com is provided for your personal, non-commercial use.
             You agree not to use turingtestchat.com for any illegal or unauthorized purpose.
             You must not use turingtestchat.com in a way that could damage, disable, overburden, or impair ou
-            servers or networks.</Typography>
+            servers or networks. You must be 13 years of age or older to use Turing Test Chat.</Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 22 }}>Intellectual property</Typography>
           <Typography sx={{ my: 1 }}>All content on turingtestchat.com, including text, graphics, logos, images, and software,

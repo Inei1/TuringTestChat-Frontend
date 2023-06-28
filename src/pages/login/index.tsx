@@ -1,6 +1,6 @@
 import { Constants } from "@/Constants";
 import { Footer } from "@/homepage/Footer";
-import { Box, Button, FormControl, Tab, Tabs, TextField, Typography } from "@mui/material";
+import { Box, Button, Checkbox, FormControl, FormControlLabel, Tab, Tabs, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,6 +19,7 @@ export const Login = () => {
   const [accountFailedMessage, setAccountFailedMessage] = useState("");
   const [password, setPassword] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
+  const [tosAccepted, setTosAccepted] = useState(false);
 
   const handleSignIn = async (e: any) => {
     e.preventDefault();
@@ -124,7 +125,7 @@ export const Login = () => {
           <Image src="/TTCLogov2.png" alt="Turing Test Chat logo" width={256} height={256} style={{ marginTop: "1em", marginLeft: "1em" }} />
         </Link>
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <Box sx={{ minWidth: 350, minHeight: 400 }}>
+          <Box sx={{ width: 350, height: 400 }}>
             <Typography sx={{ mb: 2, fontSize: 20 }} align="center" variant="h1" color="inherit">Turing Test Chat</Typography>
             <Tabs
               variant="fullWidth"
@@ -199,7 +200,12 @@ export const Login = () => {
                           value={password}
                           type="password"
                           onChange={(e) => setPassword(e.target.value)} />
+                        <FormControlLabel
+                          sx={{ mr: "auto" }}
+                          label={`I accept the Terms of Service and Privacy Policy, and I am at least 13 years of age or older`}
+                          control={<Checkbox checked={tosAccepted} onChange={(e) => setTosAccepted(e.target.checked)} />} />
                         <Button
+                          disabled={!tosAccepted}
                           type="submit"
                           size="large"
                           variant="contained"
