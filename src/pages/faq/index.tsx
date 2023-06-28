@@ -34,7 +34,7 @@ const Faq = () => {
           <Typography variant="h1" sx={{ my: 2, fontSize: 50 }}>FAQ</Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>When will the full release of the game come out?</Typography>
-          <Typography sx={{ my: 1 }}>The full release date is unannounced, but you should expect it some time in June or July.</Typography>
+          <Typography sx={{ my: 1 }}>The game will be publically available midnight PST on July 2, or July 2 8:00am UTC.</Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>How can I give feedback/report an issue?</Typography>
           <Typography sx={{ my: 1 }}>Any and all feedback is greatly appreciated.

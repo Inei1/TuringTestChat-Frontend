@@ -37,6 +37,13 @@ const Blog = () => {
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
+            blogUrl="release-update"
+            blogTitle="Turing Test Chat releases July 2!"
+            blogDate="June 28, 2023"
+            blogSubtitle="An unofficial successor to Human or Not" />
+          <BlogEntry
+            imageAlt="Turing Test Chat logo"
+            imageSrc="TTCLogov2.png"
             blogUrl="online-ai-chat-websites"
             blogTitle="8 Unique Websites Where You Can Talk to a Robot"
             blogDate="June 23, 2023"
