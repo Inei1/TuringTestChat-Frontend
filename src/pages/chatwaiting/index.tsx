@@ -92,7 +92,7 @@ export const ChatWaiting = () => {
           goal: data.goal,
           user: data.name,
         }
-      });
+      }, "/chat");
     });
   }, []);
   /* eslint-enable react-hooks/exhaustive-deps */
@@ -166,7 +166,6 @@ export const ChatWaiting = () => {
           </Grid>
         </Container>
       </Box>
-      <Footer />
     </>
   );
 };
