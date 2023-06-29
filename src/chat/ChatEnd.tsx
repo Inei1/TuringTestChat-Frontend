@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Button, ButtonGroup, Container, Grid, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Timer } from "./Timer";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from '@socket.io/component-emitter';
@@ -21,6 +21,9 @@ export interface ChatEndProps {
 }
 
 export const ChatEnd = (props: ChatEndProps) => {
+
+  const selectionsRef = useRef<HTMLDivElement>(null);
+  const returnToHomeRef = useRef<HTMLDivElement>(null);
 
   const [result, setResult] = useState("");
   const [other, setOther] = useState("");
@@ -56,6 +59,24 @@ export const ChatEnd = (props: ChatEndProps) => {
       result: result
     });
   }
+
+  useEffect(() => {
+    if (!props.chatActive) {
+      setTimeout(() => selectionsRef.current?.scrollIntoView({ behavior: 'smooth' }), 10);
+    }
+  }, [props.chatActive]);
+
+  useEffect(() => {
+    if (props.resultOver) {
+      setTimeout(() => returnToHomeRef.current?.scrollIntoView({ behavior: 'smooth' }), 10);
+    }
+  }, [props.resultOver]);
+
+  useEffect(() => {
+    if (props.resultOver) {
+      setTimeout(() => returnToHomeRef.current?.scrollIntoView({ behavior: 'smooth' }), 10);
+    }
+  }, [otherResult])
 
   return (
     <Container>
@@ -157,7 +178,7 @@ export const ChatEnd = (props: ChatEndProps) => {
           </Grid>
         </Grid>
         <Grid item>
-          <Typography>You received {detectionExp} detection exp from your selection</Typography>
+          {(result !== "" || detectionExp !== 0) && <Typography>You received {detectionExp} detection exp from your selection</Typography>}
         </Grid>
         <Grid item sx={{ my: 2 }}>
           {props.otherLeft && other === "Human" &&
@@ -169,7 +190,7 @@ export const ChatEnd = (props: ChatEndProps) => {
             <Typography>Waiting for other chatter...</Typography>}
           {otherResult && otherResult.length > 0 && <Typography>They chose:</Typography>}
         </Grid>
-        <Grid item>
+        <Grid item ref={selectionsRef}>
           {otherResult === "Definitely a human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
           {otherResult === "Possibly a human" && <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />}
           {otherResult === "Unknown" && <Box component="img" alt="Unknown" src="TTCUnknown.png" maxWidth={"8vw"} />}
@@ -182,7 +203,7 @@ export const ChatEnd = (props: ChatEndProps) => {
         <Grid item>
           {deceptionExp !== 0 && <Typography>You received {deceptionExp} deception exp from the other chatter's selection</Typography>}
         </Grid>
-        <Grid item>
+        <Grid item ref={returnToHomeRef}>
           {props.resultOver && <Link href="/home"><Button variant="contained" sx={{ my: 3 }}>Return to home</Button></Link>}
         </Grid>
       </Grid>

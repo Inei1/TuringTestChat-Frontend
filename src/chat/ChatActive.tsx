@@ -23,7 +23,7 @@ export interface ChatActiveProps {
 
 export const ChatActive = (props: ChatActiveProps) => {	
 
-  const footerRef = useRef<HTMLDivElement>(null);	
+  const footerRef = useRef<HTMLDivElement>(null);
 
   const [messages, setMessages] = useState<Message[]>([]);	
   const [typingUser, setTypingUser] = useState('');	
@@ -56,7 +56,7 @@ export const ChatActive = (props: ChatActiveProps) => {
   useEffect(() => {	
     // Need a (very) brief amount of time to ensure the scroll uses the most recent messages.	
     // This could fail in extremely slow systems, but it isn't critical so it's fine.	
-    setTimeout(() => footerRef.current?.scrollIntoView({ behavior: 'smooth' }), 10);	
+    setTimeout(() => footerRef.current?.scrollIntoView({ behavior: 'smooth' }), 10);
   }, [messages]);	
 
   useEffect(() => {	

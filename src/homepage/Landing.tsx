@@ -2,8 +2,7 @@ import { LoginContext } from "@/pages/_app";
 import { Button, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useState } from "react";
-import useInterval from "use-interval";
+import { useContext } from "react";
 
 export const Landing = () => {
 
