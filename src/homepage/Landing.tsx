@@ -9,12 +9,6 @@ export const Landing = () => {
 
   const { user, setUser } = useContext(LoginContext);
 
-  const [timeUntilBeta, setTimeUntilBeta] = useState(1685750400000 - Date.now());
-
-  useInterval(() => {
-    setTimeUntilBeta(timeUntilBeta - 1000);
-  }, 1000)
-
   return (
     <>
       <Container
