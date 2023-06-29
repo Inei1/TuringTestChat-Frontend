@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Grid } from "@mui/material";
+import { Box, Container, Typography, Link as MuiLink, Grid } from "@mui/material";
 import Link from "next/link";
 
 export interface BlogEntryProps {

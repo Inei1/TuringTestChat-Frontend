@@ -34,7 +34,9 @@ const Faq = () => {
           <Typography variant="h1" sx={{ my: 2, fontSize: 50 }}>FAQ</Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>When will the full release of the game come out?</Typography>
-          <Typography sx={{ my: 1 }}>The game will be publically available midnight PST on July 2, or July 2 8:00am UTC.</Typography>
+          <Typography sx={{ my: 1 }}>
+            The game will be publically available midnight PST on July 2, or July 2 8:00am UTC.
+          </Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>How can I give feedback/report an issue?</Typography>
           <Typography sx={{ my: 1 }}>Any and all feedback is greatly appreciated.
@@ -43,7 +45,7 @@ const Faq = () => {
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>Who is developing Turing Test Chat?</Typography>
           <Typography sx={{ my: 1 }}>Hi there!
-            I{"\'"}m Neil, a solo developer with a few years of experience at Google and Amazon.
+            I'm Neil, a solo developer with a few years of experience at Google and Amazon.
           </Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>How can I support Turing Test Chat?</Typography>

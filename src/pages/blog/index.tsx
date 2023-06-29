@@ -1,8 +1,9 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { Header } from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import { BlogEntry } from "../../homepage/BlogEntry";
 import Head from "next/head";
+import Link from "next/link";
 
 const Blog = () => {
   return (
@@ -32,6 +33,7 @@ const Blog = () => {
         minHeight: "100vh",
       }}>
         <Header />
+        <Link href="/unknown"><Button></Button></Link>
         <Container component="section">
           <Typography variant="h1" sx={{ fontSize: 40, my: 5 }}>Turing Test Chat Blog</Typography>
           <BlogEntry

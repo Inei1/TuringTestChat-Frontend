@@ -23,13 +23,20 @@ export const darkTheme = createTheme({
         fontSize: 18
       }
     },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          "&.MuiTab-root": {
+            color: "#e9e9e9"
+          }
+        }
+      }
+    }
   },
   typography: {
     fontFamily: "monospace",
     allVariants: {
       color: "#e9e9e9",
-      marginTop: "1em",
-      lineHeight: 1.6
     },
     fontSize: 16,
   },

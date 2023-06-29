@@ -38,14 +38,10 @@ export const Homepage = () => {
         </Head>
         <Header />
         <Landing />
-        <Subscribe />
         <Features />
         <Explanations />
       </Box>
       <Footer />
-      <Box>
-
-      </Box>
     </>
   )
 }

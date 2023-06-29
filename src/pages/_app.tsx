@@ -4,6 +4,9 @@ import { EmotionCache } from "@emotion/react";
 import { ThemeProvider, CssBaseline, createTheme, Box } from "@mui/material";
 import { darkTheme } from "@/util/darkTheme";
 import Head from "next/head";
+import { LoginContextType, User } from "@/types";
+import { Socket, io } from "socket.io-client";
+import { DefaultEventsMap } from '@socket.io/component-emitter';
 
 export interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -11,8 +14,19 @@ export interface MyAppProps extends AppProps {
 
 const darkThemeProvider = createTheme(darkTheme);
 
+export const LoginContext = React.createContext<LoginContextType>({
+  user: null,
+  setUser: () => { },
+});
+
+export const SocketContext = React.createContext<Socket<DefaultEventsMap, DefaultEventsMap>>(
+  io(process.env.NODE_ENV === "production" ? "wss://api.turingtestchat.com" : "localhost:8080",
+    { autoConnect: false, transports: ["websocket"], upgrade: false, closeOnBeforeunload: false }));
+
 const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   const { Component, pageProps } = props;
+
+  const [user, setUser] = React.useState<User | null>(null);
 
   return (
     <>
@@ -21,9 +35,11 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
       <ThemeProvider theme={darkThemeProvider}>
-        <CssBaseline />
-        <Box sx={{ mt: "-18px" }} />
-        <Component {...pageProps} />
+        <LoginContext.Provider value={{ user, setUser }}>
+          <CssBaseline />
+          <Box sx={{ mt: "-18px" }} />
+          <Component {...pageProps} />
+        </LoginContext.Provider>
       </ThemeProvider>
     </>
   );
