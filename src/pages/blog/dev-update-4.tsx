@@ -35,7 +35,7 @@ const DevUpdate4 = () => {
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Developer Update #4</Typography>
           <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Results from the beta test</Typography>
           <Typography sx={{ fontSize: 18, mt: 5 }}>With the beta test started and finished, some useful information was gained from it.
-            In this blog post, I{"\'"}ll share some of my findings from it.</Typography>
+            In this blog post, I'll share some of my findings from it.</Typography>
           <Typography sx={{ fontSize: 22, mt: 2 }}>Joining a chat and the chat room</Typography>
           <Typography sx={{ fontSize: 18, mt: 1 }}>First, here are some statistics:</Typography>
           <List>
@@ -43,35 +43,35 @@ const DevUpdate4 = () => {
             <ListItem>2. around 50 chat rooms were queued, but cancelled before finding a chat</ListItem>
             <ListItem>3. The average time waiting for a chat before cancelling was around 40 seconds</ListItem>
           </List>
-          <Typography>Overall, I{"\'"}m mostly happy with these results.
+          <Typography>Overall, I'm mostly happy with these results.
             Unfortunately there were not a lot of players in the beta, which is why so many chats were cancelled.
             However, the chat queueing, joining, and messaging worked without any reported errors.
-            The server was configured to log everything that happened, and it didn{"\'"}t show any errors.
-            I was especially concerned about the ChatGPT rate limits, but there weren{"\'"}t enough players to really test it.
+            The server was configured to log everything that happened, and it didn't show any errors.
+            I was especially concerned about the ChatGPT rate limits, but there weren't enough players to really test it.
           </Typography>
           <Typography sx={{ fontSize: 22, mt: 2 }}>The Chat Bot</Typography>
           <Typography sx={{ fontSize: 18, mt: 1 }}>The chat bot running in the beta was a GPT-3.5-turbo bot with some highly randomized system prompts.
             Most people were able to see right through the bot, but it did have a few successes.
             Here are a few things that broke the bot:</Typography>
           <List>
-            <ListItem>1. If you ask the bot to do something it doesn{"\'"}t know how to do, it just breaks</ListItem>
+            <ListItem>1. If you ask the bot to do something it doesn't know how to do, it just breaks</ListItem>
             <ListItem>2. The bot sometimes fails miserably in following its goal</ListItem>
             <ListItem>3. The bot is too insistent on helping you</ListItem>
           </List>
           <Typography>The first issue is going to be difficult to fix.
-            One conversation asked the bot to do something that a human couldn{"\'"}t actually do.
+            One conversation asked the bot to do something that a human couldn't actually do.
             In this conversation, the bot tried deflecting the question by asking the other person if they are a bot.
             When the other person persisted, the bot broke and claimed it was a bot.
-            I{"\'"}ll have to really work on fixing this one, but hopefully I{"\'"}ll come up with something better.
+            I'll have to really work on fixing this one, but hopefully I'll come up with something better.
             Number 2 is due to a bug with generating the prompt, and is a simple fix.
-            I spent quite a bit of time dealing with #3, but it still isn{"\'"}t where it needs to be.
+            I spent quite a bit of time dealing with #3, but it still isn't where it needs to be.
             The bot will predictably ask you if you need help too often.
-            When you ask the bot if it need something, it will also predictably tell you it doesn{"\'"}t need anything.
+            When you ask the bot if it need something, it will also predictably tell you it doesn't need anything.
             On another note, the bot had about a one-third success rate in its deceptions.
             This is a good start, but I can make it better.
           </Typography>
           <Typography sx={{ fontSize: 22, mt: 2 }}>The Player Experience</Typography>
-          <Typography sx={{ fontSize: 18, mt: 1 }}>When I played the game, I found a few issues that didn{"\'"}t come up in development.</Typography>
+          <Typography sx={{ fontSize: 18, mt: 1 }}>When I played the game, I found a few issues that didn't come up in development.</Typography>
           <List>
             <ListItem>1. The chat bot types too fast</ListItem>
             <ListItem>2. The bot always sends messages at a speed proportional to length</ListItem>

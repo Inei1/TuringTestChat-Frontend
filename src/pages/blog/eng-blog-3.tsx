@@ -40,7 +40,7 @@ const EngBlog3 = () => {
           <Typography sx={{ fontSize: 18, mt: 5 }}>
             In this engineering blog post, the topics of how to build safeguards into chat and how to add ChatGPT to a chat is covered.
             In Turing Test Chat, users are not supposed to leave a chat in progress.
-            To help ensure this doesn{"\'"}t happen by accident, there are several precautions we can take:</Typography>
+            To help ensure this doesn't happen by accident, there are several precautions we can take:</Typography>
           <List>
             <ListItem>
               1. Notify users when they press the back button
@@ -73,7 +73,7 @@ window.addEventListener("popstate", onPopState);`}
           </SyntaxHighlighter>
           <Typography>The <Link target="_blank" rel="noreferrer" href="https://react.dev/reference/react/useCallback" color="#e9e9e9" fontFamily="monospace" fontSize={18}>useCallback hook</Link> { }
             is needed for React as a result of its render refreshing.
-            If we don{"\'"}t use that hook, attempting to remove the event listener will fail.
+            If we don't use that hook, attempting to remove the event listener will fail.
             This concept is explained in more detail in this { }
             <Link target="_blank" rel="noreferrer" href="https://dev.to/marcostreng/how-to-really-remove-eventlisteners-in-react-3och" color="#e9e9e9" fontFamily="monospace" fontSize={18}>blog post</Link>. { }
             Pressing the back button will then look like this (browser dependent): <br />
@@ -99,8 +99,8 @@ config = new Configuration({
 openai = new OpenAIApi(this.config);`}
           </SyntaxHighlighter>
           <Typography>Once you have that API initialized, you can call createChatCompletion to use ChatGPT.
-            ChatGPT{"\'"}s API requires you to have all messages in the form
-            (role: {"\""}Assistant{"\""} or {"\""}System{"\""} or {"\""}User{"\""}, content: {"\""}message{"\""}).
+            ChatGPT's API requires you to have all messages in the form
+            (role: "Assistant" or "System" or "User", content: "message").
             In this case, assistant is ChatGPT, user is the user, and system is a system message (explained later).
             This is implemented in the following code:</Typography>
           <SyntaxHighlighter language="typescript" style={dark}>

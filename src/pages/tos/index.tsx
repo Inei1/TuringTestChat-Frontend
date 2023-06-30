@@ -44,7 +44,7 @@ const Tos = () => {
           <Typography variant="h2" sx={{ my: 1, fontSize: 22 }}>Intellectual property</Typography>
           <Typography sx={{ my: 1 }}>All content on turingtestchat.com, including text, graphics, logos, images, and software,
             is the property of turingtestchat.com or its licensors and is protected by copyright, trademark, and other laws.
-            You may not copy, modify, distribute, or otherwise use Turing Test Chat{"\'"}s content without Turing Test Chat{"\'"}s prior written consent.</Typography>
+            You may not copy, modify, distribute, or otherwise use Turing Test Chat's content without Turing Test Chat's prior written consent.</Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 22 }}>User content</Typography>
           {/* the is the third */}
@@ -54,7 +54,7 @@ const Tos = () => {
             content throughout the world in any media.</Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 22 }}>Disclaimer of warranties</Typography>
-          <Typography sx={{ my: 1 }}>turingtestchat.com is provided {"\""}as is{"\""} and without warranty of any kind, either express or
+          <Typography sx={{ my: 1 }}>turingtestchat.com is provided "as is" and without warranty of any kind, either express or
             implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular
             purpose. Turing Test Chat does not warrant that turingtestchat.com will be uninterrupted or error-free.</Typography>
 
@@ -64,7 +64,7 @@ const Tos = () => {
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 22 }}>Indemnification</Typography>
           <Typography sx={{ my: 1 }}>You agree to indemnify and hold Turing Test Chat harmless from any claim or demand,
-            including reasonable attorneys{"\'"} fees, made by any third party due to or arising out of your breach of these
+            including reasonable attorneys' fees, made by any third party due to or arising out of your breach of these
             Terms or your violation of any law or the rights of a third party.</Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 22 }}>Governing law</Typography>

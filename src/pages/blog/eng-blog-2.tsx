@@ -37,8 +37,8 @@ const EngBlog2 = () => {
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Engineering Blog #2</Typography>
           <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Using WebSockets to create a chat application.</Typography>
           <Typography sx={{ fontStyle: "italic", fontWeight: "bold", fontSize: 20 }}>This blog entry focuses on writing the code for Turing Test Chat.
-            If you aren{"\'"}t familiar with coding, it may be difficult to understand.
-            Also, this blog covers the topics mentioned in the developer update, so it{"\'"}s recommended to read that first.</Typography>
+            If you aren't familiar with coding, it may be difficult to understand.
+            Also, this blog covers the topics mentioned in the developer update, so it's recommended to read that first.</Typography>
           <Typography sx={{ mt: 5 }}>
             To create the chat application, WebSockets with { }
             <Link target="_blank" rel="noreferrer" href="https://socket.io/" color="#e9e9e9">socket.io</Link> were used.
@@ -73,8 +73,8 @@ useEffect(() => {
           </SyntaxHighlighter>
           <Typography>The workflow here is that the client first calls sendMessage, which then calls the backend code.
             After this, the client receives the message response and displays it on screen.
-            Even though it{"\'"}s just an example, this is actually similar to the real code in use.</Typography>
-          <Typography>But to start from the beginning, here is what{"\'"}s done upon first clicking {"\""}join chat{"\""}:</Typography>
+            Even though it's just an example, this is actually similar to the real code in use.</Typography>
+          <Typography>But to start from the beginning, here is what's done upon first clicking "join chat":</Typography>
           <SyntaxHighlighter language="typescript" style={dark}>
             {`
 io.on("connection", (socket) => {
@@ -87,7 +87,7 @@ io.on("connection", (socket) => {
       socket.emit("roomFound", { roomId: roomId });
       // Send a message to everyone in the room.
       io.to(roomId).emit("foundChat");
-      // If one or both users haven{"\'"}t accepted after 30 seconds, cancel the chat
+      // If one or both users haven't accepted after 30 seconds, cancel the chat
       setTimeout(async () => {
         if (!user1.ready) {
           io.to(roomId).emit("readyExpired");
@@ -110,7 +110,7 @@ io.on("connection", (socket) => {
 //...
 }`}
           </SyntaxHighlighter>
-          <Typography>Of note, this uses socket.io{"\'"}s rooms functionality.
+          <Typography>Of note, this uses socket.io's rooms functionality.
             Clients can connect to these rooms, which then offers functionality to send messages to users in the room.</Typography>
           <Typography>Once an user accepts the chat, the following happens:</Typography>
           <SyntaxHighlighter language="typescript" style={dark}>
@@ -150,7 +150,7 @@ socket.on("readyChat", async (data) => {
           </SyntaxHighlighter>
           <Typography>This code just checks when a user is ready, and implements some timeouts for the end of the chat.
             The timeouts are implemented here to ensure that users are forced to have a result when the time is over.</Typography>
-            <Typography>The last bit of backend code is for determining the result when a user clicks on one of the options (such as {"\""}definitely a bot{"\""}):</Typography>
+            <Typography>The last bit of backend code is for determining the result when a user clicks on one of the options (such as "definitely a bot"):</Typography>
           <SyntaxHighlighter language="typescript" style={dark}>
             {`
 socket.on("result", async (data) => {
@@ -174,8 +174,8 @@ socket.on("result", async (data) => {
             This is because a selection affects both players at the same time.</Typography>
           <Typography>The frontend code is relatively simple, so an explanation should be enough.
             socket.emit("startRoom") is called when the "enter chat room" button is pressed, and it passes the username as data.
-            socket.emit({"\""}readyChat{"\""}) is called when clicking on {"\""}go to chat{"\""} after a chat was found.
-            socket.emit({"\""}result{"\""}) is called when clicking on an option after a chat is over. </Typography>
+            socket.emit("readyChat") is called when clicking on "go to chat" after a chat was found.
+            socket.emit("result") is called when clicking on an option after a chat is over. </Typography>
           <Typography>If any of this sounds interesting, you should sign up for Turing Test Chat.
             If you haven't read the developer update yet, you can find it { }
             <Link href="/blog/dev-update-2"

@@ -61,7 +61,7 @@ const Blog9 = () => {
             <ListItem>What is your occupation?</ListItem>
             <ListItem>What kind of music do you like?</ListItem>
           </List>
-          <Typography sx={{ fontSize: 18, mt: 1 }}>Keep in mind that a chatter{"\'"}s refusal to answer questions about themselves could be out of a desire for privacy or a pretense of being a bot, and doesn't mean that they must be a bot.</Typography>
+          <Typography sx={{ fontSize: 18, mt: 1 }}>Keep in mind that a chatter's refusal to answer questions about themselves could be out of a desire for privacy or a pretense of being a bot, and doesn't mean that they must be a bot.</Typography>
           <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>Questions A Bot Wouldn't Know</Typography>
           <Typography sx={{ fontSize: 18, mt: 1 }}>Some questions you could ask are about knowledge that you would expect a human to reasonably know.
             These questions can give you information on a chatter's understanding of recent events, personal experience, or analytical abilities.

@@ -19,7 +19,9 @@ export const Landing = () => {
           mt: 5
         }}>
         <Image alt="Turing Test Chat logo" src="/TTCLogov2.png" width={250} height={250} />
-        <Typography variant="h1" style={{ fontFamily: "monospace", fontSize: 100, fontWeight: "normal", color: "#e9e9e9" }}>Turing Test Chat</Typography>
+        <Typography variant="h1" style={{ fontFamily: "monospace", fontSize: 100, fontWeight: "normal", color: "#e9e9e9" }}>
+          Turing Test Chat
+        </Typography>
         {!user && <Link href="/login" style={{ marginTop: "2em", marginBottom: "2em" }}>
           <Button
             color="info"
