@@ -33,9 +33,9 @@ const Faq = () => {
         }}>
           <Typography variant="h1" sx={{ my: 2, fontSize: 50 }}>FAQ</Typography>
 
-          <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>When will the full release of the game come out?</Typography>
+          <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>How can I play Turing Test Chat?</Typography>
           <Typography sx={{ my: 1 }}>
-            The game will be publically available midnight PST on July 2, or July 2 8:00am UTC.
+            Register using your email address, and then click the large button to join a chat.
           </Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>How can I give feedback/report an issue?</Typography>

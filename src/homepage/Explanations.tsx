@@ -28,8 +28,7 @@ export const Explanations = () => {
           With the popular website <Link href="https://www.humanornot.ai/">Human or Not</Link> shutting down on June 28, it will no longer be possible to play an online social turing game.
           That's why Turing Test Chat is under development and very close to being finished.
           You will be able to play a game similar to the Human or Not game, but with some minor improvements.
-          Turing Test Chat will release at some point in July for everyone.
-          This human or not Turing Test is free for everyone, and if you want to start playing as soon as possible you should sign up for the waitlist!
+          Turing Test Chat is out now, and is the best alternative to human or not.
         </Typography>
       </Container>
     </Box>

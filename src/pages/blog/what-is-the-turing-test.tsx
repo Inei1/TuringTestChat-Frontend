@@ -1,7 +1,6 @@
-import { Box, Container, Typography, Link } from "@mui/material";
+import { Box, Container, Typography, Link, Button } from "@mui/material";
 import { Header } from "../../Header";
 import { Footer } from "../../homepage/Footer";
-import { Subscribe } from "../../homepage/Subscribe";
 import Head from "next/head";
 
 const Blog8 = () => {
@@ -120,11 +119,9 @@ const Blog8 = () => {
             In Turing Test Chat, you can talk to a ChatGPT AI chatbot who tries to deceive you into thinking it{"\'"}s a human.
             To make it interesting, the AI bot will sometimes try to convince you that it truly is a bot.
             Now add some other humans in the chat rooms who will try to convince you that they are a bot instead.
-            The combination of this means you{"\'"}re performing the Turing Test with ChatGPT while playing a game at the same time!
-            Sign up for the free { }
-            waitlist to participate in an online Turing Test upon release!
+            The combination of this means you're performing the Turing Test with ChatGPT while playing a game at the same time!
+            Sign up now to participate in a free online Turing Test!
           </Typography>
-          <Subscribe />
         </Container>
       </Box>
       <Footer />

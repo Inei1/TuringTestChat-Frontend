@@ -1,10 +1,8 @@
-import { Box, Container, Typography, Link as MuiLink } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { Header } from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
-import Link from "next/link";
 import Image from "next/image";
-import { Subscribe } from "@/homepage/Subscribe";
 
 const Blog11 = () => {
   return (
@@ -87,15 +85,15 @@ const Blog11 = () => {
           <Typography>
             And here's what it looks like after you've selected.
             Here, the selection is completely wrong as the choice of definitely a human was selected, while the other chatter was a bot.
+          </Typography>
           <Image src="/TTCSelected.png" alt="Result selected" width={873} height={483} />
           <Typography>
             When the other chatter is a human, you also have an element of deception added.
             You won't know for sure until you both select, but the other person's selection will affect your deception exp.
             If they get it wrong or don't select, or your goal is your true identity, then you receive points.
             If they correctly deduce who you are and if it's opposite to your goal, then you lose deception exp.
+          </Typography>
           <Image src="/TTCHumanSelected.png" alt="Human Selected Result" width={957} height={951} />
-          </Typography>
-          </Typography>
           <Typography variant="h2" sx={{ mt: 1, fontSize: 20 }}>
             Monetization
           </Typography>
@@ -115,10 +113,7 @@ const Blog11 = () => {
             It's been lots of time and effort spent full-time over the last few months to get here.
             Although Human or Not is shutting down, I hope that Turing Test Chat will help fill the void with something possibly better.
             Some things might not be as good, like the bot (I'm an individual, not an entire AI research company!), but there will be continuous work put into it.
-            If you'd like to be notified by email on Turing Test Chat's release, feel free to sign up for the waitlist below.
-            Otherwise, check back on July 2 at midnight PST and get to chatting!
           </Typography>
-          <Subscribe />
         </Container>
       </Box>
       <Footer />

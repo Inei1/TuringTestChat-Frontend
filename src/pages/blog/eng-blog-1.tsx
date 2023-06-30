@@ -4,7 +4,6 @@ import { Footer } from "../../homepage/Footer";
 import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import Head from "next/head";
-import { Subscribe } from "@/homepage/Subscribe";
 
 const EngBlog1 = () => {
   return (
@@ -42,9 +41,10 @@ const EngBlog1 = () => {
             Also, this blog covers the topics mentioned in the developer update, so it{"\'"}s recommended to read that first.</Typography>
           <Typography sx={{ fontSize: 18, mt: 5 }}>As the first entry, there is a lot to cover, so I{"\'"}ll briefly go over what{"\'"}s already in place.
             Turing Test Chat is built by one person using a MERN (MongoDB, Express, React, Node) stack and runs on AWS.
-            Some AWS services used are EC2 (backend hosting), S3 (frontend static site hosting), SES (waitlist emails), and CodeDeploy (CI/CD).
-            The waitlist uses an email validator service to avoid SES sending hard bounced emails.
+            Some AWS services used are EC2 (backend hosting), S3 (frontend static site hosting), SES (emails), and CodeDeploy (CI/CD).
+            The emails use a validator service to avoid SES sending hard bounced emails.
             On the frontend, MUI is used with React and TypeScript.
+            (Update July 2 2023: I'm using two GCP compute instances for frontend and backend, and I changed from React to NextJS.)
             The backend uses Express, Node, and OvernightJS with TypeScript to communicate with a MongoDB database.
             With that overview done, the next topic is the recently added UI for chat and the backend authentication.
             <br />
@@ -134,10 +134,9 @@ private async loginPassword(req: Request, res: Response) {
             It{"\'"}s a simple custom made system coded up in an hour, but it{"\'"}s functional.</Typography>
           <Typography>Does the coding of the blog sound interesting?
             Have you ever wanted to play a social deduction game centered around the difference between humans and AI?
-            You should sign up for the Turing Test Chat waitlist.
-            Progress and engineering updates similar to this one will happen somewhat frequently until Turing Test Chat is released.
+            You should sign up for Turing Test Chat.
+            Progress and engineering updates similar to this one will happen somewhat frequently.
           </Typography>
-          <Subscribe />
         </Container>
       </Box>
       <Footer />

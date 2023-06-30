@@ -1,7 +1,6 @@
 import { Box, Container, List, ListItem, Typography, Link as MuiLink } from "@mui/material";
 import { Header } from "../../Header";
 import { Footer } from "../../homepage/Footer";
-import { Subscribe } from "../../homepage/Subscribe";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -10,15 +9,15 @@ const Blog9 = () => {
     <>
       <Head>
         <title>The Turing Test Questions | Turing Test Chat</title>
-        <meta name="description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+        <meta name="description" content="A list of questions you should and shouldn't ask in a Turing Test" />
         <meta property="og:title" content="The Turing Test Questions | Turing Test Chat" />
-        <meta property="og:description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+        <meta property="og:description" content="A list of questions you should and shouldn't ask in a Turing Test" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://www.turingtestchat.com/TTCLogov2.png" />
         <meta property="og:url" content="https://www.turingtestchat.com" />
 
         <meta name="twitter:title" content="The Turing Test Questions | Turing Test Chat" />
-        <meta name="twitter:description" content="Perform the Turing Test in a chat with ChatGPT. In this game of deception and detection, distinguishing between ChatGPT and humans is not easy." />
+        <meta name="twitter:description" content="A list of questions you should and shouldn't ask in a Turing Test." />
         <meta name="twitter:image" content="https://www.turingtestchat.com/TTCLogov2.png" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="https://www.turingtestchat.com/" />
@@ -130,7 +129,6 @@ const Blog9 = () => {
             Questions about topics such as financial details or intimate relationships should be avoided.
             These questions are unlikely to give useful responses anyway, since most humans won't reveal this information.
           </Typography>
-          <Subscribe />
         </Container>
       </Box>
       <Footer />

@@ -1,7 +1,6 @@
 import { Box, Container, Typography, Link as MuiLink } from "@mui/material";
 import { Header } from "../../Header";
 import { Footer } from "../../homepage/Footer";
-import { Subscribe } from "../../homepage/Subscribe";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -53,7 +52,6 @@ const Blog10 = () => {
             Once you are assigned a role, you must speak with the other chatter for two and a half minutes with the goal of deceiving the other chatter as well as detecting who they are.
             You receive points for succeeding and lose points for failing to do either of these tasks.
             The best part about this Turing Test website is that you can perform the Turing Test online free.
-            Turing Test Chat is currently in development, with a waitlist available <Link target="_blank" href="/subscribe" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 18 }}>here</Link>.
           </Typography>
           <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>Features of Turing Test Chat</Typography>
           <Typography>As a chat bot AI online for free, Turing Test Chat eliminates any barriers to taking the Turing Test online with a chatbot.
@@ -74,10 +72,9 @@ const Blog10 = () => {
             At the end of each game in Turing Test chat, the other chatter will evaluate your chat messages to see if you pass the human or AI test.
             If your skills in social deception are up to par, you might be able to pass the AI human test.</Typography>
           <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>How to Play Turing Test Chat</Typography>
-          <Typography>As it is currently in development, Turing Test Chat is not available to play.
-            However, you can sign up for the waitlist to be one of the first to play the game.</Typography>
-          <Typography variant="h3" sx={{ fontSize: 20, mt: 2 }}>Join the waitlist</Typography>
-          <Typography>To play the game as soon as possible, <Link target="_blank" href="/subscribe" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 18 }}>sign up here</Link> or at the bottom of this page</Typography>
+          <Typography>To play Turing Test Chat, simply sign up on the website.
+            From there, you only have to click two buttons to join a chat.
+          </Typography>
           <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>Advantages of Turing Test Chat</Typography>
           <Typography>There are some unique advantages of trying out this anonymous AI chatting website.</Typography>
           <Typography variant="h3" sx={{ fontSize: 20, mt: 2 }}>Check Out the Current State of Conversational AI and Chatbots</Typography>
@@ -99,16 +96,17 @@ const Blog10 = () => {
           <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>Conclusion</Typography>
           <Typography>Turing Test Chat is the best AI chatbot game.
             The features of Turing Test Chat include the ability to chat anonymously with AI chat bots.
-            To play Turing Test Chat, you can easily sign up for the waitlist below.
+            To play Turing Test Chat, you can easily sign up on the website.
             Your email will only be used to send updates on development or to notify you on release.</Typography>
           <Typography>The advantages of playing Turing Test chat are more than just entertainment.
             Playing the game will keep you up to date on intelligent AI chat.
             You'll improve your social skills in detection and deception.
             Also, you get to have fun conversations with a large variety of people.
           </Typography>
-          <Typography>Do you want to prepare for the release of Turing Test chat? Check out <Link target="_blank" href="/blog/turing-test-questions" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 18 }}>this blog post</Link> on questions you should ask in a Turing Test.
-            And don't forget that to enjoy the best AI chatting website, be sure to sign up for the waitlist today.</Typography>
-          <Subscribe />
+          <Typography>
+            Do you want to learn about some questions you could ask in Turing Test Chat?
+            Check out <Link target="_blank" href="/blog/turing-test-questions" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 18 }}>this blog post</Link> on questions you should ask in a Turing Test.
+          </Typography>
         </Container>
       </Box>
       <Footer />

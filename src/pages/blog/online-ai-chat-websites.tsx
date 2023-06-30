@@ -1,7 +1,6 @@
 import { Box, Container, Typography, Link as MuiLink } from "@mui/material";
 import { Header } from "../../Header";
 import { Footer } from "../../homepage/Footer";
-import { Subscribe } from "../../homepage/Subscribe";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -52,7 +51,6 @@ const Blog11 = () => {
             Turing Test Chat is a unique upcoming chat website where you essentially perform the <Link href="/what-is-the-turing-test" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 18 }}>Turing Test</Link> with ChatGPT.
             You will be assigned to chat with another person or with a bot, and then you indicate if you think the other person was a human or a bot.
             You can learn more about Turing Test Chat <Link href="/blog/turing-test-chat-best-ai-chat" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 18 }}>Here</Link>.
-            To sign up for the waitlist, <Link href="/subscribe" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 18 }}>click here</Link> or scroll to the bottom of this page.
           </Typography>
           <Typography variant="h2" sx={{ fontSize: 22, mt: 5 }}>2. <MuiLink href="https://chat.openai.com/" style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 22 }}>ChatGPT</MuiLink></Typography>
           <Container sx={{ display: "flex", justifyContent: "center" }}>
@@ -130,9 +128,8 @@ const Blog11 = () => {
           <Typography>
             There are many recent websites where you can talk to robots.
             Developments in AI have enabled new and unique AI chatbot websites to be created.
-            The best website on this list is Turing Test Chat (obviously!), so don't hesitate to sign up for the waitlist now!
+            The best website on this list is Turing Test Chat (obviously!), so don't hesitate to sign up now!
           </Typography>
-          <Subscribe />
         </Container>
       </Box>
       <Footer />

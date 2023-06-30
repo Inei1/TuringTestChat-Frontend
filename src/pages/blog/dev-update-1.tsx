@@ -2,7 +2,6 @@ import { Box, Container, Typography } from "@mui/material";
 import { Header } from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
-import { Subscribe } from "@/homepage/Subscribe";
 import Image from "next/image";
 
 const DevUpdate1 = () => {
@@ -68,10 +67,9 @@ const DevUpdate1 = () => {
           To earn credits, you can watch ads or complete other tasks (to be determined).
           Turing Test Chat will always offer at least a few credits for free every day.</Typography>
           <Typography sx={{ fontSize: 18, mt: 2  }}>Have you ever wanted to play a social deduction game centered around the difference between humans and AI?
-          You should sign up for the Turing Test Chat waitlist.
-          Progress and engineering updates similar to this one will happen somewhat frequently until Turing Test Chat is released.
+          You should sign up for the Turing Test Chat.
+          Progress and engineering updates similar to this one will happen somewhat frequently.
           </Typography>
-          <Subscribe />
         </Container>
       </Box>
       <Footer />

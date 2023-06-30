@@ -2,7 +2,6 @@ import { Box, Container, List, ListItem, Typography, Link } from "@mui/material"
 import { Header } from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
-import { Subscribe } from "@/homepage/Subscribe";
 
 const DevUpdate4 = () => {
   return (
@@ -77,16 +76,16 @@ const DevUpdate4 = () => {
             <ListItem>1. The chat bot types too fast</ListItem>
             <ListItem>2. The bot always sends messages at a speed proportional to length</ListItem>
             <ListItem>3. The bot will never stop typing once it starts</ListItem>
-            <ListItem>4. If both players have the goal of bot, it{"\'"}s obvious that the other person is a human</ListItem>
-            <ListItem>5. It{"\'"}s difficult to fool others into thinking you are a bot</ListItem>
+            <ListItem>4. If both players have the goal of bot, it's obvious that the other person is a human</ListItem>
+            <ListItem>5. It's difficult to fool others into thinking you are a bot</ListItem>
           </List>
           <Typography>To fix #1, I can lower the typing speed of the bot.
-            I{"\'"}ve already made a system for the bot to slow down its typing, but I set it too high.
+            I've already made a system for the bot to slow down its typing, but I set it too high.
             For #2, I can randomly increase the amount of time spent before the bot sends a message.
             Sometimes a human will write a response, then cut it down to only a few words, so the bot will need to mimic this.
             #3 can be fixed by occassionally having the bot stop typing in the middle of a message.
             To elaborate on #4, goals for both sides are fully random and separate from each other.
-            However, it{"\'"}s always the case that at least one human is in a chat.
+            However, it's always the case that at least one human is in a chat.
             So, if your goal is bot and the other person says they are a bot, both sides are clearly a human.
             To fix this, both sides should have different goals (might have to put a little randomness to break this rule sometimes!).
             Number 5 is a good thing, since it shows that you can improve your skills by playing the game.
@@ -94,16 +93,14 @@ const DevUpdate4 = () => {
           <Typography sx={{ fontSize: 22, mt: 2 }}>Player count issues</Typography>
           <Typography sx={{ fontSize: 18, mt: 1 }}>As mentioned earlier, there were not a lot of people in the beta test.
             In fact, I think the only times a real human was on both sides was when I participated.
-            To rectify this, I{"\'"}ll launch on platforms like <Link href="https://www.producthunt.com/">Product Hunt</Link> and others.
-            I{"\'"}ll invest in as many forms of promotion as I can.
+            To rectify this, I'll launch on platforms like <Link href="https://www.producthunt.com/">Product Hunt</Link> and others.
+            I'll invest in as many forms of promotion as I can.
             The beta had very little promotion, which is why the turnout was low.
-            As a software engineer, marketing is not my specialty, but I{"\'"}m doing what I can.</Typography>
+            As a software engineer, marketing is not my specialty, but I'm doing what I can.</Typography>
           <Typography sx={{ fontSize: 18, mt: 2 }}>
             In conclusion, the beta was valuable for the information I obtained.
-            I apologize to anyone who tried it and wanted to chat more, but couldn{"\'"}t due to player count issues.
-            If you want to be notified for the full release, you should sign up for the waitlist.
+            I apologize to anyone who tried it and wanted to chat more, but couldn't due to player count issues.
           </Typography>
-          <Subscribe />
         </Container>
       </Box>
       <Footer />

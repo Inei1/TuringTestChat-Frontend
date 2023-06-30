@@ -61,7 +61,7 @@ const DevUpdate3 = () => {
             If you try to leave the chat by pressing the back button, it will show this message:<br />
             <Image alt="Leave back button" src="/b3Popstate.png" width={445} height={149} />
             When you try to refresh or go to another website in the address bar, a message shows up.
-            It{"\'"}s not possible to change the text on this message, but you will receive the same penalty.
+            It's not possible to change the text on this message, but you will receive the same penalty.
             It looks like this: <br />
             <Image alt="Leave address bar" src="/b3onBeforeUnload.png" width={446} height={128} />
             When one user leaves the chat, the other user will get a message that the other chatter has left.
@@ -72,11 +72,10 @@ const DevUpdate3 = () => {
             There is a chance upon joining a chat that the user will instead join into ChatGPT.
             While this implementation is still very much a work in progress, here is an image of a working prototype: <br />
             <Image alt="ChatGPT chat" src="/b3ChatGPT.png" width={807} height={802} />
-            As you can see, it{"\'"}s not particularly convincing.
+            As you can see, it's not particularly convincing.
             However, this bot will be drastically improved by the time the beta is released.<p/>
             This concludes the third developer update for Turing Test Chat.
-            If this sounds interesting, you should sign up for the waitlist.
-            If you{"\'"}re interested in the coding behind this developer update (which contains more details on the ChatGPT implementation), you can check out the { }
+            If you're interested in the coding behind this developer update (which contains more details on the ChatGPT implementation), you can check out the { }
             <Link href="/blog/eng-blog-3"
               style={{
                 color: "#e9e9e9",

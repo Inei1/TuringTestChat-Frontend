@@ -3,7 +3,6 @@ import { Header } from "./Header";
 import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
-import { Subscribe } from "./homepage/Subscribe";
 import { Explanations } from "./homepage/Explanations";
 import Head from "next/head";
 

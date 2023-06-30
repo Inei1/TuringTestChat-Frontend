@@ -140,7 +140,7 @@ messages: [{
             To get better results, you can use a different model like GPT-4 and/or fine tune the system message.
             To use GPT-4 you need to apply for access from OpenAI, who are slowly rolling it out.</Typography>
           <Typography>This concludes the engineering blog #3 for TuringTestChat.
-            If the idea of a game of deception and detection involving ChatGPT sounds interesting, you should sign up for the waitlist.
+            If the idea of a game of deception and detection involving ChatGPT sounds interesting, you should sign up.
             If you want to learn more about TuringTestChat, you can check out the {}
             <Link target="_blank" rel="noreferrer" href="/blog/dev-update-2"
               sx={{

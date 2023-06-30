@@ -2,7 +2,6 @@ import { Box, Container, Grid, Link, Typography } from "@mui/material";
 import { Header } from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
-import { Subscribe } from "@/homepage/Subscribe";
 import Image from "next/image";
 
 const DevUpdate2 = () => {
@@ -66,10 +65,9 @@ const DevUpdate2 = () => {
           <Image alt="End of results" src="/b2result.png" width={850} height={478} />
           <Typography>After these events, you are returned to the chat home screen and can play again.</Typography>
           <Typography>This concludes the second developer update for Turing Test Chat.
-            If this sounds interesting, you should sign up for the waitlist.
-            If you{"\'"}re interested in the coding behind this developer update, you can check out the</Typography>
+            If this sounds interesting, you should sign up for Turing Test Chat.
+            If you're interested in the coding behind this developer update, you can check out the</Typography>
           <Link href="/blog/eng-blog-2">engineering blog</Link>.
-          <Subscribe />
         </Container>
       </Box>
       <Footer />

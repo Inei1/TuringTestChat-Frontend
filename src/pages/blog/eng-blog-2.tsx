@@ -173,11 +173,11 @@ socket.on("result", async (data) => {
           <Typography>When a user makes their selection, it immediately notifies both them and the other user of their selection.
             This is because a selection affects both players at the same time.</Typography>
           <Typography>The frontend code is relatively simple, so an explanation should be enough.
-            socket.emit({"\""}startRoom{"\""}) is called when the {"\""}enter chat room{"\""} button is pressed, and it passes the username as data.
+            socket.emit("startRoom") is called when the "enter chat room" button is pressed, and it passes the username as data.
             socket.emit({"\""}readyChat{"\""}) is called when clicking on {"\""}go to chat{"\""} after a chat was found.
             socket.emit({"\""}result{"\""}) is called when clicking on an option after a chat is over. </Typography>
-          <Typography>If any of this sounds interesting, you should sign up for the Turing Test Chat waitlist.
-            If you haven{"\'"}t read the developer update yet, you can find it { }
+          <Typography>If any of this sounds interesting, you should sign up for Turing Test Chat.
+            If you haven't read the developer update yet, you can find it { }
             <Link href="/blog/dev-update-2"
               style={{
                 color: "#e9e9e9",
