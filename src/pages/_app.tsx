@@ -27,6 +27,8 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   const { Component, pageProps } = props;
 
   const [user, setUser] = React.useState<User | null>(null);
+  const [socket, setSocket] = React.useState<Socket<DefaultEventsMap, DefaultEventsMap>>(io(process.env.NODE_ENV === "production" ? "wss://api.turingtestchat.com" : "localhost:8080",
+    { autoConnect: false, transports: ["websocket"], upgrade: false, closeOnBeforeunload: false }));
 
   return (
     <>
@@ -36,9 +38,11 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
       </Head>
       <ThemeProvider theme={darkThemeProvider}>
         <LoginContext.Provider value={{ user, setUser }}>
-          <CssBaseline />
-          <Box sx={{ mt: "-18px" }} />
-          <Component {...pageProps} />
+          <SocketContext.Provider value={socket}>
+            <CssBaseline />
+            <Box sx={{ mt: "-18px" }} />
+            <Component {...pageProps} />
+          </SocketContext.Provider>
         </LoginContext.Provider>
       </ThemeProvider>
     </>
