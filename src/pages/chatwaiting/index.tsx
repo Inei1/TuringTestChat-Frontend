@@ -32,6 +32,7 @@ export const ChatWaiting = () => {
   }, [socket, chatFound, chatExpired]);
 
   useEffect(() => {
+    socket.connect();
     setTimeout(() => {
       if (!socket.connected) {
         setSelfDisconnect(true);
