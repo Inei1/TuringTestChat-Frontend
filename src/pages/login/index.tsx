@@ -20,8 +20,12 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
   const [tosAccepted, setTosAccepted] = useState(false);
+  const [registerButtonDelayed, setRegisterButtonDelayed] = useState(false);
+  const [loginButtonDelayed, setLoginButtonDelayed] = useState(false);
 
   const handleSignIn = async (e: any) => {
+    setLoginButtonDelayed(true);
+    setTimeout(() => setLoginButtonDelayed(false), 3000)
     e.preventDefault();
     try {
       const result = await fetch(Constants.BASE_URL + "login/password", {
@@ -91,6 +95,8 @@ export const Login = () => {
   }
 
   const handleSignUp = async (e: any) => {
+    setRegisterButtonDelayed(true);
+    setTimeout(() => setRegisterButtonDelayed(false), 3000);
     e.preventDefault();
     const validate = validateSignup()
     if (validate) {
@@ -160,6 +166,7 @@ export const Login = () => {
                           type="password"
                           onChange={(e) => setPassword(e.target.value)} />
                         <Button
+                          disabled={loginButtonDelayed}
                           type="submit"
                           size="large"
                           variant="contained"
@@ -205,7 +212,7 @@ export const Login = () => {
                           label={`I accept the Terms of Service and Privacy Policy, and I am at least 13 years of age or older`}
                           control={<Checkbox checked={tosAccepted} onChange={(e) => setTosAccepted(e.target.checked)} />} />
                         <Button
-                          disabled={!tosAccepted}
+                          disabled={!tosAccepted || registerButtonDelayed}
                           type="submit"
                           size="large"
                           variant="contained"
