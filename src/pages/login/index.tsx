@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { LoginContext } from "../_app";
+import { StatusCodes } from "http-status-codes";
 
 export const Login = () => {
 
@@ -22,6 +23,7 @@ export const Login = () => {
   const [tosAccepted, setTosAccepted] = useState(false);
   const [registerButtonDelayed, setRegisterButtonDelayed] = useState(false);
   const [loginButtonDelayed, setLoginButtonDelayed] = useState(false);
+  const [loginFailedMessage, setLoginFailedMessage] = useState("");
 
   const handleSignIn = async (e: any) => {
     setLoginButtonDelayed(true);
@@ -32,10 +34,17 @@ export const Login = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: name, password: password }),
-      }).then(res => res.json());
-      if (result.succeeded) {
-        setUser(result.user);
+      });
+      if (result.ok) {
+        const resultJson = await result.json();
+        setUser(resultJson.user);
         router.push("/home");
+      } else if (result.status === StatusCodes.UNAUTHORIZED) {
+        setLoginFailedMessage("Incorrect username or password");
+        setTimeout(() => setLoginFailedMessage(""), 3000);
+      } else if (result.status === StatusCodes.BAD_REQUEST) {
+        setLoginFailedMessage("Enter a valid username and password");
+        setTimeout(() => setLoginFailedMessage(""), 3000);
       }
     } catch (err) {
       console.error(err);
@@ -45,50 +54,45 @@ export const Login = () => {
   const validateSignup = () => {
     if (email.length === 0) {
       setAccountFailedMessage("Email must not be empty");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }
     // validate email regex
     if (!email.match("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$")) {
       setAccountFailedMessage("Invalid email");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }
     // don't allow < > & ' " or /
     // backend escapes these so they will not work properly when trying to log in
     if (email.match("[<>&\'\"/]+")) {
       setAccountFailedMessage("Email cannot contain < > & \' \" or /");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }
     if (name.length === 0) {
       setAccountFailedMessage("Username must not be empty");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
-      return false;
-    }
-    if (name.length < 6) {
-      setAccountFailedMessage("Username must be at least 6 characters long");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }
     if (name.match("[<>&\'\"/]+")) {
       setAccountFailedMessage("Name cannot contain < > & \' \" or /");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }
     if (password.length === 0) {
       setAccountFailedMessage("Password must not be empty");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }
     if (password.length < 6) {
       setAccountFailedMessage("Password must be at least 6 characters long");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }
     if (password.match("[<>&\'\"/]+")) {
       setAccountFailedMessage("Password cannot contain < > & \' \" or /");
-      setTimeout(() => setAccountFailedMessage(""), 5000);
+      setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }
     return true;
@@ -110,6 +114,7 @@ export const Login = () => {
           setAccountCreated(true);
         } else {
           setAccountFailedMessage(result.message);
+          setTimeout(() => setAccountFailedMessage(""), 3000);
         }
       } catch (err) {
         throw err;
@@ -228,6 +233,7 @@ export const Login = () => {
             })()}
             {accountCreated && tabIndex === 1 && <Typography>Account successfully created! Please log in.</Typography>}
             {accountFailedMessage.length > 0 && tabIndex === 1 && <Typography>{accountFailedMessage}</Typography>}
+            {loginFailedMessage.length > 0 && <Typography>{loginFailedMessage}</Typography>}
             {/* <Link style={{ color: "#E9E9E9", fontFamily: "monospace" }} href={"/forgotpassword"}>Forgot Password?</Link> */}
           </Box>
         </Box>
