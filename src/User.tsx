@@ -40,7 +40,7 @@ export const User = () => {
           </Box>
         </Tooltip>
       </>}
-      <Button color="info" variant="contained" sx={{ fontSize: isMobile ? 10 : 16 }} size="small">
+      <Button color="info" variant="contained" sx={{ fontSize: isMobile ? 10 : 16, ml: "auto" }} size="small">
         <Link href="/" onClick={logout} style={{ textDecoration: "none", color: "#000000" }}>Logout</Link>
       </Button>
     </>
