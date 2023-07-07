@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Link, Typography } from "@mui/material";
 import { Header } from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
@@ -37,6 +37,12 @@ const PrivacyPolicy = () => {
           <Typography sx={{ my: 1 }}>The personal data collected from you may include your email address.
             Turing Test Chat may also collect non-personally identifiable information such as your IP address and browsing behavior.
             Turing Test Chat will store your chat messages.</Typography>
+          <Typography sx={{ my: 1 }}>Third party vendors, including Google, use cookies to serve ads based on a user's prior visits to your website or other websites.
+            Google's use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.
+            Users may opt out of personalized advertising by visiting Google's <Link target="_blank" href="https://www.google.com/settings/ads">Ads Settings</Link>.
+            Additionally, the third-party ad service <Link target="_blank" href="https://www.ezoic.com/">Ezoic</Link> may serve peronalized ads.
+            You may view Ezoic's part of the Turing Test Chat <Link target="_blank" href="https://g.ezoic.net/privacy/turingtestchat.com">privacy policy here</Link>.
+            To opt out of third party ad vendors, you can visit www.aboutads.info.</Typography>
           <Typography sx={{ my: 1 }}>Turing Test Chat uses your personal data to provide you with the products and services you have requested,
             to communicate with you about Turing Test Chat's products and services, and to improve Turing Test Chat's offerings.
             Turing Test Chat may also use your information for market research purposes, but only in an aggregated and anonymous form.</Typography>
