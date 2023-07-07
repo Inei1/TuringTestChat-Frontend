@@ -28,9 +28,6 @@ export const ChatFooter = (props: ChatFooterProps) => {
   }, [props.socket]);
 
   const handleTyping = (e: any) => {
-    if (e.key === "Enter") {
-      sendMessage();
-    }
     props.socket.emit("typing", "Chatter");
     if (typingTimeout) {
       clearTimeout(typingTimeout);
@@ -38,7 +35,8 @@ export const ChatFooter = (props: ChatFooterProps) => {
     setActiveTimeout(setTimeout(() => props.socket.emit("typingStop"), 5000));
   }
 
-  const sendMessage = () => {
+  const sendMessage = (e: any) => {
+    e.preventDefault();
     let messageToSend = message;
     if (message.length > MAX_LENGTH) {
       messageToSend = message.substring(0, MAX_LENGTH);
@@ -64,29 +62,29 @@ export const ChatFooter = (props: ChatFooterProps) => {
 
   return (
     <Box>
-      <Grid container width={"100%"}>
-        <Typography>{canSend ? "Your turn to chat" : "Waiting for other chatter..."}</Typography>
-        <Grid item xs={11.5}>
-          <TextField
-            disabled={!canSend}
-            sx={{ input: { color: "#e9e9e9", backgroundColor: "#2D2D2D" }, borderColor: "primary.info", width: "100%" }}
-            type="text"
-            placeholder="Write message"
-            className="message"
-            value={message}
-            onChange={(e) => updateMessage(e)}
-            onKeyDown={handleTyping}
-          />
-        </Grid>
-        <Grid item xs={0.5} sx={{ my: 1 }}>
-          <IconButton>
+      <form onSubmit={(e) => sendMessage(e)}>
+        <Grid container width={"100%"}>
+          <Typography>{canSend ? "Your turn to chat" : "Waiting for other chatter..."}</Typography>
+          <Grid item xs={11.5}>
+            <TextField
+              disabled={!canSend}
+              sx={{ input: { color: "#e9e9e9", backgroundColor: "#2D2D2D" }, borderColor: "primary.info", width: "100%" }}
+              type="text"
+              placeholder="Write message"
+              className="message"
+              value={message}
+              onChange={(e) => updateMessage(e)}
+              onKeyDown={handleTyping}
+            />
+          </Grid>
+          <IconButton type="submit" onClick={(e) => sendMessage(e)}>
             <SendIcon color="primary" />
           </IconButton>
         </Grid>
-      </Grid>
-      <Typography>{messageLength + ` / ${MAX_LENGTH}`}</Typography>
-      <Box sx={{ my: 2 }} />
-      <Box ref={props.footerRef} />
+        <Typography>{messageLength + ` / ${MAX_LENGTH}`}</Typography>
+        <Box sx={{ my: 2 }} />
+        <Box ref={props.footerRef} />
+      </form>
     </Box>
   );
 };

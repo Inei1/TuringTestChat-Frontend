@@ -20,7 +20,7 @@ export const LoginContext = React.createContext<LoginContextType>({
 });
 
 export const SocketContext = React.createContext<Socket<DefaultEventsMap, DefaultEventsMap>>(
-  io(process.env.NODE_ENV === "production" ? "wss://api.turingtestchat.com" : "localhost:8080",
+  io(process.env.NODE_ENV === "production" ? "wss://api.turingtestchat.com" : "192.168.0.166:8080",
     { autoConnect: false, transports: ["websocket"], upgrade: false, closeOnBeforeunload: false }));
 
 const MyApp: React.FunctionComponent<MyAppProps> = (props) => {

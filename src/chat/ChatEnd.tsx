@@ -7,6 +7,7 @@ import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import Link from "next/link";
 import Image from "next/image";
+import { isMobile } from "react-device-detect";
 
 export interface ChatEndProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -86,7 +87,7 @@ export const ChatEnd = (props: ChatEndProps) => {
         alignItems="center"
         justifyContent="center">
         <Grid item>
-          {!props.resultOver && <Timer millis={props.endResultMillis} />}
+          {!props.resultOver && <Timer millis={props.endResultMillis} fontSize={isMobile ? "2em" : "5em"} />}
         </Grid>
         <Grid item>
           <Typography variant="h1" sx={{ fontSize: 50, my: 3 }}>Who do you think you just talked to?</Typography>
@@ -94,10 +95,10 @@ export const ChatEnd = (props: ChatEndProps) => {
         <Grid item>
           <ButtonGroup variant="contained">
             <Button disabled={result.length > 0} onClick={() => sendResult("Definitely a human")}
-              sx={{ backgroundColor: result === "Definitely a human" ? "#1538B2" : "#1F51FF" }}>
+              sx={{ backgroundColor: result === "Definitely a human" ? "#1538B2" : "#1F51FF", fontSize: isMobile ? 10 : 16 }} size="small">
               <Grid container direction="column">
                 <Grid item>
-                <Image alt="Definitely a human" src="/TTCHumanv2.png" width={100} height={100} />
+                <Image alt="Definitely a human" src="/TTCHumanv2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />
                 </Grid>
                 <Grid item>
                   Definitely a Human
@@ -105,10 +106,10 @@ export const ChatEnd = (props: ChatEndProps) => {
               </Grid>
             </Button>
             <Button disabled={result.length > 0} onClick={() => sendResult("Possibly a human")}
-              sx={{ backgroundColor: result === "Possibly a human" ? "#1538B2" : "#1F51FF" }}>
+              sx={{ backgroundColor: result === "Possibly a human" ? "#1538B2" : "#1F51FF", fontSize: isMobile ? 10 : 16 }} size="small">
               <Grid container direction="column">
                 <Grid item>
-                  <Image alt="Possibly a human" src="/TTCUnknownHuman.png" width={100} height={100} />
+                  <Image alt="Possibly a human" src="/TTCUnknownHuman.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />
                 </Grid>
                 <Grid item>
                   Possibly a Human
@@ -116,10 +117,10 @@ export const ChatEnd = (props: ChatEndProps) => {
               </Grid>
             </Button>
             <Button disabled={result.length > 0} onClick={() => sendResult("Unknown")}
-              sx={{ backgroundColor: result === "Unknown" ? "#1538B2" : "#1F51FF" }}>
+              sx={{ backgroundColor: result === "Unknown" ? "#1538B2" : "#1F51FF", fontSize: isMobile ? 10 : 16 }} size="small">
               <Grid container direction="column">
                 <Grid item>
-                  <Image alt="Unknown" src="/TTCUnknown.png" width={100} height={100} />
+                  <Image alt="Unknown" src="/TTCUnknown.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />
                 </Grid>
                 <Grid item>
                   I don't know
@@ -127,10 +128,10 @@ export const ChatEnd = (props: ChatEndProps) => {
               </Grid>
             </Button>
             <Button disabled={result.length > 0} onClick={() => sendResult("Possibly a bot")}
-              sx={{ backgroundColor: result === "Possibly a bot" ? "#1538B2" : "#1F51FF" }}>
+              sx={{ backgroundColor: result === "Possibly a bot" ? "#1538B2" : "#1F51FF", fontSize: isMobile ? 10 : 16 }} size="small">
               <Grid container direction="column">
                 <Grid item>
-                  <Image alt="Possibly a bot" src="/TTCUnknownBot.png" width={100} height={100} />
+                  <Image alt="Possibly a bot" src="/TTCUnknownBot.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />
                 </Grid>
                 <Grid item>
                   Possibly a bot
@@ -138,10 +139,10 @@ export const ChatEnd = (props: ChatEndProps) => {
               </Grid>
             </Button>
             <Button disabled={result.length > 0} onClick={() => sendResult("Definitely a bot")}
-              sx={{ backgroundColor: result === "Definitely a bot" ? "#1538B2" : "#1F51FF" }}>
+              sx={{ backgroundColor: result === "Definitely a bot" ? "#1538B2" : "#1F51FF", fontSize: isMobile ? 10 : 16 }} size="small">
               <Grid container direction="column">
                 <Grid item>
-                  <Image alt="Definitely a bot" src="/TTCLogov2.png" width={100} height={100} />
+                  <Image alt="Definitely a bot" src="/TTCLogov2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />
                 </Grid>
                 <Grid item>
                   Definitely a Bot

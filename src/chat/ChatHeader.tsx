@@ -1,10 +1,11 @@
 "use client";
 
-import { AppBar, Box, Container, Grid, IconButton, Menu, MenuItem, Typography } from "@mui/material";	
+import { AppBar, Container, Grid, IconButton, Menu, MenuItem, Typography } from "@mui/material";	
 import { Timer } from "./Timer";	
 import { MoreVert } from "@mui/icons-material";	
 import { useState } from "react";	
 import Image from "next/image";
+import { isMobile } from "react-device-detect";
 
 export interface ChatHeaderProps {	
   chatActive: boolean;	
@@ -34,29 +35,30 @@ export const ChatHeader = (props: ChatHeaderProps) => {
   return (	
     <AppBar position="sticky" component="nav">	
       <Container maxWidth={"lg"}>	
-        <Grid container>	
+        <Grid container direction={"row"} display={"flex"} alignItems={"center"}>	
           <Grid item>	
             <Typography	
               variant="h3"	
-              sx={{ mt: 3, mr: 2 }}>You are:</Typography>	
+              sx={{ mr: 2, fontSize: isMobile ? "1.5em" : "3em" }}>You are:</Typography>	
           </Grid>	
           <Grid item>	
             <Grid container direction="column" sx={{ mt: 2 }}>	
               <Grid item>	
                 {props.goal === "Bot" ?	
-                  <Image src="/TTCLogov2.png" alt="Bot" width={64} height={64} /> :	
-                  <Image src="/TTCHumanv2.png" alt="Human" width={64} height={65} />}	
+                  <Image src="/TTCLogov2.png" alt="Bot" width={isMobile ? 32 : 64} height={ isMobile ? 32 : 64} /> :	
+                  <Image src="/TTCHumanv2.png" alt="Human" width={isMobile ? 32 : 64} height={isMobile ? 32 : 65} />}	
               </Grid>
               <Grid item>	
-                <Typography sx={{mt: 0}}>{props.goal === "Bot" ? "Bot" : "Human"}</Typography>	
+                <Typography sx={{mt: 0, fontSize: isMobile ? 12 : 16}}>{props.goal === "Bot" ? "Bot" : "Human"}</Typography>	
               </Grid>	
             </Grid>	
           </Grid>	
-          <Grid item sx={{ ml: "auto", mr: 3, mt: 0 }}>	
+          <Grid item sx={{ ml: "auto", mr: isMobile ? 0 : 3, mt: 0 }}>	
             {props.chatActive && <Timer	
-              millis={props.endChatTime - Date.now()} />}	
+              millis={props.endChatTime - Date.now()}
+              fontSize={isMobile ? "2.5em" : "5em"} />}	
           </Grid>	
-          <IconButton size="medium" onClick={handleClick}>	
+          <IconButton size="small" onClick={handleClick}>	
             <MoreVert color="info" fontSize="large" />	
           </IconButton>	
           <Menu	

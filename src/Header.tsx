@@ -3,6 +3,8 @@ import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
 import React, { useContext } from "react";
 import { LoginContext } from "./pages/_app";
 import { User } from "./User";
+import { isMobile } from "react-device-detect";
+import Image from "next/image";
 
 export const Header = () => {
 
@@ -10,18 +12,16 @@ export const Header = () => {
 
   return (
     <>
-      <AppBar position="sticky" component="nav">
-        <Container maxWidth="lg">
+      <AppBar position="sticky" component="nav" sx={{ maxWidth: "100%" }}>
+        <Container maxWidth={isMobile ? "xl" : "lg"}>
           <Toolbar>
-            <Link
-              href="/"
-              target="_self"
-              style={{ color: "#E9E9E9", fontFamily: "monospace", fontSize: 30, textDecoration: "none" }}>Turing Test Chat
+            <Link href="/">
+              <Image src="/TTCLogov2.png" alt="Turing Test Chat logo" width={48} height={48} style={{ marginTop: 5, marginLeft: "1em" }} />
             </Link>
             <Box sx={{ flexGrow: 0.1 }} />
             <Link
               href="/home"
-              style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 20, textDecoration: "none", fontWeight: "normal" }}>Chat</Link>
+              style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: isMobile ? 12 : 20, textDecoration: "none", fontWeight: "normal", marginRight: "1em" }}>Chat</Link>
             <Box sx={{ flexGrow: 0.1 }} />
             <Link
               href="/blog"
@@ -29,17 +29,18 @@ export const Header = () => {
               style={{
                 color: "#e9e9e9",
                 fontFamily: "monospace",
-                fontSize: 20,
+                fontSize: isMobile ? 12 : 20,
                 textDecoration: "none",
-                fontWeight: "normal"
+                fontWeight: "normal",
+                marginRight: 0
               }}>Blog</Link>
-            <Box sx={{ flexGrow: 1 }} />
-            {user === null && <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            {user === null && <Box sx={{ ml: "auto" }}>
               <Button
                 color="info"
                 variant="contained"
-                sx={{mt: 0}}>
-                <Link href="/login" style={{ textDecoration: "none", color: "#000000" }}>Log in/Sign up</Link>
+                sx={{ mt: 0, }}
+                size="small">
+                <Link href="/login" style={{ textDecoration: "none", color: "#000000", fontSize: isMobile ? 10 : 16, whiteSpace: "nowrap" }}>Log in/Sign up</Link>
               </Button>
             </Box>}
             {user && <User />}

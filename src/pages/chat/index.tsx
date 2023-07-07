@@ -68,7 +68,7 @@ export const ChatRoom = () => {
 
   return (
     router.query.user ? <Box sx={{
-      minHeight: "100vh",
+      minHeight: "102.5vh",
       backgroundColor: "secondary.main",
       background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
       backgroundPosition: "center",

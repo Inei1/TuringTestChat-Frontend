@@ -10,6 +10,7 @@ import { StatusCodes } from "http-status-codes";
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import NoSSRWrapper from '@/NoSSRWrapper';
+import { isMobile } from 'react-device-detect';
 
 export const ChatWaiting = () => {
 
@@ -126,13 +127,14 @@ export const ChatWaiting = () => {
   return (
     <>
       <Box sx={{
-        minHeight: "100vh",
+        minHeight: "102.5vh",
         backgroundColor: "secondary.main",
         background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
         backgroundPosition: "center",
         backgroundSize: "100vw",
         backgroundPositionY: 60,
         maxWidth: "100vw",
+        pt: 10
       }}>
         <Head>
           <title>Waiting for Chat | Turing Test Chat</title>
@@ -143,11 +145,11 @@ export const ChatWaiting = () => {
             direction="column"
             alignItems="center"
             justifyContent="center">
-            {!chatFound && !selfDisconnect && <Typography variant="h1">Waiting for chat</Typography>}
-            {chatFound && <Typography variant="h1">Chat found</Typography>}
-            {selfDisconnect && <Typography variant="h2">Lost connection to the server.</Typography>}
+            {!chatFound && !selfDisconnect && <Typography variant="h1" sx={{fontSize: isMobile ? 75 : 100}}>Waiting for chat</Typography>}
+            {chatFound && <Typography variant="h1" sx={{fontSize: isMobile ? 75 : 100}}>Chat found</Typography>}
+            {selfDisconnect && <Typography variant="h2" sx={{fontSize: isMobile ? 60 : 100}}>Lost connection to the server.</Typography>}
             <Grid item>
-              {chatFound && !chatExpired && <Timer millis={chatWaitingEnd - Date.now()} />}
+              {chatFound && !chatExpired && <Timer millis={chatWaitingEnd - Date.now()} fontSize={isMobile ? "3em" : "5em"} />}
             </Grid>
             {chatFound && !chatAccepted && !chatExpired && <Button
               variant="contained"
