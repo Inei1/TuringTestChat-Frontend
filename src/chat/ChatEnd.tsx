@@ -189,20 +189,20 @@ export const ChatEnd = (props: ChatEndProps) => {
             </>}
           {result && result.length > 0 && otherResult.length === 0 && !props.otherLeft && other !== "Bot" &&
             <Typography>Waiting for other chatter...</Typography>}
-          {otherResult && otherResult.length > 0 && <Typography>They chose:</Typography>}
+          {otherResult && otherResult.length > 0 && result && result.length > 0 && <Typography>They chose:</Typography>}
         </Grid>
-        <Grid item ref={selectionsRef}>
+        {result && result.length > 0 && <Grid item ref={selectionsRef}>
           {otherResult === "Definitely a human" && <Box component="img" alt="Human" src="TTCHumanv2.png" maxWidth={"8vw"} />}
           {otherResult === "Possibly a human" && <Box component="img" alt="Maybe Human" src="TTCUnknownHuman.png" maxWidth={"8vw"} />}
           {otherResult === "Unknown" && <Box component="img" alt="Unknown" src="TTCUnknown.png" maxWidth={"8vw"} />}
           {otherResult === "Possibly a bot" && <Box component="img" alt="Maybe Bot" src="TTCUnknownBot.png" maxWidth={"8vw"} />}
           {otherResult === "Definitely a bot" && <Box component="img" alt="Bot" src="TTCLogov2.png" maxWidth={"8vw"} />}
+        </Grid>}
+        <Grid item>
+          {result && result.length > 0 && <Typography>{otherResult}</Typography>}
         </Grid>
         <Grid item>
-          <Typography>{otherResult}</Typography>
-        </Grid>
-        <Grid item>
-          {deceptionExp !== 0 && <Typography>You received {deceptionExp} deception exp from the other chatter's selection</Typography>}
+          {result && result.length > 0 && deceptionExp !== 0 && <Typography>You received {deceptionExp} deception exp from the other chatter's selection</Typography>}
         </Grid>
         <Grid item ref={returnToHomeRef}>
           {props.resultOver && <Link href="/home"><Button variant="contained" sx={{ my: 3 }}>Return to home</Button></Link>}
