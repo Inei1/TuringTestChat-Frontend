@@ -7,6 +7,7 @@ import Head from "next/head";
 import { LoginContextType, User } from "@/types";
 import { Socket, io } from "socket.io-client";
 import { DefaultEventsMap } from '@socket.io/component-emitter';
+import Script from "next/script";
 
 export interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -33,9 +34,9 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5833731328065632"
-          crossOrigin="anonymous"></script>
       </Head>
+      <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5833731328065632"
+        crossOrigin="anonymous"></Script>
       <ThemeProvider theme={darkThemeProvider}>
         <LoginContext.Provider value={{ user, setUser }}>
           <CssBaseline />

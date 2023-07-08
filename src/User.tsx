@@ -28,7 +28,7 @@ export const User = () => {
           </Box>
         </Tooltip> */}
         <Tooltip title={`${user.currentDailyCredits} daily credits remaining`}>
-          <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", mr: 2, ml: 2, }}>
+          <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", mr: 2, ml: "auto", }}>
             <Typography sx={{ fontSize: isMobile ? 12 : 20, mr: 0.5, mt: 0 }}>{user.currentDailyCredits}</Typography>
             <Box component="img" alt="Daily Credits" src="/TTCDailyCredits.png" height={isMobile ? 16 : 24} />
           </Box>

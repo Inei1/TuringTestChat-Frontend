@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { LoginContext } from "../_app";
 import { StatusCodes } from "http-status-codes";
+import { isMobile } from "react-device-detect";
 
 export const Login = () => {
 
@@ -16,7 +17,7 @@ export const Login = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [accountCreated, setAccountCreated] = useState(false);
+  const [accountCreatedMessage, setAccountCreatedMessage] = useState("");
   const [accountFailedMessage, setAccountFailedMessage] = useState("");
   const [password, setPassword] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
@@ -33,7 +34,7 @@ export const Login = () => {
       const result = await fetch(Constants.BASE_URL + "login/password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: name, password: password }),
+        body: JSON.stringify({ username: name.trim(), password: password }),
       });
       if (result.ok) {
         const resultJson = await result.json();
@@ -45,11 +46,30 @@ export const Login = () => {
       } else if (result.status === StatusCodes.BAD_REQUEST) {
         setLoginFailedMessage("Enter a valid username and password");
         setTimeout(() => setLoginFailedMessage(""), 3000);
+      } else {
+        setLoginFailedMessage("An unknown error occurred");
+        setTimeout(() => setLoginFailedMessage(""), 3000);
       }
     } catch (err) {
       console.error(err);
     }
   };
+
+  const handleSignInGoogle = async () => {
+    router.push("http://localhost:8080/login/google");
+    //   const result = await fetch(Constants.BASE_URL + "login/google", {
+    //     method: "GET",
+    //     headers: { "Content-Type": "application/json" },
+    //   });
+    //   if (result.ok) {
+    //     const resultJson = await result.json();
+    //     setUser(resultJson.user);
+    //     router.push("/home");
+    //   }
+    // } catch (err) {
+    //   console.error(err);
+    // }
+  }
 
   const validateSignup = () => {
     if (email.length === 0) {
@@ -108,10 +128,10 @@ export const Login = () => {
         const result = await fetch(Constants.BASE_URL + "account/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username: name, email: email, password: password }),
+          body: JSON.stringify({ username: name.trim(), email: email.trim(), password: password.trim() }),
         }).then(res => res.json());
-        if (result.succeeded) {
-          setAccountCreated(true);
+        if (result.ok) {
+          setAccountCreatedMessage(result.message);
         } else {
           setAccountFailedMessage(result.message);
           setTimeout(() => setAccountFailedMessage(""), 3000);
@@ -125,7 +145,7 @@ export const Login = () => {
   return (
     <>
       <Box sx={{
-        minHeight: "100vh",
+        minHeight: "102.5vh",
         backgroundColor: "secondary.main",
         background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
         backgroundPosition: "center",
@@ -133,7 +153,7 @@ export const Login = () => {
         maxWidth: "100vw",
       }}>
         <Link href="/">
-          <Image src="/TTCLogov2.png" alt="Turing Test Chat logo" width={256} height={256} style={{ marginTop: "1em", marginLeft: "1em" }} />
+          <Image src="/TTCLogov2.png" alt="Turing Test Chat logo" width={isMobile ? 128 : 256} height={isMobile ? 128 : 256} style={{ marginTop: "1em", marginLeft: "1em" }} />
         </Link>
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <Box sx={{ width: 350, height: 400 }}>
@@ -152,6 +172,22 @@ export const Login = () => {
                 case 0:
                   return (
                     <form onSubmit={(e) => handleSignIn(e)}>
+                      {/* <div id="g_id_onload"
+                        data-client_id="503289598094-1olualu4iqgr429omgd1tl2r2ubjij1v.apps.googleusercontent.com"
+                        data-context="signin"
+                        data-ux_mode="popup"
+                        data-login_uri="https://www.turingtestchat.com/login"
+                        data-auto_prompt="false">
+                      </div>
+
+                      <div className="g_id_signin"
+                        data-type="standard"
+                        data-shape="rectangular"
+                        data-theme="filled_blue"
+                        data-text="signin_with"
+                        data-size="large"
+                        data-logo_alignment="left">
+                      </div> */}
                       <FormControl margin="none" fullWidth>
                         <TextField
                           color="info"
@@ -198,8 +234,8 @@ export const Login = () => {
                         <TextField
                           color="info"
                           sx={{ mt: 2, input: { color: "#e9e9e9" } }}
-                          placeholder="Name"
-                          label="Name"
+                          placeholder="Username"
+                          label="Username"
                           variant="filled"
                           value={name}
                           onChange={(e) => setName(e.target.value)} />
@@ -231,7 +267,7 @@ export const Login = () => {
                   )
               };
             })()}
-            {accountCreated && tabIndex === 1 && <Typography>Account successfully created! Please log in.</Typography>}
+            {accountCreatedMessage.length > 0 && tabIndex === 1 && <Typography>{accountCreatedMessage}</Typography>}
             {accountFailedMessage.length > 0 && tabIndex === 1 && <Typography>{accountFailedMessage}</Typography>}
             {loginFailedMessage.length > 0 && <Typography>{loginFailedMessage}</Typography>}
             {/* <Link style={{ color: "#E9E9E9", fontFamily: "monospace" }} href={"/forgotpassword"}>Forgot Password?</Link> */}
