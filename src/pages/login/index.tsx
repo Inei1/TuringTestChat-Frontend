@@ -1,6 +1,6 @@
 import { Constants } from "@/Constants";
 import { Footer } from "@/homepage/Footer";
-import { Box, Button, Checkbox, FormControl, FormControlLabel, Tab, Tabs, TextField, Typography } from "@mui/material";
+import { Box, Button, Checkbox, FormControl, FormControlLabel, Grid, Tab, Tabs, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -267,6 +267,8 @@ export const Login = () => {
                   )
               };
             })()}
+            <Box sx={{ mt: 3 }} />
+            <Link href="/forgotpassword" style={{ color: "#E9E9E9", fontFamily: "monospace", marginLeft: 100, }}>Forgot Password?</Link>
             {accountCreatedMessage.length > 0 && tabIndex === 1 && <Typography>{accountCreatedMessage}</Typography>}
             {accountFailedMessage.length > 0 && tabIndex === 1 && <Typography>{accountFailedMessage}</Typography>}
             {loginFailedMessage.length > 0 && <Typography>{loginFailedMessage}</Typography>}
