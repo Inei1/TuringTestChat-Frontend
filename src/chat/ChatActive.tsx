@@ -6,8 +6,7 @@ import { ChatFooter } from "./ChatFooter";
 import { useEffect, useRef, useState } from "react";	
 import { Socket } from "socket.io-client";	
 import { DefaultEventsMap } from '@socket.io/component-emitter';	
-import { Message } from "../types";	
-import { ChatDialog } from "./ChatDialog";	
+import { Message } from "../types";		
 
 export interface ChatActiveProps {	
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;	
@@ -26,9 +25,7 @@ export const ChatActive = (props: ChatActiveProps) => {
   const footerRef = useRef<HTMLDivElement>(null);
 
   const [messages, setMessages] = useState<Message[]>([]);	
-  const [typingUser, setTypingUser] = useState('');	
-  const [chatDialogText, setChatDialogText] = useState("");	
-  const [chatDialogOpen, setChatDialogOpen] = useState(false);	
+  const [typingUser, setTypingUser] = useState('');		
 
   useEffect(() => {	
     props.socket.on("otherLeft", () => {	
@@ -38,13 +35,6 @@ export const ChatActive = (props: ChatActiveProps) => {
       }	
     });	
   }, [props.socket]);	
-
-  useEffect(() => {	
-    props.socket.on("???", (text) => {	
-      setChatDialogOpen(true);	
-      setChatDialogText(text);	
-    });	
-  }, [props.socket])	
 
   useEffect(() => {	
     props.socket.on('messageResponse', (data: any) => {	
@@ -75,8 +65,7 @@ export const ChatActive = (props: ChatActiveProps) => {
         alignItems: "center",	
         mx: "auto",	
         mt: 5	
-      }}>	
-      <ChatDialog text={chatDialogText} open={chatDialogOpen} onClose={() => setChatDialogOpen(false)} />	
+      }}>
       <Grid container direction="column">	
         <Container sx={{ backgroundColor: "#1D1D1D", width: "100%", mb: 2, }}>	
           <ChatBody messages={messages} typingUser={typingUser} user={props.user} />	

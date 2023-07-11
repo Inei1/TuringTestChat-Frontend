@@ -52,9 +52,6 @@ const Faq = () => {
           <Typography sx={{ my: 1 }}>Share the game on social media!
             You can find social media links in the footer below.
           </Typography>
-          <Typography display="none" sx={{ my: 1 }}>
-            robot is the seventh.
-          </Typography>
           <Typography sx={{ my: 1 }}>If you have any questions, send an email to support@turingtestchat.com.</Typography>
         </Container>
       </Box>

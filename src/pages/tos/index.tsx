@@ -47,7 +47,6 @@ const Tos = () => {
             You may not copy, modify, distribute, or otherwise use Turing Test Chat's content without Turing Test Chat's prior written consent.</Typography>
 
           <Typography variant="h2" sx={{ my: 1, fontSize: 22 }}>User content</Typography>
-          {/* the is the third */}
           <Typography sx={{ my: 1 }}>You may submit content to turingtestchat.com, such as chat messages. By submitting content,
             you grant Turing Test Chat a non-exclusive, royalty-free, perpetual, irrevocable, and fully sub-licensable right to use,
             reproduce, modify, adapt, publish, translate, create derivative works from, distribute, and display such

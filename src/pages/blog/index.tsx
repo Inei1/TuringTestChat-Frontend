@@ -33,7 +33,6 @@ const Blog = () => {
         minHeight: "100vh",
       }}>
         <Header />
-        <Link href="/unknown"><Button></Button></Link>
         <Container component="section">
           <Typography variant="h1" sx={{ fontSize: 40, my: 5 }}>Turing Test Chat Blog</Typography>
           <BlogEntry
