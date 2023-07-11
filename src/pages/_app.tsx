@@ -37,6 +37,15 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
       </Head>
       <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5833731328065632"
         crossOrigin="anonymous"></Script>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-J8W08XRDN6" />
+      <Script id="google-analytics">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-J8W08XRDN6');
+          `}
+      </Script>
       <ThemeProvider theme={darkThemeProvider}>
         <LoginContext.Provider value={{ user, setUser }}>
           <CssBaseline />
