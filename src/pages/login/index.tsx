@@ -40,6 +40,7 @@ export const Login = () => {
         const resultJson = await result.json();
         setUser(resultJson.user);
         router.push("/home");
+        localStorage.setItem("user", resultJson.user.username);
       } else if (result.status === StatusCodes.UNAUTHORIZED) {
         setLoginFailedMessage("Incorrect username or password");
         setTimeout(() => setLoginFailedMessage(""), 3000);

@@ -1,61 +1,23 @@
 "use client";
 
-import { Box, Button, Container, FormControlLabel, FormGroup, Grid, Switch, Typography } from '@mui/material';
-import { Footer } from '../../homepage/Footer';
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { Timer } from '../../chat/Timer';
-import { LoginContext, SocketContext } from '../_app';
-import { Constants } from '../../Constants';
-import { StatusCodes } from "http-status-codes";
+import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { useCallback, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import NoSSRWrapper from '@/NoSSRWrapper';
 import { isMobile } from 'react-device-detect';
+import { LoginContext, SocketContext } from '../_app';
 
 export const ChatWaiting = () => {
 
   const { user, setUser } = useContext(LoginContext);
-
-  const router = useRouter();
-
   const socket = useContext(SocketContext);
 
-  const [chatFound, setChatFound] = useState(false);
-  const [chatWaitingEnd, setChatWaitingEnd] = useState(-1);
-  const [chatAccepted, setChatAccepted] = useState(false);
-  const [chatExpired, setChatExpired] = useState(false);
-  const [selfDisconnect, setSelfDisconnect] = useState(false);
-  const [toggleError, setToggleError] = useState(false);
+  const router = useRouter();
 
   const onPopState = useCallback((e: PopStateEvent) => {
     window.removeEventListener("popstate", onPopState);
     socket.disconnect();
-  }, [socket, chatFound, chatExpired]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (!socket.connected) {
-        setSelfDisconnect(true);
-      }
-    }, 1000);
-  }, [socket]);
-
-  useEffect(() => {
-    socket.on("foundChat", (data) => {
-      setChatFound(true);
-      setChatWaitingEnd(data.endTime);
-      if (user?.currentDailyCredits! > 0) {
-        setUser({ ...user!, currentDailyCredits: user?.currentDailyCredits! - 1 });
-      } else if (user?.permanentCredits! > 0) {
-        setUser({ ...user!, permanentCredits: user?.permanentCredits! - 1 });
-      }
-
-      if (user?.playFoundSound) {
-        const sound = new Audio("TTCNotification.mp3");
-        sound.volume = 0.1;
-        sound.play();
-      }
-    });
   }, [socket]);
 
   useEffect(() => {
@@ -68,60 +30,36 @@ export const ChatWaiting = () => {
   }, [onPopState]);
 
   useEffect(() => {
-    socket.off("readyExpired");
-    socket.on("readyExpired", () => {
-      setChatExpired(true);
+    socket.on("foundChat", (data) => {
+      if (user?.currentDailyCredits! > 0) {
+        setUser({ ...user!, currentDailyCredits: user?.currentDailyCredits! - 1 });
+        router.push({
+          pathname: "/chat", query: {
+            endChatTime: data.endChatTime,
+            endResultTime: data.endResultTime,
+            canSend: String(data.canSend),
+            goal: data.goal,
+            user: data.name,
+          }
+        }, "/chat");
+      } else if (user?.permanentCredits! > 0) {
+        setUser({ ...user!, permanentCredits: user?.permanentCredits! - 1 });
+        router.push({
+          pathname: "/chat", query: {
+            endChatTime: data.endChatTime,
+            endResultTime: data.endResultTime,
+            canSend: String(data.canSend),
+            goal: data.goal,
+            user: data.name,
+          }
+        }, "/chat");
+      }
     });
   }, [socket]);
 
-  useEffect(() => {
-    socket.on("otherWaitingLeft", () => {
-      setChatExpired(true);
-      setChatAccepted(true);
-    });
-  });
-
-  /* eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    socket.once("startChat", (data) => {
-      window.removeEventListener("popstate", onPopState);
-      router.push({
-        pathname: "/chat", query: {
-          endChatTime: data.endChatTime,
-          endResultTime: data.endResultTime,
-          canSend: String(data.canSend),
-          goal: data.goal,
-          user: data.name,
-        }
-      }, "/chat");
-    });
-  }, []);
-  /* eslint-enable react-hooks/exhaustive-deps */
-
-  const ready = () => {
-    setChatAccepted(true);
-    // TODO: implement something better
-    setTimeout(() => socket.emit("readyChat", { username: user?.username }), 1000);
-  }
-
   const returnHome = () => {
     socket.disconnect();
-    window.removeEventListener("popstate", onPopState);
     router.push("/home");
-  }
-
-  const toggleNotificationSound = async () => {
-    const result = await fetch(Constants.BASE_URL + "settings/notifications/waiting", {
-      method: "POST",
-      credentials: "include",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ playFoundSound: !user?.playFoundSound, username: user?.username }),
-    });
-    if (result.status === StatusCodes.OK) {
-      setUser({ ...user!, playFoundSound: !user?.playFoundSound });
-    } else {
-      setToggleError(true);
-    }
   }
 
   return (
@@ -145,26 +83,12 @@ export const ChatWaiting = () => {
             direction="column"
             alignItems="center"
             justifyContent="center">
-            {!chatFound && !selfDisconnect && <Typography variant="h1" sx={{fontSize: isMobile ? 75 : 100}}>Waiting for chat</Typography>}
-            {chatFound && <Typography variant="h1" sx={{fontSize: isMobile ? 75 : 100}}>Chat found</Typography>}
-            {selfDisconnect && <Typography variant="h2" sx={{fontSize: isMobile ? 60 : 100}}>Lost connection to the server.</Typography>}
-            <Grid item>
-              {chatFound && !chatExpired && <Timer millis={chatWaitingEnd - Date.now()} fontSize={isMobile ? "3em" : "5em"} />}
-            </Grid>
-            {chatFound && !chatAccepted && !chatExpired && <Button
-              variant="contained"
-              sx={{ width: "100%", height: 75, fontSize: 30 }} onClick={ready}>Go To Chat</Button>}
-            {chatAccepted && !chatExpired && <Typography variant="h3" sx={{ my: 5 }}>Waiting for other chatter</Typography>}
-            {chatExpired && !chatAccepted && <Typography variant="h3" sx={{ my: 5 }}>Your chat has expired and you have lost two detection exp and one deception exp.</Typography>}
-            {chatExpired && chatAccepted && <Typography variant="h3" sx={{ my: 5 }}>The other chatter has not accepted, please return to home.</Typography>}
-            {(chatExpired || selfDisconnect) && <Button variant="contained" onClick={returnHome}
-              sx={{ width: "100%", height: 75, fontSize: 30 }}>Return to home</Button>}
-            {!chatFound && !selfDisconnect && <Button variant="contained" onClick={returnHome}
-              sx={{ width: "100%", height: 75, fontSize: 30 }}>Cancel</Button>}
-            <FormGroup sx={{ mt: 2 }}>
-              <FormControlLabel control={<Switch color="primary" onClick={toggleNotificationSound} checked={user?.playFoundSound} />} label="Play notification sound when chat found"></FormControlLabel>
-            </FormGroup>
-            {toggleError && <Typography>An unknown error occurred when toggling notification sounds</Typography>}
+            <Typography variant="h1" sx={{ fontSize: isMobile ? 75 : 100 }}>Waiting for chat</Typography>
+            {user?.permanentCredits === 0 && user?.currentDailyCredits === 0 && <>
+              <Typography>Out of credits</Typography>
+            </>}
+            <Button variant="contained" onClick={returnHome}
+              sx={{ width: "100%", height: 75, fontSize: 30 }}>Cancel</Button>
           </Grid>
         </Container>
       </Box>

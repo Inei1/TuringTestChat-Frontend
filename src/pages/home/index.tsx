@@ -21,7 +21,7 @@ export const UserHome = () => {
 
   const enterChat = (e: any) => {
     socket.connect();
-    socket.emit("startRoom", { username: user?.username });
+    socket.emit("enterQueue", { username: user?.username });
     router.push({pathname: "/chatwaiting" });
   };
 
@@ -64,9 +64,6 @@ export const UserHome = () => {
           <title>Home | Turing Test Chat</title>
         </Head>
         <Header />
-        {/* Ezoic - sidebar_floating_1 - sidebar_floating_1 */}
-        {/* <div id="ezoic-pub-ad-placeholder-106"> </div> */}
-        {/* End Ezoic - sidebar_floating_1 - sidebar_floating_1 */}
         <Container component="section">
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Box sx={{ maxWidth: 800, mt: 5 }}>

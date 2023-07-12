@@ -8,6 +8,8 @@ import { LoginContextType, User } from "@/types";
 import { Socket, io } from "socket.io-client";
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import Script from "next/script";
+import { Constants } from "@/Constants";
+import { useEffect } from "react";
 
 export interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -28,6 +30,23 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   const { Component, pageProps } = props;
 
   const [user, setUser] = React.useState<User | null>(null);
+
+  useEffect(() => {
+    const getUser = async (username: string) => {
+      const result = await fetch(Constants.BASE_URL + `account/user/${username}`, {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' },
+        credentials: "include",
+      });
+      setUser(await result.json());
+    }
+    const user = localStorage.getItem("user");
+    console.log(user);
+    if (user) {
+      getUser(localStorage.getItem("user")!).catch(console.error);
+    }
+
+  }, []);
 
   return (
     <>
