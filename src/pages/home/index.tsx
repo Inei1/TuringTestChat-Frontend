@@ -22,7 +22,7 @@ export const UserHome = () => {
   const enterChat = (e: any) => {
     socket.connect();
     socket.emit("enterQueue", { username: user?.username });
-    router.push({pathname: "/chatwaiting" });
+    router.push({ pathname: "/chatwaiting" });
   };
 
   const getExpMessage = () => {
