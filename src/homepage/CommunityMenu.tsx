@@ -56,7 +56,7 @@ const CommunityMenu = () => {
         </MenuItem>
         <MenuItem sx={{ color: "#1D1D1D" }} onClick={popupState.close}>
           <Link sx={{ color: "#1F51FF" }} href="https://discord.com/invite/SX48DMUb5H">
-            <Image alt="Discord Icon" src="/discordicon.svg" width={24} height={24} /> Discord
+            <Image alt="Discord Icon" src="/discordicon.png" width={24} height={24} /> Discord
           </Link>
         </MenuItem>
         <MenuItem>
