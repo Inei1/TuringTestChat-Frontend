@@ -158,23 +158,23 @@ export const ChatEnd = (props: ChatEndProps) => {
           spacing={5}>
           <Grid item sx={{ mt: 2 }}>
             {(result.length > 0 || props.resultOver) && <Typography>You chose:</Typography>}
-            {result === "Definitely a human" && <Image alt="Human" src="/TTCHumanv2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
-            {result === "Possibly a human" && <Image alt="Maybe Human" src="TTCUnknownHuman.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
-            {result === "Unknown" && <Image alt="Unknown" src="/TTCUnknown.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
-            {result === "Possibly a bot" && <Image alt="Maybe Bot" src="/TTCUnknownBot.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
-            {result === "Definitely a bot" && <Image alt="Bot" src="/TTCLogov2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
+            {result === "Definitely a human" && <Image alt="Human" src="/TTCHumanv2.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
+            {result === "Possibly a human" && <Image alt="Maybe Human" src="TTCUnknownHuman.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
+            {result === "Unknown" && <Image alt="Unknown" src="/TTCUnknown.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
+            {result === "Possibly a bot" && <Image alt="Maybe Bot" src="/TTCUnknownBot.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
+            {result === "Definitely a bot" && <Image alt="Bot" src="/TTCLogov2.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
             {props.resultOver && <Typography>{result === "" ? "Did not pick" : result}</Typography>}
           </Grid>
           <Grid item sx={{ mt: 2 }}>
             {other.length > 0 && <Typography>They were:</Typography>}
-            {other === "Human" && <Image alt="Human" src="/TTCHumanv2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
-            {other === "Bot" && <Image alt="Bot" src="/TTCLogov2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
+            {other === "Human" && <Image alt="Human" src="/TTCHumanv2.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
+            {other === "Bot" && <Image alt="Bot" src="/TTCLogov2.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
             <Typography>{other}</Typography>
           </Grid>
           <Grid item>
             {otherGoal && otherGoal.length > 0 && <Typography>Their goal was: </Typography>}
-            {otherGoal === "Human" && <Image alt="Human" src="/TTCHumanv2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
-            {otherGoal === "Bot" && <Image alt="Bot" src="/TTCLogov2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
+            {otherGoal === "Human" && <Image alt="Human" src="/TTCHumanv2.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
+            {otherGoal === "Bot" && <Image alt="Bot" src="/TTCLogov2.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
             <Typography>{otherGoal}</Typography>
           </Grid>
         </Grid>
@@ -192,11 +192,11 @@ export const ChatEnd = (props: ChatEndProps) => {
           {otherResult && otherResult.length > 0 && result && result.length > 0 && <Typography>They chose:</Typography>}
         </Grid>
         {result && result.length > 0 && <Grid item ref={selectionsRef}>
-          {otherResult === "Definitely a human" && <Image alt="Human" src="/TTCHumanv2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
-          {otherResult === "Possibly a human" && <Image alt="Maybe Human" src="/TTCUnknownHuman.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
-          {otherResult === "Unknown" && <Image alt="Unknown" src="/TTCUnknown.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
-          {otherResult === "Possibly a bot" && <Image alt="Maybe Bot" src="/TTCUnknownBot.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
-          {otherResult === "Definitely a bot" && <Image alt="Bot" src="/TTCLogov2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />}
+          {otherResult === "Definitely a human" && <Image alt="Human" src="/TTCHumanv2.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
+          {otherResult === "Possibly a human" && <Image alt="Maybe Human" src="/TTCUnknownHuman.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
+          {otherResult === "Unknown" && <Image alt="Unknown" src="/TTCUnknown.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
+          {otherResult === "Possibly a bot" && <Image alt="Maybe Bot" src="/TTCUnknownBot.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
+          {otherResult === "Definitely a bot" && <Image alt="Bot" src="/TTCLogov2.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
         </Grid>}
         <Grid item>
           {result && result.length > 0 && <Typography>{otherResult}</Typography>}

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import HoverMenu from 'material-ui-popup-state/HoverMenu';
 import MenuItem from '@mui/material/MenuItem';
 import {
@@ -18,7 +18,14 @@ const CommunityMenu = () => {
   const popupState = usePopupState({
     variant: 'popover',
     popupId: 'demoMenu',
-  })
+  });
+
+  const [mobile, setMobile] = useState(true);
+
+  useEffect(() => {
+    setMobile(isMobile);
+  });
+
   return (
     <>
       <Box flexDirection="row" display="flex" alignContent="center"
@@ -28,10 +35,11 @@ const CommunityMenu = () => {
           style={{
             color: "#e9e9e9",
             fontFamily: "monospace",
-            fontSize: isMobile ? 12 : 20,
+            fontSize: mobile ? 12 : 20,
             textDecoration: "none",
             fontWeight: "normal",
-            marginRight: 0
+            marginRight: 0,
+            marginTop: mobile ? 5 : 0
           }}>
           Community
         </Typography>
