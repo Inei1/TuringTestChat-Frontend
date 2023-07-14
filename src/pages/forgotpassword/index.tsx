@@ -44,6 +44,7 @@ export const ForgotPassword = () => {
           <Grid container direction={"column"} sx={{ justifyContent: "center", display: "flex", width: "100%" }}>
             <Typography variant="h1" sx={{ fontSize: 50 }}>Forgot Password</Typography>
             <Typography variant="h2" sx={{ fontSize: 20, my: 2 }}>You are definitely a human, bots don't forget passwords!</Typography>
+            <Typography>Make sure your email is subscribed to account messages, or you won't receive an email.</Typography>
             <form onSubmit={submitForgot}>
               <TextField variant="filled" label="Enter Email" sx={{ width: "100%", input: { color: "#e9e9e9" } }} value={email} onChange={(e) => setEmail(e.target.value)}></TextField>
               <Button type="submit" disabled={loading} variant="contained" sx={{ width: "100%" }}>{loading ? "Processing" : "Submit"}</Button>

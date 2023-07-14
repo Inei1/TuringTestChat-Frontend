@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { LoginContext } from "./pages/_app";
 import { User } from "./User";
 import { isMobile } from "react-device-detect";
 import Image from "next/image";
+import CommunityMenu from "./homepage/CommunityMenu";
 
 export const Header = () => {
 
@@ -16,13 +17,13 @@ export const Header = () => {
         <Container maxWidth={isMobile ? "xl" : "lg"}>
           <Toolbar>
             <Link href="/">
-              <Image src="/TTCLogov2.png" alt="Turing Test Chat logo" width={48} height={48} style={{ marginTop: 5, marginLeft: "1em" }} />
+              <Image src="/TTCLogov2.png" alt="Turing Test Chat logo" width={48} height={48} style={{ marginTop: 5, marginLeft: isMobile ? "-1em" : "1em" }} />
             </Link>
-            <Box sx={{ flexGrow: 0.1 }} />
+            {isMobile ? <Box /> : <Box sx={{ flexGrow: 0.1 }} />}
             <Link
               href="/home"
-              style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: isMobile ? 12 : 20, textDecoration: "none", fontWeight: "normal", marginRight: "1em" }}>Chat</Link>
-            <Box sx={{ flexGrow: 0.1 }} />
+              style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: isMobile ? 12 : 20, textDecoration: "none", fontWeight: "normal", marginLeft: "1em" }}>Chat</Link>
+            {isMobile ? <Box /> : <Box sx={{ flexGrow: 0.1 }} />}
             <Link
               href="/blog"
               color="info"
@@ -32,8 +33,11 @@ export const Header = () => {
                 fontSize: isMobile ? 12 : 20,
                 textDecoration: "none",
                 fontWeight: "normal",
-                marginRight: 0
+                marginLeft: "1em",
+                marginRight: "1em"
               }}>Blog</Link>
+              {isMobile ? <Box /> : <Box sx={{ flexGrow: 0.1 }} />}
+            <CommunityMenu />
             {user === null && <Box sx={{ ml: "auto" }}>
               <Button
                 color="info"

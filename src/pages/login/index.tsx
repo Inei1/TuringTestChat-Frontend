@@ -22,13 +22,12 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
   const [tosAccepted, setTosAccepted] = useState(false);
-  const [registerButtonDelayed, setRegisterButtonDelayed] = useState(false);
-  const [loginButtonDelayed, setLoginButtonDelayed] = useState(false);
   const [loginFailedMessage, setLoginFailedMessage] = useState("");
+  const [registerLoading, setRegisterLoading] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
 
   const handleSignIn = async (e: any) => {
-    setLoginButtonDelayed(true);
-    setTimeout(() => setLoginButtonDelayed(false), 3000)
+    setLoginLoading(true);
     e.preventDefault();
     try {
       const result = await fetch(Constants.BASE_URL + "login/password", {
@@ -54,6 +53,7 @@ export const Login = () => {
     } catch (err) {
       console.error(err);
     }
+    setLoginLoading(false);
   };
 
   const handleSignInGoogle = async () => {
@@ -120,8 +120,7 @@ export const Login = () => {
   }
 
   const handleSignUp = async (e: any) => {
-    setRegisterButtonDelayed(true);
-    setTimeout(() => setRegisterButtonDelayed(false), 3000);
+    setRegisterLoading(true);
     e.preventDefault();
     const validate = validateSignup()
     if (validate) {
@@ -141,12 +140,13 @@ export const Login = () => {
         throw err;
       }
     }
+    setRegisterLoading(false);
   };
 
   return (
     <>
       <Box sx={{
-        minHeight: "102.5vh",
+        minHeight: isMobile ? "110vh" : "102.5vh",
         backgroundColor: "secondary.main",
         background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
         backgroundPosition: "center",
@@ -157,7 +157,7 @@ export const Login = () => {
           <Image src="/TTCLogov2.png" alt="Turing Test Chat logo" width={isMobile ? 128 : 256} height={isMobile ? 128 : 256} style={{ marginTop: "1em", marginLeft: "1em" }} />
         </Link>
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <Box sx={{ width: 350, height: 400 }}>
+          <Box sx={{ width: 350, height: 400, mt: isMobile ? 0 : -20 }}>
             <Typography sx={{ mb: 2, fontSize: 20 }} align="center" variant="h1" color="inherit">Turing Test Chat</Typography>
             <Tabs
               variant="fullWidth"
@@ -208,14 +208,14 @@ export const Login = () => {
                           type="password"
                           onChange={(e) => setPassword(e.target.value)} />
                         <Button
-                          disabled={loginButtonDelayed}
+                          disabled={loginLoading}
                           type="submit"
                           size="large"
                           variant="contained"
                           color="primary"
                           fullWidth
                           onClick={(e) => handleSignIn(e)}>
-                          Log in
+                          {loginLoading ? "Processing" : "Log in"}
                         </Button>
                       </FormControl>
                     </form>
@@ -254,14 +254,14 @@ export const Login = () => {
                           label={`I accept the Terms of Service and Privacy Policy, and I am at least 13 years of age or older`}
                           control={<Checkbox checked={tosAccepted} onChange={(e) => setTosAccepted(e.target.checked)} />} />
                         <Button
-                          disabled={!tosAccepted || registerButtonDelayed}
+                          disabled={!tosAccepted || registerLoading}
                           type="submit"
                           size="large"
                           variant="contained"
                           color="primary"
                           fullWidth
                           onClick={(e) => handleSignUp(e)}>
-                          Create Account
+                          {registerLoading ? "Processing" : "Create Account"}
                         </Button>
                       </FormControl>
                     </form>
