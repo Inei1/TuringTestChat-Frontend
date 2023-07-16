@@ -1,5 +1,5 @@
 import { Box, Container, List, ListItem, Typography, Link as MuiLink } from "@mui/material";
-import { Header } from "../../Header";
+import Header from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
 import Link from "next/link";

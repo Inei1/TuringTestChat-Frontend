@@ -1,5 +1,5 @@
 import { Box, Container, List, ListItem, Typography } from "@mui/material"
-import { Header } from "../Header"
+import Header from "../Header"
 import { Footer } from "./Footer"
 import Head from "next/head"
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Header } from '../../Header';
+import Header from '../../Header';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { Footer } from '../../homepage/Footer';
 import { useContext, useEffect } from 'react';

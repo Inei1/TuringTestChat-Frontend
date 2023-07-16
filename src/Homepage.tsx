@@ -1,5 +1,5 @@
 import { Features } from "./homepage/Features";
-import { Header } from "./Header";
+import Header from "./Header";
 import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";

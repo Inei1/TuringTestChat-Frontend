@@ -67,7 +67,6 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
       <ThemeProvider theme={darkThemeProvider}>
         <LoginContext.Provider value={{ user, setUser }}>
           <CssBaseline />
-          <Box sx={{ mt: "-18px" }} />
           <Component {...pageProps} />
         </LoginContext.Provider>
       </ThemeProvider>

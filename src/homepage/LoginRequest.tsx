@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import { Header } from "../Header";
+import Header from "../Header";
 import Link from "next/link";
 import { isMobile } from "react-device-detect";
 

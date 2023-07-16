@@ -1,5 +1,5 @@
 import { Constants } from "@/Constants";
-import { Header } from "@/Header";
+import Header from "@/Header";
 import { Footer } from "@/homepage/Footer";
 import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
 import Head from "next/head";

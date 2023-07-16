@@ -1,5 +1,5 @@
 import { Box, Button, Container, Typography } from "@mui/material";
-import { Header } from "../../Header";
+import Header from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import { BlogEntry } from "../../homepage/BlogEntry";
 import Head from "next/head";

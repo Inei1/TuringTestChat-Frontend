@@ -1,5 +1,5 @@
 import { Box, Container, Link, Typography } from "@mui/material";
-import { Header } from "../../Header";
+import Header from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import SyntaxHighlighter from "react-syntax-highlighter";
