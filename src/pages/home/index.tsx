@@ -10,6 +10,7 @@ import { LoginContext, SocketContext } from '../_app';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { isMobile } from 'react-device-detect';
 
 export const UserHome = () => {
 
@@ -65,15 +66,9 @@ export const UserHome = () => {
         </Head>
         <Header />
         <Container component="section">
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: isMobile ? 10 : 30 }}>
             <Box sx={{ maxWidth: 800, mt: 5 }}>
-              <Typography sx={{ fontSize: 18, mb: 5 }}>You will be paired anonymously with a human or with ChatGPT on entering the chat room.
-                Your task is to perform the Turing Test by identifying which of the two you think you were talking to.</Typography>
-              <Typography sx={{ fontSize: 18, my: 5 }}>Your chat partner will also be trying to do the same for you.
-                You must simultaneously attempt to convince your partner while also determining what they are.</Typography>
-              <Typography sx={{ fontSize: 18, my: 5 }}>You will gain or lose exp based on performance. Successfully guessing your partner's identity and convincing your partner of your own identity will give you up to 10 exp each. Failing to do so for either will cost you up to 3 exp each. If you use the back button or otherwise leave the page, you will lose exp.</Typography>
-              <Typography sx={{ fontSize: 18, my: 5 }}>Have any questions? Check out the { }
-                <Link href="/faq" style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 18 }}>FAQ</Link></Typography>
+            <Link href="/howtoplay" style={{ color: "#E9E9E9", fontFamily: "monospace" }}>How to play Turing Test Chat (Read this before playing)</Link>.
               <Typography sx={{ fontSize: 20, my: 5 }}>
                 {getExpMessage()}
               </Typography>

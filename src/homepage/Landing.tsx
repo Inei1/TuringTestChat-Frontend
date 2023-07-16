@@ -22,6 +22,7 @@ export const Landing = () => {
         <Typography variant="h1" style={{ fontFamily: "monospace", fontSize: 100, fontWeight: "normal", color: "#e9e9e9" }}>
           Turing Test Chat
         </Typography>
+        <Typography>V1.1.2</Typography>
         {!user && <Link href="/login" style={{ marginTop: "2em", marginBottom: "2em" }}>
           <Button
             color="info"
@@ -32,9 +33,6 @@ export const Landing = () => {
             color="info"
             variant="contained">Go to chat</Button>
         </Link>}
-        <Link href="/faq">
-          <Button variant="contained" color="success">FAQ</Button>
-        </Link>
       </Container>
     </>
   );

@@ -23,7 +23,7 @@ export const Footer = () => {
             <Link style={{ color: "#E9E9E9", fontFamily: "monospace" }} href="/privacypolicy" target="_self">Privacy Policy</Link>
           </Grid>
           <Grid item xs={5} md={0}>
-            <MuiLink style={{ color: "#E9E9E9", fontFamily: "monospace" }} href="https://discord.com/invite/SX48DMUb5H">Discord</MuiLink>
+            <MuiLink href="https://discord.com/invite/SX48DMUb5H">Discord</MuiLink>
           </Grid>
         </Grid>
         <Box sx={{ minHeight: 100 }}></Box>

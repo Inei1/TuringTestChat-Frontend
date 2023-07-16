@@ -10,7 +10,7 @@ import NoSSRWrapper from "./NoSSRWrapper";
 
 const Header = () => {
 
-  const { user, setUser } = useContext(LoginContext);
+  const { user } = useContext(LoginContext);
 
   return (
     <>
@@ -77,6 +77,7 @@ const Header = () => {
                 }}>Blog</Link>
               <Box sx={{ flexGrow: 0.1 }} />
               <CommunityMenu />
+              <Box sx={{ml: "auto"}} />
               {user === null && <Box sx={{ ml: "auto" }}>
                 <Button
                   color="info"

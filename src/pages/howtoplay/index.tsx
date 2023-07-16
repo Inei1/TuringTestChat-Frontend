@@ -1,8 +1,9 @@
-import { Box } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import Header from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
 import Faq from "@/homepage/Faq";
+import Link from "next/link";
 
 const FaqPage = () => {
   return (
@@ -24,8 +25,16 @@ const FaqPage = () => {
           <meta name="twitter:site" content="https://www.turingtestchat.com/" />
         </Head>
         <Header />
-        <Faq />
-        </Box>
+        <Container maxWidth="md" sx={{mt: 10}}>
+          <Typography sx={{ fontSize: 18, mb: 5 }}>You will be paired anonymously with a human or with ChatGPT on entering the chat room.
+            Your task is to perform the Turing Test by identifying which of the two you think you were talking to.</Typography>
+          <Typography sx={{ fontSize: 18, my: 5 }}>Your chat partner will also be trying to do the same for you.
+            You must simultaneously attempt to convince your partner while also determining what they are.</Typography>
+          <Typography sx={{ fontSize: 18, my: 5 }}>You will gain or lose exp based on performance. Successfully guessing your partner's identity and convincing your partner of your own identity will give you up to 10 exp each. Failing to do so for either will cost you up to 3 exp each. If you use the back button or otherwise leave the page, you will lose exp.</Typography>
+          <Typography sx={{ fontSize: 18, my: 5 }}>Have any questions? Check out the { }
+            <Link href="/faq" style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 18 }}>FAQ</Link></Typography>
+        </Container>
+      </Box>
       <Footer />
     </>
   )

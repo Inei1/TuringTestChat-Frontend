@@ -45,20 +45,6 @@ const Blog = () => {
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
-            blogUrl="online-ai-chat-websites"
-            blogTitle="8 Unique Websites Where You Can Talk to a Robot"
-            blogDate="June 23, 2023"
-            blogSubtitle="Talk With AI Online" />
-          <BlogEntry
-            imageAlt="Turing Test Chat logo"
-            imageSrc="TTCLogov2.png"
-            blogUrl="turing-test-chat-best-ai-chat"
-            blogTitle="Turing Test Chat: The Best Free AI Chat Game"
-            blogDate="June 23, 2023"
-            blogSubtitle="Free AI Chat App" />
-          <BlogEntry
-            imageAlt="Turing Test Chat logo"
-            imageSrc="TTCLogov2.png"
             blogUrl="turing-test-questions"
             blogTitle="The Turing Test Questions To Ask List"
             blogDate="June 22, 2023"
@@ -73,49 +59,49 @@ const Blog = () => {
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
-            blogUrl={"dev-update-4"}
+            blogUrl="dev-update-4"
             blogTitle="Turing Test Chat Developer Update #4"
             blogDate="June 6, 2023"
             blogSubtitle="Results from the beta test." />
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
-            blogUrl={"dev-update-3"}
+            blogUrl="dev-update-3"
             blogTitle="Turing Test Chat Developer Update #3"
             blogDate="May 22, 2023"
             blogSubtitle="Adding ChatGPT to the chat room (and other improvements)." />
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
-            blogUrl={"eng-blog-3"}
+            blogUrl="eng-blog-3"
             blogTitle="Turing Test Chat Engineering Blog #3"
             blogDate="May 22, 2023"
             blogSubtitle="How to deal with users leaving, and adding ChatGPT to a room." />
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
-            blogUrl={"dev-update-2"}
+            blogUrl="dev-update-2"
             blogTitle="Turing Test Chat Developer Update #2"
             blogDate="May 11, 2023"
             blogSubtitle="Building the chat application for Turing Test Chat." />
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
-            blogUrl={"eng-blog-2"}
+            blogUrl="eng-blog-2"
             blogTitle="Turing Test Chat Engineering Blog #2"
             blogDate="May 11, 2023"
             blogSubtitle="Using WebSockets to create a chat application." />
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
-            blogUrl={"dev-update-1"}
+            blogUrl="dev-update-1"
             blogTitle="Turing Test Chat Developer Update #1"
             blogDate="May 1, 2023"
             blogSubtitle="Building the UI and authentication systems of Turing Test Chat." />
           <BlogEntry
             imageAlt="Turing Test Chat logo"
             imageSrc="TTCLogov2.png"
-            blogUrl={"eng-blog-1"}
+            blogUrl="eng-blog-1"
             blogTitle="Turing Test Chat Engineering Blog #1"
             blogDate="May 1, 2023"
             blogSubtitle="Diving into the code behind the early UI and authentication." />

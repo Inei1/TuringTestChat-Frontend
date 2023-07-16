@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import HoverMenu from 'material-ui-popup-state/HoverMenu';
 import MenuItem from '@mui/material/MenuItem';
 import {
@@ -59,6 +59,11 @@ const CommunityMenu = () => {
               <TwitterIcon sx={{ color: "#1F51FF", width: 24, height: 24 }} /> Twitter
             </Link>
           </MenuItem>
+          <MenuItem>
+            <Link sx={{ color: "#1F51FF" }} href="https://docs.google.com/document/d/1CzymxKXPxEW-pyXYBdSZLG6CB-86lCsew9gBhSPpkec/edit?usp=sharing">
+              <Image src="/TTCLogo.png" alt="Turing Test Chat logo" width={24} height={24} /> Update Notes
+            </Link>
+          </MenuItem>
         </HoverMenu>
       </MobileView>
       <BrowserView>
@@ -96,6 +101,11 @@ const CommunityMenu = () => {
           <MenuItem>
             <Link sx={{ color: "#1F51FF" }} href="https://twitter.com/TuringTestChat">
               <TwitterIcon sx={{ color: "#1F51FF", width: 24, height: 24 }} /> Twitter
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link sx={{ color: "#1F51FF" }} href="https://docs.google.com/document/d/1CzymxKXPxEW-pyXYBdSZLG6CB-86lCsew9gBhSPpkec/edit?usp=sharing">
+              <Image src="/TTCLogo.png" alt="Turing Test Chat logo" width={24} height={24} /> Update Notes
             </Link>
           </MenuItem>
         </HoverMenu>

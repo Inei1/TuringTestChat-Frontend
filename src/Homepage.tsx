@@ -3,8 +3,8 @@ import Header from "./Header";
 import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
-import { Explanations } from "./homepage/Explanations";
 import Head from "next/head";
+import Faq from "./homepage/Faq";
 
 export const Homepage = () => {
 
@@ -38,7 +38,7 @@ export const Homepage = () => {
         <Header />
         <Landing />
         <Features />
-        <Explanations />
+        <Faq />
       </Box>
       <Footer />
     </>
