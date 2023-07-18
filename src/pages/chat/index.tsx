@@ -56,6 +56,9 @@ export const ChatRoom = () => {
     } else {
       setSelfDisconnect(true);
     }
+    setTimeout(() => {
+      socket.emit("checkActive");
+    }, 5000);
   }, []);
 
   useEffect(() => {

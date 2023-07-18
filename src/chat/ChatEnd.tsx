@@ -159,7 +159,7 @@ export const ChatEnd = (props: ChatEndProps) => {
           <Grid item sx={{ mt: 2 }}>
             {(result.length > 0 || props.resultOver) && <Typography>You chose:</Typography>}
             {result === "Definitely a human" && <Image alt="Human" src="/TTCHumanv2.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
-            {result === "Possibly a human" && <Image alt="Maybe Human" src="TTCUnknownHuman.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
+            {result === "Possibly a human" && <Image alt="Maybe Human" src="/TTCUnknownHuman.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
             {result === "Unknown" && <Image alt="Unknown" src="/TTCUnknown.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
             {result === "Possibly a bot" && <Image alt="Maybe Bot" src="/TTCUnknownBot.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}
             {result === "Definitely a bot" && <Image alt="Bot" src="/TTCLogov2.png" width={isMobile ? 50 : 100} height={isMobile ? 50 : 100} />}

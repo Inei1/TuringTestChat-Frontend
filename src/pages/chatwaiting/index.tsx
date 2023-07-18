@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Button, Container, Grid, Typography } from '@mui/material';
-import { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import NoSSRWrapper from '@/NoSSRWrapper';
@@ -12,11 +12,10 @@ export const ChatWaiting = () => {
 
   const { user, setUser } = useContext(LoginContext);
   const socket = useContext(SocketContext);
-
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const onPopState = useCallback((e: PopStateEvent) => {
-    window.removeEventListener("popstate", onPopState);
     socket.disconnect();
   }, [socket]);
 
@@ -31,6 +30,7 @@ export const ChatWaiting = () => {
 
   useEffect(() => {
     socket.on("foundChat", (data) => {
+      setLoading(true);
       if (user?.currentDailyCredits! > 0) {
         setUser({ ...user!, currentDailyCredits: user?.currentDailyCredits! - 1 });
         router.push({
@@ -54,10 +54,12 @@ export const ChatWaiting = () => {
           }
         }, "/chat");
       }
+      setLoading(false);
     });
   }, [socket]);
 
   const returnHome = () => {
+    setLoading(true);
     socket.disconnect();
     router.push("/home");
   }
@@ -87,8 +89,8 @@ export const ChatWaiting = () => {
             {user?.permanentCredits === 0 && user?.currentDailyCredits === 0 && <>
               <Typography>Out of credits</Typography>
             </>}
-            <Button variant="contained" onClick={returnHome}
-              sx={{ width: "100%", height: 75, fontSize: 30 }}>Cancel</Button>
+            <Button variant="contained" onClick={returnHome} disabled={loading}
+              sx={{ width: "100%", height: 75, fontSize: 30 }}>{loading ? "Processing" : "Cancel"}</Button>
           </Grid>
         </Container>
       </Box>
