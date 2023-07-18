@@ -3,7 +3,7 @@
 import Header from '../../Header';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { Footer } from '../../homepage/Footer';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LoginRequest } from '../../homepage/LoginRequest';
 import { Constants } from '../../Constants';
 import { LoginContext, SocketContext } from '../_app';
@@ -15,15 +15,16 @@ import { isMobile } from 'react-device-detect';
 export const UserHome = () => {
 
   const { user, setUser } = useContext(LoginContext);
-
   const socket = useContext(SocketContext);
-
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const enterChat = (e: any) => {
+    setLoading(true);
     socket.connect();
     socket.emit("enterQueue", { username: user?.username });
     router.push({ pathname: "/chatwaiting" });
+    setLoading(false);
   };
 
   const getExpMessage = () => {
@@ -68,11 +69,17 @@ export const UserHome = () => {
         <Container component="section">
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: isMobile ? 10 : 30 }}>
             <Box sx={{ maxWidth: 800, mt: 5 }}>
-            <Link href="/howtoplay" style={{ color: "#E9E9E9", fontFamily: "monospace" }}>How to play Turing Test Chat (Read this before playing)</Link>.
+              <Link href="/howtoplay" style={{ color: "#E9E9E9", fontFamily: "monospace" }}>How to play Turing Test Chat (Read this before playing)</Link>.
               <Typography sx={{ fontSize: 20, my: 5 }}>
                 {getExpMessage()}
               </Typography>
-              <Button sx={{ width: "100%", height: 75, fontSize: 30 }} variant="contained" onClick={(e) => enterChat(e)}>Enter Chat Room</Button>
+              <Button
+                disabled={loading}
+                sx={{ width: "100%", height: 75, fontSize: 30 }}
+                variant="contained"
+                onClick={(e) => enterChat(e)}>
+                {loading ? "Processing" : "Enter Chat Room"}
+              </Button>
             </Box>
           </Box>
         </Container>
