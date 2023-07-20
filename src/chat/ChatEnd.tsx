@@ -1,13 +1,14 @@
 "use client";
 
 import { Box, Button, ButtonGroup, Container, Grid, Typography } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Timer } from "./Timer";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import Link from "next/link";
 import Image from "next/image";
 import { isMobile } from "react-device-detect";
+import { LoginContext } from "@/pages/_app";
 
 export interface ChatEndProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -22,6 +23,8 @@ export interface ChatEndProps {
 }
 
 export const ChatEnd = (props: ChatEndProps) => {
+
+  const { user } = useContext(LoginContext);
 
   const selectionsRef = useRef<HTMLDivElement>(null);
   const returnToHomeRef = useRef<HTMLDivElement>(null);
@@ -57,7 +60,8 @@ export const ChatEnd = (props: ChatEndProps) => {
   const sendResult = (result: string) => {
     props.socket.emit("result", {
       name: props.user,
-      result: result
+      username: user?.username,
+      result: result,
     });
   }
 
@@ -98,7 +102,7 @@ export const ChatEnd = (props: ChatEndProps) => {
               sx={{ backgroundColor: result === "Definitely a human" ? "#1538B2" : "#1F51FF", fontSize: isMobile ? 10 : 16 }} size="small">
               <Grid container direction="column">
                 <Grid item>
-                <Image alt="Definitely a human" src="/TTCHumanv2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />
+                  <Image alt="Definitely a human" src="/TTCHumanv2.png" width={isMobile ? 25 : 100} height={isMobile ? 25 : 100} />
                 </Grid>
                 <Grid item>
                   Definitely a Human

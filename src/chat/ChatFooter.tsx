@@ -5,6 +5,7 @@ import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import SendIcon from '@mui/icons-material/Send';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 export interface ChatFooterProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
@@ -21,6 +22,7 @@ export const ChatFooter = (props: ChatFooterProps) => {
   const [typingTimeout, setActiveTimeout] = useState<NodeJS.Timeout>();
   const [canSend, setCanSend] = useState(props.canSend);
   const [messageLength, setMessageLength] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     props.socket.on("messageWaitingOther", () => setCanSend(false));
@@ -36,6 +38,7 @@ export const ChatFooter = (props: ChatFooterProps) => {
   }
 
   const sendMessage = (e: any) => {
+    setLoading(true);
     e.preventDefault();
     let messageToSend = message;
     if (message.length > MAX_LENGTH) {
@@ -49,6 +52,7 @@ export const ChatFooter = (props: ChatFooterProps) => {
     }
     setMessage('');
     setMessageLength(0);
+    setLoading(false);
   };
 
   const updateMessage = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -67,7 +71,7 @@ export const ChatFooter = (props: ChatFooterProps) => {
           <Typography>{canSend ? "Your turn to chat" : "Waiting for other chatter..."}</Typography>
           <Grid item xs={11.5}>
             <TextField
-              disabled={!canSend}
+              disabled={loading || !canSend}
               sx={{ input: { color: "#e9e9e9", backgroundColor: "#2D2D2D" }, borderColor: "primary.info", width: "100%" }}
               type="text"
               placeholder="Write message"
@@ -77,10 +81,16 @@ export const ChatFooter = (props: ChatFooterProps) => {
               onKeyDown={handleTyping}
             />
           </Grid>
-          <IconButton type="submit" onClick={(e) => sendMessage(e)}>
+          <BrowserView><IconButton type="submit" onClick={(e) => sendMessage(e)}>
+            <SendIcon color="primary" />
+          </IconButton></BrowserView>
+        </Grid>
+        <MobileView>
+          <IconButton disabled={loading || !canSend} type="submit" onClick={(e) => sendMessage(e)}>
             <SendIcon color="primary" />
           </IconButton>
-        </Grid>
+        </MobileView>
+
         <Typography>{messageLength + ` / ${MAX_LENGTH}`}</Typography>
         <Box sx={{ my: 2 }} />
         <Box ref={props.footerRef} />
