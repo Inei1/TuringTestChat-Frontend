@@ -53,6 +53,16 @@ export const ChatWaiting = () => {
             user: data.name,
           }
         }, "/chat");
+      } else {
+        router.push({
+          pathname: "/chat", query: {
+            endChatTime: data.endChatTime,
+            endResultTime: data.endResultTime,
+            canSend: String(data.canSend),
+            goal: data.goal,
+            user: data.name,
+          }
+        }, "/chat");
       }
       setLoading(false);
     });

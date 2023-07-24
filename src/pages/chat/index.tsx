@@ -12,6 +12,7 @@ import { ChatActive } from '@/chat/ChatActive';
 import Link from 'next/link';
 import { SocketContext } from '../_app';
 import NoSSRWrapper from '@/NoSSRWrapper';
+import useInterval from 'use-interval';
 
 export const ChatRoom = () => {
 
@@ -50,15 +51,14 @@ export const ChatRoom = () => {
     }
   }, [selfDisconnect]);
 
+  useInterval(() => socket.emit("checkActive"), 5000);
+
   useEffect(() => {
     if (socket.connected) {
       setSelfDisconnect(false);
     } else {
       setSelfDisconnect(true);
     }
-    setTimeout(() => {
-      socket.emit("checkActive");
-    }, 5000);
   }, []);
 
   useEffect(() => {

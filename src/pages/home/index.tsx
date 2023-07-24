@@ -4,7 +4,6 @@ import Header from '../../Header';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { Footer } from '../../homepage/Footer';
 import { useContext, useEffect, useState } from 'react';
-import { LoginRequest } from '../../homepage/LoginRequest';
 import { Constants } from '../../Constants';
 import { LoginContext, SocketContext } from '../_app';
 import Head from 'next/head';
@@ -22,21 +21,26 @@ export const UserHome = () => {
   const enterChat = (e: any) => {
     setLoading(true);
     socket.connect();
-    socket.emit("enterQueue", { username: user?.username });
+    if (!user) {
+      socket.emit("enterQueue", { username: "guest" });
+    } else {
+      socket.emit("enterQueue", { username: user?.username });
+    }
     router.push({ pathname: "/chatwaiting" });
     setLoading(false);
   };
 
   const getExpMessage = () => {
     if (!user) {
-      return "user not found"
+      return "Log in to track exp.";
+    } else {
+      return "You have " + user.detection + " detection exp with " + user.detectionWins + "/" +
+        user.detectionLosses + " win/loss (" +
+        (100 * (user.detectionWins / Math.max(user.detectionWins + user.detectionLosses, 1))).toFixed(0) + "%) and " +
+        user.deception + " deception exp with " + user.deceptionWins + "/" + user.deceptionLosses + " win/loss (" +
+        (100 * (user!.deceptionWins / Math.max(user!.deceptionWins +
+          user!.deceptionLosses, 1))).toFixed(0) + "%).";
     }
-    return "You have " + user.detection + " detection exp with " + user.detectionWins + "/" +
-      user.detectionLosses + " win/loss (" +
-      (100 * (user.detectionWins / Math.max(user.detectionWins + user.detectionLosses, 1))).toFixed(0) + "%) and " +
-      user.deception + " deception exp with " + user.deceptionWins + "/" + user.deceptionLosses + " win/loss (" +
-      (100 * (user!.deceptionWins / Math.max(user!.deceptionWins +
-        user!.deceptionLosses, 1))).toFixed(0) + "%)."
   }
 
   useEffect(() => {
@@ -48,11 +52,15 @@ export const UserHome = () => {
       });
       setUser(await result.json());
     }
-    getUser(user?.username!).catch(console.error);
+    if (localStorage.getItem("user") !== "guest") {
+      getUser(user?.username!).catch(console.error);
+    }
+    // Disconnect from any sockets that might not have been properly cleaned up
+    socket.disconnect();
   }, []);
 
   return (
-    user ? <>
+    <>
       <Box sx={{
         minHeight: "102.5vh",
         backgroundColor: "secondary.main",
@@ -85,8 +93,7 @@ export const UserHome = () => {
         </Container>
       </Box>
       <Footer />
-    </> :
-      <LoginRequest />
+    </>
   );
 };
 

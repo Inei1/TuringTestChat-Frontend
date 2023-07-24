@@ -11,12 +11,13 @@ export const User = () => {
 
   const logout = () => {
     setUser(null);
+    localStorage.setItem("user", "guest");
   }
 
   return (
     <>
       <MobileView>
-        <Grid container direction="row" display="flex" sx={{ml: "auto"}}>
+        <Grid container direction="row" display="flex" sx={{ ml: "auto" }}>
           {user && <>
             <Grid item>
               <Tooltip title={`${user.currentDailyCredits} daily credits remaining`}>
@@ -36,8 +37,14 @@ export const User = () => {
             </Grid>
           </>}
           <Grid item>
-            <Button color="info" variant="contained" sx={{ fontSize: 10, ml: "auto" }} size="small">
-              <Link href="/" onClick={logout} style={{ textDecoration: "none", color: "#000000" }}>Logout</Link>
+            <Button
+              color="info"
+              variant="contained"
+              sx={{ fontSize: 10, ml: "auto" }}
+              size="small"
+              onClick={logout}
+              style={{ textDecoration: "none", color: "#000000" }}>
+              Logout
             </Button>
           </Grid>
         </Grid>

@@ -78,6 +78,11 @@ export const Login = () => {
       setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }
+    if (email.length > 254) {
+      setAccountFailedMessage("Email must be 254 characters or less");
+      setTimeout(() => setAccountFailedMessage(""), 3000);
+      return false;
+    }
     // validate email regex
     if (!email.match("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$")) {
       setAccountFailedMessage("Invalid email");
@@ -96,8 +101,18 @@ export const Login = () => {
       setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }
+    if (name.length > 64) {
+      setAccountFailedMessage("Username must be 64 characters or less");
+      setTimeout(() => setAccountFailedMessage(""), 3000);
+      return false;
+    }
     if (name.match("[<>&\'\"/]+")) {
       setAccountFailedMessage("Name cannot contain < > & \' \" or /");
+      setTimeout(() => setAccountFailedMessage(""), 3000);
+      return false;
+    }
+    if (name.match(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi)) {
+      setAccountFailedMessage("Name cannot be a UUID");
       setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }
@@ -108,6 +123,11 @@ export const Login = () => {
     }
     if (password.length < 6) {
       setAccountFailedMessage("Password must be at least 6 characters long");
+      setTimeout(() => setAccountFailedMessage(""), 3000);
+      return false;
+    }
+    if (password.length > 64) {
+      setAccountFailedMessage("Password must be 64 characters or less");
       setTimeout(() => setAccountFailedMessage(""), 3000);
       return false;
     }

@@ -41,10 +41,12 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
       setUser(await result.json());
     }
     const user = localStorage.getItem("user");
-    if (user) {
+    if (!user) {
+      localStorage.setItem("user", "guest");
+    }
+    if (user && user !== "guest") {
       getUser(localStorage.getItem("user")!).catch(console.error);
     }
-
   }, []);
 
   return (
