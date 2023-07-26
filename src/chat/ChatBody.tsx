@@ -13,7 +13,7 @@ export interface ChatBodyProps {
 export const ChatBody = (props: ChatBodyProps) => {
 
   return (
-    <Box sx={{ backgroundColor: "#1D1D1D", my: 2 }}>
+    <Box sx={{ my: 2 }}>
       {props.messages.map((message) => {
         return <ChatMessage message={message} key={message.key} user={props.user} />
       })}

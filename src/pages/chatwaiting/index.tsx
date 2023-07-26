@@ -1,11 +1,11 @@
 "use client";
 
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Container, Grid, Typography } from '@mui/material';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Image from "next/image";
 import NoSSRWrapper from '@/NoSSRWrapper';
-import { isMobile } from 'react-device-detect';
 import { LoginContext, SocketContext } from '../_app';
 
 export const ChatWaiting = () => {
@@ -14,13 +14,22 @@ export const ChatWaiting = () => {
   const socket = useContext(SocketContext);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [warningMessage, setWarningMessage] = useState("");
+  const [botClicks, setBotClicks] = useState(0);
 
   const onPopState = useCallback((e: PopStateEvent) => {
     socket.disconnect();
   }, [socket]);
 
   useEffect(() => {
+    setBotClicks(Number(localStorage.getItem("botClicks")));
+  }, []);
+
+  useEffect(() => {
     window.addEventListener("popstate", onPopState);
+    setTimeout(() => {
+      setWarningMessage("This is taking a long time, you may need to leave and re-enter queue")
+    }, 60000);
     return () => {
       setTimeout(() => {
         window.removeEventListener("popstate", onPopState);
@@ -74,6 +83,11 @@ export const ChatWaiting = () => {
     router.push("/home");
   }
 
+  const updateBotClick = () => {
+    localStorage.setItem("botClicks", String(botClicks + 1));
+    setBotClicks(botClicks + 1);
+  }
+
   return (
     <>
       <Box sx={{
@@ -89,18 +103,32 @@ export const ChatWaiting = () => {
         <Head>
           <title>Waiting for Chat | Turing Test Chat</title>
         </Head>
-        <Container component="section">
+        <Container component="section" sx={{ mt: "20vh" }}>
           <Grid
             container
             direction="column"
             alignItems="center"
             justifyContent="center">
-            <Typography variant="h1" sx={{ fontSize: isMobile ? 75 : 100 }}>Waiting for chat</Typography>
+            <CircularProgress color="primary" />
+            <Typography variant="h1" sx={{ fontSize: 18, mt: 3 }}>Waiting for chat</Typography>
             {user?.permanentCredits === 0 && user?.currentDailyCredits === 0 && <>
               <Typography>Out of credits</Typography>
             </>}
-            <Button variant="contained" onClick={returnHome} disabled={loading}
-              sx={{ width: "100%", height: 75, fontSize: 30 }}>{loading ? "Processing" : "Cancel"}</Button>
+            <Typography>
+              This will take up to one minute
+            </Typography>
+            <Button
+              variant="contained"
+              onClick={returnHome}
+              disabled={loading}
+              sx={{ height: 60, width: 200, mt: 5, mb: 5 }}>
+              {loading ? "Processing" : "Cancel"}
+            </Button>
+            <Button onClick={updateBotClick}>
+              <Image src="/TTCLogov2.png" alt="Turing Test Chat Logo" width={64} height={64} />
+            </Button>
+            <Typography>You've clicked the bot {botClicks} times</Typography>
+            <Typography sx={{ mt: 1 }}>{warningMessage}</Typography>
           </Grid>
         </Container>
       </Box>

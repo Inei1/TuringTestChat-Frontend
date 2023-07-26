@@ -1,15 +1,13 @@
 "use client";
 
-import { Box, Grid, IconButton, TextField, Typography } from '@mui/material';
+import { Box, IconButton, LinearProgress, TextField, Typography } from '@mui/material';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import SendIcon from '@mui/icons-material/Send';
-import { BrowserView, MobileView } from 'react-device-detect';
 
 export interface ChatFooterProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-  footerRef: React.RefObject<HTMLDivElement>;
   canSend: boolean;
   user: string;
 }
@@ -50,7 +48,7 @@ export const ChatFooter = (props: ChatFooterProps) => {
         text: messageToSend,
       });
     }
-    setMessage('');
+    setMessage("");
     setMessageLength(0);
     setLoading(false);
   };
@@ -65,36 +63,37 @@ export const ChatFooter = (props: ChatFooterProps) => {
   }
 
   return (
-    <Box>
+    canSend ?
       <form onSubmit={(e) => sendMessage(e)}>
-        <Grid container width={"100%"}>
-          <Typography>{canSend ? "Your turn to chat" : "Waiting for other chatter..."}</Typography>
-          <Grid item xs={11.5}>
-            <TextField
-              disabled={loading || !canSend}
-              sx={{ input: { color: "#e9e9e9", backgroundColor: "#2D2D2D" }, borderColor: "primary.info", width: "100%" }}
-              type="text"
-              placeholder="Write message"
-              className="message"
-              value={message}
-              onChange={(e) => updateMessage(e)}
-              onKeyDown={handleTyping}
-            />
-          </Grid>
-          <BrowserView><IconButton type="submit" onClick={(e) => sendMessage(e)}>
-            <SendIcon color="primary" />
-          </IconButton></BrowserView>
-        </Grid>
-        <MobileView>
-          <IconButton disabled={loading || !canSend} type="submit" onClick={(e) => sendMessage(e)}>
-            <SendIcon color="primary" />
-          </IconButton>
-        </MobileView>
-
+        <TextField
+          disabled={loading || !canSend}
+          sx={{
+            input: {
+              color: "#FFFFFF",
+              backgroundColor: "#1F51FF"
+            },
+            borderColor: "primary.info",
+          }}
+          type="text"
+          className="message"
+          value={message}
+          onChange={(e) => updateMessage(e)}
+          onKeyDown={handleTyping}
+          fullWidth
+          inputRef={(input) => {
+            if (input !== null) {
+              input.focus();
+            }
+          }} />
+        <IconButton disabled={loading || !canSend} type="submit" onClick={(e) => sendMessage(e)}>
+          <SendIcon color="primary" />
+        </IconButton>
         <Typography>{messageLength + ` / ${MAX_LENGTH}`}</Typography>
         <Box sx={{ my: 2 }} />
-        <Box ref={props.footerRef} />
-      </form>
-    </Box>
+      </form> :
+      <Box>
+        <Typography>Waiting for other chatter</Typography>
+        <LinearProgress sx={{ "& .MuiLinearProgress-bar": { animationDuration: "10s" } }} />
+      </Box>
   );
 };

@@ -15,19 +15,19 @@ export const ChatMessage = (props: ChatMessageProps) => {
   return (
     <Box sx={{ my: 2 }}>
       {props.message.name === props.user ? (
-        <Grid container justifyContent="flex-end">
-          <Box sx={{ borderRadius: 3, border: 1, borderWidth: 8, borderColor: "#1F51FF", backgroundColor: "#1F51FF", mr: 2 }}>
-            <Typography sx={{ mt: 0 }}>{props.message.text}</Typography>
+        <Box display="flex" justifyContent="flex-end">
+          <Box display="flex" sx={{ borderRadius: 3, border: 1, borderWidth: 8, borderColor: "#1F51FF", backgroundColor: "#1F51FF" }}>
+            <Typography sx={{ mt: 0, mr: 2, overflowWrap: "break-word", wordBreak: "break-word", display: "inline-block" }}>{props.message.text}</Typography>
+            <Image alt="Human icon" src="/TTCHumanv2.png" width={32} height={32} />
           </Box>
-          <Image alt="Human icon" src="/TTCHumanv2.png" width={32} height={32} />
-        </Grid>
+        </Box>
       ) : (
-        <Grid container>
-          <Image alt="Unknown icon" src="/TTCUnknown.png" width={32} height={32} />
-          <Box sx={{ borderRadius: 3, border: 1, borderWidth: 8, borderColor: "#e9e9e9", backgroundColor: "#e9e9e9", ml: 2 }}>
-            <Typography sx={{ color: "#1D1D1D", mt: 0 }}>{props.message.text}</Typography>
+        <Box display="flex">
+          <Box display="flex" sx={{ borderRadius: 3, border: 1, borderWidth: 8, borderColor: "#e9e9e9", backgroundColor: "#e9e9e9" }}>
+            <Image alt="Unknown icon" src="/TTCUnknownDark.png" width={32} height={32} />
+            <Typography sx={{ color: "#1D1D1D", mt: 0, ml: 2, overflowWrap: "break-word", wordBreak: "break-word", display: "inline-block" }}>{props.message.text}</Typography>
           </Box>
-        </Grid>
+        </Box>
       )}
     </Box>
   )

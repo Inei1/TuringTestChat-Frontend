@@ -19,7 +19,7 @@ export const Timer = (props: TimerProps) => {
 
   return (
     <Grid container>
-      <Typography variant="h1" sx={{ mt: 0, fontSize: props.fontSize }}>{new Date(millis).toISOString().substring(14, 19)}</Typography>
+      <Typography variant="h1" sx={{ mt: 0, fontSize: props.fontSize, fontFamily: "Open Sans" }}>{new Date(millis).toISOString().substring(14, 19)}</Typography>
     </Grid>
   );
 };

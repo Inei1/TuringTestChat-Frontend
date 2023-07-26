@@ -29,7 +29,6 @@ const CommunityMenu = () => {
           <Typography
             style={{
               color: "#e9e9e9",
-              fontFamily: "monospace",
               fontSize: 12,
               textDecoration: "none",
               fontWeight: "normal",
@@ -73,7 +72,6 @@ const CommunityMenu = () => {
           <Typography
             style={{
               color: "#e9e9e9",
-              fontFamily: "monospace",
               fontSize: 20,
               textDecoration: "none",
               fontWeight: "normal",

@@ -19,7 +19,7 @@ export const darkTheme = createTheme({
         target: "_blank",
         rel: "noreferrer",
         color: "#E9E9E9",
-        fontFamily: "monospace",
+        fontFamily: "Montserrat",
         fontSize: 18
       }
     },
@@ -31,13 +31,25 @@ export const darkTheme = createTheme({
           }
         }
       }
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontFamily: "Open Sans"
+        }
+      }
     }
   },
   typography: {
-    fontFamily: "monospace",
+    fontFamily: "Montserrat, Roboto Serif",
     allVariants: {
       color: "#e9e9e9",
     },
     fontSize: 16,
   },
+  transitions: {
+    easing: {
+      easeOut: 'cubic-bezier(0.0, 0, 0.2, 1)',
+    }
+  }
 });

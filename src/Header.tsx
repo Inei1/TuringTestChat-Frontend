@@ -23,13 +23,18 @@ const Header = () => {
               </Link>
               <Link
                 href="/home"
-                style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 12, textDecoration: "none", fontWeight: "normal", marginLeft: "1em" }}>Chat</Link>
+                style={{
+                  color: "#e9e9e9",
+                  fontSize: 12,
+                  textDecoration: "none",
+                  fontWeight: "normal",
+                  marginLeft: "1em"
+                }}>Chat</Link>
               <Link
                 href="/blog"
                 color="info"
                 style={{
                   color: "#e9e9e9",
-                  fontFamily: "monospace",
                   fontSize: 12,
                   textDecoration: "none",
                   fontWeight: "normal",
@@ -61,14 +66,19 @@ const Header = () => {
               <Box sx={{ flexGrow: 0.1 }} />
               <Link
                 href="/home"
-                style={{ color: "#e9e9e9", fontFamily: "monospace", fontSize: 20, textDecoration: "none", fontWeight: "normal", marginLeft: "1em" }}>Chat</Link>
+                style={{
+                  color: "#e9e9e9",
+                  fontSize: 20,
+                  textDecoration: "none",
+                  fontWeight: "normal",
+                  marginLeft: "1em"
+                }}>Chat</Link>
               <Box sx={{ flexGrow: 0.1 }} />
               <Link
                 href="/blog"
                 color="info"
                 style={{
                   color: "#e9e9e9",
-                  fontFamily: "monospace",
                   fontSize: 20,
                   textDecoration: "none",
                   fontWeight: "normal",
@@ -77,7 +87,7 @@ const Header = () => {
                 }}>Blog</Link>
               <Box sx={{ flexGrow: 0.1 }} />
               <CommunityMenu />
-              <Box sx={{ml: "auto"}} />
+              <Box sx={{ ml: "auto" }} />
               {user === null && <Box sx={{ ml: "auto" }}>
                 <Button
                   color="info"

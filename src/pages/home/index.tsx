@@ -1,7 +1,7 @@
 "use client";
 
 import Header from '../../Header';
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Grid, Typography } from '@mui/material';
 import { Footer } from '../../homepage/Footer';
 import { useContext, useEffect, useState } from 'react';
 import { Constants } from '../../Constants';
@@ -32,7 +32,7 @@ export const UserHome = () => {
 
   const getExpMessage = () => {
     if (!user) {
-      return "Log in to track exp.";
+      return <b>Log in to track exp</b>;
     } else {
       return "You have " + user.detection + " detection exp with " + user.detectionWins + "/" +
         user.detectionLosses + " win/loss (" +
@@ -74,23 +74,33 @@ export const UserHome = () => {
           <title>Home | Turing Test Chat</title>
         </Head>
         <Header />
-        <Container component="section">
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: isMobile ? 10 : 30 }}>
-            <Box sx={{ maxWidth: 800, mt: 5 }}>
-              <Link href="/howtoplay" style={{ color: "#E9E9E9", fontFamily: "monospace" }}>How to play Turing Test Chat (Read this before playing)</Link>.
-              <Typography sx={{ fontSize: 20, my: 5 }}>
+        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ mt: "25vh" }}>
+          <Grid
+            container
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            direction="column"
+            maxWidth="sm">
+            <Grid item sx={{ textAlign: "center" }}>
+              <Link href="/howtoplay" style={{ color: "#E9E9E9", fontSize: 16 }}>How to play Turing Test Chat (Read this before playing)</Link>
+            </Grid>
+            <Grid item sx={{ textAlign: "center" }}>
+              <Typography sx={{ my: 5 }}>
                 {getExpMessage()}
               </Typography>
+            </Grid>
+            <Grid item sx={{ textAlign: "center" }}>
               <Button
+                sx={{ height: 60, width: 200 }}
                 disabled={loading}
-                sx={{ width: "100%", height: 75, fontSize: 30 }}
                 variant="contained"
                 onClick={(e) => enterChat(e)}>
-                {loading ? "Processing" : "Enter Chat Room"}
+                {loading ? "Processing" : "Start"}
               </Button>
-            </Box>
-          </Box>
-        </Container>
+            </Grid>
+          </Grid>
+        </Box>
       </Box>
       <Footer />
     </>

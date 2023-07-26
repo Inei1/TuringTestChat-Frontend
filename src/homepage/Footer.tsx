@@ -17,10 +17,10 @@ export const Footer = () => {
             <MuiLink href="https://twitter.com/TuringTestChat">Twitter</MuiLink>
           </Grid>
           <Grid item xs={5} md={0}>
-            <Link style={{ color: "#E9E9E9", fontFamily: "monospace" }} href="/tos" target="_self">Terms of Service</Link>
+            <Link style={{ color: "#E9E9E9" }} href="/tos" target="_self">Terms of Service</Link>
           </Grid>
           <Grid item xs={5} md={0}>
-            <Link style={{ color: "#E9E9E9", fontFamily: "monospace" }} href="/privacypolicy" target="_self">Privacy Policy</Link>
+            <Link style={{ color: "#E9E9E9" }} href="/privacypolicy" target="_self">Privacy Policy</Link>
           </Grid>
           <Grid item xs={5} md={0}>
             <MuiLink href="https://discord.com/invite/SX48DMUb5H">Discord</MuiLink>

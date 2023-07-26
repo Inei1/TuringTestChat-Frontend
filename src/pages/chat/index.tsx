@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState, useContext } from 'react';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import Head from 'next/head';
-import { LoginRequest } from '@/homepage/LoginRequest';
 import { ChatEnd } from '@/chat/ChatEnd';
 import { ChatHeader } from '@/chat/ChatHeader';
 import { LeaveChatDialog } from '@/chat/LeaveChatDialog';
@@ -51,7 +50,11 @@ export const ChatRoom = () => {
     }
   }, [selfDisconnect]);
 
-  useInterval(() => socket.emit("checkActive"), 5000);
+  useInterval(() => {
+    if (chatActive) {
+      socket.emit("checkActive");
+    }
+  }, 5000);
 
   useEffect(() => {
     if (socket.connected) {
@@ -70,9 +73,9 @@ export const ChatRoom = () => {
   }, [socket]);
 
   return (
-    router.query.user ? <Box sx={{
+    <Box sx={{
       minHeight: "102.5vh",
-      backgroundColor: "secondary.main",
+      backgroundColor: "#1D1D1D",
       background: "radial-gradient(circle, rgba(19,42,122,1) 0%, rgba(29,29,29,1) 100%)",
       backgroundPosition: "center",
       backgroundSize: "100vw",
@@ -119,8 +122,7 @@ export const ChatRoom = () => {
             <Button variant="contained" sx={{ my: 3, height: 75, fontSize: 30 }}>Return to home</Button>
           </Link>
         </Grid>}
-    </Box> :
-      <LoginRequest />
+    </Box>
   );
 };
 
