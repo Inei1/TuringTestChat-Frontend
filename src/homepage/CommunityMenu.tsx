@@ -13,6 +13,8 @@ import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import RedditIcon from '@mui/icons-material/Reddit';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import Image from "next/image";
+import DiscordIcon from "../../public/discordicon.png";
+import TTCLogo from "../../public/TTCLogo.png";
 
 const CommunityMenu = () => {
   const popupState = usePopupState({
@@ -93,7 +95,7 @@ const CommunityMenu = () => {
           </MenuItem>
           <MenuItem sx={{ color: "#1D1D1D" }} onClick={popupState.close}>
             <Link sx={{ color: "#1F51FF" }} href="https://discord.com/invite/SX48DMUb5H">
-              <Image alt="Discord Icon" src="/discordicon.png" width={24} height={24} /> Discord
+              <Image alt="Discord Icon" src={DiscordIcon} width={24} height={24} /> Discord
             </Link>
           </MenuItem>
           <MenuItem>
@@ -103,7 +105,7 @@ const CommunityMenu = () => {
           </MenuItem>
           <MenuItem>
             <Link sx={{ color: "#1F51FF" }} href="https://docs.google.com/document/d/1CzymxKXPxEW-pyXYBdSZLG6CB-86lCsew9gBhSPpkec/edit?usp=sharing">
-              <Image src="/TTCLogo.png" alt="Turing Test Chat logo" width={24} height={24} /> Update Notes
+              <Image src={TTCLogo} alt="Turing Test Chat logo" width={24} height={24} /> Update Notes
             </Link>
           </MenuItem>
         </HoverMenu>
