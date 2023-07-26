@@ -22,7 +22,7 @@ export const Landing = () => {
         <Typography variant="h1" style={{ fontFamily: "monospace", fontSize: 100, fontWeight: "normal", color: "#e9e9e9" }}>
           Turing Test Chat
         </Typography>
-        <Typography>V1.2.0</Typography>
+        <Typography>V1.2.1</Typography>
         {!user && <Link href="/login" style={{ marginTop: "2em", marginBottom: "2em" }}>
           <Button
             color="info"

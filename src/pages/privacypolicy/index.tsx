@@ -56,6 +56,11 @@ const PrivacyPolicy = () => {
             If you have any questions or concerns about Turing Test Chat's privacy practices, please send an email to support@turingtestchat.com.</Typography>
           <Typography sx={{ my: 1 }}>This privacy policy is effective as of 4/22/2023 and may be updated from time to time.
             you can review this policy regularly to stay informed of any changes.</Typography>
+          <Typography sx={{my: 1}}>*This Site is affiliated with Monumetric
+          (dba for The Blogger Network, LLC) for the purposes of placing advertising on the Site,
+          and Monumetric will collect and use certain data for advertising purposes.
+          To learn more about Monumetric's data usage, click here: {}
+          <Link target="_blank" href='http://www.monumetric.com/publisher-advertising-privacy'>Publisher Advertising Privacy</Link>*</Typography>
         </Container>
       </Box>
       <Footer />
