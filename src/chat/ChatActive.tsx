@@ -41,6 +41,12 @@ export const ChatActive = (props: ChatActiveProps) => {
     });
   }, [props.socket, messages]);
 
+  useEffect(() => {	
+    props.socket.on('typingResponse', (data) => {	
+      setTypingUser(data);
+    });	
+  }, [props.socket]);	
+
   return (
     <Box
       sx={{
