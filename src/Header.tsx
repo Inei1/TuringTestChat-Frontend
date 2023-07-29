@@ -102,6 +102,7 @@ const Header = () => {
           </Container>
         </AppBar>
       </BrowserView>
+      <div id="ezoic-pub-ad-placeholder-119"> </div>
     </>
   );
 }

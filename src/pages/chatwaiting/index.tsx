@@ -17,6 +17,18 @@ export const ChatWaiting = () => {
   const [warningMessage, setWarningMessage] = useState("");
   const [botClicks, setBotClicks] = useState(0);
 
+  useEffect(() => {
+    if (globalThis.ezstandalone) {
+      ezstandalone.define(118, 119, 120, 121);
+      if (!ezstandalone.enabled) {
+        ezstandalone.enable();
+        ezstandalone.display();
+      } else {
+        ezstandalone.refresh();
+      }
+    }
+  }, []);
+
   const onPopState = useCallback((e: PopStateEvent) => {
     socket.disconnect();
   }, [socket]);

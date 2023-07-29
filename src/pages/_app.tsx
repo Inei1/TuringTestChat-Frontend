@@ -75,6 +75,7 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5833731328065632"
         crossOrigin="anonymous">
       </Script>
+      <Script async src="//www.ezojs.com/ezoic/sa.min.js" strategy="beforeInteractive"></Script>
       <ThemeProvider theme={darkThemeProvider}>
         <LoginContext.Provider value={{ user, setUser }}>
           <CssBaseline />

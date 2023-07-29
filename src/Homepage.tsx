@@ -5,8 +5,21 @@ import { Footer } from "./homepage/Footer";
 import { Box } from "@mui/material";
 import Head from "next/head";
 import Faq from "./homepage/Faq";
+import { useEffect } from "react";
 
 export const Homepage = () => {
+
+  useEffect(() => {
+    if (globalThis.ezstandalone) {
+      ezstandalone.define(118, 119, 120, 121);
+      if (!ezstandalone.enabled) {
+        ezstandalone.enable();
+        ezstandalone.display();
+      } else {
+        ezstandalone.refresh();
+      }
+    }
+  }, []);
 
   return (
     <>
@@ -37,7 +50,9 @@ export const Homepage = () => {
         </Head>
         <Header />
         <Landing />
+        <div id="ezoic-pub-ad-placeholder-120"> </div>
         <Features />
+        <div id="ezoic-pub-ad-placeholder-118"> </div>
         <Faq />
       </Box>
       <Footer />

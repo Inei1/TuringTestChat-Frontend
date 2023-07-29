@@ -9,7 +9,6 @@ import { LoginContext, SocketContext } from '../_app';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { isMobile } from 'react-device-detect';
 
 export const UserHome = () => {
 
@@ -17,6 +16,18 @@ export const UserHome = () => {
   const socket = useContext(SocketContext);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (globalThis.ezstandalone) {
+      ezstandalone.define(118, 119, 120, 121);
+      if (!ezstandalone.enabled) {
+        ezstandalone.enable();
+        ezstandalone.display();
+      } else {
+        ezstandalone.refresh();
+      }
+    }
+  }, []);
 
   const enterChat = (e: any) => {
     setLoading(true);
