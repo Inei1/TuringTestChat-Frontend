@@ -16,16 +16,19 @@ export const UserHome = () => {
   const socket = useContext(SocketContext);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [adblock, setAdblock] = useState(false);
 
   useEffect(() => {
     if (globalThis.ezstandalone) {
-      ezstandalone.define(118, 119, 120, 121);
+      ezstandalone.define(119, 121, 122);
       if (!ezstandalone.enabled) {
         ezstandalone.enable();
         ezstandalone.display();
       } else {
         ezstandalone.refresh();
       }
+    } else {
+      setAdblock(true);
     }
   }, []);
 
@@ -85,7 +88,7 @@ export const UserHome = () => {
           <title>Home | Turing Test Chat</title>
         </Head>
         <Header />
-        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ mt: "25vh" }}>
+        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ mt: adblock ? "0vh" : "25vh" }}>
           <Grid
             container
             display="flex"

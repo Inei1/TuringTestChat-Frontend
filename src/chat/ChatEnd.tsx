@@ -36,8 +36,6 @@ export const ChatEnd = (props: ChatEndProps) => {
   const [otherResult, setOtherResult] = useState("");
   const [deceptionExp, setDeceptionExp] = useState(0);
 
-  console.log(otherResult);
-
   useEffect(() => {
     props.socket.on("otherResult", (data) => {
       setOtherResult(data.result);

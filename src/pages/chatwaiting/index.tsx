@@ -16,16 +16,19 @@ export const ChatWaiting = () => {
   const [loading, setLoading] = useState(false);
   const [warningMessage, setWarningMessage] = useState("");
   const [botClicks, setBotClicks] = useState(0);
+  const [adblock, setAdblock] = useState(false);
 
   useEffect(() => {
     if (globalThis.ezstandalone) {
-      ezstandalone.define(118, 119, 120, 121);
+      ezstandalone.define(128, 129);
       if (!ezstandalone.enabled) {
         ezstandalone.enable();
         ezstandalone.display();
       } else {
         ezstandalone.refresh();
       }
+    } else {
+      setAdblock(true);
     }
   }, []);
 
@@ -115,7 +118,8 @@ export const ChatWaiting = () => {
         <Head>
           <title>Waiting for Chat | Turing Test Chat</title>
         </Head>
-        <Container component="section" sx={{ mt: "20vh" }}>
+        <div id="ezoic-pub-ad-placeholder-128" />
+        <Container component="section" sx={{ mt: adblock ? "0" : "20vh" }}>
           <Grid
             container
             direction="column"
@@ -143,6 +147,7 @@ export const ChatWaiting = () => {
             <Typography sx={{ mt: 1 }}>{warningMessage}</Typography>
           </Grid>
         </Container>
+        <div id="ezoic-pub-ad-placeholder-129" />
       </Box>
     </>
   );

@@ -5,8 +5,8 @@ export const Footer = () => {
 
   return (
     <>
-      <div id="ezoic-pub-ad-placeholder-121"/>
       <Box sx={{ background: "#1D1D1D" }}>
+        <div id="ezoic-pub-ad-placeholder-121" />
         <Container sx={{ pt: 10 }}>
           <Grid container spacing={1}>
             <Grid item xs={5} md={0}>

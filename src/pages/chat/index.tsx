@@ -31,6 +31,17 @@ export const ChatRoom = () => {
   }, [router, socket]);
 
   useEffect(() => {
+    if (globalThis.ezstandalone) {
+      if (!ezstandalone.enabled) {
+        ezstandalone.enable();
+        ezstandalone.display();
+      } else {
+        ezstandalone.refresh();
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if (!resultOver) {
       window.addEventListener("popstate", onPopState);
     } else {
