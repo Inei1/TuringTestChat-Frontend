@@ -88,6 +88,7 @@ export const UserHome = () => {
           <title>Home | Turing Test Chat</title>
         </Head>
         <Header />
+        <div id="ezoic-pub-ad-placeholder-130" />
         <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ mt: adblock ? "0vh" : "25vh" }}>
           <Grid
             container
@@ -115,6 +116,7 @@ export const UserHome = () => {
             </Grid>
           </Grid>
         </Box>
+        <div id="ezoic-pub-ad-placeholder-122" />
       </Box>
       <Footer />
     </>
