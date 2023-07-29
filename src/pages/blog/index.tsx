@@ -1,11 +1,23 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import Header from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import { BlogEntry } from "../../homepage/BlogEntry";
 import Head from "next/head";
-import Link from "next/link";
+import { useEffect } from "react";
 
 const Blog = () => {
+
+  useEffect(() => {
+    if (globalThis.ezstandalone) {
+      if (!ezstandalone.enabled) {
+        ezstandalone.enable();
+        ezstandalone.display();
+      } else {
+        ezstandalone.refresh();
+      }
+    }
+  }, []);
+
   return (
     <>
       <Head>

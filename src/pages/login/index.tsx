@@ -165,7 +165,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (globalThis.ezstandalone) {
-      ezstandalone.define(121, 125, 126);
+      ezstandalone.define(121, 126);
       if (!ezstandalone.enabled) {
         ezstandalone.enable();
         ezstandalone.display();
@@ -188,7 +188,6 @@ export const Login = () => {
         <Link href="/">
           <Image src="/TTCLogov2.png" alt="Turing Test Chat logo" width={isMobile ? 128 : 256} height={isMobile ? 128 : 256} style={{ marginTop: "1em", marginLeft: "1em" }} />
         </Link>
-        <div id="ezoic-pub-ad-placeholder-125" />
         <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <Box sx={{ width: 350, height: 400, mt: isMobile ? 0 : -20 }}>
             <Typography sx={{ mb: 2, fontSize: 20 }} align="center" variant="h1" color="inherit">Turing Test Chat</Typography>

@@ -2,8 +2,21 @@ import { Box, Container, Typography, Link, Button } from "@mui/material";
 import Header from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
+import { useEffect } from "react";
 
 const Blog8 = () => {
+
+  useEffect(() => {
+    if (globalThis.ezstandalone) {
+      if (!ezstandalone.enabled) {
+        ezstandalone.enable();
+        ezstandalone.display();
+      } else {
+        ezstandalone.refresh();
+      }
+    }
+  }, []);
+
   return (
     <>
       <Head>

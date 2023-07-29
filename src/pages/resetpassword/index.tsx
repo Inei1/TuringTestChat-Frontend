@@ -3,10 +3,9 @@ import Header from "@/Header";
 import { Footer } from "@/homepage/Footer";
 import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ResetPassword = () => {
 
@@ -19,6 +18,17 @@ const ResetPassword = () => {
   const router = useRouter();
 
   const { token, email } = router.query;
+
+  useEffect(() => {
+    if (globalThis.ezstandalone) {
+      if (!ezstandalone.enabled) {
+        ezstandalone.enable();
+        ezstandalone.display();
+      } else {
+        ezstandalone.refresh();
+      }
+    }
+  }, []);
 
   const validatePassword = () => {
     if (password.length === 0) {

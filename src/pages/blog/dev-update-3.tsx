@@ -4,8 +4,21 @@ import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect } from "react";
 
 const DevUpdate3 = () => {
+
+  useEffect(() => {
+    if (globalThis.ezstandalone) {
+      if (!ezstandalone.enabled) {
+        ezstandalone.enable();
+        ezstandalone.display();
+      } else {
+        ezstandalone.refresh();
+      }
+    }
+  }, []);
+
   return (
     <>
       <Head>

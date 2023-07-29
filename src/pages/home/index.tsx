@@ -89,7 +89,7 @@ export const UserHome = () => {
         </Head>
         <Header />
         <div id="ezoic-pub-ad-placeholder-130" />
-        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ mt: adblock ? "0vh" : "25vh" }}>
+        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ mt: adblock ? "25vh" : "0vh" }}>
           <Grid
             container
             display="flex"

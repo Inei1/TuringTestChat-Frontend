@@ -4,8 +4,21 @@ import { Footer } from "../../homepage/Footer";
 import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import Head from "next/head";
+import { useEffect } from "react";
 
 const EngBlog1 = () => {
+
+  useEffect(() => {
+    if (globalThis.ezstandalone) {
+      if (!ezstandalone.enabled) {
+        ezstandalone.enable();
+        ezstandalone.display();
+      } else {
+        ezstandalone.refresh();
+      }
+    }
+  }, []);
+  
   return (
     <>
       <Head>

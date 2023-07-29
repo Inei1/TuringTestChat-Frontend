@@ -119,7 +119,7 @@ export const ChatWaiting = () => {
           <title>Waiting for Chat | Turing Test Chat</title>
         </Head>
         <div id="ezoic-pub-ad-placeholder-128" />
-        <Container component="section" sx={{ mt: adblock ? "0" : "20vh" }}>
+        <Container component="section" sx={{ mt: adblock ? "20vh" : "0" }}>
           <Grid
             container
             direction="column"

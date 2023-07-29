@@ -2,8 +2,21 @@ import { Box, Container, List, ListItem, Typography, Link } from "@mui/material"
 import Header from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
+import { useEffect } from "react";
 
 const DevUpdate4 = () => {
+
+  useEffect(() => {
+    if (globalThis.ezstandalone) {
+      if (!ezstandalone.enabled) {
+        ezstandalone.enable();
+        ezstandalone.display();
+      } else {
+        ezstandalone.refresh();
+      }
+    }
+  }, []);
+
   return (
     <>
       <Head>
