@@ -19,17 +19,6 @@ const ResetPassword = () => {
 
   const { token, email } = router.query;
 
-  useEffect(() => {
-    if (globalThis.ezstandalone) {
-      if (!ezstandalone.enabled) {
-        ezstandalone.enable();
-        ezstandalone.display();
-      } else {
-        ezstandalone.refresh();
-      }
-    }
-  }, []);
-
   const validatePassword = () => {
     if (password.length === 0) {
       setMessage("Password must not be empty");

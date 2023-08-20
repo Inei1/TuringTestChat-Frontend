@@ -3,20 +3,8 @@ import Header from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
 import Faq from "@/homepage/Faq";
-import { useEffect } from "react";
 
 const FaqPage = () => {
-
-  useEffect(() => {
-    if (globalThis.ezstandalone) {
-      if (!ezstandalone.enabled) {
-        ezstandalone.enable();
-        ezstandalone.display();
-      } else {
-        ezstandalone.refresh();
-      }
-    }
-  }, []);
 
   return (
     <>

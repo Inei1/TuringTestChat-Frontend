@@ -4,24 +4,13 @@ import { Box, Button, Container, Grid, TextField, Typography } from "@mui/materi
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const ForgotPassword = () => {
 
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (globalThis.ezstandalone) {
-      if (!ezstandalone.enabled) {
-        ezstandalone.enable();
-        ezstandalone.display();
-      } else {
-        ezstandalone.refresh();
-      }
-    }
-  }, []);
 
   const submitForgot = async (e: any) => {
     setLoading(true);

@@ -42,6 +42,7 @@ const Faq = () => {
         <Typography variant="h2" sx={{ my: 1, fontSize: 28 }}>How can I support Turing Test Chat?</Typography>
         <Typography sx={{ my: 1 }}>Share the game on social media!
           You can find social media links in the footer below.
+          You can also turn off your adblocker if you have one.
         </Typography>
         <Typography sx={{ my: 1 }}>If you have any questions, send an email to <MuiLink href="mailto:support@turingtestchat.com">support@turingtestchat.com</MuiLink>.</Typography>
       </Container>

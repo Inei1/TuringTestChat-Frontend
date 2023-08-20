@@ -1,5 +1,5 @@
 export { }
 
 declare global {
-  var ezstandalone: any;
+  nitroAds: any;
 }

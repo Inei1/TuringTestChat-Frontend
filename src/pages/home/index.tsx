@@ -1,7 +1,7 @@
 "use client";
 
 import Header from '../../Header';
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { Footer } from '../../homepage/Footer';
 import { useContext, useEffect, useState } from 'react';
 import { Constants } from '../../Constants';
@@ -9,6 +9,7 @@ import { LoginContext, SocketContext } from '../_app';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 
 export const UserHome = () => {
 
@@ -17,20 +18,6 @@ export const UserHome = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [adblock, setAdblock] = useState(false);
-
-  useEffect(() => {
-    if (globalThis.ezstandalone) {
-      ezstandalone.define(119, 121, 122);
-      if (!ezstandalone.enabled) {
-        ezstandalone.enable();
-        ezstandalone.display();
-      } else {
-        ezstandalone.refresh();
-      }
-    } else {
-      setAdblock(true);
-    }
-  }, []);
 
   const enterChat = (e: any) => {
     setLoading(true);
@@ -88,8 +75,7 @@ export const UserHome = () => {
           <title>Home | Turing Test Chat</title>
         </Head>
         <Header />
-        <div id="ezoic-pub-ad-placeholder-130" />
-        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ mt: adblock ? "25vh" : "0vh" }}>
+        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" sx={{ mt: !adblock ? "25vh" : "0vh" }}>
           <Grid
             container
             display="flex"
@@ -116,7 +102,6 @@ export const UserHome = () => {
             </Grid>
           </Grid>
         </Box>
-        <div id="ezoic-pub-ad-placeholder-122" />
       </Box>
       <Footer />
     </>

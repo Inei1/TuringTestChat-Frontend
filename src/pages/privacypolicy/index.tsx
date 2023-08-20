@@ -2,20 +2,8 @@ import { Box, Container, Link, Typography } from "@mui/material";
 import Header from "../../Header";
 import { Footer } from "../../homepage/Footer";
 import Head from "next/head";
-import { useEffect } from "react";
 
 const PrivacyPolicy = () => {
-
-  useEffect(() => {
-    if (globalThis.ezstandalone) {
-      if (!ezstandalone.enabled) {
-        ezstandalone.enable();
-        ezstandalone.display();
-      } else {
-        ezstandalone.refresh();
-      }
-    }
-  }, []);
 
   return (
     <>
@@ -65,16 +53,20 @@ const PrivacyPolicy = () => {
           <Typography sx={{ my: 1 }}>Turing Test Chat takes reasonable steps to protect your personal information from unauthorized access, use, or disclosure.
             However, no data transmission over the internet can be guaranteed to be completely secure.
             Therefore, Turing Test Chat cannot guarantee the security of any information you provide.</Typography>
+          <Typography sx={{ my: 1}}>In accordance with the California Consumer Privacy Act (CCPA),
+            Turing Test Chat respects the privacy rights of California residents.
+            If you are a California resident, you have the right to request access to the personal information we have collected about you,
+            request that we delete your personal information, and opt-out of the sale of your personal information.
+            Turing Test Chat does not discriminate against any consumer for exercising their CCPA rights.
+            To make a request under the CCPA, please contact us at support@turingtestchat.com.
+            You will receive a response to your request within 45 days.
+          </Typography>
           <Typography sx={{ my: 1 }}>By using turingtestchat.com, you consent to the terms of this privacy policy.
             If you have any questions or concerns about Turing Test Chat's privacy practices, please send an email to support@turingtestchat.com.</Typography>
-          <Typography sx={{ my: 1 }}>This privacy policy is effective as of 4/22/2023 and may be updated from time to time.
+          <Typography sx={{ my: 1 }}>This privacy policy is effective as of 8/15/2023 and may be updated from time to time.
             you can review this policy regularly to stay informed of any changes.</Typography>
-          <Typography sx={{my: 1}}>*This Site is affiliated with Monumetric
-          (dba for The Blogger Network, LLC) for the purposes of placing advertising on the Site,
-          and Monumetric will collect and use certain data for advertising purposes.
-          To learn more about Monumetric's data usage, click here: {}
-          <Link target="_blank" href='http://www.monumetric.com/publisher-advertising-privacy'>Publisher Advertising Privacy</Link>*</Typography>
         </Container>
+        <span data-ccpa-link="1"></span>
       </Box>
       <Footer />
     </>

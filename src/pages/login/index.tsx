@@ -1,7 +1,7 @@
 import { Constants } from "@/Constants";
 import { Footer } from "@/homepage/Footer";
 import { Box, Button, Checkbox, FormControl, FormControlLabel, Grid, Tab, Tabs, TextField, Typography } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -163,18 +163,6 @@ export const Login = () => {
     setRegisterLoading(false);
   };
 
-  useEffect(() => {
-    if (globalThis.ezstandalone) {
-      ezstandalone.define(121, 126);
-      if (!ezstandalone.enabled) {
-        ezstandalone.enable();
-        ezstandalone.display();
-      } else {
-        ezstandalone.refresh();
-      }
-    }
-  }, []);
-
   return (
     <>
       <Box sx={{
@@ -308,7 +296,6 @@ export const Login = () => {
             {/* <Link style={{ color: "#E9E9E9", fontFamily: "monospace" }} href={"/forgotpassword"}>Forgot Password?</Link> */}
           </Box>
         </Box>
-        <div id="ezoic-pub-ad-placeholder-126" />
       </Box>
       <Footer />
     </>

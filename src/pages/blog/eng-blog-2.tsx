@@ -5,19 +5,9 @@ import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import Head from "next/head";
 import { useEffect } from "react";
+import Script from "next/script";
 
 const EngBlog2 = () => {
-
-  useEffect(() => {
-    if (globalThis.ezstandalone) {
-      if (!ezstandalone.enabled) {
-        ezstandalone.enable();
-        ezstandalone.display();
-      } else {
-        ezstandalone.refresh();
-      }
-    }
-  }, []);
 
   return (
     <>
@@ -47,6 +37,7 @@ const EngBlog2 = () => {
       }}>
         <Header />
         <Container component="section">
+        <div id="article-ads">
           <Typography variant="h1" sx={{ fontSize: 40, mt: 5 }}>Turing Test Chat Engineering Blog #2</Typography>
           <Typography variant="h2" sx={{ mt: 1, mb: 3, fontStyle: "italic", fontSize: 22 }}>Using WebSockets to create a chat application.</Typography>
           <Typography sx={{ fontStyle: "italic", fontWeight: "bold", fontSize: 20 }}>This blog entry focuses on writing the code for Turing Test Chat.
@@ -197,6 +188,21 @@ socket.on("result", async (data) => {
                 fontFamily: "monospace",
               }}>here</Link>.
           </Typography>
+          </div>
+          <Script id="article-ads-script">{`
+          window['nitroAds'].createAd('article-ads', {
+            "refreshLimit": 20,
+            "refreshTime": 30,
+            "format": "article",
+            "pageInterval": 1,
+            "report": {
+              "enabled": true,
+              "icon": true,
+              "wording": "Report Ad",
+              "position": "bottom-right"
+            }
+          });
+          `}</Script>
         </Container>
       </Box >
       <Footer />

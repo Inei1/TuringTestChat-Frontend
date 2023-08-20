@@ -69,13 +69,48 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
           gtag('config', 'G-J8W08XRDN6');
           `}
       </Script>
-      <Script
-        id="google-adsense"
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5833731328065632"
-        crossOrigin="anonymous">
-      </Script>
-      <Script async src="//www.ezojs.com/ezoic/sa.min.js" strategy="beforeInteractive"></Script>
+      <Script id="nitropay-setup" data-cfasync="false">{`
+      window.nitroAds = window.nitroAds || {
+        createAd: function () {
+          return new Promise(e => {
+            window.nitroAds.queue.push(["createAd", arguments, e])
+          })
+        }, addUserToken: function () {
+          window.nitroAds.queue.push(["addUserToken", arguments])
+        }, queue: [] };`}</Script>
+      <Script id="nitropay-setup-2" data-cfasync="false" async src="https://s.nitropay.com/ads-1627.js"></Script>
+      <Script id="bottom-anchor-ads">{`
+        window['nitroAds'].createAd('bottom-anchor', {
+          "refreshLimit": 100,
+          "refreshTime": 30,
+          "format": "anchor",
+          "anchor": "bottom",
+          "anchorPersistClose": false,
+          "mediaQuery": "(min-width: 0px)",
+          "report": {
+            "enabled": true,
+            "icon": true,
+            "wording": "Report Ad",
+            "position": "top-right"
+          }
+        });
+        `}</Script>
+      <Script id="top-anchor-ads">{`
+        window['nitroAds'].createAd('top-anchor', {
+          "refreshLimit": 100,
+          "refreshTime": 30,
+          "format": "anchor",
+          "anchor": "top",
+          "anchorPersistClose": false,
+          "mediaQuery": "(min-width: 0px)",
+          "report": {
+            "enabled": true,
+            "icon": true,
+            "wording": "Report Ad",
+            "position": "bottom-right"
+          }
+        });
+        `}</Script>
       <ThemeProvider theme={darkThemeProvider}>
         <LoginContext.Provider value={{ user, setUser }}>
           <CssBaseline />
