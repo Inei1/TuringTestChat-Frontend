@@ -2,7 +2,7 @@ import { Features } from "./homepage/Features";
 import Header from "./Header";
 import { Landing } from "./homepage/Landing";
 import { Footer } from "./homepage/Footer";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Head from "next/head";
 import Faq from "./homepage/Faq";
 import Script from "next/script";

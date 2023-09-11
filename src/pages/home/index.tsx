@@ -87,6 +87,9 @@ export const UserHome = () => {
               <Link href="/howtoplay" style={{ color: "#E9E9E9", fontSize: 16 }}>How to play Turing Test Chat (Read this before playing)</Link>
             </Grid>
             <Grid item sx={{ textAlign: "center" }}>
+            <Typography>Turing Test Chat is shutting down September 20. See <Link href="/shutdown" style={{ color: "#E9E9E9", fontSize: 18 }}>here</Link> for more details.</Typography>
+            </Grid>
+            <Grid item sx={{ textAlign: "center" }}>
               <Typography sx={{ my: 5 }}>
                 {getExpMessage()}
               </Typography>

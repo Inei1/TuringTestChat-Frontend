@@ -23,6 +23,7 @@ export const Landing = () => {
           Turing Test Chat
         </Typography>
         <Typography>V1.2.2</Typography>
+        <Typography>Turing Test Chat is shutting down September 20. See <Link href="/shutdown" style={{ color: "#E9E9E9", fontSize: 18 }}>here</Link> for more details.</Typography>
         {!user && <Link href="/login" style={{ marginTop: "2em", marginBottom: "2em" }}>
           <Button
             color="info"
