@@ -44,6 +44,9 @@ const Shutdown = () => {
             Feel free to reach out if you want to discuss anything related to Turing Test Chat.
             In the mean time, I'm looking for a software development job, so please contact me if you know of any such opportunities.
             You can find out more about me at my <Link href="https://neil-moon.com">personal website</Link>.
+            If you want to see the source code of Turing Test Chat, it's available
+            <Link href="https://github.com/Inei1/TuringTestChat-Frontend">for the frontend</Link>
+            and <Link href="https://github.com/Inei1/TuringTestChat-Backend">for the backend</Link>.
           </Typography>
         </Container>
       </Box>
