@@ -1,2 +1,2 @@
 # Turing Test Chat Frontend
-This repository contains the code hosted at https://www.turingtestchat.com/.
+This repository contains the code formerly hosted at https://www.turingtestchat.com/.
